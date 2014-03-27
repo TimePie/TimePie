@@ -1,0 +1,534 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
+		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
+		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
+		CD4CE05D18E464D000916A4B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05C18E464D000916A4B /* CoreData.framework */; };
+		CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE06118E464D000916A4B /* InfoPlist.strings */; };
+		CD4CE06518E464D000916A4B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE06418E464D000916A4B /* main.m */; };
+		CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE06818E464D000916A4B /* TimePieAppDelegate.m */; };
+		CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */; };
+		CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE06D18E464D000916A4B /* Images.xcassets */; };
+		CD4CE07518E464D000916A4B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE07418E464D000916A4B /* XCTest.framework */; };
+		CD4CE07618E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
+		CD4CE07718E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
+		CD4CE07818E464D000916A4B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05C18E464D000916A4B /* CoreData.framework */; };
+		CD4CE08018E464D000916A4B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE07E18E464D000916A4B /* InfoPlist.strings */; };
+		CD4CE08218E464D000916A4B /* TimePieTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE08118E464D000916A4B /* TimePieTests.m */; };
+		CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE08C18E4678400916A4B /* MainScreenViewController.m */; };
+		CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */; };
+		CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE09318E46EBA00916A4B /* PersonalViewController.m */; };
+		CD4CE09618E46EBA00916A4B /* PersonalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE09418E46EBA00916A4B /* PersonalViewController.xib */; };
+		CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE09818E46EC800916A4B /* StatsViewController.m */; };
+		CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE09918E46EC800916A4B /* StatsViewController.xib */; };
+		CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */; };
+		CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CD4CE07918E464D000916A4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD4CE04B18E464D000916A4B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD4CE05218E464D000916A4B;
+			remoteInfo = TimePie;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CD4CE05A18E464D000916A4B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CD4CE05C18E464D000916A4B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CD4CE06018E464D000916A4B /* TimePie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimePie-Info.plist"; sourceTree = "<group>"; };
+		CD4CE06218E464D000916A4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD4CE06418E464D000916A4B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CD4CE06618E464D000916A4B /* TimePie-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimePie-Prefix.pch"; sourceTree = "<group>"; };
+		CD4CE06718E464D000916A4B /* TimePieAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimePieAppDelegate.h; sourceTree = "<group>"; };
+		CD4CE06818E464D000916A4B /* TimePieAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimePieAppDelegate.m; sourceTree = "<group>"; };
+		CD4CE06B18E464D000916A4B /* TimePie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimePie.xcdatamodel; sourceTree = "<group>"; };
+		CD4CE06D18E464D000916A4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CD4CE07318E464D000916A4B /* TimePieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimePieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD4CE07418E464D000916A4B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CD4CE07D18E464D000916A4B /* TimePieTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimePieTests-Info.plist"; sourceTree = "<group>"; };
+		CD4CE07F18E464D000916A4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD4CE08118E464D000916A4B /* TimePieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimePieTests.m; sourceTree = "<group>"; };
+		CD4CE08B18E4678400916A4B /* MainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenViewController.h; sourceTree = "<group>"; };
+		CD4CE08C18E4678400916A4B /* MainScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenViewController.m; sourceTree = "<group>"; };
+		CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainScreenViewController.xib; sourceTree = "<group>"; };
+		CD4CE09218E46EBA00916A4B /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
+		CD4CE09318E46EBA00916A4B /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
+		CD4CE09418E46EBA00916A4B /* PersonalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewController.xib; sourceTree = "<group>"; };
+		CD4CE09718E46EC800916A4B /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
+		CD4CE09818E46EC800916A4B /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
+		CD4CE09918E46EC800916A4B /* StatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsViewController.xib; sourceTree = "<group>"; };
+		CD4CE0A118E4700F00916A4B /* CreateItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateItemViewController.h; sourceTree = "<group>"; };
+		CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateItemViewController.m; sourceTree = "<group>"; };
+		CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateItemViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD4CE05018E464D000916A4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */,
+				CD4CE05D18E464D000916A4B /* CoreData.framework in Frameworks */,
+				CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */,
+				CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD4CE07018E464D000916A4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD4CE07518E464D000916A4B /* XCTest.framework in Frameworks */,
+				CD4CE07818E464D000916A4B /* CoreData.framework in Frameworks */,
+				CD4CE07718E464D000916A4B /* UIKit.framework in Frameworks */,
+				CD4CE07618E464D000916A4B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CD4CE04A18E464D000916A4B = {
+			isa = PBXGroup;
+			children = (
+				CD4CE05E18E464D000916A4B /* TimePie */,
+				CD4CE07B18E464D000916A4B /* TimePieTests */,
+				CD4CE05518E464D000916A4B /* Frameworks */,
+				CD4CE05418E464D000916A4B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD4CE05418E464D000916A4B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE05318E464D000916A4B /* TimePie.app */,
+				CD4CE07318E464D000916A4B /* TimePieTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD4CE05518E464D000916A4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE05618E464D000916A4B /* Foundation.framework */,
+				CD4CE05818E464D000916A4B /* CoreGraphics.framework */,
+				CD4CE05A18E464D000916A4B /* UIKit.framework */,
+				CD4CE05C18E464D000916A4B /* CoreData.framework */,
+				CD4CE07418E464D000916A4B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD4CE05E18E464D000916A4B /* TimePie */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE09118E46A1400916A4B /* models */,
+				CD4CE09018E46A0100916A4B /* controllers */,
+				CD4CE06718E464D000916A4B /* TimePieAppDelegate.h */,
+				CD4CE06818E464D000916A4B /* TimePieAppDelegate.m */,
+				CD4CE06D18E464D000916A4B /* Images.xcassets */,
+				CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */,
+				CD4CE05F18E464D000916A4B /* Supporting Files */,
+			);
+			path = TimePie;
+			sourceTree = "<group>";
+		};
+		CD4CE05F18E464D000916A4B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE06018E464D000916A4B /* TimePie-Info.plist */,
+				CD4CE06118E464D000916A4B /* InfoPlist.strings */,
+				CD4CE06418E464D000916A4B /* main.m */,
+				CD4CE06618E464D000916A4B /* TimePie-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD4CE07B18E464D000916A4B /* TimePieTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE08118E464D000916A4B /* TimePieTests.m */,
+				CD4CE07C18E464D000916A4B /* Supporting Files */,
+			);
+			path = TimePieTests;
+			sourceTree = "<group>";
+		};
+		CD4CE07C18E464D000916A4B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE07D18E464D000916A4B /* TimePieTests-Info.plist */,
+				CD4CE07E18E464D000916A4B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD4CE09018E46A0100916A4B /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE08B18E4678400916A4B /* MainScreenViewController.h */,
+				CD4CE08C18E4678400916A4B /* MainScreenViewController.m */,
+				CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */,
+				CD4CE09218E46EBA00916A4B /* PersonalViewController.h */,
+				CD4CE09318E46EBA00916A4B /* PersonalViewController.m */,
+				CD4CE09418E46EBA00916A4B /* PersonalViewController.xib */,
+				CD4CE09718E46EC800916A4B /* StatsViewController.h */,
+				CD4CE09818E46EC800916A4B /* StatsViewController.m */,
+				CD4CE09918E46EC800916A4B /* StatsViewController.xib */,
+				CD4CE0A118E4700F00916A4B /* CreateItemViewController.h */,
+				CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */,
+				CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		CD4CE09118E46A1400916A4B /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD4CE05218E464D000916A4B /* TimePie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD4CE08518E464D000916A4B /* Build configuration list for PBXNativeTarget "TimePie" */;
+			buildPhases = (
+				CD4CE04F18E464D000916A4B /* Sources */,
+				CD4CE05018E464D000916A4B /* Frameworks */,
+				CD4CE05118E464D000916A4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimePie;
+			productName = TimePie;
+			productReference = CD4CE05318E464D000916A4B /* TimePie.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CD4CE07218E464D000916A4B /* TimePieTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD4CE08818E464D000916A4B /* Build configuration list for PBXNativeTarget "TimePieTests" */;
+			buildPhases = (
+				CD4CE06F18E464D000916A4B /* Sources */,
+				CD4CE07018E464D000916A4B /* Frameworks */,
+				CD4CE07118E464D000916A4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD4CE07A18E464D000916A4B /* PBXTargetDependency */,
+			);
+			name = TimePieTests;
+			productName = TimePieTests;
+			productReference = CD4CE07318E464D000916A4B /* TimePieTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD4CE04B18E464D000916A4B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TimePie;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = TimePieOrg;
+				TargetAttributes = {
+					CD4CE07218E464D000916A4B = {
+						TestTargetID = CD4CE05218E464D000916A4B;
+					};
+				};
+			};
+			buildConfigurationList = CD4CE04E18E464D000916A4B /* Build configuration list for PBXProject "TimePie" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CD4CE04A18E464D000916A4B;
+			productRefGroup = CD4CE05418E464D000916A4B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD4CE05218E464D000916A4B /* TimePie */,
+				CD4CE07218E464D000916A4B /* TimePieTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD4CE05118E464D000916A4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
+				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
+				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
+				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
+				CD4CE09618E46EBA00916A4B /* PersonalViewController.xib in Resources */,
+				CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD4CE07118E464D000916A4B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD4CE08018E464D000916A4B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD4CE04F18E464D000916A4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
+				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
+				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
+				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
+				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
+				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
+				CD4CE06518E464D000916A4B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD4CE06F18E464D000916A4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD4CE08218E464D000916A4B /* TimePieTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD4CE07A18E464D000916A4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD4CE05218E464D000916A4B /* TimePie */;
+			targetProxy = CD4CE07918E464D000916A4B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CD4CE06118E464D000916A4B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD4CE06218E464D000916A4B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CD4CE07E18E464D000916A4B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD4CE07F18E464D000916A4B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CD4CE08318E464D000916A4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CD4CE08418E464D000916A4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD4CE08618E464D000916A4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimePie/TimePie-Prefix.pch";
+				INFOPLIST_FILE = "TimePie/TimePie-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CD4CE08718E464D000916A4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimePie/TimePie-Prefix.pch";
+				INFOPLIST_FILE = "TimePie/TimePie-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CD4CE08918E464D000916A4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TimePie.app/TimePie";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimePie/TimePie-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TimePieTests/TimePieTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CD4CE08A18E464D000916A4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TimePie.app/TimePie";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TimePie/TimePie-Prefix.pch";
+				INFOPLIST_FILE = "TimePieTests/TimePieTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD4CE04E18E464D000916A4B /* Build configuration list for PBXProject "TimePie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD4CE08318E464D000916A4B /* Debug */,
+				CD4CE08418E464D000916A4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD4CE08518E464D000916A4B /* Build configuration list for PBXNativeTarget "TimePie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD4CE08618E464D000916A4B /* Debug */,
+				CD4CE08718E464D000916A4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD4CE08818E464D000916A4B /* Build configuration list for PBXNativeTarget "TimePieTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD4CE08918E464D000916A4B /* Debug */,
+				CD4CE08A18E464D000916A4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CD4CE06B18E464D000916A4B /* TimePie.xcdatamodel */,
+			);
+			currentVersion = CD4CE06B18E464D000916A4B /* TimePie.xcdatamodel */;
+			path = TimePie.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = CD4CE04B18E464D000916A4B /* Project object */;
+}
