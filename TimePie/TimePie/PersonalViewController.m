@@ -56,8 +56,8 @@
     _mainView.backgroundView = nil;
     _mainView.backgroundColor = [UIColor clearColor];
     _mainView.scrollEnabled = YES;
-//    _mainView.delegate = self;
-//    _mainView.dataSource = self;
+    _mainView.delegate = self;
+    _mainView.dataSource = self;
     [self.view addSubview:_mainView];
 }
 
@@ -68,6 +68,50 @@
 }
 
 #pragma mark - UITableView DataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 2)
+    {
+        return 10;
+    }
+    else if(section == 0) return 2;
+    else return 1;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    return cell;
+}
+
+#pragma mark - UITableView Delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger section = [indexPath section];
+    if (section == 0 || section == 2) return 50;
+    else return 120;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) return 0.01;
+    else return 16;
+}
+
+//- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    return nil;
+//}
 
 - (void)didReceiveMemoryWarning
 {
