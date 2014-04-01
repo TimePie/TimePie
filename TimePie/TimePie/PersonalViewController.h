@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonalViewController : UIViewController
+@interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@property (strong, nonatomic) UINavigationBar *navBar;
+@property (strong, nonatomic) UIButton *exitButton;
+
+@property (strong, nonatomic) UITableView *mainView;
 
 @end
