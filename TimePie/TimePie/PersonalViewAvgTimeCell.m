@@ -46,12 +46,14 @@
     _labelTotal.font = [UIFont fontWithName:@"Roboto-Medium" size:30.f];
     _labelTotal.textColor = MAIN_UI_COLOR;
     [self addSubview:_labelTotal];
+    [self.delegate showTotalTime];
     
     _labelAvg = [[UILabel alloc] initWithFrame:CGRectMake(245, 5, 160, 40)];
     _labelAvg.text = @"99";
     _labelAvg.font = [UIFont fontWithName:@"Roboto-Medium" size:30.f];
     _labelAvg.textColor = MAIN_UI_COLOR;
     [self addSubview:_labelAvg];
+    [self.delegate showAvgTime];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
