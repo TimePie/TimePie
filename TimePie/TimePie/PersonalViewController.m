@@ -8,6 +8,8 @@
 
 #import "PersonalViewController.h"
 #import "BasicUIColor+UIPosition.h"
+#import "PersonalViewAvgTimeCell.h"
+#import "timeDistributeCell.h"
 
 @interface PersonalViewController ()
 
@@ -21,6 +23,13 @@
     if (self) {
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        [self setEdgesForExtendedLayout:UIRectEdgeBottom];
 }
 
 - (void)viewDidLoad
@@ -52,12 +61,13 @@
 
 - (void)initMainView
 {
-    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT*2) style:UITableViewStyleGrouped];
+    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
     _mainView.backgroundView = nil;
     _mainView.backgroundColor = [UIColor clearColor];
-    _mainView.scrollEnabled = YES;
-    _mainView.delegate = self;
     _mainView.dataSource = self;
+    _mainView.delegate = self;
+    _mainView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _mainView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self.view addSubview:_mainView];
 }
 
@@ -85,33 +95,102 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(cell == nil)
+    NSUInteger section = [indexPath section];
+    NSUInteger row = [indexPath row];
+    if (section == 0 && row == 0)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        static NSString *rangeCellIdentifier = @"Cell";
+        UITableViewCell *rangeCell = [tableView dequeueReusableCellWithIdentifier:rangeCellIdentifier];
+        if(rangeCell == nil)
+        {
+            rangeCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:rangeCellIdentifier];
+        }
+        rangeCell.textLabel.text = @"查看范围";
+        rangeCell.textLabel.textColor = MAIN_UI_COLOR;
+        rangeCell.detailTextLabel.text = @"过去一周";
+        rangeCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        rangeCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return rangeCell;
     }
-    return cell;
+    else if(section == 0 && row == 1)
+    {
+        static NSString *avgTimeCellIdentifier = @"AvgTimeIdentifier";
+        PersonalViewAvgTimeCell *avgTimeCell = [tableView dequeueReusableCellWithIdentifier:avgTimeCellIdentifier];
+        if (avgTimeCell == nil)
+        {
+            avgTimeCell = [[PersonalViewAvgTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:avgTimeCellIdentifier];
+        }
+        avgTimeCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return avgTimeCell;
+    }
+    else if(section == 1)
+    {
+        static NSString *timeDistributeCellIdentifier = @"timeDistributeIdentifier";
+        timeDistributeCell *timeDrtbCell = [tableView dequeueReusableCellWithIdentifier:timeDistributeCellIdentifier];
+        if (timeDrtbCell == nil)
+        {
+            timeDrtbCell = [[timeDistributeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:timeDistributeCellIdentifier];
+        }
+        timeDrtbCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return timeDrtbCell;
+    }
+    else
+    {
+        static NSString *itemTrackCellIdentifier = @"Cell";
+        UITableViewCell *itemTrackCell = [tableView dequeueReusableCellWithIdentifier:itemTrackCellIdentifier];
+        if(itemTrackCell == nil)
+        {
+            itemTrackCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
+        }
+        itemTrackCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return itemTrackCell;
+    }
 }
 
 #pragma mark - UITableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger section = [indexPath section];
-    if (section == 0 || section == 2) return 50;
-    else return 120;
+    if (section == 0 || section == 2) return 50.0;
+    else return 120.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) return 0.01;
-    else return 16;
+    else return 18.0;
 }
 
-//- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    return nil;
-//}
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 1)
+    {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, -7, tableView.frame.size.width, 16)];
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -17, tableView.frame.size.width, 35)];
+        bgView.backgroundColor = MAIN_DARK_BG_COLOR;
+        label.text = @"时间分布比";
+        label.textColor = MAIN_UI_COLOR;
+        [view addSubview:label];
+        [view addSubview:bgView];
+        [view sendSubviewToBack:bgView];
+        return view;
+    }
+    else if (section == 2)
+    {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, -7, tableView.frame.size.width, 16)];
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, -17, tableView.frame.size.width, 35)];
+        bgView.backgroundColor = MAIN_DARK_BG_COLOR;
+        label.text = @"事件日均时间跟踪";
+        label.textColor = MAIN_UI_COLOR;
+        [view addSubview:label];
+        [view addSubview:bgView];
+        [view sendSubviewToBack:bgView];
+        return view;
+    }
+    else return nil;
+}
 
 - (void)didReceiveMemoryWarning
 {
