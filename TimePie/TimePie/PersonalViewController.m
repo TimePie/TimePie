@@ -8,6 +8,7 @@
 
 #import "PersonalViewController.h"
 #import "BasicUIColor+UIPosition.h"
+#import "PersonalViewAvgTimeCell.h"
 
 @interface PersonalViewController ()
 
@@ -55,9 +56,9 @@
     _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT*2) style:UITableViewStyleGrouped];
     _mainView.backgroundView = nil;
     _mainView.backgroundColor = [UIColor clearColor];
-    _mainView.scrollEnabled = YES;
-    _mainView.delegate = self;
     _mainView.dataSource = self;
+    _mainView.delegate = self;
+    _mainView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [self.view addSubview:_mainView];
 }
 
@@ -85,27 +86,60 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(cell == nil)
+    NSUInteger section = [indexPath section];
+    NSUInteger row = [indexPath row];
+    if (section == 0 && row == 0)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        static NSString *CellIdentifier1 = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier1];
+      
+        if(cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier1];
+        }
+        cell.textLabel.text = @"查看范围";
+        cell.textLabel.textColor = MAIN_UI_COLOR;
+        cell.detailTextLabel.text = @"过去一周";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
-    return cell;
+    else if(section == 0 && row == 1)
+    {
+        static NSString *CellIdentifier2 = @"AvgTimeIdentifier";
+        PersonalViewAvgTimeCell *cell1 = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];
+        if (cell1 == nil)
+        {
+            cell1 = [[PersonalViewAvgTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
+        }
+        cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell1;
+    }
+    else
+    {
+        static NSString *CellIdentifier3 = @"Cell";
+        UITableViewCell *cell2 = [tableView dequeueReusableCellWithIdentifier:CellIdentifier3];
+        if(cell2 == nil)
+        {
+            cell2 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier3];
+        }
+        cell2.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell2;
+    }
 }
 
 #pragma mark - UITableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger section = [indexPath section];
-    if (section == 0 || section == 2) return 50;
-    else return 120;
+    if (section == 0 || section == 2) return 50.0;
+    else return 120.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) return 0.01;
-    else return 16;
+    else return 16.0;
 }
 
 //- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

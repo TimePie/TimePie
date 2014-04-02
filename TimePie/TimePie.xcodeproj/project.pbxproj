@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
+		13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */; };
+		13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */; };
+		13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */; };
+		13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57F18EC49E400462A83 /* PersonalView_Total@2x.png */; };
+		13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58418EC501200462A83 /* Roboto-Medium.ttf */; };
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
 		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
@@ -26,7 +31,6 @@
 		CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE08C18E4678400916A4B /* MainScreenViewController.m */; };
 		CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */; };
 		CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE09318E46EBA00916A4B /* PersonalViewController.m */; };
-		CD4CE09618E46EBA00916A4B /* PersonalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE09418E46EBA00916A4B /* PersonalViewController.xib */; };
 		CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE09818E46EC800916A4B /* StatsViewController.m */; };
 		CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE09918E46EC800916A4B /* StatsViewController.xib */; };
 		CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */; };
@@ -46,6 +50,12 @@
 /* Begin PBXFileReference section */
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
+		13CCE57618EC469500462A83 /* PersonalViewAvgTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewAvgTimeCell.h; sourceTree = "<group>"; };
+		13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewAvgTimeCell.m; sourceTree = "<group>"; };
+		13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewAvgTimeCell.xib; sourceTree = "<group>"; };
+		13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PersonalView_Avg@2x.png"; sourceTree = "<group>"; };
+		13CCE57F18EC49E400462A83 /* PersonalView_Total@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PersonalView_Total@2x.png"; sourceTree = "<group>"; };
+		13CCE58418EC501200462A83 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -69,7 +79,6 @@
 		CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainScreenViewController.xib; sourceTree = "<group>"; };
 		CD4CE09218E46EBA00916A4B /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
 		CD4CE09318E46EBA00916A4B /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
-		CD4CE09418E46EBA00916A4B /* PersonalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewController.xib; sourceTree = "<group>"; };
 		CD4CE09718E46EC800916A4B /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
 		CD4CE09818E46EC800916A4B /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		CD4CE09918E46EC800916A4B /* StatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsViewController.xib; sourceTree = "<group>"; };
@@ -107,9 +116,46 @@
 		132A702318EB027600AA675F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */,
+				13CCE58318EC500800462A83 /* Fonts */,
+				13CCE58218EC4FFC00462A83 /* Images */,
 			);
 			name = Resource;
+			sourceTree = "<group>";
+		};
+		13CCE57318EC2F8800462A83 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				13CCE57418EC2FAD00462A83 /* PersonalView */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		13CCE57418EC2FAD00462A83 /* PersonalView */ = {
+			isa = PBXGroup;
+			children = (
+				13CCE57618EC469500462A83 /* PersonalViewAvgTimeCell.h */,
+				13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */,
+				13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */,
+			);
+			name = PersonalView;
+			sourceTree = "<group>";
+		};
+		13CCE58218EC4FFC00462A83 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */,
+				13CCE57F18EC49E400462A83 /* PersonalView_Total@2x.png */,
+				132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		13CCE58318EC500800462A83 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				13CCE58418EC501200462A83 /* Roboto-Medium.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		CD4CE04A18E464D000916A4B = {
@@ -153,6 +199,7 @@
 				CD4CE06818E464D000916A4B /* TimePieAppDelegate.m */,
 				CD4CE06D18E464D000916A4B /* Images.xcassets */,
 				CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */,
+				13CCE57318EC2F8800462A83 /* views */,
 				CD4CE05F18E464D000916A4B /* Supporting Files */,
 			);
 			path = TimePie;
@@ -195,7 +242,6 @@
 				CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */,
 				CD4CE09218E46EBA00916A4B /* PersonalViewController.h */,
 				CD4CE09318E46EBA00916A4B /* PersonalViewController.m */,
-				CD4CE09418E46EBA00916A4B /* PersonalViewController.xib */,
 				CD4CE09718E46EC800916A4B /* StatsViewController.h */,
 				CD4CE09818E46EC800916A4B /* StatsViewController.m */,
 				CD4CE09918E46EC800916A4B /* StatsViewController.xib */,
@@ -290,12 +336,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */,
+				13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */,
+				13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */,
+				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
 				132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */,
-				CD4CE09618E46EBA00916A4B /* PersonalViewController.xib in Resources */,
 				CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
