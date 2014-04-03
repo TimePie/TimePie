@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8564D23A-7273-429F-A3B8-FCE5E9A02F80</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TimePie</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5BA9D823-E6A2-4008-A04F-0B6CE513465E</key>
+		<string>https://github.com/TimePie/TimePie.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TimePieOld/TimePie.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5BA9D823-E6A2-4008-A04F-0B6CE513465E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/TimePie/TimePie.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5BA9D823-E6A2-4008-A04F-0B6CE513465E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5BA9D823-E6A2-4008-A04F-0B6CE513465E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TimePie</string>
+		</dict>
+	</array>
+</dict>
+</plist>
