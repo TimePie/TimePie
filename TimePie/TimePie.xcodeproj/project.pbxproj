@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
 		13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */; };
 		13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */; };
@@ -15,6 +16,12 @@
 		13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58418EC501200462A83 /* Roboto-Medium.ttf */; };
 		13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */; };
 		13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */; };
+=======
+		6833021818EB1592005BCE6D /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021118EB1592005BCE6D /* BEMAnimations.m */; };
+		6833021918EB1592005BCE6D /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021318EB1592005BCE6D /* BEMCircle.m */; };
+		6833021A18EB1592005BCE6D /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021518EB1592005BCE6D /* BEMLine.m */; };
+		6833021B18EB1592005BCE6D /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021718EB1592005BCE6D /* BEMSimpleLineGraphView.m */; };
+>>>>>>> HZBStatsView
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
 		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
@@ -50,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
 		13CCE57618EC469500462A83 /* PersonalViewAvgTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewAvgTimeCell.h; sourceTree = "<group>"; };
@@ -61,6 +69,16 @@
 		13CCE58618EC5ABC00462A83 /* timeDistributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timeDistributeCell.h; sourceTree = "<group>"; };
 		13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timeDistributeCell.m; sourceTree = "<group>"; };
 		13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = timeDistributeCell.xib; sourceTree = "<group>"; };
+=======
+		6833021018EB1592005BCE6D /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
+		6833021118EB1592005BCE6D /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
+		6833021218EB1592005BCE6D /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		6833021318EB1592005BCE6D /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		6833021418EB1592005BCE6D /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		6833021518EB1592005BCE6D /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		6833021618EB1592005BCE6D /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		6833021718EB1592005BCE6D /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
+>>>>>>> HZBStatsView
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -118,6 +136,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+<<<<<<< HEAD
 		132A702318EB027600AA675F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,11 +183,35 @@
 				13CCE58418EC501200462A83 /* Roboto-Medium.ttf */,
 			);
 			name = Fonts;
+=======
+		6833020E18EB1531005BCE6D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6833020F18EB1541005BCE6D /* StatsViewClasses */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		6833020F18EB1541005BCE6D /* StatsViewClasses */ = {
+			isa = PBXGroup;
+			children = (
+				6833021018EB1592005BCE6D /* BEMAnimations.h */,
+				6833021118EB1592005BCE6D /* BEMAnimations.m */,
+				6833021218EB1592005BCE6D /* BEMCircle.h */,
+				6833021318EB1592005BCE6D /* BEMCircle.m */,
+				6833021418EB1592005BCE6D /* BEMLine.h */,
+				6833021518EB1592005BCE6D /* BEMLine.m */,
+				6833021618EB1592005BCE6D /* BEMSimpleLineGraphView.h */,
+				6833021718EB1592005BCE6D /* BEMSimpleLineGraphView.m */,
+			);
+			name = StatsViewClasses;
+>>>>>>> HZBStatsView
 			sourceTree = "<group>";
 		};
 		CD4CE04A18E464D000916A4B = {
 			isa = PBXGroup;
 			children = (
+				6833020E18EB1531005BCE6D /* Classes */,
 				CD4CE05E18E464D000916A4B /* TimePie */,
 				CD4CE07B18E464D000916A4B /* TimePieTests */,
 				CD4CE05518E464D000916A4B /* Frameworks */,
@@ -373,8 +416,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
+=======
+				6833021B18EB1592005BCE6D /* BEMSimpleLineGraphView.m in Sources */,
+				6833021A18EB1592005BCE6D /* BEMLine.m in Sources */,
+>>>>>>> HZBStatsView
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
+				6833021818EB1592005BCE6D /* BEMAnimations.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
@@ -382,6 +431,7 @@
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
+				6833021918EB1592005BCE6D /* BEMCircle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
