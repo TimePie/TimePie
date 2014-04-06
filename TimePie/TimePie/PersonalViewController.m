@@ -152,7 +152,7 @@
 {
     NSInteger section = [indexPath section];
     if (section == 0 || section == 2) return 50.0;
-    else return 120.0;
+    else return 142.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

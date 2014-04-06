@@ -15,6 +15,8 @@
 		13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58418EC501200462A83 /* Roboto-Medium.ttf */; };
 		13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */; };
 		13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */; };
+		13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB518F1BD4700D716AE /* tDCPieChart.m */; };
+		13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB918F1C12100D716AE /* UIView+Frame.m */; };
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
 		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
@@ -61,6 +63,10 @@
 		13CCE58618EC5ABC00462A83 /* timeDistributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timeDistributeCell.h; sourceTree = "<group>"; };
 		13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timeDistributeCell.m; sourceTree = "<group>"; };
 		13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = timeDistributeCell.xib; sourceTree = "<group>"; };
+		13F4CBB418F1BD4700D716AE /* tDCPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tDCPieChart.h; sourceTree = "<group>"; };
+		13F4CBB518F1BD4700D716AE /* tDCPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tDCPieChart.m; sourceTree = "<group>"; };
+		13F4CBB818F1C12100D716AE /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		13F4CBB918F1C12100D716AE /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +150,8 @@
 				13CCE58618EC5ABC00462A83 /* timeDistributeCell.h */,
 				13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */,
 				13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */,
+				13F4CBB418F1BD4700D716AE /* tDCPieChart.h */,
+				13F4CBB518F1BD4700D716AE /* tDCPieChart.m */,
 			);
 			name = PersonalView;
 			sourceTree = "<group>";
@@ -164,6 +172,15 @@
 				13CCE58418EC501200462A83 /* Roboto-Medium.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		13F4CBB718F1C10E00D716AE /* category */ = {
+			isa = PBXGroup;
+			children = (
+				13F4CBB818F1C12100D716AE /* UIView+Frame.h */,
+				13F4CBB918F1C12100D716AE /* UIView+Frame.m */,
+			);
+			name = category;
 			sourceTree = "<group>";
 		};
 		CD4CE04A18E464D000916A4B = {
@@ -200,6 +217,7 @@
 		CD4CE05E18E464D000916A4B /* TimePie */ = {
 			isa = PBXGroup;
 			children = (
+				13F4CBB718F1C10E00D716AE /* category */,
 				132A702318EB027600AA675F /* Resource */,
 				CD4CE09118E46A1400916A4B /* models */,
 				CD4CE09018E46A0100916A4B /* controllers */,
@@ -378,10 +396,12 @@
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
+				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
+				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
