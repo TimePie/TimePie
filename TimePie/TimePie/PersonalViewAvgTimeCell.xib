@@ -14,11 +14,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PersonalView_Total.png" translatesAutoresizingMaskIntoConstraints="NO" id="RFd-f4-XaI">
-                        <rect key="frame" x="20" y="17" width="41" height="15"/>
+                        <rect key="frame" x="20" y="17" width="41" height="12"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PersonalView_Avg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Grj-8c-FjB">
-                        <rect key="frame" x="201" y="17" width="41" height="15"/>
+                        <rect key="frame" x="201" y="17" width="41" height="12"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                 </subviews>

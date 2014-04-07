@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BEMSimpleLineGraphView.h"
-@interface StatsViewController : UIViewController <BEMSimpleLineGraphDelegate> 
 
-@property (strong, nonatomic) IBOutlet BEMSimpleLineGraphView *myGraph;
-
-@property (strong, nonatomic) NSMutableArray *ArrayOfValues;
-@property (strong, nonatomic) NSMutableArray *ArrayOfDates;
+@interface StatsViewController : UIViewController
 
 @end

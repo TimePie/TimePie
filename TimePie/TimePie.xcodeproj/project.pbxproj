@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
+		13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */; };
+		13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */; };
 		13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */; };
 		13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */; };
 		13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */; };
@@ -16,12 +17,8 @@
 		13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58418EC501200462A83 /* Roboto-Medium.ttf */; };
 		13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */; };
 		13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */; };
-=======
-		6833021818EB1592005BCE6D /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021118EB1592005BCE6D /* BEMAnimations.m */; };
-		6833021918EB1592005BCE6D /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021318EB1592005BCE6D /* BEMCircle.m */; };
-		6833021A18EB1592005BCE6D /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021518EB1592005BCE6D /* BEMLine.m */; };
-		6833021B18EB1592005BCE6D /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6833021718EB1592005BCE6D /* BEMSimpleLineGraphView.m */; };
->>>>>>> HZBStatsView
+		13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB518F1BD4700D716AE /* tDCPieChart.m */; };
+		13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB918F1C12100D716AE /* UIView+Frame.m */; };
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
 		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
@@ -57,9 +54,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
+		13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewEventTrackCell.h; sourceTree = "<group>"; };
+		13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewEventTrackCell.m; sourceTree = "<group>"; };
+		13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewEventTrackCell.xib; sourceTree = "<group>"; };
 		13CCE57618EC469500462A83 /* PersonalViewAvgTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewAvgTimeCell.h; sourceTree = "<group>"; };
 		13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewAvgTimeCell.m; sourceTree = "<group>"; };
 		13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewAvgTimeCell.xib; sourceTree = "<group>"; };
@@ -69,16 +68,10 @@
 		13CCE58618EC5ABC00462A83 /* timeDistributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timeDistributeCell.h; sourceTree = "<group>"; };
 		13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timeDistributeCell.m; sourceTree = "<group>"; };
 		13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = timeDistributeCell.xib; sourceTree = "<group>"; };
-=======
-		6833021018EB1592005BCE6D /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
-		6833021118EB1592005BCE6D /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
-		6833021218EB1592005BCE6D /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
-		6833021318EB1592005BCE6D /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
-		6833021418EB1592005BCE6D /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
-		6833021518EB1592005BCE6D /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
-		6833021618EB1592005BCE6D /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
-		6833021718EB1592005BCE6D /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
->>>>>>> HZBStatsView
+		13F4CBB418F1BD4700D716AE /* tDCPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tDCPieChart.h; sourceTree = "<group>"; };
+		13F4CBB518F1BD4700D716AE /* tDCPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tDCPieChart.m; sourceTree = "<group>"; };
+		13F4CBB818F1C12100D716AE /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		13F4CBB918F1C12100D716AE /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,7 +129,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-<<<<<<< HEAD
 		132A702318EB027600AA675F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +155,11 @@
 				13CCE58618EC5ABC00462A83 /* timeDistributeCell.h */,
 				13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */,
 				13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */,
+				13F4CBB418F1BD4700D716AE /* tDCPieChart.h */,
+				13F4CBB518F1BD4700D716AE /* tDCPieChart.m */,
+				13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */,
+				13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */,
+				13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */,
 			);
 			name = PersonalView;
 			sourceTree = "<group>";
@@ -183,35 +180,20 @@
 				13CCE58418EC501200462A83 /* Roboto-Medium.ttf */,
 			);
 			name = Fonts;
-=======
-		6833020E18EB1531005BCE6D /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				6833020F18EB1541005BCE6D /* StatsViewClasses */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
-		6833020F18EB1541005BCE6D /* StatsViewClasses */ = {
+		13F4CBB718F1C10E00D716AE /* category */ = {
 			isa = PBXGroup;
 			children = (
-				6833021018EB1592005BCE6D /* BEMAnimations.h */,
-				6833021118EB1592005BCE6D /* BEMAnimations.m */,
-				6833021218EB1592005BCE6D /* BEMCircle.h */,
-				6833021318EB1592005BCE6D /* BEMCircle.m */,
-				6833021418EB1592005BCE6D /* BEMLine.h */,
-				6833021518EB1592005BCE6D /* BEMLine.m */,
-				6833021618EB1592005BCE6D /* BEMSimpleLineGraphView.h */,
-				6833021718EB1592005BCE6D /* BEMSimpleLineGraphView.m */,
+				13F4CBB818F1C12100D716AE /* UIView+Frame.h */,
+				13F4CBB918F1C12100D716AE /* UIView+Frame.m */,
 			);
-			name = StatsViewClasses;
->>>>>>> HZBStatsView
+			name = category;
 			sourceTree = "<group>";
 		};
 		CD4CE04A18E464D000916A4B = {
 			isa = PBXGroup;
 			children = (
-				6833020E18EB1531005BCE6D /* Classes */,
 				CD4CE05E18E464D000916A4B /* TimePie */,
 				CD4CE07B18E464D000916A4B /* TimePieTests */,
 				CD4CE05518E464D000916A4B /* Frameworks */,
@@ -243,6 +225,7 @@
 		CD4CE05E18E464D000916A4B /* TimePie */ = {
 			isa = PBXGroup;
 			children = (
+				13F4CBB718F1C10E00D716AE /* category */,
 				132A702318EB027600AA675F /* Resource */,
 				CD4CE09118E46A1400916A4B /* models */,
 				CD4CE09018E46A0100916A4B /* controllers */,
@@ -396,6 +379,7 @@
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
+				13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */,
 				132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */,
 				CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */,
 			);
@@ -416,22 +400,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
-=======
-				6833021B18EB1592005BCE6D /* BEMSimpleLineGraphView.m in Sources */,
-				6833021A18EB1592005BCE6D /* BEMLine.m in Sources */,
->>>>>>> HZBStatsView
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
-				6833021818EB1592005BCE6D /* BEMAnimations.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
+				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
+				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
-				6833021918EB1592005BCE6D /* BEMCircle.m in Sources */,
+				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

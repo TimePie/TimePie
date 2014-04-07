@@ -10,6 +10,7 @@
 #import "BasicUIColor+UIPosition.h"
 #import "PersonalViewAvgTimeCell.h"
 #import "timeDistributeCell.h"
+#import "PersonalViewEventTrackCell.h"
 
 @interface PersonalViewController ()
 
@@ -130,17 +131,31 @@
         if (timeDrtbCell == nil)
         {
             timeDrtbCell = [[timeDistributeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:timeDistributeCellIdentifier];
+            
         }
         timeDrtbCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return timeDrtbCell;
     }
     else
     {
-        static NSString *itemTrackCellIdentifier = @"Cell";
-        UITableViewCell *itemTrackCell = [tableView dequeueReusableCellWithIdentifier:itemTrackCellIdentifier];
+        static NSString *itemTrackCellIdentifier = @"PersonalViewEventTrackCell";
+        PersonalViewEventTrackCell *itemTrackCell = [tableView dequeueReusableCellWithIdentifier:itemTrackCellIdentifier];
         if(itemTrackCell == nil)
         {
-            itemTrackCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
+            itemTrackCell = [[PersonalViewEventTrackCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
+        }
+        //todo: set with index path
+        if (indexPath.row == 1)
+        {
+            itemTrackCell.PVETCEventLabel.text = @"酱油";
+            itemTrackCell.PVETCAvgTimeLabel.text = @"2.6";
+            itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = BLUENO2;
+        }
+        else if(indexPath.row == 2)
+        {
+            itemTrackCell.PVETCEventLabel.text = @"健身";
+            itemTrackCell.PVETCAvgTimeLabel.text = @"3.9";
+            itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = GREENNO3;
         }
         itemTrackCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return itemTrackCell;
@@ -152,7 +167,7 @@
 {
     NSInteger section = [indexPath section];
     if (section == 0 || section == 2) return 50.0;
-    else return 120.0;
+    else return 142.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

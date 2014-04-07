@@ -45,6 +45,7 @@
     PersonalViewController *viewController = [[PersonalViewController alloc] init];
     [self presentViewController:viewController animated:YES completion:nil];
     NSLog(@"Go to personal view");
+    
 }
 
 -(IBAction)stats_btn_clicked:(id)sender
