@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
+		13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */; };
+		13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */; };
 		13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */; };
 		13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */; };
 		13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */; };
@@ -54,6 +56,9 @@
 /* Begin PBXFileReference section */
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
+		13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewEventTrackCell.h; sourceTree = "<group>"; };
+		13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewEventTrackCell.m; sourceTree = "<group>"; };
+		13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewEventTrackCell.xib; sourceTree = "<group>"; };
 		13CCE57618EC469500462A83 /* PersonalViewAvgTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewAvgTimeCell.h; sourceTree = "<group>"; };
 		13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewAvgTimeCell.m; sourceTree = "<group>"; };
 		13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewAvgTimeCell.xib; sourceTree = "<group>"; };
@@ -152,6 +157,9 @@
 				13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */,
 				13F4CBB418F1BD4700D716AE /* tDCPieChart.h */,
 				13F4CBB518F1BD4700D716AE /* tDCPieChart.m */,
+				13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */,
+				13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */,
+				13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */,
 			);
 			name = PersonalView;
 			sourceTree = "<group>";
@@ -371,6 +379,7 @@
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
+				13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */,
 				132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */,
 				CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */,
 			);
@@ -400,6 +409,7 @@
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
+				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
 				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,
 			);
