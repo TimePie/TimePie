@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
+		13469E9E18F2D0E900B7F30C /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9718F2D0E900B7F30C /* BEMAnimations.m */; };
+		13469E9F18F2D0E900B7F30C /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9918F2D0E900B7F30C /* BEMCircle.m */; };
+		13469EA018F2D0E900B7F30C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9B18F2D0E900B7F30C /* BEMLine.m */; };
+		13469EA118F2D0E900B7F30C /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9D18F2D0E900B7F30C /* BEMSimpleLineGraphView.m */; };
 		13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */; };
 		13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */; };
 		13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */; };
@@ -55,6 +59,14 @@
 
 /* Begin PBXFileReference section */
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
+		13469E9618F2D0E900B7F30C /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
+		13469E9718F2D0E900B7F30C /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
+		13469E9818F2D0E900B7F30C /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		13469E9918F2D0E900B7F30C /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		13469E9A18F2D0E900B7F30C /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		13469E9B18F2D0E900B7F30C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		13469E9C18F2D0E900B7F30C /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		13469E9D18F2D0E900B7F30C /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
 		13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewEventTrackCell.h; sourceTree = "<group>"; };
 		13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewEventTrackCell.m; sourceTree = "<group>"; };
@@ -136,6 +148,21 @@
 				13CCE58218EC4FFC00462A83 /* Images */,
 			);
 			name = Resource;
+			sourceTree = "<group>";
+		};
+		13469E9518F2D0E900B7F30C /* BEMSimpleLineGraph */ = {
+			isa = PBXGroup;
+			children = (
+				13469E9618F2D0E900B7F30C /* BEMAnimations.h */,
+				13469E9718F2D0E900B7F30C /* BEMAnimations.m */,
+				13469E9818F2D0E900B7F30C /* BEMCircle.h */,
+				13469E9918F2D0E900B7F30C /* BEMCircle.m */,
+				13469E9A18F2D0E900B7F30C /* BEMLine.h */,
+				13469E9B18F2D0E900B7F30C /* BEMLine.m */,
+				13469E9C18F2D0E900B7F30C /* BEMSimpleLineGraphView.h */,
+				13469E9D18F2D0E900B7F30C /* BEMSimpleLineGraphView.m */,
+			);
+			path = BEMSimpleLineGraph;
 			sourceTree = "<group>";
 		};
 		13CCE57318EC2F8800462A83 /* views */ = {
@@ -225,15 +252,16 @@
 		CD4CE05E18E464D000916A4B /* TimePie */ = {
 			isa = PBXGroup;
 			children = (
-				13F4CBB718F1C10E00D716AE /* category */,
+				13469E9518F2D0E900B7F30C /* BEMSimpleLineGraph */,
 				132A702318EB027600AA675F /* Resource */,
+				13F4CBB718F1C10E00D716AE /* category */,
 				CD4CE09118E46A1400916A4B /* models */,
+				13CCE57318EC2F8800462A83 /* views */,
 				CD4CE09018E46A0100916A4B /* controllers */,
 				CD4CE06718E464D000916A4B /* TimePieAppDelegate.h */,
 				CD4CE06818E464D000916A4B /* TimePieAppDelegate.m */,
 				CD4CE06D18E464D000916A4B /* Images.xcassets */,
 				CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */,
-				13CCE57318EC2F8800462A83 /* views */,
 				CD4CE05F18E464D000916A4B /* Supporting Files */,
 			);
 			path = TimePie;
@@ -403,10 +431,14 @@
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
+				13469E9E18F2D0E900B7F30C /* BEMAnimations.m in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
+				13469EA018F2D0E900B7F30C /* BEMLine.m in Sources */,
+				13469EA118F2D0E900B7F30C /* BEMSimpleLineGraphView.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
 				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
+				13469E9F18F2D0E900B7F30C /* BEMCircle.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
