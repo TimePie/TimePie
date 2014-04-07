@@ -6,6 +6,10 @@
     //color platte no.1 -- timepie default color set
 #define RedNO1_light [UIColor colorWithRed:1.0 green:0.65 blue:0.47 alpha:0.57]
 #define REDNO1 [UIColor colorWithRed:1.0 green:0.65 blue:0.47 alpha:1.0]
+#define BLUENO2_light [UIColor colorWithRed:0.49 green:0.72 blue:0.86 alpha:0.57]
+#define BLUENO2 [UIColor colorWithRed:0.49 green:0.72 blue:0.86 alpha:1.0]
+#define GREENNO3_light [UIColor colorWithRed:0.61 green:0.82 blue:0.45 alpha:0.57]
+#define GREENNO3 [UIColor colorWithRed:0.61 green:0.82 blue:0.45 alpha:1.0]
 
 //UIPosition
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width

@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface tDCPieChart : UIView
+{
+    UIColor* _tDCColor;
+    UIColor* _tDCLightColor;
+    NSString* _tDCEventName;
+    CGFloat _tDCPercentage;
+    NSString* _tDCPercentageString;
+}
+
+- (void)initInfosWithColor:(UIColor*)color lightColor:(UIColor*)lColor Name:(NSString*)eventName Percent:(CGFloat)percent PercentString:(NSString*)pString;
 
 @end

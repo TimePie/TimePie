@@ -17,7 +17,6 @@
     if (self)
     {
         self.backgroundColor = [UIColor clearColor];
-        [self initLabels];
     }
     return self;
 }
@@ -26,8 +25,18 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self drawSectorWithColor:REDNO1];
-    [self drawCircleInContext:context withRadius:42 color:RedNO1_light];
+    [self drawCircleInContext:context withRadius:42 color:_tDCLightColor];
     [self drawCircleInContext:context withRadius:30 color:WHITE_COLOR];
+}
+
+- (void)initInfosWithColor:(UIColor *)color lightColor:(UIColor *)lColor Name:(NSString *)eventName Percent:(CGFloat)percent PercentString:(NSString *)pString
+{
+    _tDCColor = color;
+    _tDCLightColor = lColor;
+    _tDCEventName = eventName;
+    _tDCPercentage = percent;
+    _tDCPercentageString = pString;
+    [self initLabelsWithColor:_tDCColor];
 }
 
 -(void)drawCircleInContext:(CGContextRef)context withRadius:(int)radius color:(UIColor*)color
@@ -48,7 +57,7 @@
 
 - (void)drawSectorWithColor:(UIColor*)color
 {
-    CGFloat percentage = 0.7f;
+    CGFloat percentage = _tDCPercentage;
     CGFloat radius = 42;
     //fixed start point
     CGFloat starttime = -M_PI/2;
@@ -65,26 +74,44 @@
     [arc addArcWithCenter:center radius:radius startAngle:starttime endAngle:endtime clockwise:YES]; //add the arc
     [arc addLineToPoint:center]; //back to center
     
-    [color set];
+    [_tDCColor set];
     [arc fill];
 }
 
 #pragma mark - UIView
-- (void)initLabels
+- (void)initLabelsWithColor:(UIColor*)color
 {
-    UILabel *percentageValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(33, 35, 60, 30)];
-    percentageValueLabel.text = @"70";
+    UILabel *percentageValueLabel = [[UILabel alloc] initWithFrame:CGRectMake([self originXValue], 35, 60, 30)];
+    percentageValueLabel.text = _tDCPercentageString;
     percentageValueLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:26.f];
-    percentageValueLabel.textColor = REDNO1;
+    percentageValueLabel.textColor = color;
     [self addSubview:percentageValueLabel];
     [self bringSubviewToFront:percentageValueLabel];
     
     UILabel *percentageLabel = [[UILabel alloc] initWithFrame:CGRectMake(62, 40, 20, 10)];
     percentageLabel.text = @"%";
     percentageLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
-    percentageLabel.textColor = REDNO1;
+    percentageLabel.textColor = color;
     [self addSubview:percentageLabel];
     [self bringSubviewToFront:percentageLabel];
+    
+    UILabel *eventName = [[UILabel alloc] initWithFrame:CGRectMake(30, 95, 60, 30)];
+    eventName.text = _tDCEventName;
+    eventName.font = [UIFont fontWithName:@"Arial-BoldMT" size:20.f];
+    eventName.textColor = color;
+    [self addSubview:eventName];
+    [self bringSubviewToFront:eventName];
+}
+
+- (CGFloat)originXValue
+{
+    CGFloat originX = 0;
+    if (_tDCPercentage >= 0.1f)
+    {
+        originX = 33;
+    }
+    else originX = 42;
+    return originX;
 }
 
 @end
