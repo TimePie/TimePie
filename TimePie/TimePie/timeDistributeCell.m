@@ -40,8 +40,8 @@
 
 - (void)initDistributeGraph
 {
-    tDCPieChart *testChart = [[tDCPieChart alloc] initWithFrame:CGRectMake(10, 10, 100, 130)];
-    [_vessel addSubview:testChart];
+    tDCPieChart *testChart1 = [[tDCPieChart alloc] initWithFrame:CGRectMake(10, 10, 100, 130)];
+    [_vessel addSubview:testChart1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
