@@ -14,7 +14,8 @@
 
 @implementation BEMSimpleLineGraphView
 
-int numberOfPoints; // The number of Points in the Graph.
+int numberOfXaxisPoints; // The number of Points in the Graph.
+int numberOfAllPointsInAGraph;
 BEMCircle *closestDot;
 int currentlyCloser;
 
@@ -61,14 +62,24 @@ int currentlyCloser;
 }
 
 - (void)layoutSubviews {
-    numberOfPoints = [self.delegate numberOfPointsInGraph]; // The number of Points in the Graph.
+    numberOfXaxisPoints = [self.delegate numberOfXaxisPoints]; // The number of Points in the Graph.
+    numberOfAllPointsInAGraph= [self.delegate numberOfAllPoints];
+    
     
     self.animationDelegate = [[BEMAnimations alloc] init];
     self.animationDelegate.delegate = self;
     
-    [self drawGraph];
+    
+    //draw different item in one view
+    for (int i=0; i<self.itemCount; i++) {
+        [self drawGraph:i];
+    }
+    
     [self drawXAxis];
     
+    
+    
+    //TODO: change vertical to horizontal
     if (self.enableTouchReport == YES) {
         // Initialize the vertical gray line that appears where the user touches the graph.
         self.verticalLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, self.viewForBaselineLayout.frame.size.height)];
@@ -87,7 +98,8 @@ int currentlyCloser;
     }
 }
 
-- (void)drawGraph {
+- (void)drawGraph:(int) index
+{
     // CREATION OF THE DOTS
     
     float maxValue = [self maxValue]; // Biggest Y-axis value from all the points.
@@ -96,21 +108,23 @@ int currentlyCloser;
     float positionOnXAxis; // The position on the X-axis of the point currently being created.
     float positionOnYAxis; // The position on the Y-axis of the point currently being created.
     
-    for (UIView *subview in [self subviews]) {
-        if ([subview isKindOfClass:[BEMCircle class]])
-            [subview removeFromSuperview];
-    }
+//    for (UIView *subview in [self subviews]) {
+//        if ([subview isKindOfClass:[BEMCircle class]])
+//            [subview removeFromSuperview];
+//    }
     
-    for (int i = 0; i < numberOfPoints; i++) {
+    for (int i = 0; i < numberOfXaxisPoints; i++) {
         
-        float dotValue = [self.delegate valueForIndex:i];
+        float dotValue = [self.delegate valueInArray:index ObjectAtIndex:i];
         
-        positionOnXAxis = (self.viewForBaselineLayout.frame.size.width/(numberOfPoints - 1))*i;
+        positionOnXAxis = (self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints - 1))*i;
         positionOnYAxis = (self.viewForBaselineLayout.frame.size.height - 80) - ((dotValue - minValue) / ((maxValue - minValue) / (self.viewForBaselineLayout.frame.size.height - 80))) + 20;
         
         BEMCircle *circleDot = [[BEMCircle alloc] initWithFrame:CGRectMake(0, 0, circleSize, circleSize)];
         circleDot.center = CGPointMake(positionOnXAxis, positionOnYAxis);
-        circleDot.tag = i+100;
+        //dot view tag
+        //at most 99 dots per view
+        circleDot.tag = i+ index*100;
         circleDot.alpha = 0;
         
         [self addSubview:circleDot];
@@ -120,23 +134,24 @@ int currentlyCloser;
     
     // CREATION OF THE LINE AND BOTTOM AND TOP FILL
     
-    float xDot1; // Postion on the X-axis of the first dot.
-    float yDot1; // Postion on the Y-axis of the first dot.
-    float xDot2; // Postion on the X-axis of the next dot.
-    float yDot2; // Postion on the Y-axis of the next dot.
+    float xDot1=0; // Postion on the X-axis of the first dot.
+    float yDot1=0; // Postion on the Y-axis of the first dot.
+    float xDot2=0; // Postion on the X-axis of the next dot.
+    float yDot2=0; // Postion on the Y-axis of the next dot.
     
-    for (UIView *subview in [self subviews]) {
-        if ([subview isKindOfClass:[BEMLine class]])
-            [subview removeFromSuperview];
-    }
+//    for (UIView *subview in [self subviews]) {
+//        if ([subview isKindOfClass:[BEMLine class]])
+//            [subview removeFromSuperview];
+//    }
     
-    for (int i = 0; i < numberOfPoints - 1; i++) {
+    for (int i = 0; i < numberOfXaxisPoints - 1; i++)
+    {
         
         for (UIView *dot in [self.viewForBaselineLayout subviews]) {
-            if (dot.tag == i + 100)  {
+            if (dot.tag == i + index*100)  {
                 xDot1 = dot.center.x;
                 yDot1 = dot.center.y;
-            } else if (dot.tag == i + 101) {
+            } else if (dot.tag == i + index*100+1) {
                 xDot2 = dot.center.x;
                 yDot2 = dot.center.y;
             }
@@ -150,14 +165,19 @@ int currentlyCloser;
         line.firstPoint = CGPointMake(xDot1, yDot1);
         line.secondPoint = CGPointMake(xDot2, yDot2);
         line.topColor = self.colorTop;
-        line.bottomColor = self.colorBottom;
-        line.color = self.colorLine;
+        
+        line.color = [self.colorsOfGraph objectAtIndex:index];
+        line.bottomColor = [self.colorsOfGraph objectAtIndex:index];
+        
+        line.bottomColor =[line.bottomColor colorWithAlphaComponent:0.5];
+        
         line.topAlpha = self.alphaTop;
         line.bottomAlpha = self.alphaBottom;
         line.lineAlpha = self.alphaLine;
         line.lineWidth = self.widthLine;
         [self addSubview:line];
-        [self sendSubviewToBack:line];
+        
+        //[self sendSubviewToBack:line];
         
         [self.animationDelegate animationForLine:i line:line animationSpeed:self.animationGraphEntranceSpeed];
     }
@@ -216,7 +236,7 @@ int currentlyCloser;
     float dotValue;
     float maxValue = 0;
     
-    for (int i = 0; i < numberOfPoints; i++) {
+    for (int i = 0; i < numberOfAllPointsInAGraph; i++) {
         dotValue = [self.delegate valueForIndex:i];
         
         if (dotValue > maxValue) {
@@ -232,7 +252,7 @@ int currentlyCloser;
     float dotValue;
     float minValue = INFINITY;
     
-    for (int i = 0; i < numberOfPoints; i++) {
+    for (int i = 0; i < numberOfAllPointsInAGraph; i++) {
         dotValue = [self.delegate valueForIndex:i];
         
         if (dotValue < minValue) {
@@ -242,6 +262,7 @@ int currentlyCloser;
     
     return minValue;
 }
+
 
 - (void)drawXAxis {
     if (![self.delegate respondsToSelector:@selector(numberOfGapsBetweenLabels)]) return;
@@ -253,7 +274,7 @@ int currentlyCloser;
     
     int numberOfGaps = [self.delegate numberOfGapsBetweenLabels] ;//+ 1;
     
-    if (numberOfGaps >= (numberOfPoints - 1)) {
+    if (numberOfGaps >= (numberOfXaxisPoints - 1)) {
         UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(3, self.frame.size.height - (labelXaxisOffset + 10), self.frame.size.width/2, 20)];
         firstLabel.text = [self.delegate labelOnXAxisForIndex:0];
         firstLabel.font = self.labelFont;
@@ -263,18 +284,18 @@ int currentlyCloser;
         [self addSubview:firstLabel];
         
         UILabel *lastLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 3, self.frame.size.height - (labelXaxisOffset + 10), self.frame.size.width/2, 20)];
-        lastLabel.text = [self.delegate labelOnXAxisForIndex:(numberOfPoints - 1)];
+        lastLabel.text = [self.delegate labelOnXAxisForIndex:(numberOfXaxisPoints - 1)];
         lastLabel.font = self.labelFont;
         lastLabel.textAlignment = 2;
         lastLabel.textColor = self.colorXaxisLabel;
         lastLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:lastLabel];
     } else {
-        for (int i = 1; i <= (numberOfPoints/numberOfGaps); i++) {
+        for (int i = 1; i <= (numberOfXaxisPoints/numberOfGaps); i++) {
             UILabel *labelXAxis = [[UILabel alloc] init];
             labelXAxis.text = [self.delegate labelOnXAxisForIndex:(i * numberOfGaps - 1)];
             [labelXAxis sizeToFit];
-            [labelXAxis setCenter:CGPointMake((self.viewForBaselineLayout.frame.size.width/(numberOfPoints-1))*(i*numberOfGaps - 1), self.frame.size.height - labelXaxisOffset)];
+            [labelXAxis setCenter:CGPointMake((self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints-1))*(i*numberOfGaps - 1), self.frame.size.height - labelXaxisOffset)];
             labelXAxis.font = self.labelFont;
             labelXAxis.textAlignment = 1;
             labelXAxis.textColor = self.colorXaxisLabel;

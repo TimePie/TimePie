@@ -20,14 +20,17 @@
 
 /** The number of points along the X-axis of the graph.
  @return Number of points. */
-- (int)numberOfPointsInGraph;
+- (int)numberOfXaxisPoints;
 
-
+//the number of points drew in the graph
+- (int)numberOfAllPoints;
 
 /** The vertical position for a point at given index. It corresponds to the Y-axis value of the Graph.
  @param index   The index from left to right of a given point (X-axis). The first value for the index is 0.
  @return        The Y-axis value at a given index. */
 - (float)valueForIndex:(NSInteger)index;
+
+- (float)valueInArray:(int) arrayIndex ObjectAtIndex:(int)index;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -63,6 +66,10 @@
 /** The string to display on the label on the X-axis at a given index. Please note that the number of strings to be returned should be equal to the number of points in the Graph.
  @param index    The index from left to right of a given label on the X-axis. Is the same index as the one for the points. The first value for the index is 0. */
 - (NSString *)labelOnXAxisForIndex:(NSInteger)index;
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -124,6 +131,10 @@
 
 /// Color of the label's text displayed on the X-Axis.
 @property (strong, nonatomic) UIColor *colorXaxisLabel;
+
+@property (strong,nonatomic) NSMutableArray *colorsOfGraph;
+//add
+@property (nonatomic) NSInteger itemCount;
 
 
 @end

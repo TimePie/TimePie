@@ -27,34 +27,65 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.ArrayOfValues = [[NSMutableArray alloc] init];
+    
+    //get the data from last view
+    //...
+    
+    
+    self.statsItemData= [[ZBStatsDataArray alloc] initWithCount:3];
+    
     self.ArrayOfDates = [[NSMutableArray alloc] init];
-    
-    //totalNumber = 0;
-    
-    for (int i=0; i < 7; i++) {
-        [self.ArrayOfValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+    //week
+    for (int i=0; i < 7; i++)
+    {
         [self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:i+1]]];
-        //[self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:2000 + i]]]; // Dates for the X-Axis of the graph
-        
-        //totalNumber = totalNumber + [[self.ArrayOfValues objectAtIndex:i] intValue]; // All of the values added together
     }
     
-    /* This is commented out because the graph is created in the interface with this sample app. However, the code remains as an example for creating the graph using code.*/
+    for(int count=0;count <self.statsItemData.itemCount;count++)
+    {
+        self.ArrayOfValues = [[NSMutableArray alloc] init];
+        for (int i=0; i < 7; i++)
+        {
+            [self.ArrayOfValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+            
+        }
+        [self.statsItemData.itemDataArrayList addObject:self.ArrayOfValues];
+    }
     
-    self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 60, 320, 250)];
+    [self.statsItemData initAllIntemData];
+    
+    [self.statsItemData.itemNameList addObject:@"学习"];
+    [self.statsItemData.itemNameList addObject:@"健身"];
+    [self.statsItemData.itemNameList addObject:@"酱油"];
+    
+    //create view for graph
+    self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 80, 318, 250)];
     self.myGraph.delegate = self;
     
-    // Customization of the graph
+    self.myGraph.itemCount=self.statsItemData.itemCount;
     
+    // Customization of the graph
     self.myGraph.colorTop = [UIColor whiteColor];
-    self.myGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.6]; // Leaving this not-set on iOS 7 will default to your window's tintColor
+    
+    self.myGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
     self.myGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
     self.myGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
 
-    self.myGraph.widthLine = 3.0;
+    self.myGraph.widthLine = 2.0;
     self.myGraph.enableTouchReport = YES;
     self.myGraph.animationGraphEntranceSpeed=0;
+    
+    
+    //set graph color
+    UIColor* tempColor=[UIColor colorWithRed:177/255.0 green:226/255.0 blue:139/255 alpha:1.0];
+    NSMutableArray* tempArray=[[NSMutableArray alloc] init];
+    [tempArray addObject:tempColor];
+    tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
+    [tempArray addObject:tempColor];
+    tempColor=[UIColor colorWithRed:251/255.0 green:170/255.0 blue:121/255.0 alpha:1.0];
+    [tempArray addObject:tempColor];
+    self.myGraph.colorsOfGraph=tempArray;
+    
     [self.view addSubview:self.myGraph];
     
 
@@ -94,14 +125,23 @@
 //    [self.myGraph reloadGraph];
 //}
 
-#pragma mark - SimpleLineGraph Data Source
+#pragma mark - Data Source
 
-- (int)numberOfPointsInGraph {
-    return (int)[self.ArrayOfValues count];
+- (int)numberOfXaxisPoints {
+    return (int)[self.ArrayOfDates count];
+}
+
+- (int)numberOfAllPoints{
+    return (int)[self.statsItemData.AllItemData count];
 }
 
 - (float)valueForIndex:(NSInteger)index {
-    return [[self.ArrayOfValues objectAtIndex:index] floatValue];
+    return [[self.statsItemData.AllItemData objectAtIndex:index] floatValue];
+}
+
+- (float)valueInArray:(int) arrayIndex ObjectAtIndex:(int)index
+{
+    return [[[self.statsItemData.itemDataArrayList objectAtIndex:arrayIndex] objectAtIndex:index] floatValue];
 }
 
 #pragma mark - SimpleLineGraph Delegate
