@@ -48,6 +48,17 @@
     [self addSubview:_labelTotal];
     [self.delegate showTotalTime];
     
+    UILabel* hourIndicator1 = [[UILabel alloc] initWithFrame:CGRectMake(108, 20, 40, 20)];
+    hourIndicator1.text = @"h";
+    hourIndicator1.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
+    hourIndicator1.textColor = MAIN_UI_COLOR;
+    [self addSubview:hourIndicator1];
+    UILabel* hourIndicator2 = [[UILabel alloc] initWithFrame:CGRectMake(283, 20, 40, 20)];
+    hourIndicator2.text = @"h";
+    hourIndicator2.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
+    hourIndicator2.textColor = MAIN_UI_COLOR;
+    [self addSubview:hourIndicator2];
+    
     _labelAvg = [[UILabel alloc] initWithFrame:CGRectMake(245, 5, 160, 40)];
     _labelAvg.text = @"99";
     _labelAvg.font = [UIFont fontWithName:@"Roboto-Medium" size:30.f];
