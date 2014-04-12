@@ -26,13 +26,69 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    //
+    [self initSegmentedControl];
     
     //get the data from last view
     //...
+    [self initData];
     
+    //
+    [self initGraphs];
     
-    self.statsItemData= [[ZBStatsDataArray alloc] initWithCount:3];
+}
+
+- (void)initNavigationBar
+{
+    
+}
+
+- (void)initSegmentedControl
+{
+    self.segmentedControl.selectedSegmentIndex =1;//设置默认选择项索引
+    [self.segmentedControl setTitle:@"过去三天" forSegmentAtIndex:2];
+}
+
+- (void)initData
+{
+    self.itemDataArray=[[NSMutableArray alloc]init];
+    int itemCount=3;
+    NSMutableArray *nameArray=[[NSMutableArray alloc]init];
+    
+    //item name
+    for (int i=0; i<itemCount; i++)
+    {
+        NSString* temp=@"Study";
+        NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",i]];
+        [nameArray addObject:name];
+    }
+    //item color
+    NSMutableArray *colorArray=[[NSMutableArray alloc]init];
+    UIColor* tempColor=[UIColor colorWithRed:177/255.0 green:226/255.0 blue:139/255 alpha:1.0];
+    [colorArray addObject:tempColor];
+    tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
+    [colorArray addObject:tempColor];
+    tempColor=[UIColor colorWithRed:251/255.0 green:170/255.0 blue:121/255.0 alpha:1.0];
+    [colorArray addObject:tempColor];
+    
+    //itemdata
+    for (int i=0; i<itemCount; i++)
+    {
+        NSMutableArray *tempValues;
+        for(int count=0;count <30;count++)
+        {
+            tempValues = [[NSMutableArray alloc] init];
+            [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+        }
+        
+        ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[colorArray objectAtIndex:i] AndMouthData:tempValues];
+        
+        
+        [self.itemDataArray addObject:itemTemp];
+        
+    }
+    
     
     self.ArrayOfDates = [[NSMutableArray alloc] init];
     //week
@@ -41,25 +97,15 @@
         [self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:i+1]]];
     }
     
-    for(int count=0;count <self.statsItemData.itemCount;count++)
-    {
-        self.ArrayOfValues = [[NSMutableArray alloc] init];
-        for (int i=0; i < 7; i++)
-        {
-            [self.ArrayOfValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
-            
-        }
-        [self.statsItemData.itemDataArrayList addObject:self.ArrayOfValues];
-    }
-    
-    [self.statsItemData initAllIntemData];
-    
-    [self.statsItemData.itemNameList addObject:@"学习"];
-    [self.statsItemData.itemNameList addObject:@"健身"];
-    [self.statsItemData.itemNameList addObject:@"酱油"];
+}
+
+- (void)initGraphs
+{
+    //TODO: rewrite this part
+    //使数据模型和视图分开
     
     //create view for graph
-    self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 80, 318, 250)];
+    self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 121, 318, 250)];
     self.myGraph.delegate = self;
     
     self.myGraph.itemCount=self.statsItemData.itemCount;
@@ -70,7 +116,7 @@
     self.myGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
     self.myGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
     self.myGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
-
+    self.myGraph.labelFont=[UIFont systemFontOfSize:14];
     self.myGraph.widthLine = 2.0;
     self.myGraph.enableTouchReport = YES;
     self.myGraph.animationGraphEntranceSpeed=0;
@@ -87,8 +133,6 @@
     self.myGraph.colorsOfGraph=tempArray;
     
     [self.view addSubview:self.myGraph];
-    
-
     
 }
 

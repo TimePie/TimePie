@@ -169,7 +169,7 @@ int currentlyCloser;
         line.color = [self.colorsOfGraph objectAtIndex:index];
         line.bottomColor = [self.colorsOfGraph objectAtIndex:index];
         
-        line.bottomColor =[line.bottomColor colorWithAlphaComponent:0.5];
+        line.bottomColor =[line.bottomColor colorWithAlphaComponent:0.3];
         
         line.topAlpha = self.alphaTop;
         line.bottomAlpha = self.alphaBottom;
@@ -295,8 +295,9 @@ int currentlyCloser;
             UILabel *labelXAxis = [[UILabel alloc] init];
             labelXAxis.text = [self.delegate labelOnXAxisForIndex:(i * numberOfGaps - 1)];
             [labelXAxis sizeToFit];
-            [labelXAxis setCenter:CGPointMake((self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints-1))*(i*numberOfGaps - 1), self.frame.size.height - labelXaxisOffset)];
+            [labelXAxis setCenter:CGPointMake((self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints-1))*(i*numberOfGaps - 1), self.frame.size.height + labelXaxisOffset+5)];
             labelXAxis.font = self.labelFont;
+            
             labelXAxis.textAlignment = 1;
             labelXAxis.textColor = self.colorXaxisLabel;
             labelXAxis.backgroundColor = [UIColor clearColor];
