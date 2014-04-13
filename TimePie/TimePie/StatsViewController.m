@@ -63,6 +63,7 @@
         NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",i]];
         [nameArray addObject:name];
     }
+    
     //item color
     NSMutableArray *colorArray=[[NSMutableArray alloc]init];
     UIColor* tempColor=[UIColor colorWithRed:177/255.0 green:226/255.0 blue:139/255 alpha:1.0];
@@ -72,13 +73,13 @@
     tempColor=[UIColor colorWithRed:251/255.0 green:170/255.0 blue:121/255.0 alpha:1.0];
     [colorArray addObject:tempColor];
     
-    //itemdata
+    //item data
     for (int i=0; i<itemCount; i++)
     {
         NSMutableArray *tempValues;
+        tempValues = [[NSMutableArray alloc] init];
         for(int count=0;count <30;count++)
         {
-            tempValues = [[NSMutableArray alloc] init];
             [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
         }
         
@@ -89,7 +90,7 @@
         
     }
     
-    
+    //30
     self.ArrayOfDates = [[NSMutableArray alloc] init];
     //week
     for (int i=0; i < 7; i++)
@@ -108,7 +109,7 @@
     self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 121, 318, 250)];
     self.myGraph.delegate = self;
     
-    self.myGraph.itemCount=self.statsItemData.itemCount;
+    self.myGraph.itemCount=self.itemDataArray.count;
     
     // Customization of the graph
     self.myGraph.colorTop = [UIColor whiteColor];
@@ -117,8 +118,8 @@
     self.myGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
     self.myGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
     self.myGraph.labelFont=[UIFont systemFontOfSize:14];
-    self.myGraph.widthLine = 2.0;
-    self.myGraph.enableTouchReport = YES;
+    self.myGraph.widthLine = 1.5;
+    self.myGraph.enableTouchReport = NO;
     self.myGraph.animationGraphEntranceSpeed=0;
     
     
@@ -176,18 +177,87 @@
 }
 
 - (int)numberOfAllPoints{
-    return (int)[self.statsItemData.AllItemData count];
+    return 0;//(int)[self.statsItemData.AllItemData count];
 }
 
 - (float)valueForIndex:(NSInteger)index {
-    return [[self.statsItemData.AllItemData objectAtIndex:index] floatValue];
+    return 0;//[[self.statsItemData.AllItemData objectAtIndex:index] floatValue];
 }
 
 - (float)valueInArray:(int) arrayIndex ObjectAtIndex:(int)index
 {
-    return [[[self.statsItemData.itemDataArrayList objectAtIndex:arrayIndex] objectAtIndex:index] floatValue];
+    ZBStatsItemData *item=[self.itemDataArray objectAtIndex:arrayIndex];
+    
+    return [[item.dataOfMonth objectAtIndex:index] floatValue];
 }
 
+- (float)minValueOfGraphType:(int) graphIndex
+{
+    //graphIndex
+    //0 -> 30
+    //1 -> 7
+    //2 -> 3
+    int endIndex=0;
+    float minValue = INFINITY;
+    switch (graphIndex) {
+        case 0:
+            endIndex=30;
+            break;
+        case 1:
+            endIndex=7;
+            break;
+        case 2:
+            endIndex=3;
+            break;
+        default:
+            break;
+    }
+    //NSMutableArray *minArray= [[NSMutableArray alloc]init];
+    for(int i=0;i<self.itemDataArray.count;i++)
+    {
+        float tempmin=[[self.itemDataArray objectAtIndex:i] minValueStartAt:0 EndAt:endIndex];
+        if(tempmin<minValue)
+        {
+            minValue=tempmin;
+        }
+        
+    }
+    return minValue;
+}
+- (float)maxValueOfGraphType:(int) graphIndex
+{
+    
+    //graphIndex
+    //0 -> 30
+    //1 -> 7
+    //2 -> 3
+    int endIndex=0;
+    float maxValue = 0;
+    switch (graphIndex) {
+        case 0:
+            endIndex=30;
+            break;
+        case 1:
+            endIndex=7;
+            break;
+        case 2:
+            endIndex=3;
+            break;
+        default:
+            break;
+    }
+    //NSMutableArray *minArray= [[NSMutableArray alloc]init];
+    for(int i=0;i<self.itemDataArray.count;i++)
+    {
+        float tempMax=[[self.itemDataArray objectAtIndex:i] maxValueStartAt:0 EndAt:endIndex];
+        if(tempMax>maxValue)
+        {
+            maxValue=tempMax;
+        }
+        
+    }
+    return maxValue;
+}
 #pragma mark - SimpleLineGraph Delegate
 
 - (int)numberOfGapsBetweenLabels {
@@ -197,6 +267,9 @@
 - (NSString *)labelOnXAxisForIndex:(NSInteger)index {
     return [self.ArrayOfDates objectAtIndex:index];
 }
+
+
+
 
 //- (void)didTouchGraphWithClosestIndex:(int)index {
 //    self.labelValues.text = [NSString stringWithFormat:@"%@", [self.ArrayOfValues objectAtIndex:index]];

@@ -16,4 +16,6 @@
 
 - (id)initWithName:(NSString*) name Color:(UIColor *)color AndMouthData:(NSMutableArray*) array;
 
+- (float)maxValueStartAt:(int)startIndex EndAt:(int)endIndex;
+- (float)minValueStartAt:(int)startIndex EndAt:(int)endIndex;
 @end

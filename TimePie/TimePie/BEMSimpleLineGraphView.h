@@ -32,6 +32,8 @@
 
 - (float)valueInArray:(int) arrayIndex ObjectAtIndex:(int)index;
 
+- (float)maxValueOfGraphType:(int) graphIndex;
+- (float)minValueOfGraphType:(int) graphIndex;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

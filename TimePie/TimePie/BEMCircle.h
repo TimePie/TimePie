@@ -12,4 +12,7 @@
 /// Class to draw the cicrle for the points.
 @interface BEMCircle : UIView
 
+// COLORS
+@property (strong, nonatomic) UIColor *color;
+
 @end

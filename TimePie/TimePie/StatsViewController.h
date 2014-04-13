@@ -22,6 +22,6 @@
 
 @property (strong,nonatomic) NSMutableArray *itemDataArray;
 
-@property (strong,nonatomic) ZBStatsDataArray* statsItemData;
+//@property (strong,nonatomic) ZBStatsDataArray* statsItemData;
 
 @end

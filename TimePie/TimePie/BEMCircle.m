@@ -16,6 +16,7 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
+        //[self drawInnerRect:frame];
     }
     return self;
 }
@@ -24,8 +25,11 @@
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddEllipseInRect(ctx, rect);
-    [[UIColor whiteColor] set];
+    [self.color set];
     CGContextFillPath(ctx);
+    
+    
+    
 }
 
 @end
