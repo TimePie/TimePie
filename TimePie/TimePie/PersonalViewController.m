@@ -69,6 +69,7 @@
     _mainView.delegate = self;
     _mainView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _mainView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    _mainView.separatorInset = UIEdgeInsetsZero;
     [self.view addSubview:_mainView];
 }
 

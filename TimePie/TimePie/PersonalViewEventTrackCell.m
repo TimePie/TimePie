@@ -8,6 +8,7 @@
 
 #import "PersonalViewEventTrackCell.h"
 #import "BasicUIColor+UIPosition.h"
+#import "eventTrackColumnGraph.h"
 
 @implementation PersonalViewEventTrackCell
 
@@ -22,6 +23,7 @@
     if (self)
     {
         [self initlabel];
+        [self initEventTrackColumnGraph];
     }
     return self;
 }
@@ -45,6 +47,13 @@
     _PVETCHourIndicatorLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
     _PVETCHourIndicatorLabel.textColor = REDNO1;
     [self addSubview:_PVETCHourIndicatorLabel];
+}
+
+- (void)initEventTrackColumnGraph
+{
+    eventTrackColumnGraph *columnGraph = [[eventTrackColumnGraph alloc] initWithFrame:CGRectMake(0, 10, 250, 40)];
+    [columnGraph initColumnGraphWithColumnCount:6];
+    [self addSubview:columnGraph];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

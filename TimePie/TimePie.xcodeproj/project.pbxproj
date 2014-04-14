@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
+		134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 134275D118FC403300533378 /* eventTrackColumnGraph.m */; };
 		13469E9E18F2D0E900B7F30C /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9718F2D0E900B7F30C /* BEMAnimations.m */; };
 		13469E9F18F2D0E900B7F30C /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9918F2D0E900B7F30C /* BEMCircle.m */; };
 		13469EA018F2D0E900B7F30C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9B18F2D0E900B7F30C /* BEMLine.m */; };
@@ -59,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
+		134275D018FC403300533378 /* eventTrackColumnGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventTrackColumnGraph.h; sourceTree = "<group>"; };
+		134275D118FC403300533378 /* eventTrackColumnGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventTrackColumnGraph.m; sourceTree = "<group>"; };
 		13469E9618F2D0E900B7F30C /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
 		13469E9718F2D0E900B7F30C /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
 		13469E9818F2D0E900B7F30C /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 				13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */,
 				13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */,
 				13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */,
+				134275D018FC403300533378 /* eventTrackColumnGraph.h */,
+				134275D118FC403300533378 /* eventTrackColumnGraph.m */,
 			);
 			name = PersonalView;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
 				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,
+				134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
