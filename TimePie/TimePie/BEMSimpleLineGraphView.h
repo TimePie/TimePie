@@ -67,7 +67,7 @@
 
 /** The string to display on the label on the X-axis at a given index. Please note that the number of strings to be returned should be equal to the number of points in the Graph.
  @param index    The index from left to right of a given label on the X-axis. Is the same index as the one for the points. The first value for the index is 0. */
-- (NSString *)labelOnXAxisForIndex:(NSInteger)index;
+- (NSString *)labelOnXAxisForIndex:(NSInteger)index WithTimeRange:(int) range;
 
 
 
@@ -84,7 +84,8 @@
 
 @property (strong, nonatomic) BEMAnimations *animationDelegate;
 
-@property (strong, nonatomic) UIView *verticalLine;
+//@property (strong, nonatomic) UIView *verticalLine;
+@property (strong, nonatomic) UIView *horizontalLine;
 
 @property (strong, nonatomic) UIFont *labelFont;
 

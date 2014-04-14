@@ -78,6 +78,8 @@
     {
         NSMutableArray *tempValues;
         tempValues = [[NSMutableArray alloc] init];
+        
+        //NSString * nsDateString= [NSString stringWithFormat:@"%d.%d",month,day];
         for(int count=0;count <30;count++)
         {
             [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
@@ -87,15 +89,37 @@
         
         
         [self.itemDataArray addObject:itemTemp];
-        
     }
     
-    //30
+    //7
     self.ArrayOfDates = [[NSMutableArray alloc] init];
+    NSDate *currentDate=[[NSDate alloc]init];
+    NSCalendar * cal=[NSCalendar currentCalendar];
+    
+    NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
+    NSDateComponents * conponent= [cal components:unitFlags fromDate:currentDate];
+    NSInteger year=[conponent year];
+    NSInteger month=[conponent month];
+    NSInteger day=[conponent day];
+    
+    
+    //
+    
     //week
-    for (int i=0; i < 7; i++)
+    for (int i=0; i < 30; i++)
     {
-        [self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:i+1]]];
+        NSString *tempS=@"";
+        if(i==0)
+        {
+            tempS=@"今日";
+        }
+        else
+        {
+            day-=1;
+            tempS= [NSString stringWithFormat:@"%d.%d",month,day];
+        }
+        [self.ArrayOfDates addObject:tempS];
+            //[self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:i+1]]];
     }
     
 }
@@ -106,7 +130,11 @@
     //使数据模型和视图分开
     
     //create view for graph
-    self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(0, 121, 318, 250)];
+    self.myGraph = [[BEMSimpleLineGraphView alloc] initWithFrame:CGRectMake(-4, 120, 320, 250)];
+    
+    //self.myGraph.backgroundColor=[UIColor blackColor];
+    
+    
     self.myGraph.delegate = self;
     
     self.myGraph.itemCount=self.itemDataArray.count;
@@ -114,14 +142,13 @@
     // Customization of the graph
     self.myGraph.colorTop = [UIColor whiteColor];
     
-    self.myGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
-    self.myGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
+//    self.myGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
+//    self.myGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
     self.myGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
-    self.myGraph.labelFont=[UIFont systemFontOfSize:14];
+    self.myGraph.labelFont=[UIFont systemFontOfSize:13];
     self.myGraph.widthLine = 1.5;
-    self.myGraph.enableTouchReport = NO;
+    self.myGraph.enableTouchReport = YES;
     self.myGraph.animationGraphEntranceSpeed=0;
-    
     
     //set graph color
     UIColor* tempColor=[UIColor colorWithRed:177/255.0 green:226/255.0 blue:139/255 alpha:1.0];
@@ -173,7 +200,10 @@
 #pragma mark - Data Source
 
 - (int)numberOfXaxisPoints {
-    return (int)[self.ArrayOfDates count];
+    
+    //TODO: use graph index to index the generating graph
+    
+    return 7;//(int)[self.ArrayOfDates count];
 }
 
 - (int)numberOfAllPoints{
@@ -264,8 +294,12 @@
     return 1;
 }
 
-- (NSString *)labelOnXAxisForIndex:(NSInteger)index {
-    return [self.ArrayOfDates objectAtIndex:index];
+- (NSString *)labelOnXAxisForIndex:(NSInteger)index WithTimeRange:(int) range
+{
+    int currentTypeOffset=range;
+    
+    return [self.ArrayOfDates objectAtIndex: currentTypeOffset- (index+1)];
+    
 }
 
 
