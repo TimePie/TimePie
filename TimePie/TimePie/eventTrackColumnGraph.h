@@ -11,8 +11,10 @@
 @interface eventTrackColumnGraph : UIView
 {
     NSInteger columnCount;
+    NSMutableArray *columnHeightArray;
+    UIColor *columnColor;
 }
 
-- (void)initColumnGraphWithColumnCount:(NSInteger)cCount;
+- (void)initColumnGraphWithColumnCount:(NSInteger)cCount heightArray:(NSMutableArray*)cHeightArray columnColor:(UIColor*)cColor;
 
 @end

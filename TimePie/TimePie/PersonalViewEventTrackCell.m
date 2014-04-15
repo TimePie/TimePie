@@ -23,7 +23,6 @@
     if (self)
     {
         [self initlabel];
-        [self initEventTrackColumnGraph];
     }
     return self;
 }
@@ -49,11 +48,21 @@
     [self addSubview:_PVETCHourIndicatorLabel];
 }
 
+
+
 - (void)initEventTrackColumnGraph
 {
+    NSArray *tempCHeightArray = @[@15.f,@20.f,@15.f,@20.f,@15.f,@20.f];
+    eventTrackColumnHeightArray = [NSMutableArray arrayWithArray:tempCHeightArray];
     eventTrackColumnGraph *columnGraph = [[eventTrackColumnGraph alloc] initWithFrame:CGRectMake(0, 10, 250, 40)];
-    [columnGraph initColumnGraphWithColumnCount:6];
+    [columnGraph initColumnGraphWithColumnCount:[eventTrackColumnHeightArray count] heightArray:eventTrackColumnHeightArray columnColor:_cellColor];
     [self addSubview:columnGraph];
+}
+
+- (void)initCellColorWith:(UIColor *)cColor
+{
+    _cellColor = cColor;
+    [self initEventTrackColumnGraph];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

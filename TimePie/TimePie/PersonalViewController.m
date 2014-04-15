@@ -145,18 +145,21 @@
         {
             itemTrackCell = [[PersonalViewEventTrackCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
         }
+        if(indexPath.row == 0) [itemTrackCell initCellColorWith:REDNO1];
         //todo: set with index path
         if (indexPath.row == 1)
         {
             itemTrackCell.PVETCEventLabel.text = @"酱油";
             itemTrackCell.PVETCAvgTimeLabel.text = @"2.6";
             itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = BLUENO2;
+            [itemTrackCell initCellColorWith:BLUENO2];
         }
         else if(indexPath.row == 2)
         {
             itemTrackCell.PVETCEventLabel.text = @"健身";
             itemTrackCell.PVETCAvgTimeLabel.text = @"3.9";
             itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = GREENNO3;
+            [itemTrackCell initCellColorWith:GREENNO3];
         }
         itemTrackCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return itemTrackCell;

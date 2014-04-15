@@ -25,16 +25,18 @@
 {
     for (int i = 0; i < columnCount; i++)
     {
-        CGRect rectangle = CGRectMake(230 - 7*i, 40-15, 5, 15);
+        CGRect rectangle = CGRectMake(230 - 7*i, 40-[columnHeightArray[i] floatValue], 5, [columnHeightArray[i] floatValue]);
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetRGBFillColor(context, CGColorGetComponents([REDNO1 CGColor])[0], CGColorGetComponents([REDNO1 CGColor])[1], CGColorGetComponents([REDNO1 CGColor])[2], 0.3);
+        CGContextSetRGBFillColor(context, CGColorGetComponents([columnColor CGColor])[0], CGColorGetComponents([columnColor CGColor])[1], CGColorGetComponents([columnColor CGColor])[2], 0.3);
         CGContextFillRect(context, rectangle);
     }
 }
 
-- (void)initColumnGraphWithColumnCount:(NSInteger)cCount
+- (void)initColumnGraphWithColumnCount:(NSInteger)cCount heightArray:(NSMutableArray *)cHeightArray columnColor:(UIColor *)cColor
 {
     columnCount = cCount;
+    columnHeightArray = cHeightArray;
+    columnColor = cColor;
 }
 
 

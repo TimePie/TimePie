@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonalViewEventTrackCell : UITableViewCell
-
+{
+    NSMutableArray *eventTrackColumnHeightArray;
+}
 @property (strong, nonatomic) UILabel *PVETCEventLabel;
 @property (strong, nonatomic) UILabel *PVETCAvgTimeLabel;
 @property (strong, nonatomic) UILabel *PVETCHourIndicatorLabel;
+@property (strong, nonatomic) UIColor *cellColor;
 
+- (void)initCellColorWith:(UIColor*)cColor;
 
 @end
