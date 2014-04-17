@@ -7,8 +7,13 @@
 //
 
 #import "StatsViewController.h"
-
+#import "StatsItemTableViewCell.h"
 @interface StatsViewController ()
+{
+    //record the current graph type
+    //0 - >30  1-> 7 2->3
+    int currentType;
+}
 
 @end
 
@@ -26,7 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    currentType=1;
     //
     [self initSegmentedControl];
     
@@ -50,6 +56,7 @@
     [self.segmentedControl setTitle:@"过去三天" forSegmentAtIndex:2];
 }
 
+#pragma mark - graph view
 - (void)initData
 {
     self.itemDataArray=[[NSMutableArray alloc]init];
@@ -65,13 +72,13 @@
     }
     
     //item color
-    NSMutableArray *colorArray=[[NSMutableArray alloc]init];
-    UIColor* tempColor=[UIColor colorWithRed:177/255.0 green:226/255.0 blue:139/255 alpha:1.0];
-    [colorArray addObject:tempColor];
+    self.colorArray=[[NSMutableArray alloc]init];
+    UIColor* tempColor=[UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
+    [self.colorArray addObject:tempColor];
     tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
-    [colorArray addObject:tempColor];
+    [self.colorArray addObject:tempColor];
     tempColor=[UIColor colorWithRed:251/255.0 green:170/255.0 blue:121/255.0 alpha:1.0];
-    [colorArray addObject:tempColor];
+    [self.colorArray addObject:tempColor];
     
     //item data
     for (int i=0; i<itemCount; i++)
@@ -85,7 +92,7 @@
             [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
         }
         
-        ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[colorArray objectAtIndex:i] AndMouthData:tempValues];
+        ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[self.colorArray objectAtIndex:i] AndMouthData:tempValues];
         
         
         [self.itemDataArray addObject:itemTemp];
@@ -151,7 +158,7 @@
     self.myGraph.animationGraphEntranceSpeed=0;
     
     //set graph color
-    UIColor* tempColor=[UIColor colorWithRed:177/255.0 green:226/255.0 blue:139/255 alpha:1.0];
+    UIColor* tempColor=[UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
     NSMutableArray* tempArray=[[NSMutableArray alloc] init];
     [tempArray addObject:tempColor];
     tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
@@ -197,7 +204,7 @@
 //    [self.myGraph reloadGraph];
 //}
 
-#pragma mark - Data Source
+#pragma mark - Data Source for graph view
 
 - (int)numberOfXaxisPoints {
     
@@ -327,6 +334,85 @@
 //    }];
 //    
 //}
+
+
+#pragma mark - table view
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    //
+    [self setExtraCellLineHidden:tableView];
+    //[tableView setScrollEnabled:NO];
+    //
+    return 1;
+}
+
+//delete useless lines
+-(void)setExtraCellLineHidden: (UITableView *)tableView
+{
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+    //[view release];
+}
+
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 48;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.itemDataArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    //use the cell defined in storyboard
+    static NSString *CellIdentifier = @"StatsItemTableViewCell";
+    
+    StatsItemTableViewCell *cell = (StatsItemTableViewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if(cell==nil)
+    {
+        //cell=[[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"StatsItemTableViewCell" owner:self options:nil] lastObject];
+    }
+    //
+    int index=indexPath.row;
+    ZBStatsItemData* tempItem=(ZBStatsItemData*)[self.itemDataArray objectAtIndex:index];
+    cell.timeLabel.text=@"1.5";
+    
+    cell.itemName=tempItem.itemName;
+    [cell setColorForItem: tempItem.mainColor];
+    
+    if (index==0) {
+        //create left color block view
+        UIView *separatorline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.5 )];
+        separatorline.backgroundColor = [UIColor colorWithRed:200/255.0 green:199/255.0 blue:204/255.0 alpha:1.0];
+        [cell addSubview:separatorline];
+
+    }
+    
+    
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+}
 
 
 @end

@@ -12,6 +12,8 @@
 		684C4FAC18F299F100CF1387 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 684C4FA518F299F100CF1387 /* BEMLine.m */; };
 		684C4FAD18F299F100CF1387 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 684C4FA718F299F100CF1387 /* BEMSimpleLineGraphView.m */; };
 		684C4FAE18F299F100CF1387 /* ZBStatsDataArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 684C4FA918F299F100CF1387 /* ZBStatsDataArray.m */; };
+		685DB3CA19001D310073852E /* StatsItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 685DB3C819001D310073852E /* StatsItemTableViewCell.m */; };
+		685DB3CB19001D310073852E /* StatsItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685DB3C919001D310073852E /* StatsItemTableViewCell.xib */; };
 		68AE0AD918F99BF000AB77E0 /* ZBStatsItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AE0AD818F99BF000AB77E0 /* ZBStatsItemData.m */; };
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
@@ -59,6 +61,9 @@
 		684C4FA718F299F100CF1387 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BEMSimpleLineGraphView.m; path = TimePie/BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		684C4FA818F299F100CF1387 /* ZBStatsDataArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZBStatsDataArray.h; path = TimePie/ZBStatsDataArray.h; sourceTree = "<group>"; };
 		684C4FA918F299F100CF1387 /* ZBStatsDataArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZBStatsDataArray.m; path = TimePie/ZBStatsDataArray.m; sourceTree = "<group>"; };
+		685DB3C719001D310073852E /* StatsItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsItemTableViewCell.h; path = TimePie/StatsItemTableViewCell.h; sourceTree = "<group>"; };
+		685DB3C819001D310073852E /* StatsItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsItemTableViewCell.m; path = TimePie/StatsItemTableViewCell.m; sourceTree = "<group>"; };
+		685DB3C919001D310073852E /* StatsItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatsItemTableViewCell.xib; path = TimePie/StatsItemTableViewCell.xib; sourceTree = "<group>"; };
 		68AE0AD718F99BF000AB77E0 /* ZBStatsItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBStatsItemData.h; sourceTree = "<group>"; };
 		68AE0AD818F99BF000AB77E0 /* ZBStatsItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBStatsItemData.m; sourceTree = "<group>"; };
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +147,9 @@
 				684C4FA918F299F100CF1387 /* ZBStatsDataArray.m */,
 				68AE0AD718F99BF000AB77E0 /* ZBStatsItemData.h */,
 				68AE0AD818F99BF000AB77E0 /* ZBStatsItemData.m */,
+				685DB3C719001D310073852E /* StatsItemTableViewCell.h */,
+				685DB3C819001D310073852E /* StatsItemTableViewCell.m */,
+				685DB3C919001D310073852E /* StatsItemTableViewCell.xib */,
 			);
 			name = StatsViewClasses;
 			sourceTree = "<group>";
@@ -323,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				685DB3CB19001D310073852E /* StatsItemTableViewCell.xib in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
@@ -357,6 +366,7 @@
 				684C4FAB18F299F100CF1387 /* BEMCircle.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
+				685DB3CA19001D310073852E /* StatsItemTableViewCell.m in Sources */,
 				684C4FAE18F299F100CF1387 /* ZBStatsDataArray.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,

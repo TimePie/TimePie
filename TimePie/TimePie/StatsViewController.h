@@ -10,7 +10,9 @@
 #import "BEMSimpleLineGraphView.h"
 #import "ZBStatsDataArray.h"
 #import "ZBStatsItemData.h"
-@interface StatsViewController : UIViewController <BEMSimpleLineGraphDelegate> 
+@interface StatsViewController : UIViewController <BEMSimpleLineGraphDelegate,UITableViewDelegate, UITableViewDataSource>
+
+@property (strong,nonatomic) IBOutlet UITableView *itemTableView;
 
 @property (strong, nonatomic) IBOutlet BEMSimpleLineGraphView *myGraph;
 
@@ -21,7 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *ArrayOfDates;
 
 @property (strong,nonatomic) NSMutableArray *itemDataArray;
-
+@property (strong,nonatomic) NSMutableArray  *colorArray;
 //@property (strong,nonatomic) ZBStatsDataArray* statsItemData;
 
 @end
