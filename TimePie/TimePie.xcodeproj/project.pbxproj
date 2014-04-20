@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
+		134189891904111900DF2F41 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134189881904111900DF2F41 /* SettingsViewController.m */; };
 		134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 134275D118FC403300533378 /* eventTrackColumnGraph.m */; };
 		13469E9E18F2D0E900B7F30C /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9718F2D0E900B7F30C /* BEMAnimations.m */; };
 		13469E9F18F2D0E900B7F30C /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9918F2D0E900B7F30C /* BEMCircle.m */; };
@@ -60,6 +61,8 @@
 
 /* Begin PBXFileReference section */
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
+		134189871904111900DF2F41 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		134189881904111900DF2F41 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		134275D018FC403300533378 /* eventTrackColumnGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventTrackColumnGraph.h; sourceTree = "<group>"; };
 		134275D118FC403300533378 /* eventTrackColumnGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventTrackColumnGraph.m; sourceTree = "<group>"; };
 		13469E9618F2D0E900B7F30C /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
@@ -309,6 +312,8 @@
 				CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */,
 				CD4CE09218E46EBA00916A4B /* PersonalViewController.h */,
 				CD4CE09318E46EBA00916A4B /* PersonalViewController.m */,
+				134189871904111900DF2F41 /* SettingsViewController.h */,
+				134189881904111900DF2F41 /* SettingsViewController.m */,
 				CD4CE09718E46EC800916A4B /* StatsViewController.h */,
 				CD4CE09818E46EC800916A4B /* StatsViewController.m */,
 				CD4CE09918E46EC800916A4B /* StatsViewController.xib */,
@@ -436,6 +441,7 @@
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
+				134189891904111900DF2F41 /* SettingsViewController.m in Sources */,
 				13469E9E18F2D0E900B7F30C /* BEMAnimations.m in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
 				13469EA018F2D0E900B7F30C /* BEMLine.m in Sources */,

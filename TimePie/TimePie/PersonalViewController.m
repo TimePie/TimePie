@@ -11,6 +11,7 @@
 #import "PersonalViewAvgTimeCell.h"
 #import "timeDistributeCell.h"
 #import "PersonalViewEventTrackCell.h"
+#import "SettingsViewController.h"
 
 @interface PersonalViewController ()
 
@@ -46,6 +47,13 @@
 {
     _navBar= [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
     UINavigationItem *tempNavItem = [[UINavigationItem alloc] initWithTitle:@"个人中心"];
+    
+    UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 42, 22)];
+    [tempBtn setImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
+    [tempBtn addTarget:self action:@selector(settingsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithCustomView:tempBtn];
+    tempNavItem.rightBarButtonItem = closeButton;
+    
     [_navBar pushNavigationItem:tempNavItem animated:NO];
     _navBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
     [self.view addSubview:_navBar];
@@ -77,6 +85,12 @@
 - (void)exitButtonPressed
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)settingsButtonPressed
+{
+    SettingsViewController *sVC = [[SettingsViewController alloc] init];
+    [self presentViewController:sVC animated:YES completion:nil];
 }
 
 #pragma mark - UITableView DataSource
