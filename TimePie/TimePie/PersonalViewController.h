@@ -13,6 +13,7 @@
 @interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,SettingsViewControllerDelegate>
 {
     UIView *darkUILayer;
+    NSString *timeRangeInfo;
 }
 
 @property (strong, nonatomic) UINavigationBar *navBar;

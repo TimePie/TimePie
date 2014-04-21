@@ -29,7 +29,7 @@
     if ((self = [super initWithFrame: frame]))
     {
         self.backgroundColor = [UIColor whiteColor];
-        pickerData = [[NSArray alloc] initWithObjects:@"过去一周",@"过去一个月",@"过去三个月",@"过去六个月",@"过去一年", nil];
+        _pickerData = [[NSArray alloc] initWithObjects:@"过去一周",@"过去一个月",@"过去三个月",@"过去六个月",@"过去一年", nil];
         
         UIPickerView *picker = [[UIPickerView alloc] initWithFrame: CGRectMake(0, MyDateTimePickerToolbarHeight, frame.size.width, frame.size.height - MyDateTimePickerToolbarHeight)];
         picker.dataSource = self;
@@ -65,14 +65,14 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return pickerData.count;
+    return _pickerData.count;
 }
 
 #pragma mark - UIPickerView Delegate
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     pickerView.tintColor = [UIColor blueColor];
-    return [pickerData objectAtIndex:row];
+    return [_pickerData objectAtIndex:row];
 }
 
 - (void) donePressed

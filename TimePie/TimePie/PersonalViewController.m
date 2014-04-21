@@ -75,6 +75,7 @@
     _mainView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _mainView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     _mainView.separatorInset = UIEdgeInsetsZero;
+    timeRangeInfo = @"过去一周";
     [self.view addSubview:_mainView];
 }
 
@@ -102,6 +103,8 @@
 
 -(void)donePressed
 {
+    timeRangeInfo = [_pVCPicker.pickerData objectAtIndex:[_pVCPicker.picker selectedRowInComponent:0]];
+    [_mainView reloadData];
     [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
     self.view.userInteractionEnabled = YES;
 }
@@ -142,7 +145,7 @@
         }
         rangeCell.textLabel.text = @"查看范围";
         rangeCell.textLabel.textColor = MAIN_UI_COLOR;
-        rangeCell.detailTextLabel.text = @"过去一周";
+        rangeCell.detailTextLabel.text = timeRangeInfo;
         rangeCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         rangeCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return rangeCell;

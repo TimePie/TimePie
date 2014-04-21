@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonalViewPicker : UIView<UIPickerViewDataSource,UIPickerViewDelegate>
-{
-    NSArray *pickerData;
-}
 
 @property (nonatomic, assign, readonly) UIPickerView *picker;
+@property (strong, nonatomic) NSArray *pickerData;
 
 - (void) addTargetForDoneButton: (id) target action: (SEL) action;
 - (void) addTargetForCancelButton: (id) target action: (SEL) action;
