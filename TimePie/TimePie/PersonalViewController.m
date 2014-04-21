@@ -11,7 +11,7 @@
 #import "PersonalViewAvgTimeCell.h"
 #import "timeDistributeCell.h"
 #import "PersonalViewEventTrackCell.h"
-#import "SettingsViewController.h"
+
 
 @interface PersonalViewController ()
 
@@ -45,18 +45,14 @@
 #pragma mark - init UI
 - (void)initNavBar
 {
-    _navBar= [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-    UINavigationItem *tempNavItem = [[UINavigationItem alloc] initWithTitle:@"个人中心"];
-    
     UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 42, 22)];
     [tempBtn setImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
     [tempBtn addTarget:self action:@selector(settingsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithCustomView:tempBtn];
-    tempNavItem.rightBarButtonItem = closeButton;
     
-    [_navBar pushNavigationItem:tempNavItem animated:NO];
-    _navBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
-    [self.view addSubview:_navBar];
+    self.title = @"个人中心";
+    self.navigationItem.rightBarButtonItem = closeButton;
+    [self navigationController].navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
 }
 
 - (void)initExitButton
@@ -64,13 +60,13 @@
     _exitButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-62, 94, 57)];
     [_exitButton setImage:[UIImage imageNamed:@"TimePie_Personal_Exit_Button"] forState:UIControlStateNormal];
     [_exitButton addTarget:self action:@selector(exitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_exitButton];
-    [self.view.superview bringSubviewToFront:_exitButton];
+    [[self navigationController].view addSubview:_exitButton];
+    [[self navigationController].view bringSubviewToFront:_exitButton];
 }
 
 - (void)initMainView
 {
-    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
     _mainView.backgroundView = nil;
     _mainView.backgroundColor = [UIColor clearColor];
     _mainView.dataSource = self;
@@ -90,7 +86,9 @@
 - (void)settingsButtonPressed
 {
     SettingsViewController *sVC = [[SettingsViewController alloc] init];
-    [self presentViewController:sVC animated:YES completion:nil];
+    sVC.delegate = self;
+    self.exitButton.hidden = YES;
+    [[self navigationController] pushViewController:sVC animated:YES];
 }
 
 #pragma mark - UITableView DataSource
@@ -224,6 +222,13 @@
     }
     else return nil;
 }
+
+#pragma mark - settingsViewController Delegate
+- (void)reverseCloseButton
+{
+    self.exitButton.hidden = NO;
+}
+
 
 - (void)didReceiveMemoryWarning
 {

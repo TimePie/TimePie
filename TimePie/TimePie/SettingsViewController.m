@@ -31,28 +31,15 @@
     [self initNavBar];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.delegate reverseCloseButton];
+}
+
 #pragma mark - init UI
 - (void)initNavBar
 {
-    _navBar= [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-    UINavigationItem *tempNavItem = [[UINavigationItem alloc] initWithTitle:@"设置"];
-    
-    UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
-    [tempBtn setImage:[UIImage imageNamed:@"closeButton"] forState:UIControlStateNormal];
-    [tempBtn addTarget:self action:@selector(closeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithCustomView:tempBtn];
-    tempNavItem.rightBarButtonItem = closeButton;
-    
-    [_navBar pushNavigationItem:tempNavItem animated:NO];
-    _navBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
-    [self.view addSubview:_navBar];
-}
-
-#pragma mark - target selector
-- (void)closeButtonPressed
-{
-    self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.title = @"设置";
 }
 
 - (void)didReceiveMemoryWarning

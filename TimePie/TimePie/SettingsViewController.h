@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SettingsViewControllerDelegate <NSObject>
+
+@required
+- (void)reverseCloseButton;
+
+@end
+
 @interface SettingsViewController : UIViewController
 
 @property (strong, nonatomic) UINavigationBar *navBar;
+@property (nonatomic, assign) id<SettingsViewControllerDelegate> delegate;
 
 @end

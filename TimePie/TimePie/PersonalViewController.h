@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsViewController.h"
 
-@interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,SettingsViewControllerDelegate>
 
 @property (strong, nonatomic) UINavigationBar *navBar;
 @property (strong, nonatomic) UIButton *exitButton;

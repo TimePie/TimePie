@@ -10,6 +10,7 @@
 #import "PersonalViewController.h"
 #import "StatsViewController.h"
 #import "CreateItemViewController.h"
+#import "BasicUIColor+UIPosition.h"
 
 
 @interface MainScreenViewController ()
@@ -43,9 +44,12 @@
 -(IBAction)personal_btn_clicked:(id)sender
 {
     PersonalViewController *viewController = [[PersonalViewController alloc] init];
-    [self presentViewController:viewController animated:YES completion:nil];
-    NSLog(@"Go to personal view");
-    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];    
+    [self presentViewController: navController animated:YES completion:nil];
+}
+
+- (void)settingsButtonPressed
+{
 }
 
 -(IBAction)stats_btn_clicked:(id)sender
