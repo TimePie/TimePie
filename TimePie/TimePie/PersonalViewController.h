@@ -11,6 +11,9 @@
 
 @class PersonalViewPicker;
 @interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,SettingsViewControllerDelegate>
+{
+    UIView *darkUILayer;
+}
 
 @property (strong, nonatomic) UINavigationBar *navBar;
 @property (strong, nonatomic) UIButton *exitButton;

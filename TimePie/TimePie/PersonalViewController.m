@@ -40,6 +40,7 @@
     [self initNavBar];
     [self initMainView];
     [self initExitButton];
+    [self initDarkUILayer];
 }
 
 #pragma mark - init UI
@@ -77,6 +78,14 @@
     [self.view addSubview:_mainView];
 }
 
+- (void)initDarkUILayer
+{
+    darkUILayer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    darkUILayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    darkUILayer.userInteractionEnabled = NO;
+    [self.view addSubview:darkUILayer];
+}
+
 #pragma mark - target selector
 - (void)exitButtonPressed
 {
@@ -93,12 +102,14 @@
 
 -(void)donePressed
 {
-    _pVCPicker.hidden = YES;
+    [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
+    self.view.userInteractionEnabled = YES;
 }
 
 -(void)cancelPressed
 {
-    _pVCPicker.hidden = YES;
+    [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
+    self.view.userInteractionEnabled = YES;
 }
 
 #pragma mark - UITableView DataSource
@@ -237,10 +248,12 @@
 {
     if(indexPath.section == 0 && indexPath.row == 0)
     {
-        _pVCPicker = [[PersonalViewPicker alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 215, SCREEN_WIDTH, 215)];
+        self.view.userInteractionEnabled = NO;
+        _pVCPicker = [[PersonalViewPicker alloc] initWithFrame:CGRectMake(0, 568, SCREEN_WIDTH, 215)];
         [_pVCPicker addTargetForCancelButton:self action:@selector(cancelPressed)];
         [_pVCPicker addTargetForDoneButton:self action:@selector(donePressed)];
         [[self navigationController].view addSubview:_pVCPicker];
+        [self pushViewAnimationWithView:_pVCPicker willHidden:NO];
         _pVCPicker.hidden = NO;
     }
 }
@@ -249,6 +262,26 @@
 - (void)reverseCloseButton
 {
     self.exitButton.hidden = NO;
+}
+
+#pragma mark - utility functions
+- (void)pushViewAnimationWithView:(UIView*)view willHidden:(BOOL)hidden
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        if (hidden)
+        {
+            view.frame = CGRectMake(0, 568, SCREEN_WIDTH, 215);
+            darkUILayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        }
+        else
+        {
+            [view setHidden:hidden];
+            view.frame = CGRectMake(0, SCREEN_HEIGHT - 215, SCREEN_WIDTH, 215);
+            darkUILayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        }
+    } completion:^(BOOL finished){
+        [view setHidden:hidden];
+    }];
 }
 
 
