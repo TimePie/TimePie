@@ -11,7 +11,7 @@
 #import "PersonalViewAvgTimeCell.h"
 #import "timeDistributeCell.h"
 #import "PersonalViewEventTrackCell.h"
-
+#import "PersonalViewPicker.h"
 
 @interface PersonalViewController ()
 
@@ -89,6 +89,16 @@
     sVC.delegate = self;
     self.exitButton.hidden = YES;
     [[self navigationController] pushViewController:sVC animated:YES];
+}
+
+-(void)donePressed
+{
+    _pVCPicker.hidden = YES;
+}
+
+-(void)cancelPressed
+{
+    _pVCPicker.hidden = YES;
 }
 
 #pragma mark - UITableView DataSource
@@ -221,6 +231,18 @@
         return view;
     }
     else return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0 && indexPath.row == 0)
+    {
+        _pVCPicker = [[PersonalViewPicker alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 215, SCREEN_WIDTH, 215)];
+        [_pVCPicker addTargetForCancelButton:self action:@selector(cancelPressed)];
+        [_pVCPicker addTargetForDoneButton:self action:@selector(donePressed)];
+        [[self navigationController].view addSubview:_pVCPicker];
+        _pVCPicker.hidden = NO;
+    }
 }
 
 #pragma mark - settingsViewController Delegate

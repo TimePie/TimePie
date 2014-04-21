@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "SettingsViewController.h"
 
+@class PersonalViewPicker;
 @interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,SettingsViewControllerDelegate>
 
 @property (strong, nonatomic) UINavigationBar *navBar;
 @property (strong, nonatomic) UIButton *exitButton;
 
 @property (strong, nonatomic) UITableView *mainView;
+@property (strong, nonatomic) PersonalViewPicker *pVCPicker;
 
 @end
