@@ -361,10 +361,10 @@
 		CD4CE09018E46A0100916A4B /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				13DF3AA319066CF70050C09E /* Main */,
 				13DF3AA619066D620050C09E /* CreateItem */,
 				13DF3AA519066D460050C09E /* Stats */,
 				13DF3AA419066D2E0050C09E /* PersonalCenter */,
-				13DF3AA319066CF70050C09E /* Main */,
 			);
 			name = controllers;
 			sourceTree = "<group>";

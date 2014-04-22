@@ -62,8 +62,8 @@
 -(IBAction)create_btn_clicked:(id)sender
 {
     CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
-    [self presentViewController:viewController animated:YES completion:nil];
-    NSLog(@"Go to create item view");
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 

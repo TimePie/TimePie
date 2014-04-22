@@ -49,10 +49,10 @@
     UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 42, 22)];
     [tempBtn setImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
     [tempBtn addTarget:self action:@selector(settingsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithCustomView:tempBtn];
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithCustomView:tempBtn];
     
     self.title = @"个人中心";
-    self.navigationItem.rightBarButtonItem = closeButton;
+    self.navigationItem.rightBarButtonItem = settingsButton;
     [self navigationController].navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
 }
 
