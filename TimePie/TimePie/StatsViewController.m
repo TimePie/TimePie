@@ -13,6 +13,7 @@
     //record the current graph type
     //0 - >30  1-> 7 2->3
     int currentType;
+    
 }
 
 @end
@@ -100,12 +101,14 @@
     
     //7
     self.ArrayOfDates = [[NSMutableArray alloc] init];
+    
     NSDate *currentDate=[[NSDate alloc]init];
     NSCalendar * cal=[NSCalendar currentCalendar];
+    //currentDate.date
     
     NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
     NSDateComponents * conponent= [cal components:unitFlags fromDate:currentDate];
-    NSInteger year=[conponent year];
+    //NSInteger year=[conponent year];
     NSInteger month=[conponent month];
     NSInteger day=[conponent day];
     
@@ -113,6 +116,7 @@
     //
     
     //week
+    //TODO: count day for date for display
     for (int i=0; i < 30; i++)
     {
         NSString *tempS=@"";
@@ -382,9 +386,8 @@
     //
     int index=indexPath.row;
     ZBStatsItemData* tempItem=(ZBStatsItemData*)[self.itemDataArray objectAtIndex:index];
-    cell.timeLabel.text=@"1.5";
-    
-    cell.itemName=tempItem.itemName;
+    cell.timeLabel.text=@"2.5";
+    cell.itemName.text=tempItem.itemName;
     [cell setColorForItem: tempItem.mainColor];
     
     if (index==0) {
