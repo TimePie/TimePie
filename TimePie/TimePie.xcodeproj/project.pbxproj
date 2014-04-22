@@ -222,6 +222,55 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		13DF3AA219066CE80050C09E /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		13DF3AA319066CF70050C09E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE08B18E4678400916A4B /* MainScreenViewController.h */,
+				CD4CE08C18E4678400916A4B /* MainScreenViewController.m */,
+				CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		13DF3AA419066D2E0050C09E /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE09218E46EBA00916A4B /* PersonalViewController.h */,
+				CD4CE09318E46EBA00916A4B /* PersonalViewController.m */,
+				134189871904111900DF2F41 /* SettingsViewController.h */,
+				134189881904111900DF2F41 /* SettingsViewController.m */,
+			);
+			name = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		13DF3AA519066D460050C09E /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE09718E46EC800916A4B /* StatsViewController.h */,
+				CD4CE09818E46EC800916A4B /* StatsViewController.m */,
+				CD4CE09918E46EC800916A4B /* StatsViewController.xib */,
+			);
+			name = Stats;
+			sourceTree = "<group>";
+		};
+		13DF3AA619066D620050C09E /* CreateItem */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE0A118E4700F00916A4B /* CreateItemViewController.h */,
+				CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */,
+				CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */,
+			);
+			name = CreateItem;
+			sourceTree = "<group>";
+		};
 		13F4CBB718F1C10E00D716AE /* category */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,19 +361,10 @@
 		CD4CE09018E46A0100916A4B /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CD4CE08B18E4678400916A4B /* MainScreenViewController.h */,
-				CD4CE08C18E4678400916A4B /* MainScreenViewController.m */,
-				CD4CE08D18E4678400916A4B /* MainScreenViewController.xib */,
-				CD4CE09218E46EBA00916A4B /* PersonalViewController.h */,
-				CD4CE09318E46EBA00916A4B /* PersonalViewController.m */,
-				134189871904111900DF2F41 /* SettingsViewController.h */,
-				134189881904111900DF2F41 /* SettingsViewController.m */,
-				CD4CE09718E46EC800916A4B /* StatsViewController.h */,
-				CD4CE09818E46EC800916A4B /* StatsViewController.m */,
-				CD4CE09918E46EC800916A4B /* StatsViewController.xib */,
-				CD4CE0A118E4700F00916A4B /* CreateItemViewController.h */,
-				CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */,
-				CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */,
+				13DF3AA619066D620050C09E /* CreateItem */,
+				13DF3AA519066D460050C09E /* Stats */,
+				13DF3AA419066D2E0050C09E /* PersonalCenter */,
+				13DF3AA319066CF70050C09E /* Main */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -332,7 +372,7 @@
 		CD4CE09118E46A1400916A4B /* models */ = {
 			isa = PBXGroup;
 			children = (
-				134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */,
+				13DF3AA219066CE80050C09E /* Basic */,
 			);
 			name = models;
 			sourceTree = "<group>";
