@@ -10,6 +10,8 @@
 #define BLUENO2 [UIColor colorWithRed:0.49 green:0.72 blue:0.86 alpha:1.0]
 #define GREENNO3_light [UIColor colorWithRed:0.61 green:0.82 blue:0.45 alpha:0.57]
 #define GREENNO3 [UIColor colorWithRed:0.61 green:0.82 blue:0.45 alpha:1.0]
+#define PINKNO04 [UIColor colorWithRed:0.97 green:0.62 blue:0.66 alpha:1.0]
+#define PINKNO04_light [UIColor colorWithRed:0.97 green:0.62 blue:0.66 alpha:0.57]
 
 //UIPosition
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width

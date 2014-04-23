@@ -8,6 +8,7 @@
 
 #import "CreateItemViewController.h"
 #import "BasicUIColor+UIPosition.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CreateItemViewController ()
 
@@ -29,6 +30,17 @@
 {
     [super viewDidLoad];
     [self initNavBar];
+    [self initMainVessel];
+    [NSTimer scheduledTimerWithTimeInterval:0.033f target:self
+                                   selector:@selector(mainLoop:) userInfo:nil repeats:NO];
+}
+
+- (void) mainLoop: (id) sender
+{
+    if(inputField.text.length > 0) initInputLabel.text = @"";
+    else initInputLabel.text = @"名称";
+    [NSTimer scheduledTimerWithTimeInterval:0.033f target:self
+                                   selector:@selector(mainLoop:) userInfo:nil repeats:NO];
 }
 
 - (void)initNavBar
@@ -48,6 +60,51 @@
     [self navigationController].navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
 }
 
+- (void)initMainVessel
+{
+    _CIVC_mainVessel = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _CIVC_mainVessel.separatorInset = UIEdgeInsetsZero;
+    _CIVC_mainVessel.dataSource = self;
+    _CIVC_mainVessel.delegate = self;
+    _CIVC_mainVessel.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+    [self.view addSubview:_CIVC_mainVessel];
+}
+
+#pragma mark - UITableView DataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3 + 2;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"Cell";
+    int row = indexPath.row;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+    }
+    if (row == 0)
+    {
+        [self initTextFieldInView:cell];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+#pragma mark - UITableView Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 48;
+}
+
 #pragma mark - target selector
 - (void)cancelButtonPressed
 {
@@ -57,6 +114,32 @@
 - (void)confirmButtonPressed
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - utilities methods
+- (void)initTextFieldInView:(UIView*)view
+{
+    colorTag = [[UIView alloc] initWithFrame:CGRectMake(10, 14, 20, 20)];
+    colorTag.backgroundColor = PINKNO04;
+    [self setRoundedView:colorTag toDiameter:16];
+    [view addSubview:colorTag];
+    inputField = [[UITextField alloc] initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH, 48)];
+    [inputField becomeFirstResponder];
+    [view addSubview:inputField];
+    initInputLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
+    initInputLabel.text = @"名称";
+    initInputLabel.textColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
+    [view addSubview:initInputLabel];
+}
+
+-(void)setRoundedView:(UIView *)roundedView toDiameter:(float)newSize;
+{
+    roundedView.clipsToBounds = YES;
+    CGPoint saveCenter = roundedView.center;
+    CGRect newFrame = CGRectMake(roundedView.frame.origin.x, roundedView.frame.origin.y, newSize, newSize);
+    roundedView.frame = newFrame;
+    roundedView.layer.cornerRadius = newSize / 2.0;
+    roundedView.center = saveCenter;
 }
 
 - (void)didReceiveMemoryWarning
