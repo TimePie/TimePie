@@ -10,10 +10,6 @@
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
 		134189891904111900DF2F41 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134189881904111900DF2F41 /* SettingsViewController.m */; };
 		134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 134275D118FC403300533378 /* eventTrackColumnGraph.m */; };
-		13469E9E18F2D0E900B7F30C /* BEMAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9718F2D0E900B7F30C /* BEMAnimations.m */; };
-		13469E9F18F2D0E900B7F30C /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9918F2D0E900B7F30C /* BEMCircle.m */; };
-		13469EA018F2D0E900B7F30C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9B18F2D0E900B7F30C /* BEMLine.m */; };
-		13469EA118F2D0E900B7F30C /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13469E9D18F2D0E900B7F30C /* BEMSimpleLineGraphView.m */; };
 		1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1378213D19055B3800083168 /* PersonalViewPicker.m */; };
 		13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */; };
 		13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */; };
@@ -26,6 +22,16 @@
 		13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */; };
 		13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB518F1BD4700D716AE /* tDCPieChart.m */; };
 		13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB918F1C12100D716AE /* UIView+Frame.m */; };
+		6831559B1909201400C9A27C /* StatsView_itemCellBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */; };
+		6831559E1909263C00C9A27C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6831559D1909263C00C9A27C /* BEMLine.m */; };
+		68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0971909193F00F12101 /* StatsLineGraphView.m */; };
+		68BBE09C19091A4600F12101 /* StatsItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE09A19091A4600F12101 /* StatsItemTableViewCell.m */; };
+		68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BBE09B19091A4600F12101 /* StatsItemTableViewCell.xib */; };
+		68BBE0A019091A7600F12101 /* ZBStatsItemData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE09F19091A7600F12101 /* ZBStatsItemData.m */; };
+		68BBE0A319091B9500F12101 /* StatsCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0A219091B9500F12101 /* StatsCircle.m */; };
+		68BBE0A619091C6700F12101 /* StatsLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0A519091C6700F12101 /* StatsLine.m */; };
+		68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0A819091D5C00F12101 /* StatsAnimations.m */; };
+		68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */; };
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
 		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
@@ -66,14 +72,6 @@
 		134189881904111900DF2F41 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		134275D018FC403300533378 /* eventTrackColumnGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventTrackColumnGraph.h; sourceTree = "<group>"; };
 		134275D118FC403300533378 /* eventTrackColumnGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eventTrackColumnGraph.m; sourceTree = "<group>"; };
-		13469E9618F2D0E900B7F30C /* BEMAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimations.h; sourceTree = "<group>"; };
-		13469E9718F2D0E900B7F30C /* BEMAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimations.m; sourceTree = "<group>"; };
-		13469E9818F2D0E900B7F30C /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
-		13469E9918F2D0E900B7F30C /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
-		13469E9A18F2D0E900B7F30C /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
-		13469E9B18F2D0E900B7F30C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
-		13469E9C18F2D0E900B7F30C /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
-		13469E9D18F2D0E900B7F30C /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
 		1378213C19055B3800083168 /* PersonalViewPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewPicker.h; sourceTree = "<group>"; };
 		1378213D19055B3800083168 /* PersonalViewPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewPicker.m; sourceTree = "<group>"; };
@@ -93,6 +91,24 @@
 		13F4CBB518F1BD4700D716AE /* tDCPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tDCPieChart.m; sourceTree = "<group>"; };
 		13F4CBB818F1C12100D716AE /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		13F4CBB918F1C12100D716AE /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsView_itemCellBG@2x.png"; sourceTree = "<group>"; };
+		6831559C1909263C00C9A27C /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		6831559D1909263C00C9A27C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		68BBE0961909193F00F12101 /* StatsLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsLineGraphView.h; sourceTree = "<group>"; };
+		68BBE0971909193F00F12101 /* StatsLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsLineGraphView.m; sourceTree = "<group>"; };
+		68BBE09919091A4600F12101 /* StatsItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsItemTableViewCell.h; sourceTree = "<group>"; };
+		68BBE09A19091A4600F12101 /* StatsItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsItemTableViewCell.m; sourceTree = "<group>"; };
+		68BBE09B19091A4600F12101 /* StatsItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsItemTableViewCell.xib; sourceTree = "<group>"; };
+		68BBE09E19091A7600F12101 /* ZBStatsItemData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBStatsItemData.h; sourceTree = "<group>"; };
+		68BBE09F19091A7600F12101 /* ZBStatsItemData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBStatsItemData.m; sourceTree = "<group>"; };
+		68BBE0A119091B9500F12101 /* StatsCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsCircle.h; sourceTree = "<group>"; };
+		68BBE0A219091B9500F12101 /* StatsCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsCircle.m; sourceTree = "<group>"; };
+		68BBE0A419091C6700F12101 /* StatsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsLine.h; sourceTree = "<group>"; };
+		68BBE0A519091C6700F12101 /* StatsLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsLine.m; sourceTree = "<group>"; };
+		68BBE0A719091D5C00F12101 /* StatsAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsAnimations.h; sourceTree = "<group>"; };
+		68BBE0A819091D5C00F12101 /* StatsAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsAnimations.m; sourceTree = "<group>"; };
+		68BBE0AA19091EB300F12101 /* ZBStatsDataArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBStatsDataArray.h; sourceTree = "<group>"; };
+		68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBStatsDataArray.m; sourceTree = "<group>"; };
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -159,24 +175,10 @@
 			name = Resource;
 			sourceTree = "<group>";
 		};
-		13469E9518F2D0E900B7F30C /* BEMSimpleLineGraph */ = {
-			isa = PBXGroup;
-			children = (
-				13469E9618F2D0E900B7F30C /* BEMAnimations.h */,
-				13469E9718F2D0E900B7F30C /* BEMAnimations.m */,
-				13469E9818F2D0E900B7F30C /* BEMCircle.h */,
-				13469E9918F2D0E900B7F30C /* BEMCircle.m */,
-				13469E9A18F2D0E900B7F30C /* BEMLine.h */,
-				13469E9B18F2D0E900B7F30C /* BEMLine.m */,
-				13469E9C18F2D0E900B7F30C /* BEMSimpleLineGraphView.h */,
-				13469E9D18F2D0E900B7F30C /* BEMSimpleLineGraphView.m */,
-			);
-			path = BEMSimpleLineGraph;
-			sourceTree = "<group>";
-		};
 		13CCE57318EC2F8800462A83 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				68BBE095190918F100F12101 /* StatsView */,
 				13CCE57418EC2FAD00462A83 /* PersonalView */,
 			);
 			name = views;
@@ -207,6 +209,7 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */,
 				13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */,
 				13CCE57F18EC49E400462A83 /* PersonalView_Total@2x.png */,
 				132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */,
@@ -280,6 +283,30 @@
 			name = category;
 			sourceTree = "<group>";
 		};
+		68BBE095190918F100F12101 /* StatsView */ = {
+			isa = PBXGroup;
+			children = (
+				6831559C1909263C00C9A27C /* BEMLine.h */,
+				6831559D1909263C00C9A27C /* BEMLine.m */,
+				68BBE0AA19091EB300F12101 /* ZBStatsDataArray.h */,
+				68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */,
+				68BBE09E19091A7600F12101 /* ZBStatsItemData.h */,
+				68BBE09F19091A7600F12101 /* ZBStatsItemData.m */,
+				68BBE09919091A4600F12101 /* StatsItemTableViewCell.h */,
+				68BBE09A19091A4600F12101 /* StatsItemTableViewCell.m */,
+				68BBE09B19091A4600F12101 /* StatsItemTableViewCell.xib */,
+				68BBE0961909193F00F12101 /* StatsLineGraphView.h */,
+				68BBE0971909193F00F12101 /* StatsLineGraphView.m */,
+				68BBE0A119091B9500F12101 /* StatsCircle.h */,
+				68BBE0A219091B9500F12101 /* StatsCircle.m */,
+				68BBE0A419091C6700F12101 /* StatsLine.h */,
+				68BBE0A519091C6700F12101 /* StatsLine.m */,
+				68BBE0A719091D5C00F12101 /* StatsAnimations.h */,
+				68BBE0A819091D5C00F12101 /* StatsAnimations.m */,
+			);
+			name = StatsView;
+			sourceTree = "<group>";
+		};
 		CD4CE04A18E464D000916A4B = {
 			isa = PBXGroup;
 			children = (
@@ -314,7 +341,6 @@
 		CD4CE05E18E464D000916A4B /* TimePie */ = {
 			isa = PBXGroup;
 			children = (
-				13469E9518F2D0E900B7F30C /* BEMSimpleLineGraph */,
 				132A702318EB027600AA675F /* Resource */,
 				13F4CBB718F1C10E00D716AE /* category */,
 				CD4CE09118E46A1400916A4B /* models */,
@@ -453,12 +479,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6831559B1909201400C9A27C /* StatsView_itemCellBG@2x.png in Resources */,
 				13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */,
 				13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */,
 				13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */,
 				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
+				68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */,
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
@@ -486,20 +514,24 @@
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
+				68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */,
+				68BBE0A019091A7600F12101 /* ZBStatsItemData.m in Sources */,
 				134189891904111900DF2F41 /* SettingsViewController.m in Sources */,
-				13469E9E18F2D0E900B7F30C /* BEMAnimations.m in Sources */,
+				68BBE0A319091B9500F12101 /* StatsCircle.m in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
-				13469EA018F2D0E900B7F30C /* BEMLine.m in Sources */,
-				13469EA118F2D0E900B7F30C /* BEMSimpleLineGraphView.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
+				68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */,
 				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
+				6831559E1909263C00C9A27C /* BEMLine.m in Sources */,
+				68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
-				13469E9F18F2D0E900B7F30C /* BEMCircle.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */,
+				68BBE0A619091C6700F12101 /* StatsLine.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
+				68BBE09C19091A4600F12101 /* StatsItemTableViewCell.m in Sources */,
 				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,
 				134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */,
 			);
