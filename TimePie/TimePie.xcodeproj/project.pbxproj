@@ -24,6 +24,8 @@
 		13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB918F1C12100D716AE /* UIView+Frame.m */; };
 		6831559B1909201400C9A27C /* StatsView_itemCellBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */; };
 		6831559E1909263C00C9A27C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6831559D1909263C00C9A27C /* BEMLine.m */; };
+		688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688586EC190931AE0050D15D /* StatsBackButton@2x.png */; };
+		688586F11909368A0050D15D /* StatsNavShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688586F01909368A0050D15D /* StatsNavShadow@2x.png */; };
 		68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0971909193F00F12101 /* StatsLineGraphView.m */; };
 		68BBE09C19091A4600F12101 /* StatsItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE09A19091A4600F12101 /* StatsItemTableViewCell.m */; };
 		68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BBE09B19091A4600F12101 /* StatsItemTableViewCell.xib */; };
@@ -94,6 +96,8 @@
 		6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsView_itemCellBG@2x.png"; sourceTree = "<group>"; };
 		6831559C1909263C00C9A27C /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
 		6831559D1909263C00C9A27C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		688586EC190931AE0050D15D /* StatsBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsBackButton@2x.png"; sourceTree = "<group>"; };
+		688586F01909368A0050D15D /* StatsNavShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsNavShadow@2x.png"; sourceTree = "<group>"; };
 		68BBE0961909193F00F12101 /* StatsLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsLineGraphView.h; sourceTree = "<group>"; };
 		68BBE0971909193F00F12101 /* StatsLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsLineGraphView.m; sourceTree = "<group>"; };
 		68BBE09919091A4600F12101 /* StatsItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsItemTableViewCell.h; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				688586F01909368A0050D15D /* StatsNavShadow@2x.png */,
+				688586EC190931AE0050D15D /* StatsBackButton@2x.png */,
 				6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */,
 				13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */,
 				13CCE57F18EC49E400462A83 /* PersonalView_Total@2x.png */,
@@ -485,11 +491,13 @@
 				13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */,
 				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
+				688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
 				68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */,
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
+				688586F11909368A0050D15D /* StatsNavShadow@2x.png in Resources */,
 				13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */,
 				132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */,
 				CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */,

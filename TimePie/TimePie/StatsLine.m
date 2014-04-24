@@ -26,15 +26,15 @@
     //FILL TOP
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-        CGContextSetFillColorWithColor(ctx, [[UIColor blackColor] CGColor]);
-        CGContextSetAlpha(ctx, self.topAlpha);
-        CGContextBeginPath(ctx);
-        CGContextMoveToPoint(ctx, round(self.firstPoint.x), self.firstPoint.y);
-        CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.secondPoint.y);
-        CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.frame.origin.y);
-        CGContextAddLineToPoint(ctx, round(self.firstPoint.x), self.frame.origin.x);
-        CGContextClosePath(ctx);
-            CGContextDrawPath(ctx, kCGPathFill);
+//        CGContextSetFillColorWithColor(ctx, [[UIColor blackColor] CGColor]);
+//        CGContextSetAlpha(ctx, self.topAlpha);
+//        CGContextBeginPath(ctx);
+//        CGContextMoveToPoint(ctx, round(self.firstPoint.x), self.firstPoint.y);
+//        CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.secondPoint.y);
+//        CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.frame.origin.y);
+//        CGContextAddLineToPoint(ctx, round(self.firstPoint.x), self.frame.origin.x);
+//        CGContextClosePath(ctx);
+//            CGContextDrawPath(ctx, kCGPathFill);
     
     //FILL BOTOM
     CGContextSetFillColorWithColor(ctx, [self.bottomColor CGColor]);

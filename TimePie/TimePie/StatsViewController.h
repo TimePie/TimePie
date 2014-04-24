@@ -12,6 +12,8 @@
 #import "ZBStatsItemData.h"
 @interface StatsViewController : UIViewController <StatsLineGraphDelegate,UITableViewDelegate, UITableViewDataSource>
 
+@property (strong,nonatomic) IBOutlet UINavigationBar *navigationBar;
+
 @property (strong,nonatomic) IBOutlet UITableView *itemTableView;
 
 @property (strong, nonatomic) IBOutlet StatsLineGraphView *myGraph;

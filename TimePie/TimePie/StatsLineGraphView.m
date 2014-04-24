@@ -172,7 +172,9 @@ int currentlyCloser;
             }
         }
         
-        StatsLine *line = [[StatsLine alloc] initWithFrame:CGRectMake(0, 0, self.viewForBaselineLayout.frame.size.width+circleSize/2, self.viewForBaselineLayout.frame.size.height)];
+        //StatsLine *line = [[StatsLine alloc] initWithFrame:CGRectMake(0, 0, self.viewForBaselineLayout.frame.size.width+circleSize/2, self.viewForBaselineLayout.frame.size.height)];
+        
+        StatsLine *line = [[StatsLine alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width +circleSize/2, self.frame.size.height)];
         line.opaque = NO;
         
         //line.tag = i + 1000;
@@ -186,12 +188,13 @@ int currentlyCloser;
         line.color = [self.colorsOfGraph objectAtIndex:index];
         line.bottomColor = [self.colorsOfGraph objectAtIndex:index];
         
-        line.bottomColor =[line.bottomColor colorWithAlphaComponent:0.9];
+        line.bottomColor =[line.bottomColor colorWithAlphaComponent:1];
         
         line.topAlpha = self.alphaTop;
         line.bottomAlpha = self.alphaBottom;
         line.lineAlpha = self.alphaLine;
         line.lineWidth = self.widthLine;
+        
         [self addSubview:line];
         //[self bringSubviewToFront:line];
         //set the dot on the line

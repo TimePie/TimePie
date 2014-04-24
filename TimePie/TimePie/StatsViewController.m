@@ -33,6 +33,7 @@
 {
     [super viewDidLoad];
     
+    [self initNavigationBar];
     currentType=1;
     //
     [self initSegmentedControl];
@@ -48,7 +49,17 @@
 
 - (void)initNavigationBar
 {
+    //[self.navigationItem setBackBarButtonItem:[[UINavigationItem alloc] se ]]
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"StatsBackButton"] style:nil target:self action:@selector(exitButtonPressed)];//initWithTitle:@"t" style:UIBarButtonItemStyleBordered:self action:@selector(exitButtonPressed)];
+    self.navigationItem.leftBarButtonItem=backButton;
+    
+    [self.navigationBar pushNavigationItem:self.navigationItem animated:NO];  //.leftBarButtonItem= backButton;
+    
+    self.navigationBar.topItem.title=@"历史回顾";
+    
+    self.navigationBar.clipsToBounds = YES;
+    //[[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
 }
 
 - (void)initSegmentedControl
@@ -155,8 +166,11 @@
     
 //    self.myGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
 //    self.myGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
+    self.myGraph.alphaBottom=0.3;
+    self.myGraph.alphaLine=0.8;
+    
     self.myGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
-    self.myGraph.labelFont=[UIFont systemFontOfSize:13];
+    self.myGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:13];
     self.myGraph.widthLine = 1.5;
     self.myGraph.enableTouchReport = YES;
     self.myGraph.animationGraphEntranceSpeed=0;
@@ -417,5 +431,10 @@
 {
 }
 
+
+- (void)exitButtonPressed
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end
