@@ -13,6 +13,9 @@
     UIView *colorTag;
     UITextField *inputField;
     UILabel *initInputLabel;
+    UILabel *addTagLabel;
+    NSMutableArray *tagTextArray;
+    UIButton *routineButton;
 }
 @property (strong, nonatomic) UITableView *CIVC_mainVessel;
 

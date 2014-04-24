@@ -35,12 +35,22 @@
                                    selector:@selector(mainLoop:) userInfo:nil repeats:NO];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self performSelector:@selector(respondInput:) withObject:self afterDelay:0.033f];
+}
+
 - (void) mainLoop: (id) sender
 {
     if(inputField.text.length > 0) initInputLabel.text = @"";
     else initInputLabel.text = @"名称";
     [NSTimer scheduledTimerWithTimeInterval:0.033f target:self
                                    selector:@selector(mainLoop:) userInfo:nil repeats:NO];
+}
+
+- (void)respondInput:(id)sender
+{
+    [inputField becomeFirstResponder];
 }
 
 - (void)initNavBar
@@ -84,7 +94,8 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
-    int row = indexPath.row;
+    NSInteger row = indexPath.row;
+    tagTextArray = [[NSMutableArray alloc] initWithObjects:@"工作",@"学习", nil];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
     {
@@ -93,6 +104,18 @@
     if (row == 0)
     {
         [self initTextFieldInView:cell];
+    }
+    else if(row >= 1 && row <= 2)
+    {
+        [self initTagCellView:cell withIndexPath:indexPath];
+    }
+    else if(row == 3)
+    {
+        [self initAddTagButtonInView:cell];
+    }
+    else
+    {
+        [self initRoutineCell:cell];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -116,6 +139,22 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)routineButtonPressed:(id)sender
+{
+    if ([sender isSelected]) {
+        [sender setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
+        [sender setSelected:NO];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"AddRoutineButtonActive"] forState:UIControlStateSelected];
+        [sender setSelected:YES];
+    }
+}
+
+- (void)addTagButtonPressed:(id)sender
+{
+    
+}
+
 #pragma mark - utilities methods
 - (void)initTextFieldInView:(UIView*)view
 {
@@ -123,8 +162,7 @@
     colorTag.backgroundColor = PINKNO04;
     [self setRoundedView:colorTag toDiameter:16];
     [view addSubview:colorTag];
-    inputField = [[UITextField alloc] initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH, 48)];
-    [inputField becomeFirstResponder];
+    inputField = [[UITextField alloc] initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH, 48)];
     [view addSubview:inputField];
     initInputLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
     initInputLabel.text = @"名称";
@@ -140,6 +178,29 @@
     roundedView.frame = newFrame;
     roundedView.layer.cornerRadius = newSize / 2.0;
     roundedView.center = saveCenter;
+}
+
+- (void)initTagCellView:(UIView*)view withIndexPath:(NSIndexPath*)indexPath
+{
+    UILabel *tempTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
+    tempTagLabel.text = [tagTextArray objectAtIndex:indexPath.row - 1];
+    [view addSubview:tempTagLabel];
+}
+
+- (void)initAddTagButtonInView:(UIView*)view
+{
+    addTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
+    addTagLabel.text = @"新建标签";
+    addTagLabel.textColor = [UIColor colorWithRed:0.67 green:0.67 blue:0.67 alpha:1.0];
+    [view addSubview:addTagLabel];
+}
+
+- (void)initRoutineCell:(UIView*)view
+{
+    routineButton = [[UIButton alloc] initWithFrame:CGRectMake(0, -1, SCREEN_WIDTH, 48)];
+    [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
+    [routineButton addTarget:self action:@selector(routineButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:routineButton];
 }
 
 - (void)didReceiveMemoryWarning
