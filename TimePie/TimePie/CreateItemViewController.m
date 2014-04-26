@@ -9,6 +9,7 @@
 #import "CreateItemViewController.h"
 #import "BasicUIColor+UIPosition.h"
 #import <QuartzCore/QuartzCore.h>
+#define TAG_LIMIT_COUNT 200
 
 @interface CreateItemViewController ()
 
@@ -80,6 +81,7 @@
     _CIVC_mainVessel.delegate = self;
     _CIVC_mainVessel.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
     tagTextArray = [[NSMutableArray alloc] initWithObjects:@"工作",@"学习", nil];
+    tagCellSelectedFlag = [[NSMutableArray alloc] initWithObjects:@"n",@"n", nil];
     [self.view addSubview:_CIVC_mainVessel];
 }
 
@@ -130,6 +132,24 @@
     return 48;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row >=1 && indexPath.row <= tagTextArray.count)
+    {
+        UITableViewCell *cell = (UITableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        if ([[tagCellSelectedFlag objectAtIndex:indexPath.row - 1] isEqualToString:@"y"])
+        {
+            [tagCellSelectedFlag replaceObjectAtIndex:indexPath.row - 1 withObject:@"n"];
+            [self initTagCheckViewInView:cell WithImage:[UIImage imageNamed:@"TagCheckTransparent"] AtIndexPath:indexPath];
+        }
+        else
+        {
+            [tagCellSelectedFlag replaceObjectAtIndex:indexPath.row - 1 withObject:@"y"];
+            [self initTagCheckViewInView:cell WithImage:[UIImage imageNamed:@"TagCheck"] AtIndexPath:indexPath];
+        }
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -138,6 +158,7 @@
     else if (textField.text.length > 0)
     {
         [tagTextArray addObject:textField.text];
+        [tagCellSelectedFlag addObject:@"n"];
         textField.text = @"";
         [_CIVC_mainVessel reloadData];
     }
@@ -210,11 +231,14 @@
 
 - (void)initTagCellView:(UIView*)view withIndexPath:(NSIndexPath*)indexPath
 {
+    if ([view viewWithTag:indexPath.row - 1])
+        [[view viewWithTag:indexPath.row - 1] removeFromSuperview];
     UILabel *tempTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
     tempTagLabel.text = [tagTextArray objectAtIndex:indexPath.row - 1];
+    tempTagLabel.tag = indexPath.row - 1;
+    [view addSubview:tempTagLabel];
     [tagInputField removeFromSuperview];
     [addTagLabel removeFromSuperview];
-    [view addSubview:tempTagLabel];
 }
 
 - (void)initAddTagButtonInView:(UIView*)view
@@ -237,6 +261,16 @@
     [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
     [routineButton addTarget:self action:@selector(routineButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:routineButton];
+}
+
+- (void)initTagCheckViewInView:(UIView*)view WithImage:(UIImage*)image AtIndexPath:(NSIndexPath*)indexPath
+{
+    if ([view viewWithTag:indexPath.row * TAG_LIMIT_COUNT])
+        [[view viewWithTag:indexPath.row * TAG_LIMIT_COUNT] removeFromSuperview];
+    tagCheck = [[UIImageView alloc] initWithFrame:CGRectMake(10, 15, 20, 18)];
+    tagCheck.tag = indexPath.row * TAG_LIMIT_COUNT;
+    tagCheck.image = image;
+    [view addSubview:tagCheck];
 }
 
 - (void)didReceiveMemoryWarning

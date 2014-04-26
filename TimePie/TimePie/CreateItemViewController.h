@@ -13,10 +13,13 @@
     UIView *colorTag;
     UITextField *inputField;
     UILabel *initInputLabel;
+    UILabel *tagLabel;
     UITextField *tagInputField;
     UILabel *addTagLabel;
     NSMutableArray *tagTextArray;
     UIButton *routineButton;
+    UIImageView *tagCheck;
+    NSMutableArray *tagCellSelectedFlag;
 }
 @property (strong, nonatomic) UITableView *CIVC_mainVessel;
 
