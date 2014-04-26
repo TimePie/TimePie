@@ -44,6 +44,8 @@
 {
     if(inputField.text.length > 0) initInputLabel.text = @"";
     else initInputLabel.text = @"名称";
+    if (tagInputField.text.length > 0) addTagLabel.text = @"";
+    else addTagLabel.text = @"新建标签";
     [NSTimer scheduledTimerWithTimeInterval:0.033f target:self
                                    selector:@selector(mainLoop:) userInfo:nil repeats:NO];
 }
@@ -77,6 +79,7 @@
     _CIVC_mainVessel.dataSource = self;
     _CIVC_mainVessel.delegate = self;
     _CIVC_mainVessel.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+    tagTextArray = [[NSMutableArray alloc] initWithObjects:@"工作",@"学习", nil];
     [self.view addSubview:_CIVC_mainVessel];
 }
 
@@ -88,28 +91,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3 + 2;
+    return tagTextArray.count + 3;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"Cell";
+    NSString *CellIdentifier =[NSString stringWithFormat:@"%d",indexPath.row];
     NSInteger row = indexPath.row;
-    tagTextArray = [[NSMutableArray alloc] initWithObjects:@"工作",@"学习", nil];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     if (row == 0)
     {
-        [self initTextFieldInView:cell];
+        if (_itemName.length == 0) [self initTextFieldInView:cell];
     }
-    else if(row >= 1 && row <= 2)
+    else if(row >= 1 && row <= tagTextArray.count)
     {
         [self initTagCellView:cell withIndexPath:indexPath];
     }
-    else if(row == 3)
+    else if(row == tagTextArray.count + 1)
     {
         [self initAddTagButtonInView:cell];
     }
@@ -128,6 +130,20 @@
     return 48;
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    if (textField.tag == 0) _itemName = textField.text;
+    else if (textField.text.length > 0)
+    {
+        [tagTextArray addObject:textField.text];
+        textField.text = @"";
+        [_CIVC_mainVessel reloadData];
+    }
+    return YES;
+}
+
 #pragma mark - target selector
 - (void)cancelButtonPressed
 {
@@ -136,7 +152,15 @@
 
 - (void)confirmButtonPressed
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (_itemName.length > 0)
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"名称不能为空凸^-^凸" delegate:self cancelButtonTitle:@"我知道错了" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 - (void)routineButtonPressed:(id)sender
@@ -163,6 +187,10 @@
     [self setRoundedView:colorTag toDiameter:16];
     [view addSubview:colorTag];
     inputField = [[UITextField alloc] initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH, 48)];
+    inputField.returnKeyType = UIReturnKeyDone;
+    inputField.textColor = MAIN_UI_COLOR;
+    inputField.tag = 0;
+    inputField.delegate = self;
     [view addSubview:inputField];
     initInputLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
     initInputLabel.text = @"名称";
@@ -184,15 +212,23 @@
 {
     UILabel *tempTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
     tempTagLabel.text = [tagTextArray objectAtIndex:indexPath.row - 1];
+    [tagInputField removeFromSuperview];
+    [addTagLabel removeFromSuperview];
     [view addSubview:tempTagLabel];
 }
 
 - (void)initAddTagButtonInView:(UIView*)view
 {
+    tagInputField = [[UITextField alloc] initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH, 48)];
+    tagInputField.returnKeyType = UIReturnKeyDone;
+    tagInputField.tag = 1;
+    tagInputField.delegate = self;
     addTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
     addTagLabel.text = @"新建标签";
     addTagLabel.textColor = [UIColor colorWithRed:0.67 green:0.67 blue:0.67 alpha:1.0];
+    [routineButton removeFromSuperview];
     [view addSubview:addTagLabel];
+    [view addSubview:tagInputField];
 }
 
 - (void)initRoutineCell:(UIView*)view

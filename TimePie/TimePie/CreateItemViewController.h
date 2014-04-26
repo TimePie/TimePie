@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CreateItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface CreateItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate>
 {
     UIView *colorTag;
     UITextField *inputField;
     UILabel *initInputLabel;
+    UITextField *tagInputField;
     UILabel *addTagLabel;
     NSMutableArray *tagTextArray;
     UIButton *routineButton;
 }
 @property (strong, nonatomic) UITableView *CIVC_mainVessel;
+
+@property (strong, nonatomic) NSString *itemName;
 
 @end
