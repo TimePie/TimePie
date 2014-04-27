@@ -7,12 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsViewController.h"
 
-@interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@class PersonalViewPicker;
+@interface PersonalViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,SettingsViewControllerDelegate>
+{
+    UIView *darkUILayer;
+    NSString *timeRangeInfo;
+}
 
 @property (strong, nonatomic) UINavigationBar *navBar;
 @property (strong, nonatomic) UIButton *exitButton;
 
 @property (strong, nonatomic) UITableView *mainView;
+@property (strong, nonatomic) PersonalViewPicker *pVCPicker;
 
 @end

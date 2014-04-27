@@ -8,6 +8,7 @@
 
 #import "TimePieAppDelegate.h"
 #import "MainScreenViewController.h"
+#import "BasicUIColor+UIPosition.h"
 
 @implementation TimePieAppDelegate
 
@@ -23,6 +24,7 @@
     MainScreenViewController *msvc = [[MainScreenViewController alloc] init];
     [[self window] setRootViewController:msvc];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.tintColor = MAIN_UI_COLOR;
     [self.window makeKeyAndVisible];
     return YES;
 }

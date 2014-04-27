@@ -1,14 +1,14 @@
 //
-//  BEMLine.m
-//  SimpleLineGraph
+//  StatsLine.m
+//  TimePie
 //
-//  Created by Bobo on 12/27/13.
-//  Copyright (c) 2013 Boris Emorine. All rights reserved.
+//  Created by 黄泽彪 on 14-4-24.
+//  Copyright (c) 2014年 TimePieOrg. All rights reserved.
 //
 
-#import "BEMLine.h"
+#import "StatsLine.h"
 
-@implementation BEMLine
+@implementation StatsLine
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -25,17 +25,16 @@
 {
     //FILL TOP
     CGContextRef ctx = UIGraphicsGetCurrentContext();
- 
-    CGContextSetFillColorWithColor(ctx, [self.topColor CGColor]);
-    CGContextSetAlpha(ctx, self.topAlpha);
-    CGContextBeginPath(ctx);
-    CGContextMoveToPoint(ctx, round(self.firstPoint.x), self.firstPoint.y);
-    CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.secondPoint.y);
-    CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.frame.origin.y);
-    CGContextAddLineToPoint(ctx, round(self.firstPoint.x), self.frame.origin.x);
-    CGContextClosePath(ctx);
-
-    CGContextDrawPath(ctx, kCGPathFill);
+    
+//        CGContextSetFillColorWithColor(ctx, [[UIColor blackColor] CGColor]);
+//        CGContextSetAlpha(ctx, self.topAlpha);
+//        CGContextBeginPath(ctx);
+//        CGContextMoveToPoint(ctx, round(self.firstPoint.x), self.firstPoint.y);
+//        CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.secondPoint.y);
+//        CGContextAddLineToPoint(ctx, round(self.secondPoint.x), self.frame.origin.y);
+//        CGContextAddLineToPoint(ctx, round(self.firstPoint.x), self.frame.origin.x);
+//        CGContextClosePath(ctx);
+//            CGContextDrawPath(ctx, kCGPathFill);
     
     //FILL BOTOM
     CGContextSetFillColorWithColor(ctx, [self.bottomColor CGColor]);
@@ -59,5 +58,6 @@
     [self.color set];
     [path1 strokeWithBlendMode:kCGBlendModeNormal alpha:self.lineAlpha];
 }
+
 
 @end

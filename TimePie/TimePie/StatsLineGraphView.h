@@ -1,18 +1,19 @@
 //
-//  BEMSimpleLineGraphView.h
-//  SimpleLineGraph
+//  StatsLineGraphView.h
+//  TimePie
 //
-//  Created by Bobo on 12/27/13.
-//  Copyright (c) 2013 Boris Emorine. All rights reserved.
+//  Created by 黄泽彪 on 14-4-24.
+//  Copyright (c) 2014年 TimePieOrg. All rights reserved.
 //
 
-@import UIKit;
-#import "BEMCircle.h"
-#import "BEMLine.h"
-#import "BEMAnimations.h"
+#import <UIKit/UIKit.h>
+
+#import "StatsCircle.h"
+#import "StatsLine.h"
+#import "StatsAnimations.h"
 
 /// Line Graph Delegate. Used to pupulate the graph with data, similar to how a UITableView works.
-@protocol BEMSimpleLineGraphDelegate <NSObject>
+@protocol StatsLineGraphDelegate <NSObject>
 
 @required
 
@@ -20,15 +21,20 @@
 
 /** The number of points along the X-axis of the graph.
  @return Number of points. */
-- (int)numberOfPointsInGraph;
+- (int)numberOfXaxisPoints;
 
-
+//the number of points drew in the graph
+- (int)numberOfAllPoints;
 
 /** The vertical position for a point at given index. It corresponds to the Y-axis value of the Graph.
  @param index   The index from left to right of a given point (X-axis). The first value for the index is 0.
  @return        The Y-axis value at a given index. */
 - (float)valueForIndex:(NSInteger)index;
 
+- (float)valueInArray:(int) arrayIndex ObjectAtIndex:(int)index;
+
+- (float)maxValueOfGraphType:(int) graphIndex;
+- (float)minValueOfGraphType:(int) graphIndex;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -62,20 +68,25 @@
 
 /** The string to display on the label on the X-axis at a given index. Please note that the number of strings to be returned should be equal to the number of points in the Graph.
  @param index    The index from left to right of a given label on the X-axis. Is the same index as the one for the points. The first value for the index is 0. */
-- (NSString *)labelOnXAxisForIndex:(NSInteger)index;
+- (NSString *)labelOnXAxisForIndex:(NSInteger)index WithTimeRange:(int) range;
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 @end
 
-@interface BEMSimpleLineGraphView : UIView <BEMAnimationDelegate, UIGestureRecognizerDelegate>
+@interface StatsLineGraphView : UIView <StatsAnimationsDelegate, UIGestureRecognizerDelegate>
 
-@property (assign) IBOutlet id <BEMSimpleLineGraphDelegate> delegate;
+@property (assign) IBOutlet id <StatsLineGraphDelegate> delegate;
 
-@property (strong, nonatomic) BEMAnimations *animationDelegate;
+@property (strong, nonatomic) StatsAnimations *animationDelegate;
 
-@property (strong, nonatomic) UIView *verticalLine;
+//@property (strong, nonatomic) UIView *verticalLine;
+@property (strong, nonatomic) UIView *horizontalLine;
 
 @property (strong, nonatomic) UIFont *labelFont;
 
@@ -124,6 +135,11 @@
 
 /// Color of the label's text displayed on the X-Axis.
 @property (strong, nonatomic) UIColor *colorXaxisLabel;
+
+@property (strong,nonatomic) NSMutableArray *colorsOfGraph;
+//add
+@property (nonatomic) NSInteger itemCount;
+
 
 
 @end

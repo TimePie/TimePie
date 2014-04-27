@@ -7,7 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StatsLineGraphView.h"
+#import "ZBStatsDataArray.h"
+#import "ZBStatsItemData.h"
+@interface StatsViewController : UIViewController <StatsLineGraphDelegate,UITableViewDelegate, UITableViewDataSource>
 
-@interface StatsViewController : UIViewController
+@property (strong,nonatomic) IBOutlet UINavigationBar *navigationBar;
+
+@property (strong,nonatomic) IBOutlet UITableView *itemTableView;
+
+@property (strong, nonatomic) IBOutlet StatsLineGraphView *myGraph;
+
+@property(strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
+
+@property (strong, nonatomic) NSMutableArray *ArrayOfValues;
+@property (strong, nonatomic) NSMutableArray *ArrayOfDates;
+
+@property (strong,nonatomic) NSMutableArray *itemDataArray;
+@property (strong,nonatomic) NSMutableArray  *colorArray;
+//@property (strong,nonatomic) ZBStatsDataArray* statsItemData;
 
 @end

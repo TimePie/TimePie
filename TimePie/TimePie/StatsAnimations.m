@@ -1,17 +1,19 @@
 //
-//  BEMAnimations.m
-//  SimpleLineGraph
+//  StatsAnimations.m
+//  TimePie
 //
-//  Created by Bobo on 12/27/13.
-//  Copyright (c) 2013 Boris Emorine. All rights reserved.
+//  Created by 黄泽彪 on 14-4-24.
+//  Copyright (c) 2014年 TimePieOrg. All rights reserved.
 //
 
-#import "BEMAnimations.h"
+@import Foundation;
+#import "StatsAnimations.h"
 
-@implementation BEMAnimations
+@implementation StatsAnimations
+
 
 // Animation of the dots
-- (void)animationForDot:(NSInteger)dotIndex circleDot:(BEMCircle *)circleDot animationSpeed:(NSInteger)speed {
+- (void)animationForDot:(NSInteger)dotIndex circleDot:(StatsCircle *)circleDot animationSpeed:(NSInteger)speed {
     if (speed == 0) {
         circleDot.alpha = 0;
     } else {
@@ -26,7 +28,7 @@
 }
 
 // Animation of the graph
-- (void)animationForLine:(NSInteger)lineIndex line:(BEMLine *)line animationSpeed:(NSInteger)speed {
+- (void)animationForLine:(NSInteger)lineIndex line:(StatsLine *)line animationSpeed:(NSInteger)speed {
     if (speed == 0) {
         line.alpha = 1.0;
     } else {
@@ -35,5 +37,6 @@
         } completion:nil];
     }
 }
+
 
 @end

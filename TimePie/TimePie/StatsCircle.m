@@ -1,14 +1,14 @@
 //
-//  BEMCircle.m
-//  SimpleLineGraph
+//  StatsCircle.m
+//  TimePie
 //
-//  Created by Bobo on 12/27/13.
-//  Copyright (c) 2013 Boris Emorine. All rights reserved.
+//  Created by 黄泽彪 on 14-4-24.
+//  Copyright (c) 2014年 TimePieOrg. All rights reserved.
 //
 
-#import "BEMCircle.h"
+#import "StatsCircle.h"
 
-@implementation BEMCircle
+@implementation StatsCircle
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -16,6 +16,7 @@
     if (self) {
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
+        //[self drawInnerRect:frame];
     }
     return self;
 }
@@ -24,7 +25,7 @@
 {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextAddEllipseInRect(ctx, rect);
-    [[UIColor whiteColor] set];
+    [self.color set];
     CGContextFillPath(ctx);
 }
 

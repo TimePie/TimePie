@@ -11,6 +11,7 @@
 #import "PersonalViewAvgTimeCell.h"
 #import "timeDistributeCell.h"
 #import "PersonalViewEventTrackCell.h"
+#import "PersonalViewPicker.h"
 
 @interface PersonalViewController ()
 
@@ -39,16 +40,20 @@
     [self initNavBar];
     [self initMainView];
     [self initExitButton];
+    [self initDarkUILayer];
 }
 
 #pragma mark - init UI
 - (void)initNavBar
 {
-    _navBar= [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-    UINavigationItem *tempNavItem = [[UINavigationItem alloc] initWithTitle:@"个人中心"];
-    [_navBar pushNavigationItem:tempNavItem animated:NO];
-    _navBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
-    [self.view addSubview:_navBar];
+    UIButton *tempBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 42, 22)];
+    [tempBtn setImage:[UIImage imageNamed:@"settingsButton"] forState:UIControlStateNormal];
+    [tempBtn addTarget:self action:@selector(settingsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithCustomView:tempBtn];
+    
+    self.title = @"个人中心";
+    self.navigationItem.rightBarButtonItem = settingsButton;
+    [self navigationController].navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};
 }
 
 - (void)initExitButton
@@ -56,13 +61,13 @@
     _exitButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-62, 94, 57)];
     [_exitButton setImage:[UIImage imageNamed:@"TimePie_Personal_Exit_Button"] forState:UIControlStateNormal];
     [_exitButton addTarget:self action:@selector(exitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_exitButton];
-    [self.view.superview bringSubviewToFront:_exitButton];
+    [[self navigationController].view addSubview:_exitButton];
+    [[self navigationController].view bringSubviewToFront:_exitButton];
 }
 
 - (void)initMainView
 {
-    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
     _mainView.backgroundView = nil;
     _mainView.backgroundColor = [UIColor clearColor];
     _mainView.dataSource = self;
@@ -70,13 +75,44 @@
     _mainView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _mainView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     _mainView.separatorInset = UIEdgeInsetsZero;
+    timeRangeInfo = @"过去一周";
     [self.view addSubview:_mainView];
+}
+
+- (void)initDarkUILayer
+{
+    darkUILayer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    darkUILayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    darkUILayer.userInteractionEnabled = NO;
+    [self.view addSubview:darkUILayer];
 }
 
 #pragma mark - target selector
 - (void)exitButtonPressed
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)settingsButtonPressed
+{
+    SettingsViewController *sVC = [[SettingsViewController alloc] init];
+    sVC.delegate = self;
+    self.exitButton.hidden = YES;
+    [[self navigationController] pushViewController:sVC animated:YES];
+}
+
+-(void)donePressed
+{
+    timeRangeInfo = [_pVCPicker.pickerData objectAtIndex:[_pVCPicker.picker selectedRowInComponent:0]];
+    [_mainView reloadData];
+    [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
+    self.view.userInteractionEnabled = YES;
+}
+
+-(void)cancelPressed
+{
+    [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
+    self.view.userInteractionEnabled = YES;
 }
 
 #pragma mark - UITableView DataSource
@@ -109,7 +145,7 @@
         }
         rangeCell.textLabel.text = @"查看范围";
         rangeCell.textLabel.textColor = MAIN_UI_COLOR;
-        rangeCell.detailTextLabel.text = @"过去一周";
+        rangeCell.detailTextLabel.text = timeRangeInfo;
         rangeCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         rangeCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return rangeCell;
@@ -210,6 +246,47 @@
     }
     else return nil;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0 && indexPath.row == 0)
+    {
+        self.view.userInteractionEnabled = NO;
+        _pVCPicker = [[PersonalViewPicker alloc] initWithFrame:CGRectMake(0, 568, SCREEN_WIDTH, 215)];
+        [_pVCPicker addTargetForCancelButton:self action:@selector(cancelPressed)];
+        [_pVCPicker addTargetForDoneButton:self action:@selector(donePressed)];
+        [[self navigationController].view addSubview:_pVCPicker];
+        [self pushViewAnimationWithView:_pVCPicker willHidden:NO];
+        _pVCPicker.hidden = NO;
+    }
+}
+
+#pragma mark - settingsViewController Delegate
+- (void)reverseCloseButton
+{
+    self.exitButton.hidden = NO;
+}
+
+#pragma mark - utility functions
+- (void)pushViewAnimationWithView:(UIView*)view willHidden:(BOOL)hidden
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        if (hidden)
+        {
+            view.frame = CGRectMake(0, 568, SCREEN_WIDTH, 215);
+            darkUILayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        }
+        else
+        {
+            [view setHidden:hidden];
+            view.frame = CGRectMake(0, SCREEN_HEIGHT - 215, SCREEN_WIDTH, 215);
+            darkUILayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+        }
+    } completion:^(BOOL finished){
+        [view setHidden:hidden];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
