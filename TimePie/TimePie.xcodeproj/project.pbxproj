@@ -46,6 +46,8 @@
 		CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE09918E46EC800916A4B /* StatsViewController.xib */; };
 		CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */; };
 		CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */; };
+		CDB728A01904E98B00078675 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB7289F1904E98B00078675 /* XYPieChart.m */; };
+		CDE9CA8318FE0B7B00D165D0 /* TimingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE9CA8218FE0B7B00D165D0 /* TimingItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,10 @@
 		CD4CE0A118E4700F00916A4B /* CreateItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateItemViewController.h; sourceTree = "<group>"; };
 		CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateItemViewController.m; sourceTree = "<group>"; };
 		CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateItemViewController.xib; sourceTree = "<group>"; };
+		CDB7289E1904E98B00078675 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		CDB7289F1904E98B00078675 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		CDE9CA8118FE0B7B00D165D0 /* TimingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem.h; sourceTree = "<group>"; };
+		CDE9CA8218FE0B7B00D165D0 /* TimingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +263,7 @@
 		CD4CE05E18E464D000916A4B /* TimePie */ = {
 			isa = PBXGroup;
 			children = (
+				CDB728A11904E99000078675 /* XYPieChart */,
 				13469E9518F2D0E900B7F30C /* BEMSimpleLineGraph */,
 				132A702318EB027600AA675F /* Resource */,
 				13F4CBB718F1C10E00D716AE /* category */,
@@ -323,8 +330,19 @@
 			isa = PBXGroup;
 			children = (
 				134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */,
+				CDE9CA8118FE0B7B00D165D0 /* TimingItem.h */,
+				CDE9CA8218FE0B7B00D165D0 /* TimingItem.m */,
 			);
 			name = models;
+			sourceTree = "<group>";
+		};
+		CDB728A11904E99000078675 /* XYPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				CDB7289E1904E98B00078675 /* XYPieChart.h */,
+				CDB7289F1904E98B00078675 /* XYPieChart.m */,
+			);
+			name = XYPieChart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,11 +459,13 @@
 				13469EA018F2D0E900B7F30C /* BEMLine.m in Sources */,
 				13469EA118F2D0E900B7F30C /* BEMSimpleLineGraphView.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
+				CDE9CA8318FE0B7B00D165D0 /* TimingItem.m in Sources */,
 				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
 				13469E9F18F2D0E900B7F30C /* BEMCircle.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
+				CDB728A01904E98B00078675 /* XYPieChart.m in Sources */,
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
 				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,

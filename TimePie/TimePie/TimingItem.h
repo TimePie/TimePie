@@ -10,4 +10,15 @@
 
 @interface TimingItem : NSObject
 
+
++ (id)randomItem;
+- (id)initWithItemName:(NSString *)name;
+
+
+@property (nonatomic, strong) NSString * itemName;
+@property (nonatomic, readonly, strong) NSDate * dateCreated;
+@property (nonatomic) double time;
+@property (nonatomic, strong) NSDate * startDate;
+@property (nonatomic, strong) UIColor * color;
+
 @end
