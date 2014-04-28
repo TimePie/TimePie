@@ -106,12 +106,14 @@
     timeRangeInfo = [_pVCPicker.pickerData objectAtIndex:[_pVCPicker.picker selectedRowInComponent:0]];
     [_mainView reloadData];
     [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
     self.view.userInteractionEnabled = YES;
 }
 
 -(void)cancelPressed
 {
     [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
+    self.navigationController.navigationBar.userInteractionEnabled = YES;
     self.view.userInteractionEnabled = YES;
 }
 
@@ -252,6 +254,7 @@
     if(indexPath.section == 0 && indexPath.row == 0)
     {
         self.view.userInteractionEnabled = NO;
+        self.navigationController.navigationBar.userInteractionEnabled = NO;
         _pVCPicker = [[PersonalViewPicker alloc] initWithFrame:CGRectMake(0, 568, SCREEN_WIDTH, 215)];
         [_pVCPicker addTargetForCancelButton:self action:@selector(cancelPressed)];
         [_pVCPicker addTargetForDoneButton:self action:@selector(donePressed)];
