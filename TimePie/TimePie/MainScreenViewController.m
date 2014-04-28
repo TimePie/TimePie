@@ -13,7 +13,7 @@
 #import "BasicUIColor+UIPosition.h"
 
 #import "TimingItem.h"
-
+#import "TimePieTableViewCell.h"
 
 @interface MainScreenViewController ()
 
@@ -30,11 +30,34 @@
     return self;
 }
 
+
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     NSLog(@"viewDisLoad");
+    
+    UINib *nib = [UINib nibWithNibName:@"TimePieTableViewCell" bundle:nil];
+    [itemTable registerNib:nib forCellReuseIdentifier:@"TimePieTableViewCell"];
+    
+    
+    if(self){
+        UINavigationItem *n = [self navigationItem];
+        [n setTitle:@"TimePie"];
+        
+        
+        UIBarButtonItem *bbi= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+        
+        [n setRightBarButtonItem: bbi];
+        
+        UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editItems:)];
+        [n setLeftBarButtonItem:bbiLeft];
+                                    
+    }
+    
+    
     
     TimingItem *item1 = [[TimingItem alloc] initWithItemName:@"item1"];
     TimingItem *item2 = [[TimingItem alloc] initWithItemName:@"item2"];
@@ -42,12 +65,12 @@
     
     items = [[NSArray alloc] initWithObjects:item1,item2, nil];
     
-    pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+    pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, 0, 280, 280)];
     [pieChart setDataSource:self];
     [pieChart setDelegate:self];
     [pieChart setStartPieAngle:M_PI_2];
     [pieChart setLabelFont:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:16]];
-    [pieChart setLabelRadius:120];
+    [pieChart setLabelRadius:100];
     [pieChart setShowPercentage:NO];
     [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
     [pieChart setPieCenter:CGPointMake(160, 240)];
@@ -65,8 +88,15 @@
     [[self view] addSubview:pieChart];
     
     
-    
     [pieChart reloadData];
+    itemTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 350, 320, 320)];
+    itemTable.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+    itemTable.delegate = self;
+    itemTable.dataSource = self;
+    NSLog(@"before reloadData");
+    [itemTable reloadData];
+    [[self view] insertSubview:itemTable atIndex:0];
+    NSLog(@"After reloadData");
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -81,7 +111,7 @@
 
 
 // for pie chart
-
+//////////////////
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
     NSLog(@"%lu",[items count]);
@@ -115,11 +145,31 @@
     
     return [UIColor blackColor];
 }
+//////////////////
 
 
 
+//for table view
+////////////////////
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 2;
+}
 
-
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //TimePieTableViewCell * cell=  [tableView dequeueReusableCellWithIdentifier:@"TimePieTableViewCell"];
+    static NSString *CellIdentifier = @"newFriendCell";
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    [cell.textLabel setText:@"ItemNuma"];
+ //   [cell.itemName setText:@"Item Name"];
+ //   [cell.itemTime setText:@"1234:234"];
+    //[cell.itemColor setBackgroundColor:[UIColor blackColor]];
+    return cell;
+    
+}
+////////////////////
 
 -(IBAction)personal_btn_clicked:(id)sender
 {
@@ -146,5 +196,18 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
+
+
+-(void)addNewItem:(id)sender{
+    NSLog(@"Add new Item");
+    CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+
+-(void)editItems:(id)sender{
+    NSLog(@"Edit items");
+}
 
 @end

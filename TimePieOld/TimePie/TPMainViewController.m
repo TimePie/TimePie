@@ -65,7 +65,6 @@
         timer= [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollTime) userInfo:nil repeats:YES];
         [[[[TimeItemBucket timeItemBucket] allItems] objectAtIndex:0] refreshStartTime:YES];
         
-        
     }
     [self.tableView setContentInset:UIEdgeInsetsMake(300,0,0,0)];
 	// Do any additional setup after loading the view.

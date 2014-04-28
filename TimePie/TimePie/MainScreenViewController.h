@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "XYPieChart.h"
 
-@interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate>
+@interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     IBOutlet UIButton *personal;
     IBOutlet UIButton *stats;
     IBOutlet UIButton *create;
     XYPieChart *pieChart;
+    UITableView *itemTable;
     NSArray *items;
 }
 
