@@ -9,7 +9,11 @@
 #import "CreateItemViewController.h"
 #import "BasicUIColor+UIPosition.h"
 #import <QuartzCore/QuartzCore.h>
-#define TAG_LIMIT_COUNT 200
+#define TAG_LIMIT_COUNT     200
+#define TAG_INPUT_FIELD_1   4001
+#define TAG_INPUT_LABEL     4002
+#define TAG_COLOR_TAG       4003
+#define TAG_INPUT_FIELD_2   4004
 
 @interface CreateItemViewController ()
 
@@ -151,10 +155,17 @@
 }
 
 #pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    self.view.userInteractionEnabled = NO;
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    self.view.userInteractionEnabled = YES;
     [textField resignFirstResponder];
-    if (textField.tag == 0) _itemName = textField.text;
+    if (textField.tag == TAG_INPUT_FIELD_1) _itemName = textField.text;
     else if (textField.text.length > 0)
     {
         [tagTextArray addObject:textField.text];
@@ -205,17 +216,24 @@
 {
     colorTag = [[UIView alloc] initWithFrame:CGRectMake(10, 14, 20, 20)];
     colorTag.backgroundColor = PINKNO04;
+    colorTag.tag =  TAG_COLOR_TAG;
+    if([view viewWithTag:TAG_COLOR_TAG]) [[view viewWithTag:TAG_COLOR_TAG] removeFromSuperview];
     [self setRoundedView:colorTag toDiameter:16];
     [view addSubview:colorTag];
+    
+    if([view viewWithTag:TAG_INPUT_FIELD_1]) [[view viewWithTag:TAG_INPUT_FIELD_1] removeFromSuperview];
     inputField = [[UITextField alloc] initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH, 48)];
     inputField.returnKeyType = UIReturnKeyDone;
     inputField.textColor = MAIN_UI_COLOR;
-    inputField.tag = 0;
+    inputField.tag = TAG_INPUT_FIELD_1;
     inputField.delegate = self;
     [view addSubview:inputField];
+    
+    if([view viewWithTag:TAG_INPUT_FIELD_2]) [[view viewWithTag:TAG_INPUT_FIELD_2] removeFromSuperview];
     initInputLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
     initInputLabel.text = @"名称";
     initInputLabel.textColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
+    initInputLabel.tag = TAG_INPUT_FIELD_2;
     [view addSubview:initInputLabel];
 }
 
