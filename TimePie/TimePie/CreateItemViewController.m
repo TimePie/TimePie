@@ -15,6 +15,8 @@
 #define TAG_COLOR_TAG       4003
 #define TAG_INPUT_FIELD_2   4004
 
+static NSInteger routineItemFlag = 0;
+
 @interface CreateItemViewController ()
 
 @end
@@ -197,12 +199,17 @@
 
 - (void)routineButtonPressed:(id)sender
 {
-    if ([sender isSelected]) {
+    if ([sender isSelected])
+    {
         [sender setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
         [sender setSelected:NO];
-    } else {
+        routineItemFlag = 0;
+    }
+    else
+    {
         [sender setImage:[UIImage imageNamed:@"AddRoutineButtonActive"] forState:UIControlStateSelected];
         [sender setSelected:YES];
+        routineItemFlag = 1;
     }
 }
 
@@ -276,7 +283,16 @@
 - (void)initRoutineCell:(UIView*)view
 {
     routineButton = [[UIButton alloc] initWithFrame:CGRectMake(0, -1, SCREEN_WIDTH, 48)];
-    [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
+    if(routineItemFlag == 0)
+    {
+        [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
+        [routineButton setSelected:NO];
+    }
+    else
+    {
+        [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonActive"] forState:UIControlStateNormal];
+        [routineButton setSelected:YES];
+    }
     [routineButton addTarget:self action:@selector(routineButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:routineButton];
 }

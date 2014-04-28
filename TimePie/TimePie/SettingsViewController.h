@@ -15,9 +15,10 @@
 
 @end
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UINavigationBar *navBar;
+@property (strong, nonatomic) UITableView *SVCVessel;
 @property (nonatomic, assign) id<SettingsViewControllerDelegate> delegate;
 
 @end
