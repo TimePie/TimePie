@@ -142,6 +142,23 @@
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
+    switch(index){
+        case 0:
+            return REDNO1;
+            break;
+        case 1:
+            return BLUENO2;
+            break;
+        case 2:
+            return GREENNO3;
+            break;
+        case 3:
+            return PINKNO04;
+            break;
+        default:
+            return [UIColor blackColor];
+            break;
+    }
     
     return [UIColor blackColor];
 }
