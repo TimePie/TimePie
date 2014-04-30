@@ -10,4 +10,12 @@
 
 @interface TCell : UITableViewCell
 
+
+@property(nonatomic, strong) IBOutlet UILabel * itemName;
+@property(nonatomic, strong) IBOutlet UILabel * itemTime;
+@property(nonatomic, strong) IBOutlet UIImageView * itemColor;
+@property(nonatomic, strong) IBOutlet UIImageView * itemNotice;
+
+
+
 @end

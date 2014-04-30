@@ -56,10 +56,11 @@
 		CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE09918E46EC800916A4B /* StatsViewController.xib */; };
 		CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */; };
 		CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */; };
+		CD52392019110D83005EB55A /* personalbtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD52391F19110D83005EB55A /* personalbtn@2x.png */; };
 		CD8EE0F3190D242200F58797 /* TimingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F2190D242200F58797 /* TimingItem.m */; };
 		CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F6190D246300F58797 /* XYPieChart.m */; };
-		CD8EE0F9190D2E3100F58797 /* TimePieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8EE0F8190D2E3100F58797 /* TimePieTableViewCell.xib */; };
-		CD8EE0FC190D2FF900F58797 /* TimePieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0FB190D2FF900F58797 /* TimePieTableViewCell.m */; };
+		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
+		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,13 +147,14 @@
 		CD4CE0A118E4700F00916A4B /* CreateItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateItemViewController.h; sourceTree = "<group>"; };
 		CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateItemViewController.m; sourceTree = "<group>"; };
 		CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateItemViewController.xib; sourceTree = "<group>"; };
+		CD52391F19110D83005EB55A /* personalbtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "personalbtn@2x.png"; sourceTree = "<group>"; };
 		CD8EE0F1190D242200F58797 /* TimingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem.h; sourceTree = "<group>"; };
 		CD8EE0F2190D242200F58797 /* TimingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem.m; sourceTree = "<group>"; };
 		CD8EE0F5190D246300F58797 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		CD8EE0F6190D246300F58797 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
-		CD8EE0F8190D2E3100F58797 /* TimePieTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimePieTableViewCell.xib; sourceTree = "<group>"; };
-		CD8EE0FA190D2FF900F58797 /* TimePieTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePieTableViewCell.h; sourceTree = "<group>"; };
-		CD8EE0FB190D2FF900F58797 /* TimePieTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePieTableViewCell.m; sourceTree = "<group>"; };
+		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
+		CDC8858D1910FE3400A67510 /* TCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCell.h; sourceTree = "<group>"; };
+		CDC8858E1910FE3400A67510 /* TCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CD52391F19110D83005EB55A /* personalbtn@2x.png */,
 				688586F01909368A0050D15D /* StatsNavShadow@2x.png */,
 				688586EC190931AE0050D15D /* StatsBackButton@2x.png */,
 				6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */,
@@ -428,9 +431,9 @@
 			children = (
 				CD8EE0F5190D246300F58797 /* XYPieChart.h */,
 				CD8EE0F6190D246300F58797 /* XYPieChart.m */,
-				CD8EE0F8190D2E3100F58797 /* TimePieTableViewCell.xib */,
-				CD8EE0FA190D2FF900F58797 /* TimePieTableViewCell.h */,
-				CD8EE0FB190D2FF900F58797 /* TimePieTableViewCell.m */,
+				CDC8858B1910FE1500A67510 /* TCell.xib */,
+				CDC8858D1910FE3400A67510 /* TCell.h */,
+				CDC8858E1910FE3400A67510 /* TCell.m */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -515,15 +518,16 @@
 				13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */,
 				13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */,
 				13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */,
+				CD52392019110D83005EB55A /* personalbtn@2x.png in Resources */,
 				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
 				688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
+				CDC8858C1910FE1500A67510 /* TCell.xib in Resources */,
 				68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */,
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
-				CD8EE0F9190D2E3100F58797 /* TimePieTableViewCell.xib in Resources */,
 				688586F11909368A0050D15D /* StatsNavShadow@2x.png in Resources */,
 				13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */,
 				132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */,
@@ -548,6 +552,7 @@
 			files = (
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
+				CDC8858F1910FE3400A67510 /* TCell.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
 				68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */,
 				68BBE0A019091A7600F12101 /* ZBStatsItemData.m in Sources */,
@@ -569,7 +574,6 @@
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
 				68BBE09C19091A4600F12101 /* StatsItemTableViewCell.m in Sources */,
-				CD8EE0FC190D2FF900F58797 /* TimePieTableViewCell.m in Sources */,
 				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,
 				134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */,
 			);

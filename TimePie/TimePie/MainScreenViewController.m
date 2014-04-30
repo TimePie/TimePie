@@ -13,7 +13,7 @@
 #import "BasicUIColor+UIPosition.h"
 
 #import "TimingItem.h"
-#import "TimePieTableViewCell.h"
+#import "TCell.h"
 
 @interface MainScreenViewController ()
 
@@ -50,9 +50,22 @@
         
         UIBarButtonItem *bbi= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
         
+        
+        
+        
+        
+        UIImage *personalImage = [UIImage imageNamed:@"personalbtn.png"];
+        UIButton *personalButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        personalButton.bounds = CGRectMake( 0, 0, personalImage.size.width, personalImage.size.height );
+        [personalButton setImage:personalImage forState:UIControlStateNormal];
+        [personalButton addTarget:self action:@selector(personal_btn_clicked:) forControlEvents:UIControlEventTouchUpInside];
+
+        UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithCustomView:personalButton];
+        
+        
         [n setRightBarButtonItem: bbi];
         
-        UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editItems:)];
+        //UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editItems:)];
         [n setLeftBarButtonItem:bbiLeft];
                                     
     }
@@ -175,14 +188,17 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //TimePieTableViewCell * cell=  [tableView dequeueReusableCellWithIdentifier:@"TimePieTableViewCell"];
     static NSString *CellIdentifier = @"newFriendCell";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    TCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    [cell.textLabel setText:@"ItemNuma"];
- //   [cell.itemName setText:@"Item Name"];
- //   [cell.itemTime setText:@"1234:234"];
-    //[cell.itemColor setBackgroundColor:[UIColor blackColor]];
+    if(cell == nil){
+        [tableView registerNib:[UINib nibWithNibName:@"TCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
+    [cell.itemName setText:@"abs"];
+    cell.itemTime.text = @"0.0s";
+    cell.itemColor.backgroundColor = [UIColor blackColor];
+    cell.itemNotice.backgroundColor = [UIColor redColor];
     return cell;
     
 }
@@ -206,13 +222,6 @@
     NSLog(@"Go to statistics view");
 }
 
--(IBAction)create_btn_clicked:(id)sender
-{
-    CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
 
 
 -(void)addNewItem:(id)sender{
@@ -222,9 +231,5 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
-
--(void)editItems:(id)sender{
-    NSLog(@"Edit items");
-}
 
 @end
