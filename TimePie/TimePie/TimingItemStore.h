@@ -7,7 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TimingItem1.h"
 
 @interface TimingItemStore : NSObject
+{
+    NSMutableArray *allItems;
+}
+
+
+
++ (TimingItemStore *)timingItemStore;
+- (void)removeItem:(TimingItem *)i;
+- (NSArray *)allItems;
+- (TimingItem *)createItem;
+- (id)getItemAtIndex:(int)index;
+
+- (void)moveItemAtIndex:(int)from
+                toIndex:(int)to;
+
+
+
 
 @end

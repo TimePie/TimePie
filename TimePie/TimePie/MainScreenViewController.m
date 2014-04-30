@@ -71,12 +71,20 @@
     }
     
     
+    timingItemStore = [TimingItemStore timingItemStore];
+    TimingItem *item1 = [timingItemStore createItem];
+    TimingItem *item2 = [timingItemStore createItem];
     
-    TimingItem *item1 = [[TimingItem alloc] initWithItemName:@"item1"];
-    TimingItem *item2 = [[TimingItem alloc] initWithItemName:@"item2"];
+    
+    item1.itemName = @"item1";
+    item2.itemName = @"item2";
+    item1.time = 2.1;
+    item2.time = 3.2;
+    item1.color = REDNO1;
+    item2.color = BLUENO2;
     
     
-    items = [[NSArray alloc] initWithObjects:item1,item2, nil];
+    
     
     pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, 0, 280, 280)];
     [pieChart setDataSource:self];
@@ -127,18 +135,16 @@
 //////////////////
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
-    NSLog(@"%lu",[items count]);
-    return 2;
+    NSLog(@"%d",[[timingItemStore allItems] count]);
+    return [[timingItemStore allItems] count];
 }
 
 
 
 - (NSString *)pieChart:(XYPieChart *)pieChart textForSliceAtIndex:(NSUInteger)index
 {
-    TimingItem * item = [items objectAtIndex:index];
-    return @"item name";
+    TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
     if(item){
-        
         return [item itemName];
     }
     NSLog(@"no item!");
@@ -148,31 +154,21 @@
 
 - (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index;
 {
-    NSLog(@"lalal");
-    return 10;
+    
+    TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
+    if(item){
+        return [item time];
+    }
+    return 0;
 }
 
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
-    switch(index){
-        case 0:
-            return REDNO1;
-            break;
-        case 1:
-            return BLUENO2;
-            break;
-        case 2:
-            return GREENNO3;
-            break;
-        case 3:
-            return PINKNO04;
-            break;
-        default:
-            return [UIColor blackColor];
-            break;
+    TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
+    if(item){
+        return [item color];
     }
-    
     return [UIColor blackColor];
 }
 //////////////////
@@ -183,7 +179,7 @@
 ////////////////////
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return [[timingItemStore allItems] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -195,10 +191,11 @@
         [tableView registerNib:[UINib nibWithNibName:@"TCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     }
-    [cell.itemName setText:@"abs"];
-    cell.itemTime.text = @"0.0s";
-    cell.itemColor.backgroundColor = [UIColor blackColor];
-    cell.itemNotice.backgroundColor = [UIColor redColor];
+    TimingItem * item = [[timingItemStore allItems] objectAtIndex:indexPath.row];
+    [cell.itemName setText:item.itemName];
+    cell.itemTime.text = [NSString stringWithFormat:@"%f", item.time];
+    cell.itemColor.backgroundColor = item.color;
+    cell.itemNotice.backgroundColor = item.color;
     return cell;
     
 }

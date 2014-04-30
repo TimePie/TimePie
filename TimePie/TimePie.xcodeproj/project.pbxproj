@@ -57,7 +57,9 @@
 		CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */; };
 		CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */; };
 		CD52392019110D83005EB55A /* personalbtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD52391F19110D83005EB55A /* personalbtn@2x.png */; };
-		CD8EE0F3190D242200F58797 /* TimingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F2190D242200F58797 /* TimingItem.m */; };
+		CD52392319111298005EB55A /* TimingItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CD52392219111298005EB55A /* TimingItemStore.m */; };
+		CD5239B01911353A005EB55A /* TimingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5239AF1911353A005EB55A /* TimingItem.m */; };
+		CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F2190D242200F58797 /* TimingItem1.m */; };
 		CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F6190D246300F58797 /* XYPieChart.m */; };
 		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
 		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
@@ -148,8 +150,12 @@
 		CD4CE0A218E4700F00916A4B /* CreateItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateItemViewController.m; sourceTree = "<group>"; };
 		CD4CE0A318E4700F00916A4B /* CreateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateItemViewController.xib; sourceTree = "<group>"; };
 		CD52391F19110D83005EB55A /* personalbtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "personalbtn@2x.png"; sourceTree = "<group>"; };
-		CD8EE0F1190D242200F58797 /* TimingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem.h; sourceTree = "<group>"; };
-		CD8EE0F2190D242200F58797 /* TimingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem.m; sourceTree = "<group>"; };
+		CD52392119111298005EB55A /* TimingItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItemStore.h; sourceTree = "<group>"; };
+		CD52392219111298005EB55A /* TimingItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItemStore.m; sourceTree = "<group>"; };
+		CD5239AE1911353A005EB55A /* TimingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem.h; sourceTree = "<group>"; };
+		CD5239AF1911353A005EB55A /* TimingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem.m; sourceTree = "<group>"; };
+		CD8EE0F1190D242200F58797 /* TimingItem1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem1.h; sourceTree = "<group>"; };
+		CD8EE0F2190D242200F58797 /* TimingItem1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem1.m; sourceTree = "<group>"; };
 		CD8EE0F5190D246300F58797 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
 		CD8EE0F6190D246300F58797 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
@@ -370,7 +376,6 @@
 				CD4CE06718E464D000916A4B /* TimePieAppDelegate.h */,
 				CD4CE06818E464D000916A4B /* TimePieAppDelegate.m */,
 				CD4CE06D18E464D000916A4B /* Images.xcassets */,
-				CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */,
 				CD4CE05F18E464D000916A4B /* Supporting Files */,
 			);
 			path = TimePie;
@@ -419,11 +424,24 @@
 		CD4CE09118E46A1400916A4B /* models */ = {
 			isa = PBXGroup;
 			children = (
-				CD8EE0F1190D242200F58797 /* TimingItem.h */,
-				CD8EE0F2190D242200F58797 /* TimingItem.m */,
+				CD5239B11911355B005EB55A /* CoreData */,
+				CD8EE0F1190D242200F58797 /* TimingItem1.h */,
+				CD8EE0F2190D242200F58797 /* TimingItem1.m */,
+				CD52392119111298005EB55A /* TimingItemStore.h */,
+				CD52392219111298005EB55A /* TimingItemStore.m */,
 				13DF3AA219066CE80050C09E /* Basic */,
 			);
 			name = models;
+			sourceTree = "<group>";
+		};
+		CD5239B11911355B005EB55A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */,
+				CD5239AE1911353A005EB55A /* TimingItem.h */,
+				CD5239AF1911353A005EB55A /* TimingItem.m */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		CD8EE0F4190D245800F58797 /* MainView */ = {
@@ -552,6 +570,7 @@
 			files = (
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
+				CD5239B01911353A005EB55A /* TimingItem.m in Sources */,
 				CDC8858F1910FE3400A67510 /* TCell.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
 				68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */,
@@ -565,10 +584,11 @@
 				6831559E1909263C00C9A27C /* BEMLine.m in Sources */,
 				68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
-				CD8EE0F3190D242200F58797 /* TimingItem.m in Sources */,
+				CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */,
 				68BBE0A619091C6700F12101 /* StatsLine.m in Sources */,
+				CD52392319111298005EB55A /* TimingItemStore.m in Sources */,
 				CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
