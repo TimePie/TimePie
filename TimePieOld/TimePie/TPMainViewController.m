@@ -60,7 +60,7 @@
     pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, -380, 320, 320)];
     //NSLog(@"%@",[[[self view] subviews] objectAtIndex:0]);
     
-    
+
     if (!timer) {
         timer= [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollTime) userInfo:nil repeats:YES];
         [[[[TimeItemBucket timeItemBucket] allItems] objectAtIndex:0] refreshStartTime:YES];

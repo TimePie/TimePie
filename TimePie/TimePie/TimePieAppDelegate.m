@@ -9,6 +9,7 @@
 #import "TimePieAppDelegate.h"
 #import "MainScreenViewController.h"
 #import "BasicUIColor+UIPosition.h"
+#import "TimingItemStore.h"
 
 @implementation TimePieAppDelegate
 
@@ -18,10 +19,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     MainScreenViewController *msvc = [[MainScreenViewController alloc] init];
+    
+    [TimingItemStore timingItemStore].managedObjectModel = [self managedObjectModel];
+    [TimingItemStore timingItemStore].managedObjectContext = [self managedObjectContext];
+    [TimingItemStore timingItemStore].persistentStoreCoordinator = [self persistentStoreCoordinator];
     
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:msvc];
     
@@ -41,6 +57,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [[TimingItemStore timingItemStore] saveData];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }

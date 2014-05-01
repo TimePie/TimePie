@@ -12,7 +12,7 @@
 #import "CreateItemViewController.h"
 #import "BasicUIColor+UIPosition.h"
 
-#import "TimingItem.h"
+#import "TimingItem1.h"
 #import "TCell.h"
 
 @interface MainScreenViewController ()
@@ -20,6 +20,8 @@
 @end
 
 @implementation MainScreenViewController
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,89 +39,110 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"viewDisLoad");
     
-    UINib *nib = [UINib nibWithNibName:@"TimePieTableViewCell" bundle:nil];
-    [itemTable registerNib:nib forCellReuseIdentifier:@"TimePieTableViewCell"];
     
     
     if(self){
+        //setup navigation items
         UINavigationItem *n = [self navigationItem];
         [n setTitle:@"TimePie"];
         
         
         UIBarButtonItem *bbi= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
         
-        
-        
-        
-        
         UIImage *personalImage = [UIImage imageNamed:@"personalbtn.png"];
         UIButton *personalButton = [UIButton buttonWithType:UIButtonTypeCustom];
         personalButton.bounds = CGRectMake( 0, 0, personalImage.size.width, personalImage.size.height );
         [personalButton setImage:personalImage forState:UIControlStateNormal];
         [personalButton addTarget:self action:@selector(personal_btn_clicked:) forControlEvents:UIControlEventTouchUpInside];
-
         UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithCustomView:personalButton];
         
-        
         [n setRightBarButtonItem: bbi];
-        
-        //UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editItems:)];
         [n setLeftBarButtonItem:bbiLeft];
-                                    
+        /////////////////////////////////
+        
+        //setup timingItemStore
+        timingItemStore = [TimingItemStore timingItemStore];
+        //[timingItemStore restoreData];
+        /*
+        TimingItem *item1 = [timingItemStore createItem];
+        TimingItem *item2 = [timingItemStore createItem];
+        
+        
+        item1.itemName = @"item1";
+        item2.itemName = @"item2";
+        item1.time = 0;
+        item2.time = 0;
+        item1.color = REDNO1;
+        item2.color = BLUENO2;
+        */
+        ////////////////////////////////
+        
+        //[timingItemStore insertItem:item1];
+        //[timingItemStore updateItem:item1];
+        //[timingItemStore deletaAllItem];
+        //[timingItemStore viewAllItem];
+        //[timingItemStore deletaAllItem];
+        //[timingItemStore viewAllItem];
+        //[timingItemStore insertItem:item1];
+        //[timingItemStore deletaAllItem];
+        //[timingItemStore insertItem:item1];
+        //[timingItemStore insertItem:item2];
+        //[timingItemStore deleteItem:item1];
+        
+//        [timingItemStore deletaAllItem];
+//        [timingItemStore insertItem:item1];
+//        [timingItemStore insertItem:item2];
+//        [timingItemStore saveData];
+        //item2.time = 100;
+        
+        //[timingItemStore updateItem:item2];
+//        [timingItemStore deletaAllItem];
+//        [timingItemStore saveData];
+        [timingItemStore restoreData];
+        [timingItemStore viewAllItem];
+        
+        
+        
+        //setup pieChart
+        pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, 0, 280, 280)];
+        [pieChart setDataSource:self];
+        [pieChart setDelegate:self];
+        [pieChart setStartPieAngle:M_PI_2];
+        [pieChart setLabelFont:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:16]];
+        [pieChart setLabelRadius:100];
+        [pieChart setShowPercentage:NO];
+        [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+        [pieChart setPieCenter:CGPointMake(160, 240)];
+        [pieChart setUserInteractionEnabled:YES];
+        [pieChart setLabelShadowColor:[UIColor blackColor]];
+        
+        [[self view] addSubview:pieChart];
+        
+        [pieChart reloadData];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, 350, 320, 320)];
+        itemTable.delegate = self;
+        itemTable.dataSource = self;
+        [itemTable reloadData];
+        [[self view] insertSubview:itemTable atIndex:0];
+        /////////////////////////////////
+        
+        
+        //setup timer
+        if(timer == nil){
+            timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollTime) userInfo:nil repeats:YES];
+        }
+        //////////
+        
+        
+        
+        
+        
     }
     
     
-    timingItemStore = [TimingItemStore timingItemStore];
-    TimingItem *item1 = [timingItemStore createItem];
-    TimingItem *item2 = [timingItemStore createItem];
     
     
-    item1.itemName = @"item1";
-    item2.itemName = @"item2";
-    item1.time = 2.1;
-    item2.time = 3.2;
-    item1.color = REDNO1;
-    item2.color = BLUENO2;
-    
-    
-    
-    
-    pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, 0, 280, 280)];
-    [pieChart setDataSource:self];
-    [pieChart setDelegate:self];
-    [pieChart setStartPieAngle:M_PI_2];
-    [pieChart setLabelFont:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:16]];
-    [pieChart setLabelRadius:100];
-    [pieChart setShowPercentage:NO];
-    [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    [pieChart setPieCenter:CGPointMake(160, 240)];
-    [pieChart setUserInteractionEnabled:YES];
-    [pieChart setLabelShadowColor:[UIColor blackColor]];
-    
-    
-    self.sliceColors =[NSArray arrayWithObjects:
-                       [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:1],
-                       [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:1],
-                       [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:1],
-                       [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:1],
-                       [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:1],nil];
-    
-    [[self view] addSubview:pieChart];
-    
-    
-    [pieChart reloadData];
-    itemTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 350, 320, 320)];
-    itemTable.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    itemTable.delegate = self;
-    itemTable.dataSource = self;
-    NSLog(@"before reloadData");
-    [itemTable reloadData];
-    [[self view] insertSubview:itemTable atIndex:0];
-    NSLog(@"After reloadData");
-    
-    // Do any additional setup after loading the view from its nib.
 }
 
 
@@ -127,15 +150,24 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
+
+
+
+
+
 
 
 // for pie chart
 //////////////////
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
-    NSLog(@"%d",[[timingItemStore allItems] count]);
+    NSLog(@"%lu",(unsigned long)[[timingItemStore allItems] count]);
     return [[timingItemStore allItems] count];
 }
 
@@ -175,6 +207,9 @@
 
 
 
+
+
+
 //for table view
 ////////////////////
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -199,9 +234,37 @@
     return cell;
     
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TimingItem *item = [timingItemStore getItemAtIndex:[indexPath row]];
+    if(!item){
+        return ;
+    }
+    TimingItem *itemtop = [timingItemStore getItemAtIndex:0];
+    if(!item){
+        return ;
+    }
+    if(itemtop==item){
+        return;
+    }
+    [itemtop check:YES];
+    itemtop.active=NO;
+    [item check:NO];
+    item.active=YES;
+    
+    [timingItemStore moveItemAtIndex:[indexPath row] toIndex:0];
+}
+
 ////////////////////
 
--(IBAction)personal_btn_clicked:(id)sender
+
+
+
+
+//event handlers
+/////////////////////////
+-(void)personal_btn_clicked:(id)sender
 {
     PersonalViewController *viewController = [[PersonalViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];    
@@ -219,14 +282,27 @@
     NSLog(@"Go to statistics view");
 }
 
-
-
 -(void)addNewItem:(id)sender{
     NSLog(@"Add new Item");
     CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:navController animated:YES completion:nil];
 }
+
+
+-(void)pollTime
+{
+    NSLog(@"Timer!");
+    if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
+        return ;
+    }
+    
+    TimingItem* item = [timingItemStore getItemAtIndex:0];
+    [item check:YES];
+    [pieChart reloadData];
+    [itemTable reloadData];
+}
+//////////////////////
 
 
 @end

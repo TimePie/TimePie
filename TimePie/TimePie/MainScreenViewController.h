@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "XYPieChart.h"
 #import "TimingItemStore.h"
+#import "MainScreenTableView.h"
+
 
 @interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource>
 {
@@ -16,17 +18,13 @@
     
     XYPieChart *pieChart;
     TimingItemStore * timingItemStore;
-    UITableView *itemTable;
-    
+    MainScreenTableView *itemTable;
+    NSTimer * timer;
 }
 
 
 
 - (IBAction)stats_btn_clicked:(id)sender;
-
-@property(nonatomic, strong) NSArray *sliceColors;
-@property(nonatomic, strong) NSMutableArray *slices;
-
 
 
 

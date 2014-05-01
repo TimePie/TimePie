@@ -13,12 +13,18 @@
 
 + (id)randomItem;
 - (id)initWithItemName:(NSString *)name;
+- (NSDate*) check:(BOOL)add;
 
 
+@property (nonatomic) int itemID;
 @property (nonatomic, strong) NSString * itemName;
-@property (nonatomic, readonly, strong) NSDate * dateCreated;
+@property (nonatomic, strong) NSDate * dateCreated;
 @property (nonatomic) double time;
-@property (nonatomic, strong) NSDate * startDate;
 @property (nonatomic, strong) UIColor * color;
+@property (nonatomic, strong) UIColor * lightColor;
+@property (nonatomic, strong) NSDate* lastCheck;
+@property (nonatomic) BOOL active;
+
+
 
 @end

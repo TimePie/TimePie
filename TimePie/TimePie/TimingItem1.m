@@ -14,9 +14,10 @@
 @synthesize itemName;
 @synthesize dateCreated;
 @synthesize time;
-@synthesize startDate;
+@synthesize lastCheck;
+@synthesize active;
 @synthesize color;
-
+@synthesize lightColor;
 
 
 
@@ -35,11 +36,31 @@
         NSTimeZone *zone = [NSTimeZone systemTimeZone];
         NSInteger interval = [zone secondsFromGMTForDate: adate];
         NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
-        startDate =localeDate;
+        lastCheck =localeDate;
+        active = NO;
         [self setColor:[UIColor blackColor]];
     }
     return self;
 }
+
+
+- (NSDate*) check:(BOOL)add
+{
+    NSDate *adate = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: adate];
+    NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
+    
+    if(add){
+        double timeInterval = [localeDate timeIntervalSinceReferenceDate]-[lastCheck timeIntervalSinceReferenceDate];
+        time+=timeInterval;
+    }
+    lastCheck = localeDate;
+    
+    return localeDate;
+}
+
+
 
 
 

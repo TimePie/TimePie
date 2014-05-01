@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "TimingItem1.h"
+
+
 
 @interface TimingItemStore : NSObject
 {
@@ -24,6 +27,25 @@
 
 - (void)moveItemAtIndex:(int)from
                 toIndex:(int)to;
+
+
+- (BOOL)saveData;
+- (BOOL)restoreData;
+
+
+- (BOOL)insertItem:(TimingItem*)item;
+- (BOOL)updateItem:(TimingItem*)item;
+- (BOOL)deleteItem:(TimingItem*)item;
+- (BOOL)deletaAllItem;
+- (BOOL)viewAllItem;
+
+
+
+@property (strong, nonatomic) NSManagedObjectContext * managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel * managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+
 
 
 
