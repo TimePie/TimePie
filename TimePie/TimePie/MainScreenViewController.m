@@ -107,7 +107,7 @@
         
         
         //setup pieChart
-        pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, 0, 280, 280)];
+        pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, -390, 300, 300)];
         [pieChart setDataSource:self];
         [pieChart setDelegate:self];
         [pieChart setStartPieAngle:M_PI_2];
@@ -119,13 +119,15 @@
         [pieChart setUserInteractionEnabled:YES];
         [pieChart setLabelShadowColor:[UIColor blackColor]];
         
-        [[self view] addSubview:pieChart];
+        //[[self view] addSubview:pieChart];
         
         [pieChart reloadData];
-        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, 350, 320, 320)];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, 20, 320, 500)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable reloadData];
+        [itemTable setContentInset:UIEdgeInsetsMake(320, 0, 0, 0)];
+        [itemTable addSubview:pieChart];
         [[self view] insertSubview:itemTable atIndex:0];
         /////////////////////////////////
         
@@ -179,7 +181,7 @@
 {
     TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
     if(item){
-        return [item itemName];
+        return [NSString stringWithFormat:@"%@\n%f",[item itemName], [item time]];
     }
     NSLog(@"no item!");
     return nil;
@@ -273,6 +275,8 @@
         NSLog(p.itemName);
     }
 }
+
+
 
 
 ////////////////////
