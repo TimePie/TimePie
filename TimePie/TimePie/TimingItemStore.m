@@ -9,6 +9,7 @@
 #import "TimingItemStore.h"
 #import "TimingItem1.h"
 #import "BasicUIColor+UIPosition.h"
+#import "ColorThemes.h"
 @implementation TimingItemStore
 
 
@@ -24,10 +25,6 @@
         if(!allItems){
             allItems = [[NSMutableArray alloc] init];
         }
-        
-        
-        //[self restoreData];
-        
         
     }
     return self;
@@ -46,6 +43,7 @@
 
 - (TimingItem *)createItem{
     TimingItem *i = [TimingItem randomItem];
+    i.color = [allItems count];
     [allItems addObject:i];
     NSLog(@"create item!");
     return i;
@@ -97,8 +95,10 @@
 {
     BOOL result = NO;
     [self deletaAllItem];
+    NSLog(@"Save!");
     for(TimingItem * item in allItems){
-        NSLog(@"Save!");
+        
+        [item check:NO];
         result = [self insertItem:item];
     }
     return result;
@@ -133,12 +133,18 @@
     NSManagedObject *i = [NSEntityDescription
                                        insertNewObjectForEntityForName:@"TimingItemEntity"
                                        inManagedObjectContext:context];
+    
+    
+    ////
     [i setValue:item.itemName forKey:@"item_name"];
     [i setValue:[NSNumber numberWithInt:item.itemID] forKey:@"item_id"];
     [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
     [i setValue:item.dateCreated forKey:@"date_created"];
+    [i setValue:item.lastCheck forKey:@"last_check"];
+    [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
     
     
+    /////
     NSError *error;
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -163,12 +169,7 @@
     
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject *i in fetchedObjects) {
-        [i setValue:item.itemName forKey:@"item_name"];
-        [i setValue:[NSNumber numberWithInt:item.itemID] forKey:@"item_id"];
-        [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
-        //NSLog([NSString stringWithFormat:@"time:%f", item.time]);
-        //NSLog([NSString stringWithFormat:@"time:%@", [i valueForKey:@"time"]]);
-        [i setValue:item.dateCreated forKey:@"date_created"];
+        [self restoreItem:i];
     }
     
     [context updatedObjects];
@@ -253,6 +254,7 @@
         NSLog(@"itemID: %@", [info valueForKey:@"item_id"]);
         NSLog(@"time: %@", [info valueForKey:@"time"]);
         NSLog(@"date_created: %@", [info valueForKey:@"date_created"]);
+        
     }
     
     return YES;
@@ -271,21 +273,19 @@
     [fetchRequest setEntity:entity];
     
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    for (NSManagedObject *info in fetchedObjects) {
-        TimingItem * item = [self createItem];
-        item.itemName =[info valueForKey:@"item_name"];
-        item.time = [[info valueForKey:@"time"] doubleValue];
-        item.itemID =[[info valueForKey:@"item_id"] integerValue];
-        item.dateCreated = [info valueForKey:@"date_created"];
+    for (NSManagedObject *i in fetchedObjects) {
+        [self restoreItem:i];
     }
     
-    [self restoreColors];
+    [[[self allItems] objectAtIndex:0] check:YES];
+    NSLog([[[self allItems] objectAtIndex:0] itemName]);
+    //[self restoreColors];
     
     
     return YES;
 }
 
-
+/*
 - (void)restoreColors
 {
     
@@ -320,6 +320,19 @@
     }
 }
 
+*/
+
+- (TimingItem* )restoreItem:(NSManagedObject *)i
+{
+    TimingItem * item = [self createItem];
+    item.itemName =[i valueForKey:@"item_name"];
+    item.time = [[i valueForKey:@"time"] doubleValue];
+    item.itemID =[[i valueForKey:@"item_id"] integerValue];
+    item.dateCreated = [i valueForKey:@"date_created"];
+    item.lastCheck = [i valueForKey:@"last_check"];
+    item.color = [[i valueForKey:@"color_number"] integerValue];
+    return item;
+}
 
 
 

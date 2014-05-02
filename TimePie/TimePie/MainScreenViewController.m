@@ -10,10 +10,10 @@
 #import "PersonalViewController.h"
 #import "StatsViewController.h"
 #import "CreateItemViewController.h"
-#import "BasicUIColor+UIPosition.h"
 
 #import "TimingItem1.h"
 #import "TCell.h"
+#import "ColorThemes.h"
 
 @interface MainScreenViewController ()
 
@@ -61,10 +61,12 @@
         [n setLeftBarButtonItem:bbiLeft];
         /////////////////////////////////
         
+        
+        
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
         //[timingItemStore restoreData];
-        /*
+        
         TimingItem *item1 = [timingItemStore createItem];
         TimingItem *item2 = [timingItemStore createItem];
         
@@ -73,9 +75,9 @@
         item2.itemName = @"item2";
         item1.time = 0;
         item2.time = 0;
-        item1.color = REDNO1;
-        item2.color = BLUENO2;
-        */
+//        item1.color = REDNO1;
+//        item2.color = BLUENO2;
+        
         ////////////////////////////////
         
         //[timingItemStore insertItem:item1];
@@ -100,7 +102,7 @@
 //        [timingItemStore deletaAllItem];
 //        [timingItemStore saveData];
         [timingItemStore restoreData];
-        [timingItemStore viewAllItem];
+//        [timingItemStore viewAllItem];
         
         
         
@@ -167,7 +169,7 @@
 //////////////////
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
-    NSLog(@"%lu",(unsigned long)[[timingItemStore allItems] count]);
+    //NSLog(@"%lu",(unsigned long)[[timingItemStore allItems] count]);
     return [[timingItemStore allItems] count];
 }
 
@@ -199,7 +201,7 @@
 {
     TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
     if(item){
-        return [item color];
+        return [[ColorThemes colorThemes] getColorAt:item.color];
     }
     return [UIColor blackColor];
 }
@@ -229,10 +231,10 @@
     TimingItem * item = [[timingItemStore allItems] objectAtIndex:indexPath.row];
     [cell.itemName setText:item.itemName];
     cell.itemTime.text = [NSString stringWithFormat:@"%f", item.time];
-    cell.itemColor.backgroundColor = item.color;
-    cell.itemNotice.backgroundColor = item.color;
-    return cell;
+    cell.itemColor.backgroundColor = [[ColorThemes colorThemes] getColorAt:item.color];
+    cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.color];
     
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -255,6 +257,23 @@
     
     [timingItemStore moveItemAtIndex:[indexPath row] toIndex:0];
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+
+        TimingItem *p = [[timingItemStore allItems] objectAtIndex:[indexPath row]];
+        [timingItemStore removeItem:p];
+        [timingItemStore deleteItem:p];
+        [itemTable reloadData];
+        NSLog(p.itemName);
+    }
+}
+
 
 ////////////////////
 
@@ -292,7 +311,7 @@
 
 -(void)pollTime
 {
-    NSLog(@"Timer!");
+    //NSLog(@"Timer!");
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
         return ;
     }
@@ -300,7 +319,9 @@
     TimingItem* item = [timingItemStore getItemAtIndex:0];
     [item check:YES];
     [pieChart reloadData];
-    [itemTable reloadData];
+    if(![itemTable isEditing]){
+        [itemTable reloadData];
+    }
 }
 //////////////////////
 

@@ -9,5 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface ColorThemes : NSObject
+{
+    NSMutableArray * defaultColorTheme;
+    NSMutableArray * defaultLightColorTheme;
+}
+
+
++ (ColorThemes *)colorThemes;
+- (NSArray *)defaultColorTheme;
+- (NSArray *)defaultLightColorTheme;
+- (UIColor *)getColorAt:(int)index;
+- (UIColor *)getLightColorAt:(int)index;
 
 @end

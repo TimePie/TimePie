@@ -20,8 +20,7 @@
 @property (nonatomic, strong) NSString * itemName;
 @property (nonatomic, strong) NSDate * dateCreated;
 @property (nonatomic) double time;
-@property (nonatomic, strong) UIColor * color;
-@property (nonatomic, strong) UIColor * lightColor;
+@property (nonatomic) int color;
 @property (nonatomic, strong) NSDate* lastCheck;
 @property (nonatomic) BOOL active;
 

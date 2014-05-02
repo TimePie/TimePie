@@ -9,6 +9,9 @@
 #import "CreateItemViewController.h"
 #import "BasicUIColor+UIPosition.h"
 #import <QuartzCore/QuartzCore.h>
+#import "TimingItemStore.h"
+#import "TimingItem1.h"
+
 #define TAG_LIMIT_COUNT     200
 #define TAG_INPUT_FIELD_1   4001
 #define TAG_INPUT_LABEL     4002
@@ -188,7 +191,11 @@ static NSInteger routineItemFlag = 0;
 {
     if (_itemName.length > 0)
     {
+        NSLog(_itemName);
+        TimingItem* item = [[TimingItemStore timingItemStore] createItem];
+        item.itemName = _itemName;
         [self dismissViewControllerAnimated:YES completion:nil];
+        
     }
     else
     {

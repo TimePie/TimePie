@@ -17,7 +17,6 @@
 @synthesize lastCheck;
 @synthesize active;
 @synthesize color;
-@synthesize lightColor;
 
 
 
@@ -38,7 +37,7 @@
         NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
         lastCheck =localeDate;
         active = NO;
-        [self setColor:[UIColor blackColor]];
+        [self setColor:0];
     }
     return self;
 }
@@ -50,12 +49,18 @@
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSInteger interval = [zone secondsFromGMTForDate: adate];
     NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
+    NSLog([NSString stringWithFormat:@"check item:%@", itemName]);
+    NSLog([NSString stringWithFormat:@"lask check:%@", lastCheck]);
+    NSLog([NSString stringWithFormat:@"lask check:%@", localeDate]);
     
     if(add){
         double timeInterval = [localeDate timeIntervalSinceReferenceDate]-[lastCheck timeIntervalSinceReferenceDate];
         time+=timeInterval;
+        NSLog([NSString stringWithFormat:@"interval: %f", timeInterval]);
     }
     lastCheck = localeDate;
+    
+
     
     return localeDate;
 }
