@@ -33,9 +33,9 @@
 - (BOOL)restoreData;
 
 
-- (BOOL)insertItem:(TimingItem*)item;
-- (BOOL)updateItem:(TimingItem*)item;
-- (BOOL)deleteItem:(TimingItem*)item;
+//- (BOOL)insertItem:(TimingItem*)item;
+//- (BOOL)updateItem:(TimingItem*)item;
+//- (BOOL)deleteItem:(TimingItem*)item;
 - (BOOL)deletaAllItem;
 - (BOOL)viewAllItem;
 

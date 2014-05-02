@@ -63,10 +63,16 @@
         
         
         
+        
+        
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
-        //[timingItemStore restoreData];
         
+        
+        
+        
+        //test items
+        /*
         TimingItem *item1 = [timingItemStore createItem];
         TimingItem *item2 = [timingItemStore createItem];
         
@@ -75,34 +81,17 @@
         item2.itemName = @"item2";
         item1.time = 0;
         item2.time = 0;
-//        item1.color = REDNO1;
-//        item2.color = BLUENO2;
-        
+        */
         ////////////////////////////////
         
-        //[timingItemStore insertItem:item1];
-        //[timingItemStore updateItem:item1];
-        //[timingItemStore deletaAllItem];
-        //[timingItemStore viewAllItem];
-        //[timingItemStore deletaAllItem];
-        //[timingItemStore viewAllItem];
-        //[timingItemStore insertItem:item1];
-        //[timingItemStore deletaAllItem];
-        //[timingItemStore insertItem:item1];
-        //[timingItemStore insertItem:item2];
-        //[timingItemStore deleteItem:item1];
         
-//        [timingItemStore deletaAllItem];
-//        [timingItemStore insertItem:item1];
-//        [timingItemStore insertItem:item2];
-//        [timingItemStore saveData];
-        //item2.time = 100;
-        
-        //[timingItemStore updateItem:item2];
 //        [timingItemStore deletaAllItem];
 //        [timingItemStore saveData];
         [timingItemStore restoreData];
 //        [timingItemStore viewAllItem];
+        
+        
+        
         
         
         
@@ -122,7 +111,7 @@
         //[[self view] addSubview:pieChart];
         
         [pieChart reloadData];
-        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, 20, 320, 500)];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 560)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable reloadData];
@@ -181,7 +170,7 @@
 {
     TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
     if(item){
-        return [NSString stringWithFormat:@"%@\n%f",[item itemName], [item time]];
+        return [NSString stringWithFormat:@"%@\n%@",[item itemName], [item getTimeString]];
     }
     NSLog(@"no item!");
     return nil;
@@ -232,7 +221,9 @@
     }
     TimingItem * item = [[timingItemStore allItems] objectAtIndex:indexPath.row];
     [cell.itemName setText:item.itemName];
-    cell.itemTime.text = [NSString stringWithFormat:@"%f", item.time];
+    
+    cell.itemTime.text = [NSString stringWithFormat:@"%@", [item getTimeString]];
+    
     cell.itemColor.backgroundColor = [[ColorThemes colorThemes] getColorAt:item.color];
     cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.color];
     
@@ -270,15 +261,10 @@
 
         TimingItem *p = [[timingItemStore allItems] objectAtIndex:[indexPath row]];
         [timingItemStore removeItem:p];
-        [timingItemStore deleteItem:p];
         [itemTable reloadData];
         NSLog(p.itemName);
     }
 }
-
-
-
-
 ////////////////////
 
 

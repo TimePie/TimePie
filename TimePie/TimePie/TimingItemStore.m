@@ -41,6 +41,12 @@
     return allItems;
 }
 
+
+
+
+//create item methods automatically insert the item into   allItem
+//The color number of an item is picked based on the number of objects in   allItem
+//Later we can use ColorTheme to manage the colors to avoid the duplicated colors.
 - (TimingItem *)createItem{
     TimingItem *i = [TimingItem randomItem];
     i.color = [allItems count];
@@ -49,6 +55,7 @@
     return i;
 }
 
+//Class method, reture a single TimingItemStore object.
 + (TimingItemStore*) timingItemStore
 {
     static TimingItemStore * timingItemStore = nil;
@@ -64,10 +71,14 @@
     return [self timingItemStore];
 }
 
+//remove the item from allItem
+//**this method DO NOT remove item from coredata
 - (void)removeItem:(TimingItem *)i
 {
     [allItems removeObjectIdenticalTo:i];
 }
+
+
 
 - (void)moveItemAtIndex:(int)from toIndex:(int)to
 {
@@ -91,6 +102,9 @@
 }
 
 
+
+
+// Save items array to core data
 - (BOOL)saveData
 {
     BOOL result = NO;
@@ -105,6 +119,10 @@
 }
 
 
+
+
+//check if there is a same item existed
+//###Deprecated####
 - (BOOL)checkExisted:(TimingItem*)item
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -124,26 +142,19 @@
 }
 
 
+
+
+
+//insert an item to coredata
+// no longer public
 - (BOOL)insertItem:(TimingItem*)item
 {
     BOOL result = YES;
     
     //insert
     NSManagedObjectContext *context = [self managedObjectContext];
-    NSManagedObject *i = [NSEntityDescription
-                                       insertNewObjectForEntityForName:@"TimingItemEntity"
-                                       inManagedObjectContext:context];
     
-    
-    ////
-    [i setValue:item.itemName forKey:@"item_name"];
-    [i setValue:[NSNumber numberWithInt:item.itemID] forKey:@"item_id"];
-    [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
-    [i setValue:item.dateCreated forKey:@"date_created"];
-    [i setValue:item.lastCheck forKey:@"last_check"];
-    [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
-    
-    
+    [self saveItemEntity:item];
     /////
     NSError *error;
     if (![context save:&error]) {
@@ -154,6 +165,10 @@
     return result;
 }
 
+
+
+// update an item to coredata
+// no longer public
 - (BOOL)updateItem:(TimingItem*)item
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -184,6 +199,8 @@
     return result;
 }
 
+// delete an item from coredata
+// no longer public
 -(BOOL)deleteItem:(TimingItem*)item
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -213,6 +230,8 @@
     return result;
 }
 
+
+// delete all items from coredata
 - (BOOL)deletaAllItem
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -238,6 +257,7 @@
     return YES;
 }
 
+// view all items in coredata
 - (BOOL)viewAllItem
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -285,43 +305,12 @@
     return YES;
 }
 
-/*
-- (void)restoreColors
-{
-    
-    if(allItems){
-        int i =0;
-        for(TimingItem * item in allItems){
-            switch (i) {
-                case 0:
-                    item.color =REDNO1;
-                    item.lightColor =RedNO1_light;
-                    break;
-                case 1:
-                    item.color =BLUENO2;
-                    item.lightColor =BLUENO2_light;
-                    break;
-                case 2:
-                    item.color =GREENNO3;
-                    item.lightColor = GREENNO3_light;
-                    break;
-                case 3:
-                    item.color = PINKNO04;
-                    item.lightColor = PINKNO04_light;
-                    break;
-                default:
-                    item.color = [UIColor blackColor];
-                    item.lightColor = [UIColor grayColor];
-                    break;
-            }
-            
-            i ++;
-        }
-    }
-}
 
-*/
 
+
+
+
+// restore a single item from NSManagedObject
 - (TimingItem* )restoreItem:(NSManagedObject *)i
 {
     TimingItem * item = [self createItem];
@@ -334,6 +323,26 @@
     return item;
 }
 
+
+
+//get a single item entity from TimingTime Class
+- (NSManagedObject *)saveItemEntity:(TimingItem *)item
+{
+    //insert
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *i = [NSEntityDescription
+                          insertNewObjectForEntityForName:@"TimingItemEntity"
+                          inManagedObjectContext:context];
+    
+    [i setValue:item.itemName forKey:@"item_name"];
+    [i setValue:[NSNumber numberWithInt:item.itemID] forKey:@"item_id"];
+    [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
+    [i setValue:item.dateCreated forKey:@"date_created"];
+    [i setValue:item.lastCheck forKey:@"last_check"];
+    [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+    return i;
+    
+}
 
 
 

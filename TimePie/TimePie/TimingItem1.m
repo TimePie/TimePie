@@ -65,7 +65,15 @@
     return localeDate;
 }
 
-
+- (NSString *)getTimeString
+{
+    NSInteger dateTime = time - 60*60*8;
+    NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:dateTime];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"hh:mm:ss"];
+    NSString *dateString = [formatter stringFromDate:date];
+    return dateString;
+}
 
 
 

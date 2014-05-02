@@ -14,7 +14,7 @@
 + (id)randomItem;
 - (id)initWithItemName:(NSString *)name;
 - (NSDate*) check:(BOOL)add;
-
+- (NSString *)getTimeString;
 
 @property (nonatomic) int itemID;
 @property (nonatomic, strong) NSString * itemName;
