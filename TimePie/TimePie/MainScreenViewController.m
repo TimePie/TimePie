@@ -232,6 +232,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //NSLog(@"Timer!");
+    if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
+        return ;
+    }
+    
     TimingItem *item = [timingItemStore getItemAtIndex:[indexPath row]];
     if(!item){
         return ;

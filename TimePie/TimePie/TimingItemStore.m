@@ -93,6 +93,9 @@
 
 - (id)getItemAtIndex:(int)index
 {
+    if(!allItems||[allItems count]==0){
+        return nil;
+    }
     TimingItem *item= [allItems objectAtIndex:index];
     if(item){
         return item;
@@ -297,10 +300,11 @@
         [self restoreItem:i];
     }
     
-    [[[self allItems] objectAtIndex:0] check:YES];
-    NSLog([[[self allItems] objectAtIndex:0] itemName]);
-    //[self restoreColors];
     
+    if(allItems&&[allItems count]!=0){
+        [[[self allItems] objectAtIndex:0] check:YES];
+        NSLog([[[self allItems] objectAtIndex:0] itemName]);
+    }
     
     return YES;
 }
