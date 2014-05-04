@@ -18,7 +18,6 @@
 @property (strong, nonatomic) UIColor *topColor;
 @property (strong, nonatomic) UIColor *bottomColor;
 
-
 // ALPHA
 @property (nonatomic) float topAlpha;
 @property (nonatomic) float bottomAlpha;

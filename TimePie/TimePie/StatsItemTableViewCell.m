@@ -29,7 +29,7 @@
     self.timeLabel.textColor=color;
     
     self.timeLabel.font=[UIFont fontWithName:@"Roboto-Medium" size:28];
-    self.itemName.font=[UIFont fontWithName:@"Roboto-Medium" size:17];
+    self.itemName.font=[UIFont fontWithName:@"Roboto-Medium" size:15];
     
     
     //create left color block view
