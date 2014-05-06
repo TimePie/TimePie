@@ -10,6 +10,8 @@
 #import "TimingItem1.h"
 #import "BasicUIColor+UIPosition.h"
 #import "ColorThemes.h"
+#import "Daily.h"
+
 @implementation TimingItemStore
 
 
@@ -348,6 +350,20 @@
     
 }
 
+
+
+
+//////////Daily Table
+
+- (Daily*)getToday
+{
+    NSDate *adate = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: adate];
+    NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
+    NSLog([NSString stringWithFormat:@"lask check:%@", localeDate]);
+    return nil;
+}
 
 
 @end

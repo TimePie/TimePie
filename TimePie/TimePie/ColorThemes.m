@@ -57,8 +57,8 @@
 
 - (UIColor *)getColorAt:(int)index
 {
-    int size = [[self defaultLightColorTheme] count];
-    return [[self defaultLightColorTheme] objectAtIndex:index%size];
+    int size = [[self defaultColorTheme] count];
+    return [[self defaultColorTheme] objectAtIndex:index%size];
 }
 
 - (UIColor *)getLightColorAt:(int)index

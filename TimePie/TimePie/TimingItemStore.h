@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "TimingItem1.h"
-
-
+@class Daily;
 
 @interface TimingItemStore : NSObject
 {
@@ -29,16 +28,18 @@
                 toIndex:(int)to;
 
 
+
+
+/////////Core Data
+
 - (BOOL)saveData;
 - (BOOL)restoreData;
 
-
-//- (BOOL)insertItem:(TimingItem*)item;
-//- (BOOL)updateItem:(TimingItem*)item;
-//- (BOOL)deleteItem:(TimingItem*)item;
 - (BOOL)deletaAllItem;
 - (BOOL)viewAllItem;
 
+
+////
 
 
 @property (strong, nonatomic) NSManagedObjectContext * managedObjectContext;
@@ -46,7 +47,7 @@
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
-
+- (Daily*)getToday;
 
 
 

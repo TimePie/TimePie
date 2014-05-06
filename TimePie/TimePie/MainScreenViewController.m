@@ -15,6 +15,7 @@
 #import "TCell.h"
 #import "ColorThemes.h"
 
+
 @interface MainScreenViewController ()
 
 @end
@@ -39,6 +40,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
+    
     
     
     
@@ -69,6 +74,7 @@
         timingItemStore = [TimingItemStore timingItemStore];
         
         
+        [timingItemStore getToday];
         
         
         //test items
