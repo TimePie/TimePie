@@ -111,6 +111,7 @@
 		6831559D1909263C00C9A27C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
 		688586EC190931AE0050D15D /* StatsBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsBackButton@2x.png"; sourceTree = "<group>"; };
 		688586F01909368A0050D15D /* StatsNavShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsNavShadow@2x.png"; sourceTree = "<group>"; };
+		68AF964B19166E4B00CDF8D7 /* GraphTypeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphTypeEnum.h; sourceTree = "<group>"; };
 		68BBE0961909193F00F12101 /* StatsLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsLineGraphView.h; sourceTree = "<group>"; };
 		68BBE0971909193F00F12101 /* StatsLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsLineGraphView.m; sourceTree = "<group>"; };
 		68BBE09919091A4600F12101 /* StatsItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsItemTableViewCell.h; sourceTree = "<group>"; };
@@ -350,6 +351,7 @@
 				68BBE0A519091C6700F12101 /* StatsLine.m */,
 				68BBE0A719091D5C00F12101 /* StatsAnimations.h */,
 				68BBE0A819091D5C00F12101 /* StatsAnimations.m */,
+				68AF964B19166E4B00CDF8D7 /* GraphTypeEnum.h */,
 			);
 			name = StatsView;
 			sourceTree = "<group>";

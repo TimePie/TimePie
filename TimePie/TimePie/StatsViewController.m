@@ -8,12 +8,12 @@
 
 #import "StatsViewController.h"
 #import "StatsItemTableViewCell.h"
+#import "GraphTypeEnum.h"
+
 @interface StatsViewController ()
 {
     //record the current graph type
-    //0 - >30  1-> 7 2->3
-    int currentType;
-    
+    GraphType currentType;
 }
 
 @end
@@ -34,14 +34,16 @@
     [super viewDidLoad];
     
     [self initNavigationBar];
-    currentType=1;
+    
+    currentType = WeekType;
     //
     [self initSegmentedControl];
     
     //get the data from last view
     //...
-    [self initData];
+    [self initItemData];
     
+    [self initDate];
     //
     [self initGraphs];
     
@@ -68,8 +70,8 @@
     [self.segmentedControl setTitle:@"过去三天" forSegmentAtIndex:2];
 }
 
-#pragma mark - graph view
-- (void)initData
+#pragma mark - graph view data
+- (void)initItemData
 {
     self.itemDataArray=[[NSMutableArray alloc]init];
     int itemCount=3;
@@ -110,24 +112,21 @@
         [self.itemDataArray addObject:itemTemp];
     }
     
-    //7
+}
+
+- (void)initDate
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    
+    //格式化日期期
+    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"M.dd"];
+    
     self.ArrayOfDates = [[NSMutableArray alloc] init];
     
-    NSDate *currentDate=[[NSDate alloc]init];
-    NSCalendar * cal=[NSCalendar currentCalendar];
-    //currentDate.date
-    
-    NSUInteger unitFlags=NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit;
-    NSDateComponents * conponent= [cal components:unitFlags fromDate:currentDate];
-    //NSInteger year=[conponent year];
-    NSInteger month=[conponent month];
-    NSInteger day=[conponent day];
-    
-    
-    //
-    
-    //week
-    //TODO: count day for date for display
+    //一次性获取一个月内的日期string
     for (int i=0; i < 30; i++)
     {
         NSString *tempS=@"";
@@ -137,55 +136,55 @@
         }
         else
         {
-            day-=1;
-            tempS= [NSString stringWithFormat:@"%d.%d",month,day];
+            [comps setDay:-i];
+            NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+            //
+            tempS=[dateformatter stringFromDate:tempDate];
         }
         [self.ArrayOfDates addObject:tempS];
-            //[self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:i+1]]];
     }
-    
+
 }
 
+#pragma mark - graph view
 - (void)initGraphs
 {
     //TODO: rewrite this part
     //使数据模型和视图分开
     
+    
+    
     //create view for graph
-    self.myGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 120, 320, 250)];
+    self.lineGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 120, 320, 250)];
     
-    //self.myGraph.backgroundColor=[UIColor blackColor];
+    //self.lineGraph.backgroundColor=[UIColor blackColor];
     
     
-    self.myGraph.delegate = self;
+    self.lineGraph.delegate = self;
     
-    self.myGraph.itemCount=self.itemDataArray.count;
+    self.lineGraph.graphType = currentType;
     
-    // Customization of the graph
-    self.myGraph.colorTop = [UIColor whiteColor];
+    self.lineGraph.itemCount = self.itemDataArray.count;
     
-//    self.myGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
-//    self.myGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
-    self.myGraph.alphaBottom=0.3;
-    self.myGraph.alphaLine=0.8;
+    //set attributes
+    //self.lineGraph.colorTop = [UIColor whiteColor];
     
-    self.myGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
-    self.myGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:13];
-    self.myGraph.widthLine = 1.5;
-    self.myGraph.enableTouchReport = YES;
-    self.myGraph.animationGraphEntranceSpeed=0;
+//    self.lineGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
+//    self.lineGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
+    
+    self.lineGraph.alphaBottom = 0.3;
+    self.lineGraph.alphaLine = 0.8;
+    self.lineGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
+    self.lineGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:11];
+    self.lineGraph.widthLine = 1.5;
+    self.lineGraph.enableTouchReport = YES;
+    self.lineGraph.animationGraphEntranceSpeed=0;
     
     //set graph color
-    UIColor* tempColor=[UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
-    NSMutableArray* tempArray=[[NSMutableArray alloc] init];
-    [tempArray addObject:tempColor];
-    tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
-    [tempArray addObject:tempColor];
-    tempColor=[UIColor colorWithRed:251/255.0 green:170/255.0 blue:121/255.0 alpha:1.0];
-    [tempArray addObject:tempColor];
-    self.myGraph.colorsOfGraph=tempArray;
+    //maybe set it to delegate
+    self.lineGraph.colorsOfGraph=self.colorArray;
     
-    [self.view addSubview:self.myGraph];
+    [self.view addSubview:self.lineGraph];
     
 }
 
@@ -195,45 +194,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-//
-//- (IBAction)refresh:(id)sender {
-//    [self.ArrayOfValues removeAllObjects];
-//    [self.ArrayOfDates removeAllObjects];
-//    
-//    for (int i = 0; i < self.graphObjectIncrement.value; i++) {
-//        [self.ArrayOfValues addObject:[NSNumber numberWithInteger:(arc4random() % 70000)]]; // Random values for the graph
-//        [self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:2000 + i]]]; // Dates for the X-Axis of the graph
-//        
-//        totalNumber = totalNumber + [[self.ArrayOfValues objectAtIndex:i] intValue]; // All of the values added together
-//    }
-//    
-//    UIColor *color;
-//    if (self.graphColorChoice.selectedSegmentIndex == 0) color = [UIColor colorWithRed:31.0/255.0 green:187.0/255.0 blue:166.0/255.0 alpha:1.0];
-//    else if (self.graphColorChoice.selectedSegmentIndex == 1) color = [UIColor colorWithRed:255.0/255.0 green:187.0/255.0 blue:31.0/255.0 alpha:1.0];
-//    else if (self.graphColorChoice.selectedSegmentIndex == 2) color = [UIColor colorWithRed:0.0 green:140.0/255.0 blue:255.0/255.0 alpha:1.0];
-//    
-//    self.myGraph.colorTop = color;
-//    self.myGraph.colorBottom = color;
-//    self.myGraph.backgroundColor = color;
-//    self.view.tintColor = color;
-//    self.labelValues.textColor = color;
-//    self.navigationController.navigationBar.tintColor = color;
-//    
-//    [self.myGraph reloadGraph];
-//}
-
 #pragma mark - Data Source for graph view
 
-- (int)numberOfXaxisPoints {
-    
-    //TODO: use graph index to index the generating graph
-    
-    return 7;//(int)[self.ArrayOfDates count];
-}
-
-- (int)numberOfAllPoints{
-    return 0;//(int)[self.statsItemData.AllItemData count];
-}
+//- (int)numberOfXaxisPoints {
+//    
+//    //TODO: use graph index to index the generating graph
+//    
+//    return 7;//(int)[self.ArrayOfDates count];
+//}
+//
+//- (int)numberOfAllPoints{
+//    return 0;//(int)[self.statsItemData.AllItemData count];
+//}
 
 - (float)valueForIndex:(NSInteger)index {
     return 0;//[[self.statsItemData.AllItemData objectAtIndex:index] floatValue];
@@ -246,62 +218,28 @@
     return [[item.dataOfMonth objectAtIndex:index] floatValue];
 }
 
-- (float)minValueOfGraphType:(int) graphIndex
+- (float)minValueOfGraphType:(GraphType) type
 {
-    //graphIndex
-    //0 -> 30
-    //1 -> 7
-    //2 -> 3
-    int endIndex=0;
+    //graphtype
+    int endIndex = type;
     float minValue = INFINITY;
-    switch (graphIndex) {
-        case 0:
-            endIndex=30;
-            break;
-        case 1:
-            endIndex=7;
-            break;
-        case 2:
-            endIndex=3;
-            break;
-        default:
-            break;
-    }
-    //NSMutableArray *minArray= [[NSMutableArray alloc]init];
     for(int i=0;i<self.itemDataArray.count;i++)
     {
+        //每个item中取出极值
         float tempmin=[[self.itemDataArray objectAtIndex:i] minValueStartAt:0 EndAt:endIndex];
+        //比较极值
         if(tempmin<minValue)
         {
             minValue=tempmin;
         }
-        
     }
     return minValue;
 }
-- (float)maxValueOfGraphType:(int) graphIndex
+- (float)maxValueOfGraphType:(GraphType) type
 {
-    
-    //graphIndex
-    //0 -> 30
-    //1 -> 7
-    //2 -> 3
-    int endIndex=0;
+    int endIndex = type;
     float maxValue = 0;
-    switch (graphIndex) {
-        case 0:
-            endIndex=30;
-            break;
-        case 1:
-            endIndex=7;
-            break;
-        case 2:
-            endIndex=3;
-            break;
-        default:
-            break;
-    }
-    //NSMutableArray *minArray= [[NSMutableArray alloc]init];
+    
     for(int i=0;i<self.itemDataArray.count;i++)
     {
         float tempMax=[[self.itemDataArray objectAtIndex:i] maxValueStartAt:0 EndAt:endIndex];
@@ -309,25 +247,22 @@
         {
             maxValue=tempMax;
         }
-        
     }
     return maxValue;
 }
-#pragma mark - SimpleLineGraph Delegate
+#pragma mark - LineGraph Delegate
 
-- (int)numberOfGapsBetweenLabels {
-    return 1;
+- (int)numberOfGapsBetweenLabels:(GraphType) type
+{
+    return type == MonthType ? 4 : 1;
 }
 
 - (NSString *)labelOnXAxisForIndex:(NSInteger)index WithTimeRange:(int) range
 {
-    int currentTypeOffset=range;
+    int currentTypeOffset = range;
     
     return [self.ArrayOfDates objectAtIndex: currentTypeOffset- (index+1)];
-    
 }
-
-
 
 
 //- (void)didTouchGraphWithClosestIndex:(int)index {
@@ -436,5 +371,36 @@
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+
+
+
+//
+//- (IBAction)refresh:(id)sender {
+//    [self.ArrayOfValues removeAllObjects];
+//    [self.ArrayOfDates removeAllObjects];
+//
+//    for (int i = 0; i < self.graphObjectIncrement.value; i++) {
+//        [self.ArrayOfValues addObject:[NSNumber numberWithInteger:(arc4random() % 70000)]]; // Random values for the graph
+//        [self.ArrayOfDates addObject:[NSString stringWithFormat:@"%@",[NSNumber numberWithInt:2000 + i]]]; // Dates for the X-Axis of the graph
+//
+//        totalNumber = totalNumber + [[self.ArrayOfValues objectAtIndex:i] intValue]; // All of the values added together
+//    }
+//
+//    UIColor *color;
+//    if (self.graphColorChoice.selectedSegmentIndex == 0) color = [UIColor colorWithRed:31.0/255.0 green:187.0/255.0 blue:166.0/255.0 alpha:1.0];
+//    else if (self.graphColorChoice.selectedSegmentIndex == 1) color = [UIColor colorWithRed:255.0/255.0 green:187.0/255.0 blue:31.0/255.0 alpha:1.0];
+//    else if (self.graphColorChoice.selectedSegmentIndex == 2) color = [UIColor colorWithRed:0.0 green:140.0/255.0 blue:255.0/255.0 alpha:1.0];
+//
+//    self.lineGraph.colorTop = color;
+//    self.lineGraph.colorBottom = color;
+//    self.lineGraph.backgroundColor = color;
+//    self.view.tintColor = color;
+//    self.labelValues.textColor = color;
+//    self.navigationController.navigationBar.tintColor = color;
+//
+//    [self.lineGraph reloadGraph];
+//}
+
 
 @end
