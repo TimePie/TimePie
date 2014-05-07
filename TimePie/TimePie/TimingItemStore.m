@@ -541,7 +541,15 @@
     for (NSManagedObject *info in fetchedObjects) {
         NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
     }
-    tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    
+    if([fetchedObjects count]==0){
+        tag = (Tag*)[NSEntityDescription insertNewObjectForEntityForName:@"Tag"
+                                                  inManagedObjectContext:context];
+        [tag setValue:tagName forKey:@"tag_name"];
+    }else{
+        tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    }
+    
     
     for(TimingItemEntity * i  in tag.item){
         NSLog(@"item entity for tag:%@", i);

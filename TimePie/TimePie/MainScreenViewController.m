@@ -78,7 +78,7 @@
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
         
-        [timingItemStore getTimingItemsByTagName:@"first Tag"];
+        //[timingItemStore getTimingItemsByTagName:@"first Tag"];
         //[timingItemStore getToday];
         
         
