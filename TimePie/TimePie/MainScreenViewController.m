@@ -36,7 +36,11 @@
 
 
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSLog(@"view did appear");
+}
 
 - (void)viewDidLoad
 {
@@ -74,8 +78,8 @@
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
         
-        
-        [timingItemStore getToday];
+        [timingItemStore getTimingItemsByTagName:@"first Tag"];
+        //[timingItemStore getToday];
         
         
         //test items
@@ -328,6 +332,10 @@
         [timingItemStore viewAllItem];
         [timingItemStore restoreData];
         [Output println:@"Yes"];
+        
+//        [timingItemStore addTag:item TagName:@"first Tag"];
+        [timingItemStore saveData];
+//        [timingItemStore getTimingItemsByTagName:@"first Tag"];
     }
     else{
         //not across a day

@@ -52,4 +52,10 @@
 
 
 
+- (BOOL)addTag:(TimingItem *)item
+       TagName:(NSString *)name;
+
+
+- (NSSet *)getTimingItemsByTagName:(NSString *)tagName;
+
 @end

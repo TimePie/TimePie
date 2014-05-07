@@ -11,7 +11,9 @@
 #import "BasicUIColor+UIPosition.h"
 #import "ColorThemes.h"
 #import "Daily.h"
+#import "Tag.h"
 #import "DateHelper.h"
+#import "TimingItemEntity.h"
 
 @implementation TimingItemStore
 
@@ -128,12 +130,25 @@
 - (BOOL)saveData
 {
     BOOL result = NO;
-    [self deletaAllItem];
-    NSLog(@"Save!");
+    
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+//    [self deletaAllItem];
+//    NSLog(@"Save!");
     for(TimingItem * item in allItems){
-        
-        [item check:NO];
-        result = [self insertItem:item];
+        TimingItemEntity *i = [self getItemEntityByItem:item];
+        [i setValue:item.itemName forKey:@"item_name"];
+        [i setValue:[NSNumber numberWithInt:item.itemID] forKey:@"item_id"];
+        [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
+        [i setValue:item.dateCreated forKey:@"date_created"];
+        [i setValue:item.lastCheck forKey:@"last_check"];
+        [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+        [context updatedObjects];
+        if (![context save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            result = NO;
+        }
     }
     return result;
 }
@@ -327,7 +342,7 @@
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     
     
-    NSLog(@"number of object returned: %d",[fetchedObjects count]);
+    NSLog(@"[restoredata]number of object returned: %d",[fetchedObjects count]);
     for (NSManagedObject *i in fetchedObjects) {
         [self restoreItem:i];
     }
@@ -376,6 +391,7 @@
 
 
 //get a single item entity from TimingTime Class
+//no longer used
 - (NSManagedObject *)saveItemEntity:(TimingItem *)item
 {
     //insert
@@ -390,7 +406,7 @@
     [i setValue:item.dateCreated forKey:@"date_created"];
     [i setValue:item.lastCheck forKey:@"last_check"];
     [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
-    
+
     
     
     
@@ -495,7 +511,192 @@
 
 
 
+- (BOOL)addTag:(TimingItem *)item
+       TagName:(NSString *)name
+{
+    
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    Tag * tag ;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",name]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
+    }
+    tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    
+    
+    
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"date_created == %@",item.dateCreated]];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"item_name"]);
+    }
+    TimingItemEntity * i = [fetchedObjects objectAtIndex:0];
+    i.tag = tag;
+    [tag addItemObject:i];
+    
+    [context updatedObjects];
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return false;
+    }
+    
+    
+    
+    
+    ///check if it works
+    
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",name]];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    tag = [fetchedObjects objectAtIndex:0];
+    for(TimingItemEntity * i  in tag.item){
+        NSLog(@"item entity for tag:%@", i);
+    }
 
+    return true;
+}
+
+- (Tag *)createTag:(NSString*)name
+{
+    //insert
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    NSManagedObject *i = [NSEntityDescription
+                          insertNewObjectForEntityForName:@"Tag"
+                          inManagedObjectContext:context];
+    
+    [i setValue:name forKey:@"tag_name"];
+    
+    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return nil;
+    }
+    
+    
+    return (Tag *)i;
+}
+
+
+- (Tag *)getTag:(NSString*)name
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",name]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    Tag* tag= nil;
+    if([fetchedObjects count]==0){
+        tag = [self createTag:name];
+    }else{
+        NSLog(@"Have tag!!!");
+        tag = [fetchedObjects objectAtIndex:0];
+    }
+    
+    return tag;
+}
+
+
+
+- (NSManagedObject *)getItemEntityByItem: (TimingItem*)item
+{
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"date_created == %@",item.dateCreated]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        NSManagedObject *i = [NSEntityDescription
+                              insertNewObjectForEntityForName:@"TimingItemEntity"
+                              inManagedObjectContext:context];
+        return i;
+    }
+
+    for(NSManagedObject * i in fetchedObjects){
+        NSLog(@"got item!%@",i);
+        return i;
+    }
+    
+    
+    return nil;
+}
+
+
+
+- (NSArray *)getTimingItemsByTagName:(NSString *)tagName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    Tag * tag ;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",tagName]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
+    }
+    tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    
+    for(TimingItemEntity * i  in tag.item){
+        NSLog(@"item entity for tag:%@", i);
+    }
+    
+    
+    return [self getTimingItemsByTag:tag];
+}
+
+
+
+- (NSArray *)getTimingItemsByTag:(Tag *)tag
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag == %@",tag]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        return nil;
+    }
+    NSLog(@"fetchedObjects: %d", [fetchedObjects count]);
+
+    return fetchedObjects;
+}
 
 
 @end
