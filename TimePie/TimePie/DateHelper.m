@@ -15,9 +15,15 @@
 + (NSDate *)beginningOfDay:(NSDate*)date
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
+
     
-    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
-                                               fromDate:date];
+    //final version
+    //NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:date];
+    
+    
+    //test version
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
+    
     
     return [calendar dateFromComponents:components];
 }
@@ -27,15 +33,32 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     NSDateComponents *components = [NSDateComponents new];
-    components.day = 1;
     
-    NSDate *date1 = [calendar dateByAddingComponents:components
-                                             toDate:[DateHelper beginningOfDay:date]
-                                            options:0];
+    //final version
+    //components.day = 1;
+    
+    //test version
+    components.minute = 1;
+    
+    NSDate *date1 = [calendar dateByAddingComponents:components toDate:[DateHelper beginningOfDay:date]  options:0];
     
     date1 = [date1 dateByAddingTimeInterval:-1];
     
     return date1;
+}
+
++(BOOL)checkAcrossDay
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate * now = [NSDate date];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:now];
+    if (components.second==0)
+    {
+        return true;
+    }
+    
+    
+    return false;
 }
 
 

@@ -292,6 +292,7 @@
     
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject *info in fetchedObjects) {
+        
         NSLog(@"Name: %@", [info valueForKey:@"item_name"]);
         NSLog(@"itemID: %@", [info valueForKey:@"item_id"]);
         NSLog(@"time: %@", [info valueForKey:@"time"]);
@@ -319,10 +320,14 @@
     NSDate *startOfToday = [DateHelper beginningOfDay:today];
     NSDate *endOfToday = [DateHelper endOfDay:today];
     
+    NSLog([NSString stringWithFormat:@"start: %@",startOfToday]);
+    NSLog([NSString stringWithFormat:@"end: %@",endOfToday]);
     
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(date_created >= %@) AND (date_created <= %@)", startOfToday, endOfToday]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     
+    
+    NSLog(@"number of object returned: %d",[fetchedObjects count]);
     for (NSManagedObject *i in fetchedObjects) {
         [self restoreItem:i];
     }
@@ -443,15 +448,16 @@
     NSDate *startOfToday = [DateHelper beginningOfDay:today];
     NSDate *endOfToday = [DateHelper endOfDay:today];
     
-    //startOfToday = [startOfToday dateByAddingTimeInterval:interval];
-    //endOfToday = [endOfToday dateByAddingTimeInterval:interval];
+    startOfToday = [startOfToday dateByAddingTimeInterval:interval];
+    endOfToday = [endOfToday dateByAddingTimeInterval:interval];
     
-    
+    //NSLog([NSString stringWithFormat:@"%@",startOfToday]);
+    //NSLog([NSString stringWithFormat:@"%@",endOfToday]);
     
     //insert
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
-/*
+
     NSManagedObject *i = [NSEntityDescription
                           insertNewObjectForEntityForName:@"Daily"
                           inManagedObjectContext:context];
@@ -462,7 +468,7 @@
     if (![context save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
-*/
+
     
     
     

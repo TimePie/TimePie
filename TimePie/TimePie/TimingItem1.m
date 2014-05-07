@@ -49,14 +49,15 @@
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSInteger interval = [zone secondsFromGMTForDate: adate];
     NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
-    NSLog([NSString stringWithFormat:@"check item:%@", itemName]);
-    NSLog([NSString stringWithFormat:@"lask check:%@", lastCheck]);
-    NSLog([NSString stringWithFormat:@"lask check:%@", localeDate]);
+    
+//    NSLog([NSString stringWithFormat:@"check item:%@", itemName]);
+//    NSLog([NSString stringWithFormat:@"lask check:%@", lastCheck]);
+//    NSLog([NSString stringWithFormat:@"lask check:%@", localeDate]);
     
     if(add){
         double timeInterval = [localeDate timeIntervalSinceReferenceDate]-[lastCheck timeIntervalSinceReferenceDate];
         time+=timeInterval;
-        NSLog([NSString stringWithFormat:@"interval: %f", timeInterval]);
+//        NSLog([NSString stringWithFormat:@"interval: %f", timeInterval]);
     }
     lastCheck = localeDate;
     

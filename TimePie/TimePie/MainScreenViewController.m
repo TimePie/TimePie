@@ -14,7 +14,8 @@
 #import "TimingItem1.h"
 #import "TCell.h"
 #import "ColorThemes.h"
-
+#import "DateHelper.h"
+#import "Output.h"
 
 @interface MainScreenViewController ()
 
@@ -74,7 +75,7 @@
         timingItemStore = [TimingItemStore timingItemStore];
         
         
-        //[timingItemStore getToday];
+        [timingItemStore getToday];
         
         
         //test items
@@ -319,13 +320,19 @@
     
     TimingItem* item = [timingItemStore getItemAtIndex:0];
     
-    /*
-    if(item.time >=10&& item.time<11){
-        [timingItemStore createItem:item];
+    if([DateHelper checkAcrossDay])
+    {
+        //across a day
+        TimingItem* timingItem = [timingItemStore createItem:item];
         [timingItemStore saveData];
+        [timingItemStore viewAllItem];
         [timingItemStore restoreData];
+        [Output println:@"Yes"];
     }
-    */
+    else{
+        //not across a day
+        [Output println:@"No"];
+    }
     
     [item check:YES];
     [pieChart reloadData];

@@ -1,5 +1,5 @@
 //
-//  DateHelper.h
+//  Output.h
 //  TimePie
 //
 //  Created by Max Lu on 5/7/14.
@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DateHelper : NSObject
+@interface Output : NSObject
 
-+(NSDate *)beginningOfDay:(NSDate *)date;
-+(NSDate *)endOfDay:(NSDate *)date;
-+(BOOL)checkAcrossDay;
-
++(void)println:(NSString*)str;
 @end

@@ -68,6 +68,7 @@
 		CD9CE6A019192DF6003C4CA6 /* Daily.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE69F19192DF6003C4CA6 /* Daily.m */; };
 		CD9CE6A319192DF6003C4CA6 /* Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE6A219192DF6003C4CA6 /* Tracking.m */; };
 		CD9CE6A71919D23E003C4CA6 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE6A61919D23E003C4CA6 /* DateHelper.m */; };
+		CD9CE6AD191A06D5003C4CA6 /* Output.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE6AC191A06D5003C4CA6 /* Output.m */; };
 		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
 		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
 /* End PBXBuildFile section */
@@ -180,6 +181,9 @@
 		CD9CE6A219192DF6003C4CA6 /* Tracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracking.m; sourceTree = "<group>"; };
 		CD9CE6A51919D23E003C4CA6 /* DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHelper.h; sourceTree = "<group>"; };
 		CD9CE6A61919D23E003C4CA6 /* DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHelper.m; sourceTree = "<group>"; };
+		CD9CE6AB191A06D5003C4CA6 /* Output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Output.h; sourceTree = "<group>"; };
+		CD9CE6AC191A06D5003C4CA6 /* Output.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Output.m; sourceTree = "<group>"; };
+		CD9CE6AE191A0729003C4CA6 /* GlobleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobleConstants.h; sourceTree = "<group>"; };
 		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
 		CDC8858D1910FE3400A67510 /* TCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCell.h; sourceTree = "<group>"; };
 		CDC8858E1910FE3400A67510 /* TCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCell.m; sourceTree = "<group>"; };
@@ -497,6 +501,9 @@
 				CD5239C21913691E005EB55A /* ColorThemes.m */,
 				CD9CE6A51919D23E003C4CA6 /* DateHelper.h */,
 				CD9CE6A61919D23E003C4CA6 /* DateHelper.m */,
+				CD9CE6AB191A06D5003C4CA6 /* Output.h */,
+				CD9CE6AC191A06D5003C4CA6 /* Output.m */,
+				CD9CE6AE191A0729003C4CA6 /* GlobleConstants.h */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -637,6 +644,7 @@
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */,
 				68BBE0A619091C6700F12101 /* StatsLine.m in Sources */,
+				CD9CE6AD191A06D5003C4CA6 /* Output.m in Sources */,
 				CD5239C31913691E005EB55A /* ColorThemes.m in Sources */,
 				CD52392319111298005EB55A /* TimingItemStore.m in Sources */,
 				CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */,
