@@ -18,7 +18,6 @@
 #import "Output.h"
 
 @interface MainScreenViewController ()
-
 @end
 
 @implementation MainScreenViewController
@@ -45,9 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    
+
     
     
     
@@ -142,14 +139,10 @@
         }
         //////////
         
-        
-        
-        
-        
+        //main Loop
+        NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
     }
-    
-    
-    
     
 }
 
@@ -162,14 +155,18 @@
 
 
 
-
-
-
-
-
-
-
-
+// main loop
+//////////////////
+- (void)mainLoop:(id)sender
+{
+    if (itemTable)
+    {
+        if (itemTable.contentOffset.y < -500.f)
+        {
+            [self animateModalView];
+        }
+    }
+}
 
 // for pie chart
 //////////////////
@@ -288,16 +285,29 @@
 ////////////////////
 
 
+//animations
+/////////////////////////
+- (void)animateModalView
+{
+    PersonalViewController *viewController = [[PersonalViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromBottom;
+    [self.view.window.layer addAnimation:transition forKey:nil];
 
+    [self presentViewController: navController animated:YES completion:nil];
+}
 
 
 //event handlers
 /////////////////////////
 -(void)personal_btn_clicked:(id)sender
 {
-    PersonalViewController *viewController = [[PersonalViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];    
-    [self presentViewController: navController animated:YES completion:nil];
+    [self animateModalView];
 }
 
 - (void)settingsButtonPressed
