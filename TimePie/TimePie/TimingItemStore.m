@@ -10,7 +10,6 @@
 #import "TimingItem1.h"
 #import "BasicUIColor+UIPosition.h"
 #import "ColorThemes.h"
-#import "Daily.h"
 #import "Tag.h"
 #import "DateHelper.h"
 #import "TimingItemEntity.h"
@@ -419,97 +418,6 @@
 
 
 
-- (Daily*)createToday
-{
-    NSDate *adate = [NSDate date];
-    NSTimeZone *zone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [zone secondsFromGMTForDate: adate];
-    NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
-    
-    NSDate *today = [NSDate date];
-    NSDate *startOfToday = [DateHelper beginningOfDay:today];
-    
-    startOfToday = [startOfToday dateByAddingTimeInterval:interval];
-    //endOfToday = [endOfToday dateByAddingTimeInterval:interval];
-    
-    
-    
-    //insert
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSError *error;
-    NSManagedObject *i = [NSEntityDescription
-    insertNewObjectForEntityForName:@"Daily"
-    inManagedObjectContext:context];
-     
-    [i setValue:today forKey:@"date"];
-     
-     
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        return nil;
-    }
-    return (Daily*)i;
-}
-
-//////////Daily Table
-
-- (Daily*)getToday
-{
-    NSDate *adate = [NSDate date];
-    NSTimeZone *zone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [zone secondsFromGMTForDate: adate];
-    NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
-    
-    NSDate *today = [NSDate date];
-    NSDate *startOfToday = [DateHelper beginningOfDay:today];
-    NSDate *endOfToday = [DateHelper endOfDay:today];
-    
-    startOfToday = [startOfToday dateByAddingTimeInterval:interval];
-    endOfToday = [endOfToday dateByAddingTimeInterval:interval];
-    
-    //NSLog([NSString stringWithFormat:@"%@",startOfToday]);
-    //NSLog([NSString stringWithFormat:@"%@",endOfToday]);
-    
-    //insert
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSError *error;
-
-    NSManagedObject *i = [NSEntityDescription
-                          insertNewObjectForEntityForName:@"Daily"
-                          inManagedObjectContext:context];
-    
-    [i setValue:today forKey:@"date"];
-    
- 
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-
-    
-    
-    
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Daily" inManagedObjectContext:context];
-    
-    [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(date >= %@) AND (date <= %@)", startOfToday, endOfToday]];
-    
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    if([fetchedObjects count]==0){
-        return [self createToday];
-    }
-    for (NSManagedObject *info in fetchedObjects) {
-        NSLog([NSString stringWithFormat:@"%@", info]);
-        return (Daily*)info;
-    }
-    
-    return nil;
-}
-
-
-
 
 - (BOOL)addTag:(TimingItem *)item
        TagName:(NSString *)name
@@ -530,7 +438,19 @@
     for (NSManagedObject *info in fetchedObjects) {
         NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
     }
-    tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    if([fetchedObjects count]==0){
+        tag = (Tag*)[NSEntityDescription insertNewObjectForEntityForName:@"Tag"
+                              inManagedObjectContext:context];
+        
+        [tag setValue:name forKey:@"tag_name"];
+    }else{
+        tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    }
+    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return false;
+    }
     
     
     
@@ -570,51 +490,6 @@
     }
 
     return true;
-}
-
-- (Tag *)createTag:(NSString*)name
-{
-    //insert
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSError *error;
-    NSManagedObject *i = [NSEntityDescription
-                          insertNewObjectForEntityForName:@"Tag"
-                          inManagedObjectContext:context];
-    
-    [i setValue:name forKey:@"tag_name"];
-    
-    
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        return nil;
-    }
-    
-    
-    return (Tag *)i;
-}
-
-
-- (Tag *)getTag:(NSString*)name
-{
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSError *error;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Tag" inManagedObjectContext:context];
-    
-    [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",name]];
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    Tag* tag= nil;
-    if([fetchedObjects count]==0){
-        tag = [self createTag:name];
-    }else{
-        NSLog(@"Have tag!!!");
-        tag = [fetchedObjects objectAtIndex:0];
-    }
-    
-    return tag;
 }
 
 
@@ -672,31 +547,57 @@
         NSLog(@"item entity for tag:%@", i);
     }
     
+    if(tag==nil){
+        return nil;
+    }
     
-    return [self getTimingItemsByTag:tag];
+    return tag.item;
 }
 
 
 
-- (NSArray *)getTimingItemsByTag:(Tag *)tag
+
+- (BOOL)markTracking:(NSString *)tagName
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
     
+    Tag * tag ;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
-    
+                                   entityForName:@"Tag" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag == %@",tag]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",tagName]];
+    
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    if([fetchedObjects count]==0){
-        return nil;
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
     }
-    NSLog(@"fetchedObjects: %d", [fetchedObjects count]);
-
-    return fetchedObjects;
+    if([fetchedObjects count]==0){
+        tag = (Tag*)[NSEntityDescription insertNewObjectForEntityForName:@"Tag"
+                                                  inManagedObjectContext:context];
+        [tag setValue:tagName forKey:@"tag_name"];
+    }else{
+        tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    }
+    
+    tag.tracking = [NSNumber numberWithBool:true];
+    [context updatedObjects];
+    
+    
+    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return false;
+    }
+    
+    return true;
 }
+
+
+
+
+
 
 
 @end

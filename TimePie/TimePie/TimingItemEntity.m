@@ -7,9 +7,7 @@
 //
 
 #import "TimingItemEntity.h"
-#import "Daily.h"
 #import "Tag.h"
-#import "TimingItemEntity.h"
 #import "User.h"
 
 
@@ -23,7 +21,6 @@
 @dynamic time;
 @dynamic daily;
 @dynamic tag;
-@dynamic tracking;
 @dynamic user;
 
 @end

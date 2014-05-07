@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Daily, Tag, TimingItemEntity, User;
+@class Tag, User;
 
 @interface TimingItemEntity : NSManagedObject
 
@@ -19,9 +19,8 @@
 @property (nonatomic, retain) NSString * item_name;
 @property (nonatomic, retain) NSDate * last_check;
 @property (nonatomic, retain) NSNumber * time;
-@property (nonatomic, retain) Daily *daily;
+@property (nonatomic, retain) NSManagedObject *daily;
 @property (nonatomic, retain) Tag *tag;
-@property (nonatomic, retain) TimingItemEntity *tracking;
 @property (nonatomic, retain) User *user;
 
 @end

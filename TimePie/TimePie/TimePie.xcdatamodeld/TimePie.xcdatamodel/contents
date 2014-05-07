@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Daily" representedClassName="Daily" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TimingItemEntity" inverseName="daily" inverseEntity="TimingItemEntity" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="daily" inverseEntity="User" syncable="YES"/>
-    </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
         <attribute name="tag_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tracking" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TimingItemEntity" inverseName="tag" inverseEntity="TimingItemEntity" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="tag" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -17,29 +13,19 @@
         <attribute name="item_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="last_check" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="daily" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Daily" inverseName="relationship" inverseEntity="Daily" syncable="YES"/>
         <relationship name="tag" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="item" inverseEntity="Tag" syncable="YES"/>
-        <relationship name="tracking" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TimingItemEntity" inverseName="tracking" inverseEntity="TimingItemEntity" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="item" inverseEntity="User" syncable="YES"/>
-    </entity>
-    <entity name="Tracking" representedClassName="Tracking" syncable="YES">
-        <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TimingItemEntity" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="tracking" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start_date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="daily" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Daily" inverseName="user" inverseEntity="Daily" syncable="YES"/>
         <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TimingItemEntity" inverseName="user" inverseEntity="TimingItemEntity" syncable="YES"/>
         <relationship name="tag" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="user" inverseEntity="Tag" syncable="YES"/>
-        <relationship name="tracking" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tracking" inverseName="user" inverseEntity="Tracking" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TimingItemEntity" positionX="-36" positionY="9" width="128" height="193"/>
-        <element name="User" positionX="-18" positionY="72" width="128" height="148"/>
-        <element name="Tracking" positionX="0" positionY="90" width="128" height="73"/>
-        <element name="Tag" positionX="18" positionY="99" width="128" height="88"/>
-        <element name="Daily" positionX="36" positionY="108" width="128" height="88"/>
+        <element name="Tag" positionX="18" positionY="99" width="128" height="103"/>
+        <element name="TimingItemEntity" positionX="-36" positionY="9" width="128" height="163"/>
+        <element name="User" positionX="-18" positionY="72" width="128" height="118"/>
     </elements>
 </model>

@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "TimingItem1.h"
-@class Daily;
+@class Tag;
+@class Tracking;
 
 @interface TimingItemStore : NSObject
 {
@@ -48,7 +49,6 @@
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
-- (Daily*)getToday;
 
 
 
@@ -57,5 +57,6 @@
 
 
 - (NSSet *)getTimingItemsByTagName:(NSString *)tagName;
+- (BOOL)markTracking:(NSString *)tagName;
 
 @end
