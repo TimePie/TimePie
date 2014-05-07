@@ -74,7 +74,7 @@
         timingItemStore = [TimingItemStore timingItemStore];
         
         
-        [timingItemStore getToday];
+        //[timingItemStore getToday];
         
         
         //test items
@@ -318,11 +318,23 @@
     }
     
     TimingItem* item = [timingItemStore getItemAtIndex:0];
+    
+    /*
+    if(item.time >=10&& item.time<11){
+        [timingItemStore createItem:item];
+        [timingItemStore saveData];
+        [timingItemStore restoreData];
+    }
+    */
+    
     [item check:YES];
     [pieChart reloadData];
     if(![itemTable isEditing]){
         [itemTable reloadData];
     }
+    
+    
+
 }
 //////////////////////
 

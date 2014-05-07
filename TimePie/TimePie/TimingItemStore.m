@@ -11,6 +11,7 @@
 #import "BasicUIColor+UIPosition.h"
 #import "ColorThemes.h"
 #import "Daily.h"
+#import "DateHelper.h"
 
 @implementation TimingItemStore
 
@@ -56,6 +57,20 @@
     NSLog(@"create item!");
     return i;
 }
+
+- (TimingItem *)createItem:(TimingItem*)item
+{
+    TimingItem *i = [TimingItem randomItem];
+    i.color = item.color;
+    i.lastCheck = item.lastCheck;
+    i.itemName = item.itemName;
+    item.time +=1;
+    i.time = item.time;
+    [allItems insertObject:i atIndex:[allItems count]];
+    NSLog(@"create item!");
+    return i;
+}
+
 
 //Class method, reture a single TimingItemStore object.
 + (TimingItemStore*) timingItemStore
@@ -159,7 +174,8 @@
     //insert
     NSManagedObjectContext *context = [self managedObjectContext];
     
-    [self saveItemEntity:item];
+    NSManagedObject * i = [self saveItemEntity:item];
+
     /////
     NSError *error;
     if (![context save:&error]) {
@@ -169,6 +185,7 @@
     
     return result;
 }
+
 
 
 
@@ -189,7 +206,7 @@
     
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject *i in fetchedObjects) {
-        [self restoreItem:i];
+        [self updateItemEntityFromItem:item to:i];
     }
     
     [context updatedObjects];
@@ -297,7 +314,15 @@
                                    entityForName:@"TimingItemEntity" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
+    
+    NSDate *today = [NSDate date];
+    NSDate *startOfToday = [DateHelper beginningOfDay:today];
+    NSDate *endOfToday = [DateHelper endOfDay:today];
+    
+    
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(date_created >= %@) AND (date_created <= %@)", startOfToday, endOfToday]];
+    
     for (NSManagedObject *i in fetchedObjects) {
         [self restoreItem:i];
     }
@@ -329,6 +354,20 @@
     return item;
 }
 
+- (NSManagedObject *)updateItemEntityFromItem:(TimingItem*)item
+                             to:(NSManagedObject*)i
+{
+    
+    [i setValue:item.itemName forKey:@"item_name"];
+    [i setValue:[NSNumber numberWithInt:item.itemID] forKey:@"item_id"];
+    [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
+    [i setValue:item.dateCreated forKey:@"date_created"];
+    [i setValue:item.lastCheck forKey:@"last_check"];
+    [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+    
+    return i;
+}
+
 
 
 //get a single item entity from TimingTime Class
@@ -346,12 +385,50 @@
     [i setValue:item.dateCreated forKey:@"date_created"];
     [i setValue:item.lastCheck forKey:@"last_check"];
     [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+    
+    
+    
+    
+    
+    
     return i;
     
 }
 
 
 
+
+- (Daily*)createToday
+{
+    NSDate *adate = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [zone secondsFromGMTForDate: adate];
+    NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
+    
+    NSDate *today = [NSDate date];
+    NSDate *startOfToday = [DateHelper beginningOfDay:today];
+    
+    startOfToday = [startOfToday dateByAddingTimeInterval:interval];
+    //endOfToday = [endOfToday dateByAddingTimeInterval:interval];
+    
+    
+    
+    //insert
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    NSManagedObject *i = [NSEntityDescription
+    insertNewObjectForEntityForName:@"Daily"
+    inManagedObjectContext:context];
+     
+    [i setValue:today forKey:@"date"];
+     
+     
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return nil;
+    }
+    return (Daily*)i;
+}
 
 //////////Daily Table
 
@@ -361,9 +438,58 @@
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSInteger interval = [zone secondsFromGMTForDate: adate];
     NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
-    NSLog([NSString stringWithFormat:@"lask check:%@", localeDate]);
+    
+    NSDate *today = [NSDate date];
+    NSDate *startOfToday = [DateHelper beginningOfDay:today];
+    NSDate *endOfToday = [DateHelper endOfDay:today];
+    
+    //startOfToday = [startOfToday dateByAddingTimeInterval:interval];
+    //endOfToday = [endOfToday dateByAddingTimeInterval:interval];
+    
+    
+    
+    //insert
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+/*
+    NSManagedObject *i = [NSEntityDescription
+                          insertNewObjectForEntityForName:@"Daily"
+                          inManagedObjectContext:context];
+    
+    [i setValue:today forKey:@"date"];
+    
+ 
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+*/
+    
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Daily" inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(date >= %@) AND (date <= %@)", startOfToday, endOfToday]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        return [self createToday];
+    }
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog([NSString stringWithFormat:@"%@", info]);
+        return (Daily*)info;
+    }
+    
     return nil;
 }
+
+
+
+
+
 
 
 @end

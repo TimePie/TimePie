@@ -22,6 +22,7 @@
 - (void)removeItem:(TimingItem *)i;
 - (NSArray *)allItems;
 - (TimingItem *)createItem;
+- (TimingItem *)createItem:(TimingItem*)item;
 - (id)getItemAtIndex:(int)index;
 
 - (void)moveItemAtIndex:(int)from
