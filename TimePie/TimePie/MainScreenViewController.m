@@ -18,6 +18,9 @@
 #import "Output.h"
 
 @interface MainScreenViewController ()
+{
+    BOOL modalCanBeTriggered;
+}
 @end
 
 @implementation MainScreenViewController
@@ -38,14 +41,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    modalCanBeTriggered = true;
     NSLog(@"view did appear");
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    
+    modalCanBeTriggered = true;
     
     
     
@@ -161,9 +164,10 @@
 {
     if (itemTable)
     {
-        if (itemTable.contentOffset.y < -500.f)
+        if (itemTable.contentOffset.y < -500.f && modalCanBeTriggered == true)
         {
-            [self animateModalView];
+            //[self resignFirstResponder];
+            //[self animateModalView];
         }
     }
 }
@@ -299,7 +303,9 @@
     transition.subtype = kCATransitionFromBottom;
     [self.view.window.layer addAnimation:transition forKey:nil];
 
-    [self presentViewController: navController animated:YES completion:nil];
+    [self presentViewController: navController animated:YES completion:^{
+        modalCanBeTriggered = false;
+    }];
 }
 
 

@@ -32,6 +32,7 @@
     [super viewWillAppear:animated];
     if([self respondsToSelector:@selector(edgesForExtendedLayout)])
         [self setEdgesForExtendedLayout:UIRectEdgeBottom];
+    if(_exitButton) _exitButton.hidden = NO;
 }
 
 - (void)viewDidLoad
@@ -61,6 +62,7 @@
     _exitButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-62, 94, 57)];
     [_exitButton setImage:[UIImage imageNamed:@"TimePie_Personal_Exit_Button"] forState:UIControlStateNormal];
     [_exitButton addTarget:self action:@selector(exitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    _exitButton.tag = 3001;
     [[self navigationController].view addSubview:_exitButton];
     [[self navigationController].view bringSubviewToFront:_exitButton];
 }

@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) UINavigationBar *navBar;
 @property (strong, nonatomic) UITableView *SVCVessel;
+@property (strong, nonatomic) NSMutableArray *themeColors;
 @property (nonatomic, assign) id<SettingsViewControllerDelegate> delegate;
 
 @end
