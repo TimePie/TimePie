@@ -29,13 +29,11 @@
     self = [super init];
     if(self){
         [self setItemName:name];
-        [self setTime:0];
+//        [self setTime:0];
+        time = 0;
         dateCreated = [[NSDate alloc] init];
         NSDate *adate = [NSDate date];
-        NSTimeZone *zone = [NSTimeZone systemTimeZone];
-        NSInteger interval = [zone secondsFromGMTForDate: adate];
-        NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
-        lastCheck =localeDate;
+        lastCheck =adate;
         active = NO;
         [self setColor:0];
     }
@@ -51,29 +49,35 @@
     NSDate *localeDate = [adate  dateByAddingTimeInterval: interval];
     
 //    NSLog([NSString stringWithFormat:@"check item:%@", itemName]);
+//    NSLog([NSString stringWithFormat:@"check:%@", adate]);
 //    NSLog([NSString stringWithFormat:@"lask check:%@", lastCheck]);
-//    NSLog([NSString stringWithFormat:@"lask check:%@", localeDate]);
+    
+    
+    
     
     if(add){
-        double timeInterval = [localeDate timeIntervalSinceReferenceDate]-[lastCheck timeIntervalSinceReferenceDate];
+        double timeInterval = [adate timeIntervalSinceDate:lastCheck];
         time+=timeInterval;
-//        NSLog([NSString stringWithFormat:@"interval: %f", timeInterval]);
     }
-    lastCheck = localeDate;
+    lastCheck = adate;
     
 
     
-    return localeDate;
+    return adate;
 }
 
 - (NSString *)getTimeString
 {
-    NSInteger dateTime = time - 60*60*8;
-    NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:dateTime];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"hh:mm:ss"];
-    NSString *dateString = [formatter stringFromDate:date];
-    return dateString;
+    
+    
+    NSTimeInterval intervalValue = time;
+    NSDateFormatter *hmsFormatter = [[NSDateFormatter alloc] init];
+    [hmsFormatter setDateFormat:@"HH:mm:ss"];
+    [hmsFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+//    NSLog(@"formatted date: %@", [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:intervalValue]]);
+    
+    return [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:intervalValue]];
+
 }
 
 

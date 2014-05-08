@@ -78,6 +78,10 @@
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
         
+        
+//        [timingItemStore getDailyTimeByTagName:@"first Tag" date:[NSDate date]];
+//        [timingItemStore getTimingItemsByDate:[NSDate date]];
+//        NSLog(@"totaldays:%d",[timingItemStore getTotalDays]);
         //[timingItemStore getTimingItemsByTagName:@"first Tag"];
         //[timingItemStore getToday];
         

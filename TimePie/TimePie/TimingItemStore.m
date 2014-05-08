@@ -357,6 +357,29 @@
 
 
 
+- (NSArray*)getTimingItemsByDate:(NSDate *)date
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSDate *startOfToday = [DateHelper beginningOfDay:date];
+    NSDate *endOfToday = [DateHelper endOfDay:date];
+    
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(date_created >= %@) AND (date_created <= %@)", startOfToday, endOfToday]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    NSLog(@"[restoredata]number of object returned: %d",[fetchedObjects count]);
+    for(NSManagedObject* i in fetchedObjects){
+        NSLog(@"item:%@", i);
+    }
+    return fetchedObjects;
+}
 
 
 
@@ -559,10 +582,51 @@
         return nil;
     }
     
-    return tag.item;
+    return [tag.item allObjects];
 }
 
 
+
+- (NSNumber *)getDailyTimeByTagName:(NSString*)tagName
+                               date:(NSDate*)date
+{
+    NSArray * items = [self getDailyTimingsItemByTagName:tagName date:date];
+    double total = 0;
+    for(TimingItemEntity * item in items){
+        total+= [item.time doubleValue];
+    }
+    NSLog(@"total time:%f", total);
+    return [NSNumber numberWithDouble:total];
+}
+
+
+- (NSMutableArray *)getDailyTimingsItemByTagName:(NSString*)tagName
+                                    date:(NSDate *)date
+{
+    NSArray * items = [self getTimingItemsByTagName:tagName];
+    NSLog(@"%@",items);
+    NSDate * startDate = [DateHelper beginningOfDay:date];
+    NSDate * endDate = [DateHelper endOfDay:date];
+    NSLog(@"current date:%@",date);
+    NSLog(@"start date:%@",startDate);
+    NSLog(@"end date:%@",endDate);
+    NSMutableArray* results = [[NSMutableArray alloc] init];
+    for(TimingItemEntity * item in items){
+        BOOL flag = true;
+        if ([item.date_created compare:startDate] == NSOrderedAscending) {
+            flag = false;
+        }
+        if ([item.date_created compare:endDate] == NSOrderedDescending) {
+            flag = false;
+        }
+        if(flag){
+            [results addObject:item];
+        }
+        
+    }
+    NSLog(@"results count:%d",[results count]);
+    return results;
+}
 
 
 - (BOOL)markTracking:(NSString *)tagName
@@ -603,6 +667,48 @@
 }
 
 
+
+- (NSNumber *)getTotalDays
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortByDate = [[NSSortDescriptor alloc] initWithKey:@"date_created" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+    [fetchRequest setFetchLimit:1];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    
+    
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"date_created....: %@", [info valueForKey:@"date_created"]);
+    }
+    if([fetchedObjects count]==0){
+        NSLog(@"Empty");
+        return 0;
+    }
+    
+    
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSUInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    
+    NSDateComponents *components = [gregorian components:unitFlags
+                                                fromDate:(NSDate*)[[fetchedObjects objectAtIndex:0]
+                                             valueForKey:@"date_created"]
+                                                  toDate:[NSDate date] options:0];
+    NSInteger days = [components day];
+    //test:
+    NSInteger minutes = [components second];
+    return [NSNumber numberWithInteger:minutes];
+}
 
 
 

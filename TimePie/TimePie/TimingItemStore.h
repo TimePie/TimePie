@@ -56,7 +56,17 @@
        TagName:(NSString *)name;
 
 
-- (NSSet *)getTimingItemsByTagName:(NSString *)tagName;
+- (NSArray *)getTimingItemsByTagName:(NSString *)tagName;
 - (BOOL)markTracking:(NSString *)tagName;
+
+
+
+///
+- (NSNumber *)getTotalDays;
+- (NSArray *)getDailyTimingsItemByTagName:(NSString*)tagName
+                                     date:(NSDate *)date;
+- (NSNumber *)getDailyTimeByTagName:(NSString*)tagName
+                               date:(NSDate*)date;
+- (NSArray*)getTimingItemsByDate:(NSDate *)date;
 
 @end
