@@ -18,7 +18,9 @@
 #import "Output.h"
 
 @interface MainScreenViewController ()
-
+{
+    BOOL modalCanBeTriggered;
+}
 @end
 
 @implementation MainScreenViewController
@@ -39,17 +41,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [timingItemStore restoreData];
+    modalCanBeTriggered = true;
     NSLog(@"view did appear");
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    
-    NSLog(@"View did load");
+    modalCanBeTriggered = true;
     
     
     
@@ -143,14 +142,10 @@
         }
         //////////
         
-        
-        
-        
-        
+        //main Loop
+        NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
     }
-    
-    
-    
     
 }
 
@@ -163,14 +158,19 @@
 
 
 
-
-
-
-
-
-
-
-
+// main loop
+//////////////////
+- (void)mainLoop:(id)sender
+{
+    if (itemTable)
+    {
+        if (itemTable.contentOffset.y < -500.f && modalCanBeTriggered == true)
+        {
+            //[self resignFirstResponder];
+            //[self animateModalView];
+        }
+    }
+}
 
 // for pie chart
 //////////////////
@@ -265,9 +265,9 @@
         return;
     }
     [itemtop check:YES];
-    itemtop.timing=NO;
+    itemtop.active=NO;
     [item check:NO];
-    item.timing=YES;
+    item.active=YES;
     
     [timingItemStore moveItemAtIndex:[indexPath row] toIndex:0];
 }
@@ -289,16 +289,31 @@
 ////////////////////
 
 
+//animations
+/////////////////////////
+- (void)animateModalView
+{
+    PersonalViewController *viewController = [[PersonalViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromBottom;
+    [self.view.window.layer addAnimation:transition forKey:nil];
 
+    [self presentViewController: navController animated:YES completion:^{
+        modalCanBeTriggered = false;
+    }];
+}
 
 
 //event handlers
 /////////////////////////
 -(void)personal_btn_clicked:(id)sender
 {
-    PersonalViewController *viewController = [[PersonalViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];    
-    [self presentViewController: navController animated:YES completion:nil];
+    [self animateModalView];
 }
 
 - (void)settingsButtonPressed
@@ -332,14 +347,14 @@
     if([DateHelper checkAcrossDay])
     {
         //across a day
-//        TimingItem* timingItem = [timingItemStore createItem:item];
-//        [timingItemStore saveData];
+        TimingItem* timingItem = [timingItemStore createItem:item];
+        [timingItemStore saveData];
         [timingItemStore viewAllItem];
         [timingItemStore restoreData];
         [Output println:@"Yes"];
         
 //        [timingItemStore addTag:item TagName:@"first Tag"];
-//        [timingItemStore saveData];
+        [timingItemStore saveData];
 //        [timingItemStore getTimingItemsByTagName:@"first Tag"];
     }
     else{

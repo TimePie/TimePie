@@ -8,6 +8,8 @@
 
 #import "SettingsViewController.h"
 #import "BasicUIColor+UIPosition.h"
+#import "SettingsThemeViewController.h"
+#import "themeView.h"
 
 @interface SettingsViewController ()
 
@@ -30,11 +32,12 @@
     [super viewDidLoad];
     [self initNavBar];
     [self initVessel];
+    [self initThemeInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.delegate reverseCloseButton];
+    //[self.delegate reverseCloseButton];
 }
 
 #pragma mark - init UI
@@ -51,6 +54,11 @@
     _SVCVessel.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     [_SVCVessel setSeparatorInset:UIEdgeInsetsZero];
     [self.view addSubview:_SVCVessel];
+}
+
+- (void)initThemeInfo
+{
+    _themeColors = [NSMutableArray arrayWithObjects:REDNO1,BLUENO2,GREENNO3, nil];
 }
 
 #pragma mark - tableView datasource
@@ -70,10 +78,16 @@
     if (indexPath.section == 0) cell.textLabel.text = [s1CellTitleArray objectAtIndex:indexPath.row];
     else cell.textLabel.text = [s2CellTitleArray objectAtIndex:indexPath.row];
     
-    cell.textLabel.textColor = [UIColor colorWithRed:0.45 green:0.45 blue:0.45 alpha:1.f];
+    cell.textLabel.textColor = [UIColor colorWithRed:0.55 green:0.55 blue:0.55 alpha:1.f];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if(indexPath.section == 1 && indexPath.row == 2)
+    if(indexPath.section == 0 && indexPath.row == 0)
+    {
+        themeView *tV = [[themeView alloc] initWithFrame:CGRectMake(160, 0, 140, 48)];
+        [tV initThemeNameWithString:@"格里粉" ColorBoard:_themeColors];
+        [cell addSubview:tV];
+    }
+    else if(indexPath.section == 1 && indexPath.row == 2)
     {
         cell.backgroundColor = REDNO1;
         [self initLabelInView:cell];
@@ -97,6 +111,15 @@
     UIView *UIFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
     UIFooterView.backgroundColor = [UIColor whiteColor];
     return UIFooterView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0 && indexPath.row == 0)
+    {
+        SettingsThemeViewController *stVC = [[SettingsThemeViewController alloc] init];
+        [[self navigationController] pushViewController:stVC animated:YES];
+    }
 }
 
 #pragma mark - utilities
