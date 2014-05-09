@@ -67,6 +67,7 @@
     i.itemName = item.itemName;
     item.time +=1;
     i.time = item.time;
+    i.timing= item.timing;
     [allItems insertObject:i atIndex:[allItems count]];
     NSLog(@"create item!");
     return i;
@@ -94,6 +95,7 @@
 - (void)removeItem:(TimingItem *)i
 {
     [allItems removeObjectIdenticalTo:i];
+    [self deleteItem:i];
 }
 
 
@@ -143,6 +145,7 @@
         [i setValue:item.dateCreated forKey:@"date_created"];
         [i setValue:item.lastCheck forKey:@"last_check"];
         [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+        [i setValue:[NSNumber numberWithBool:item.timing] forKeyPath:@"timing"];
         [context updatedObjects];
         if (![context save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -319,6 +322,8 @@
 
 - (BOOL)restoreData
 {
+    
+    NSLog(@"restore data!");
     allItems = nil;
     allItems = [[NSMutableArray alloc] init];
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -337,19 +342,55 @@
     NSLog([NSString stringWithFormat:@"start: %@",startOfToday]);
     NSLog([NSString stringWithFormat:@"end: %@",endOfToday]);
     
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(date_created >= %@) AND (date_created <= %@)", startOfToday, endOfToday]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"((date_created >= %@) AND (date_created <= %@)) OR timing = %@", startOfToday, endOfToday, [NSNumber numberWithBool:true]]];
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     
     
     NSLog(@"[restoredata]number of object returned: %d",[fetchedObjects count]);
-    for (NSManagedObject *i in fetchedObjects) {
-        [self restoreItem:i];
+    for (TimingItemEntity *i in fetchedObjects) {
+        
+        TimingItem* item = [self restoreItem:i];
+        
+        if(item.timing == YES){// if i is a timing item
+            
+            BOOL flag = true;
+            if ([item.dateCreated compare:startOfToday] == NSOrderedAscending) {
+                flag = false;
+            }
+            if ([item.dateCreated compare:endOfToday] == NSOrderedDescending) {
+                flag = false;
+            }
+            
+            
+            
+            if(flag)   //timing item is today's item;  Do nothing;
+            {
+                NSLog(@"timing item is today's item, do nothing");
+            }else{    //timing item is not today's item; create new item and abandon this item;
+                NSLog(@"Timing item is no today's item; create a new one and reload.");
+                TimingItem* newTimingItem = [self createItem:item];
+                item.timing = NO;
+                [self updateItem:item];
+                [allItems removeObjectIdenticalTo:item];
+                [self saveData];
+                //[self restoreData];
+                
+            }
+        }
+        
     }
     
     
     if(allItems&&[allItems count]!=0){
         [[[self allItems] objectAtIndex:0] check:YES];
         NSLog([[[self allItems] objectAtIndex:0] itemName]);
+    }
+    
+    
+    for(int i=0;i<[allItems count];i++){
+        if(((TimingItem*)[allItems objectAtIndex:i]).timing == YES){
+            [self moveItemAtIndex:i toIndex:0];
+        }
     }
     
     return YES;
@@ -393,6 +434,7 @@
     item.dateCreated = [i valueForKey:@"date_created"];
     item.lastCheck = [i valueForKey:@"last_check"];
     item.color = [[i valueForKey:@"color_number"] integerValue];
+    item.timing = [[i valueForKey:@"timing"] boolValue];
     return item;
 }
 
@@ -406,6 +448,7 @@
     [i setValue:item.dateCreated forKey:@"date_created"];
     [i setValue:item.lastCheck forKey:@"last_check"];
     [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+    [i setValue:[NSNumber numberWithBool:item.timing] forKey:@"timing"];
     
     return i;
 }
@@ -428,10 +471,7 @@
     [i setValue:item.dateCreated forKey:@"date_created"];
     [i setValue:item.lastCheck forKey:@"last_check"];
     [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
-
-    
-    
-    
+    [i setValue:[NSNumber numberWithBool:item.timing] forKey:@"timing"];
     
     
     return i;

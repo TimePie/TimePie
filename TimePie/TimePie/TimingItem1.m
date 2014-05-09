@@ -15,9 +15,8 @@
 @synthesize dateCreated;
 @synthesize time;
 @synthesize lastCheck;
-@synthesize active;
 @synthesize color;
-
+@synthesize timing;
 
 
 + (id)randomItem{
@@ -34,7 +33,7 @@
         dateCreated = [[NSDate alloc] init];
         NSDate *adate = [NSDate date];
         lastCheck =adate;
-        active = NO;
+        timing = NO;
         [self setColor:0];
     }
     return self;

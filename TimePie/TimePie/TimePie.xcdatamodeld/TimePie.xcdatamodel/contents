@@ -13,6 +13,7 @@
         <attribute name="item_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="last_check" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timing" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="tag" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tag" inverseName="item" inverseEntity="Tag" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="item" inverseEntity="User" syncable="YES"/>
     </entity>
@@ -25,7 +26,7 @@
     </entity>
     <elements>
         <element name="Tag" positionX="18" positionY="99" width="128" height="103"/>
-        <element name="TimingItemEntity" positionX="-36" positionY="9" width="128" height="163"/>
+        <element name="TimingItemEntity" positionX="-36" positionY="9" width="128" height="180"/>
         <element name="User" positionX="-18" positionY="72" width="128" height="118"/>
     </elements>
 </model>

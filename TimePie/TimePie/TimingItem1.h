@@ -22,8 +22,7 @@
 @property (nonatomic) double time;
 @property (nonatomic) int color;
 @property (nonatomic, strong) NSDate* lastCheck;
-@property (nonatomic) BOOL active;
-
+@property (nonatomic) BOOL timing;
 
 
 @end

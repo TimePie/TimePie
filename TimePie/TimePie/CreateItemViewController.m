@@ -194,6 +194,8 @@ static NSInteger routineItemFlag = 0;
         NSLog(_itemName);
         TimingItem* item = [[TimingItemStore timingItemStore] createItem];
         item.itemName = _itemName;
+        [[TimingItemStore timingItemStore] saveData];
+//        [[TimingItemStore timingItemStore] viewAllItem];
         [self dismissViewControllerAnimated:YES completion:nil];
         
     }
