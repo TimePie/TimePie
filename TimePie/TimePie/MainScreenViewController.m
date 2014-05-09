@@ -41,6 +41,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+//    [timingItemStore restoreData];
     modalCanBeTriggered = true;
     NSLog(@"view did appear");
 }
@@ -265,9 +266,9 @@
         return;
     }
     [itemtop check:YES];
-    itemtop.active=NO;
+    itemtop.timing=NO;
     [item check:NO];
-    item.active=YES;
+    item.timing=YES;
     
     [timingItemStore moveItemAtIndex:[indexPath row] toIndex:0];
 }
@@ -347,14 +348,14 @@
     if([DateHelper checkAcrossDay])
     {
         //across a day
-        TimingItem* timingItem = [timingItemStore createItem:item];
-        [timingItemStore saveData];
+//        TimingItem* timingItem = [timingItemStore createItem:item];
+//        [timingItemStore saveData];
         [timingItemStore viewAllItem];
         [timingItemStore restoreData];
         [Output println:@"Yes"];
         
 //        [timingItemStore addTag:item TagName:@"first Tag"];
-        [timingItemStore saveData];
+//        [timingItemStore saveData];
 //        [timingItemStore getTimingItemsByTagName:@"first Tag"];
     }
     else{
