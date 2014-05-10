@@ -12,6 +12,7 @@
 		134189891904111900DF2F41 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134189881904111900DF2F41 /* SettingsViewController.m */; };
 		134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 134275D118FC403300533378 /* eventTrackColumnGraph.m */; };
 		134BDD83191A8DC30095DB10 /* themeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 134BDD82191A8DC30095DB10 /* themeView.m */; };
+		1367C5B1191E3B67005BF8AA /* themeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367C5B0191E3B67005BF8AA /* themeDetailView.m */; };
 		1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1378213D19055B3800083168 /* PersonalViewPicker.m */; };
 		13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */; };
 		13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */; };
@@ -96,6 +97,8 @@
 		134BDD81191A8DC30095DB10 /* themeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = themeView.h; sourceTree = "<group>"; };
 		134BDD82191A8DC30095DB10 /* themeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = themeView.m; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
+		1367C5AF191E3B67005BF8AA /* themeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = themeDetailView.h; sourceTree = "<group>"; };
+		1367C5B0191E3B67005BF8AA /* themeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = themeDetailView.m; sourceTree = "<group>"; };
 		1378213C19055B3800083168 /* PersonalViewPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewPicker.h; sourceTree = "<group>"; };
 		1378213D19055B3800083168 /* PersonalViewPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewPicker.m; sourceTree = "<group>"; };
 		13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewEventTrackCell.h; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 			children = (
 				134BDD81191A8DC30095DB10 /* themeView.h */,
 				134BDD82191A8DC30095DB10 /* themeView.m */,
+				1367C5AF191E3B67005BF8AA /* themeDetailView.h */,
+				1367C5B0191E3B67005BF8AA /* themeDetailView.m */,
 			);
 			name = SettingsView;
 			sourceTree = "<group>";
@@ -656,6 +661,7 @@
 				CD5239B71911E178005EB55A /* MainScreenTableView.m in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
+				1367C5B1191E3B67005BF8AA /* themeDetailView.m in Sources */,
 				CD9CE6A71919D23E003C4CA6 /* DateHelper.m in Sources */,
 				68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */,
 				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,

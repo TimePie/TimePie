@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UILabel *themeNameLabel;
 @property (strong, nonatomic) NSMutableArray *themeColorArray;
 
+- (CGPathRef) newPathForRoundedRect:(CGRect)rect radius:(CGFloat)radius;
 - (void)initThemeNameWithString:(NSString*)name ColorBoard:(NSMutableArray*)colors;
 
 @end

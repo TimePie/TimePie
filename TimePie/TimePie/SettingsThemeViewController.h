@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsThemeViewController : UIViewController
+@interface SettingsThemeViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    NSMutableArray *themeList;
+    NSMutableArray *themeColorList;
+}
+@property (strong, nonatomic) UITableView *STVC_Vessel;
 
 @end

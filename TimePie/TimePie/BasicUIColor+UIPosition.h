@@ -12,6 +12,18 @@
 #define GREENNO3 [UIColor colorWithRed:0.61 green:0.82 blue:0.45 alpha:1.0]
 #define PINKNO04 [UIColor colorWithRed:0.97 green:0.62 blue:0.66 alpha:1.0]
 #define PINKNO04_light [UIColor colorWithRed:0.97 green:0.62 blue:0.66 alpha:0.57]
+#define BROWNN05 [UIColor colorWithRed:0.72 green:0.55 blue:0.49 alpha:1.0]
+#define BROWNN05_light [UIColor colorWithRed:0.72 green:0.55 blue:0.49 alpha:0.57]
+#define YELLOWN06 [UIColor colorWithRed:1.0 green:0.9 blue:0.58 alpha:1.0]
+#define YELLOWN06_light [UIColor colorWithRed:1.0 green:0.9 blue:0.58 alpha:0.57]
+#define PURPLEN07 [UIColor colorWithRed:0.72 green:0.58 blue:0.82 alpha:1.0]
+#define PURPLEN07_light [UIColor colorWithRed:0.72 green:0.58 blue:0.82 alpha:0.57]
+#define P01N08 [UIColor colorWithRed:0.35 green:0.64 blue:0.69 alpha:1.0]
+#define P01N08_light [UIColor colorWithRed:0.35 green:0.64 blue:0.69 alpha:0.57]
+#define P01N09 [UIColor colorWithRed:0.82 green:0.72 blue:0.58 alpha:1.0]
+#define P01N09_light [UIColor colorWithRed:0.82 green:0.72 blue:0.58 alpha:0.57]
+#define P01N10 [UIColor colorWithRed:0.5 green:0.62 blue:0.72 alpha:1.0]
+#define P01N10_light [UIColor colorWithRed:0.5 green:0.62 blue:0.72 alpha:0.57]
 
 //UIPosition
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
