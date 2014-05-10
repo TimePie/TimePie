@@ -8,6 +8,7 @@
 
 #import "PersonalViewAvgTimeCell.h"
 #import "BasicUIColor+UIPosition.h"
+#import "TimingItemStore.h"
 
 @implementation PersonalViewAvgTimeCell
 
@@ -21,10 +22,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
+        [self initNeededData];
         [self initTitleImage];
         [self initLabel];
     }
     return self;
+}
+
+- (void)initNeededData
+{
+    storeManager = [[TimingItemStore alloc] init];
+    dayCount = [storeManager getTotalDays];
 }
 
 - (void)initTitleImage
@@ -42,7 +50,7 @@
 - (void)initLabel
 {
     _labelTotal = [[UILabel alloc] initWithFrame:CGRectMake(70, 5, 160, 40)];
-    _labelTotal.text = @"99";
+    _labelTotal.text = [NSString stringWithFormat:@"%@",dayCount];
     _labelTotal.font = [UIFont fontWithName:@"Roboto-Medium" size:30.f];
     _labelTotal.textColor = MAIN_UI_COLOR;
     [self addSubview:_labelTotal];
@@ -60,7 +68,7 @@
     [self addSubview:hourIndicator2];
     
     _labelAvg = [[UILabel alloc] initWithFrame:CGRectMake(245, 5, 160, 40)];
-    _labelAvg.text = @"99";
+    _labelAvg.text = [NSString stringWithFormat:@"%@",dayCount];
     _labelAvg.font = [UIFont fontWithName:@"Roboto-Medium" size:30.f];
     _labelAvg.textColor = MAIN_UI_COLOR;
     [self addSubview:_labelAvg];

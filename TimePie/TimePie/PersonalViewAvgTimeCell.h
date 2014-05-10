@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TimingItemStore;
 
 @protocol PersonalViewAvgTimeProtocal <NSObject>
 
@@ -17,7 +18,10 @@
 @end
 
 @interface PersonalViewAvgTimeCell : UITableViewCell
-
+{
+    TimingItemStore *storeManager;
+    NSNumber *dayCount;
+}
 @property (strong, nonatomic) UIImageView *titleImageTotal;
 @property (strong, nonatomic) UIImageView *titleImageAvg;
 

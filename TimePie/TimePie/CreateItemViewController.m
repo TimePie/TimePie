@@ -150,11 +150,19 @@ static NSInteger routineItemFlag = 0;
         {
             [tagCellSelectedFlag replaceObjectAtIndex:indexPath.row - 1 withObject:@"n"];
             [self initTagCheckViewInView:cell WithImage:[UIImage imageNamed:@"TagCheckTransparent"] AtIndexPath:indexPath];
+            _currentTagOfItem = @"其他";
         }
         else
         {
+            for (int i= 0; i < tagCellSelectedFlag.count; i++)
+            {
+                [tagCellSelectedFlag replaceObjectAtIndex:i withObject:@"n"];
+                UITableViewCell *tempCell = (UITableViewCell*)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:0]];
+                [self initTagCheckViewInView:tempCell WithImage:[UIImage imageNamed:@"TagCheckTransparent"] AtIndexPath:[NSIndexPath indexPathForRow:i+1 inSection:0]];
+            }
             [tagCellSelectedFlag replaceObjectAtIndex:indexPath.row - 1 withObject:@"y"];
             [self initTagCheckViewInView:cell WithImage:[UIImage imageNamed:@"TagCheck"] AtIndexPath:indexPath];
+            _currentTagOfItem = [tagTextArray objectAtIndex:indexPath.row - 1];
         }
     }
 }

@@ -24,5 +24,6 @@
 @property (strong, nonatomic) UITableView *CIVC_mainVessel;
 
 @property (strong, nonatomic) NSString *itemName;
+@property (strong, nonatomic) NSString *currentTagOfItem;
 
 @end

@@ -327,9 +327,9 @@
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromBottom;
-    [self.view.window.layer addAnimation:transition forKey:nil];
+    [[self navigationController].view.window.layer addAnimation:transition forKey:nil];
 
-    [self presentViewController: navController animated:YES completion:^{
+    [self presentViewController: navController animated:NO completion:^{
         modalCanBeTriggered = false;
     }];
 }
