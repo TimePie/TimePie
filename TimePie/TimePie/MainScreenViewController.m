@@ -16,6 +16,8 @@
 #import "ColorThemes.h"
 #import "DateHelper.h"
 #import "Output.h"
+#import "BasicUIColor+UIPosition.h"
+
 
 @interface MainScreenViewController ()
 {
@@ -74,42 +76,10 @@
         
         
         
-        
-        
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
-        
-        
-//        [timingItemStore getDailyTimeByTagName:@"first Tag" date:[NSDate date]];
-//        [timingItemStore getTimingItemsByDate:[NSDate date]];
-//        NSLog(@"totaldays:%d",[timingItemStore getTotalDays]);
-        //[timingItemStore getTimingItemsByTagName:@"first Tag"];
-        //[timingItemStore getToday];
-        
-        
-        //test items
-        /*
-        TimingItem *item1 = [timingItemStore createItem];
-        TimingItem *item2 = [timingItemStore createItem];
-        
-        
-        item1.itemName = @"item1";
-        item2.itemName = @"item2";
-        item1.time = 0;
-        item2.time = 0;
-        */
-        ////////////////////////////////
-        
-        
-//        [timingItemStore deletaAllItem];
-//        [timingItemStore saveData];
         [timingItemStore restoreData];
-//        [timingItemStore viewAllItem];
-        
-        
-        
-        
-        
+
         
         //setup pieChart
         pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, -390, 300, 300)];
@@ -124,17 +94,48 @@
         [pieChart setUserInteractionEnabled:YES];
         [pieChart setLabelShadowColor:[UIColor blackColor]];
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         //[[self view] addSubview:pieChart];
         
         [pieChart reloadData];
-        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, 0, 320, 560)];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 660)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable reloadData];
-        [itemTable setContentInset:UIEdgeInsetsMake(320, 0, 0, 0)];
+        [itemTable setContentInset:UIEdgeInsetsMake(370, 0, 0, 0)];
         [itemTable addSubview:pieChart];
         [[self view] insertSubview:itemTable atIndex:0];
         /////////////////////////////////
+        
+        selectView = [[UIView alloc] initWithFrame:CGRectMake(-125, 475, 100, 100)];
+        
+        viewHistory = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-80, 0, 250, 90)];
+        cancelSelect =  [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+80, 0, 250, 90)];
+
+        [viewHistory setImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
+        [cancelSelect setImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
+        [viewHistory addTarget:self action:@selector(viewHistoryButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [cancelSelect addTarget:self action:@selector(cancelSelectButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [selectView addSubview:viewHistory];
+        [selectView addSubview:cancelSelect];
+        [[self view] addSubview:selectView];
+//        [self showSelectView];
+//        [self removeSelectView];
+        
+        
         
         
         //setup timer
@@ -149,6 +150,25 @@
     }
     
 }
+
+
+- (void)showSelectView
+{
+    [itemTable addSubview:selectView];
+    [itemTable bringSubviewToFront:selectView];
+//    [[self view] addSubview:selectView];
+//    [[self view] bringSubviewToFront:selectView];
+    itemTable.frame = CGRectOffset( itemTable.frame, 0, 75 );
+    pieChart.frame = CGRectOffset(  pieChart.frame, 0, -75);
+}
+
+- (void)removeSelectView
+{
+    [selectView removeFromSuperview];
+    itemTable.frame = CGRectOffset( itemTable.frame, 0, -75 );
+    pieChart.frame = CGRectOffset(  pieChart.frame, 0, 75);
+}
+
 
 
 
@@ -173,11 +193,12 @@
     }
 }
 
+
+
 // for pie chart
 //////////////////
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
-    //NSLog(@"%lu",(unsigned long)[[timingItemStore allItems] count]);
     return [[timingItemStore allItems] count];
 }
 
@@ -336,6 +357,22 @@
 }
 
 
+-(void)viewHistoryButtonPressed:(id)sender
+{
+    NSLog(@"view history!");
+}
+
+-(void)cancelSelectButtonPressed:(id)sender
+{
+    NSLog(@"cancel select!");
+}
+
+
+/////
+
+
+//timer Handler
+//////////////////
 -(void)pollTime
 {
     //NSLog(@"Timer!");
@@ -345,23 +382,25 @@
     
     TimingItem* item = [timingItemStore getItemAtIndex:0];
     
+    
+    
     if([DateHelper checkAcrossDay])
     {
         //across a day
-//        TimingItem* timingItem = [timingItemStore createItem:item];
-//        [timingItemStore saveData];
         [timingItemStore viewAllItem];
         [timingItemStore restoreData];
-        [Output println:@"Yes"];
+        [Output println:@"Across"];
         
-//        [timingItemStore addTag:item TagName:@"first Tag"];
-//        [timingItemStore saveData];
-//        [timingItemStore getTimingItemsByTagName:@"first Tag"];
+        //tests:
+//        [timingItemStore addTag:item TagName:@"Second Tag"];
+//        [timingItemStore getTimingItemsByTagName:@"Second Tag"];
+//        [timingItemStore getAllTags];
     }
     else{
         //not across a day
-        [Output println:@"No"];
+        [Output println:@"Not across"];
     }
+    
     
     [item check:YES];
     [pieChart reloadData];

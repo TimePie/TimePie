@@ -36,6 +36,8 @@
 		68BBE0A619091C6700F12101 /* StatsLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0A519091C6700F12101 /* StatsLine.m */; };
 		68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0A819091D5C00F12101 /* StatsAnimations.m */; };
 		68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */; };
+		CD3E53C6191C94D7005A1416 /* Cancel_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */; };
+		CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3E53C5191C94D7005A1416 /* History_btn@2x.png */; };
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
 		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
@@ -133,6 +135,8 @@
 		68BBE0A819091D5C00F12101 /* StatsAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsAnimations.m; sourceTree = "<group>"; };
 		68BBE0AA19091EB300F12101 /* ZBStatsDataArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBStatsDataArray.h; sourceTree = "<group>"; };
 		68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBStatsDataArray.m; sourceTree = "<group>"; };
+		CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel_btn@2x.png"; sourceTree = "<group>"; };
+		CD3E53C5191C94D7005A1416 /* History_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "History_btn@2x.png"; sourceTree = "<group>"; };
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -280,6 +284,8 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */,
+				CD3E53C5191C94D7005A1416 /* History_btn@2x.png */,
 				CD52391F19110D83005EB55A /* personalbtn@2x.png */,
 				688586F01909368A0050D15D /* StatsNavShadow@2x.png */,
 				688586EC190931AE0050D15D /* StatsBackButton@2x.png */,
@@ -608,6 +614,7 @@
 				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
 				688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */,
+				CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
 				CDC8858C1910FE1500A67510 /* TCell.xib in Resources */,
 				68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */,
@@ -618,6 +625,7 @@
 				13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */,
 				132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */,
 				CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */,
+				CD3E53C6191C94D7005A1416 /* Cancel_btn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

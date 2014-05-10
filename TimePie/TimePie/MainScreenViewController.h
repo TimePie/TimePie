@@ -20,6 +20,13 @@
     TimingItemStore * timingItemStore;
     MainScreenTableView *itemTable;
     NSTimer * timer;
+    
+    
+    
+    UIView * selectView;
+    UIButton * viewHistory;
+    UIButton * cancelSelect;
+    
 }
 
 

@@ -424,6 +424,29 @@
 
 
 
+
+
+- (NSArray*)getAllTags
+{
+    NSLog(@"get all tags");
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        return nil;
+    }
+    for(id i in fetchedObjects){
+        NSLog(@"%@",i);
+    }
+    return fetchedObjects;
+}
+
+
 // restore a single item from NSManagedObject
 - (TimingItem* )restoreItem:(NSManagedObject *)i
 {
