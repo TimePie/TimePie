@@ -11,6 +11,9 @@
 #import "tDCPieChart.h"
 #import "UIView+Frame.h"
 
+#import "TimingItemStore.h"
+#import "Tag.h"
+
 @implementation timeDistributeCell
 
 - (void)awakeFromNib
@@ -23,10 +26,16 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
+        [self initNeededData];
         [self initScrollVessel];
         [self initDistributeGraph];
     }
     return self;
+}
+
+- (void)initNeededData
+{
+    tagList = [[TimingItemStore timingItemStore] getAllTags];
 }
 
 - (void)initScrollVessel
@@ -40,15 +49,25 @@
 
 - (void)initDistributeGraph
 {
-    tDCPieChart *testChart1 = [[tDCPieChart alloc] initWithFrame:CGRectMake(10, 10, 100, 130)];
-    tDCPieChart *testChart2 = [[tDCPieChart alloc] initWithFrame:CGRectMake(110, 10, 100, 130)];
-    tDCPieChart *testChart3 = [[tDCPieChart alloc] initWithFrame:CGRectMake(210, 10, 100, 130)];
-    [testChart1 initInfosWithColor:REDNO1 lightColor:RedNO1_light Name:@"学习" Percent:0.7f PercentString:@"70"];
-    [testChart2 initInfosWithColor:BLUENO2 lightColor:BLUENO2_light Name:@"酱油" Percent:0.18f PercentString:@"18"];
-    [testChart3 initInfosWithColor:GREENNO3 lightColor:GREENNO3_light Name:@"运动" Percent:0.06 PercentString:@"6"];
-    [_vessel addSubview:testChart1];
-    [_vessel addSubview:testChart2];
-    [_vessel addSubview:testChart3];
+    if (tagList.count > 0)
+    {
+//        for (int i = 0; i < tagList.count; i++)
+//        {
+//            tDCPieChart *tempChart =[[tDCPieChart alloc] initWithFrame:CGRectMake(10 + 100 * i, 10, 100, 130)];
+//            [tempChart initInfosWithColor:REDNO1 lightColor:RedNO1_light Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:0.7f PercentString:@"70"];
+//            [_vessel addSubview:tempChart];
+//        }
+        tDCPieChart *testChart1 = [[tDCPieChart alloc] initWithFrame:CGRectMake(10, 10, 100, 130)];
+        tDCPieChart *testChart2 = [[tDCPieChart alloc] initWithFrame:CGRectMake(110, 10, 100, 130)];
+        tDCPieChart *testChart3 = [[tDCPieChart alloc] initWithFrame:CGRectMake(210, 10, 100, 130)];
+        [testChart1 initInfosWithColor:REDNO1 lightColor:RedNO1_light Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:0] tag_name]] Percent:0.7f PercentString:@"70"];
+        [testChart2 initInfosWithColor:BLUENO2 lightColor:BLUENO2_light Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:1] tag_name]] Percent:0.18f PercentString:@"18"];
+        [testChart3 initInfosWithColor:GREENNO3 lightColor:GREENNO3_light Name:@"运动" Percent:0.06 PercentString:@"6"];
+        [_vessel addSubview:testChart1];
+        [_vessel addSubview:testChart2];
+        [_vessel addSubview:testChart3];
+    }
+    else NSLog(@"Create new items to view history stats");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -189,7 +189,7 @@
 {
     if (itemTable)
     {
-        if (itemTable.contentOffset.y < -520.f && modalCanBeTriggered == true)
+        if (itemTable.contentOffset.y < -580.f && modalCanBeTriggered == true)
         {
             [self resignFirstResponder];
             [self animateModalView];

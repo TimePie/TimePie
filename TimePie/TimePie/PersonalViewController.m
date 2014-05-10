@@ -12,6 +12,8 @@
 #import "timeDistributeCell.h"
 #import "PersonalViewEventTrackCell.h"
 #import "PersonalViewPicker.h"
+#import "TimingItemStore.h"
+#import "Tag.h"
 
 @interface PersonalViewController ()
 
@@ -38,6 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initNeededInfo];
     [self initNavBar];
     [self initMainView];
     [self initExitButton];
@@ -87,6 +90,11 @@
     darkUILayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     darkUILayer.userInteractionEnabled = NO;
     [self.view addSubview:darkUILayer];
+}
+
+- (void)initNeededInfo
+{
+    tagList = [[TimingItemStore timingItemStore] getAllTags];
 }
 
 #pragma mark - target selector

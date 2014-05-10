@@ -441,7 +441,7 @@
         return nil;
     }
     for(id i in fetchedObjects){
-        NSLog(@"%@",i);
+        NSLog(@"TAGS ARE%@",i);
     }
     return fetchedObjects;
 }

@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface timeDistributeCell : UITableViewCell<UIScrollViewDelegate>
-
+{
+    NSArray *tagList;
+}
 @property (strong, nonatomic) UIScrollView *vessel;
 
 @end

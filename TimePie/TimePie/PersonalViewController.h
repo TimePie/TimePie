@@ -14,6 +14,7 @@
 {
     UIView *darkUILayer;
     NSString *timeRangeInfo;
+    NSArray *tagList;
 }
 
 @property (strong, nonatomic) UINavigationBar *navBar;
