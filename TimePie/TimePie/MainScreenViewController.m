@@ -79,7 +79,11 @@
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
         [timingItemStore restoreData];
-
+        
+        // for test:
+//        TimingItem * item = [timingItemStore createItem];
+//        [timingItemStore addTag:item TagName:@"hahah"];
+//        [timingItemStore getTimingItemsByTagName:@"hahah"];
         
         //setup pieChart
         pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, -390, 300, 300)];
@@ -392,9 +396,9 @@
         [Output println:@"Across"];
         
         //tests:
-//        [timingItemStore addTag:item TagName:@"Second Tag"];
-//        [timingItemStore getTimingItemsByTagName:@"Second Tag"];
-//        [timingItemStore getAllTags];
+        [timingItemStore addTag:item TagName:@"Second Tag"];
+        [timingItemStore getTimingItemsByTagName:@"Second Tag"];
+        [timingItemStore getAllTags];
     }
     else{
         //not across a day

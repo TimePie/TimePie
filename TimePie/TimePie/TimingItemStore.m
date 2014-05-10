@@ -496,7 +496,6 @@
     [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
     [i setValue:[NSNumber numberWithBool:item.timing] forKey:@"timing"];
     
-    
     return i;
     
 }
@@ -549,7 +548,14 @@
     for (NSManagedObject *info in fetchedObjects) {
         NSLog(@"Name: %@", [info valueForKey:@"item_name"]);
     }
-    TimingItemEntity * i = [fetchedObjects objectAtIndex:0];
+    TimingItemEntity * i;
+    if([fetchedObjects count]==0){
+        i = (TimingItemEntity*)[self saveItemEntity:item];
+    }else{
+        i= [fetchedObjects objectAtIndex:0];
+    }
+    
+
     i.tag = tag;
     [tag addItemObject:i];
     
