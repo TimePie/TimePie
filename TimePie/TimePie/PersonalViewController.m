@@ -69,7 +69,7 @@
 
 - (void)initMainView
 {
-    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    _mainView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 26) style:UITableViewStyleGrouped];
     _mainView.backgroundView = nil;
     _mainView.backgroundColor = [UIColor clearColor];
     _mainView.dataSource = self;
@@ -135,7 +135,7 @@
 {
     if (section == 2)
     {
-        return 10;
+        return 5;
     }
     else if(section == 0) return 2;
     else return 1;

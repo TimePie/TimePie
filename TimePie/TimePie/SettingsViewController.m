@@ -79,6 +79,7 @@
     else cell.textLabel.text = [s2CellTitleArray objectAtIndex:indexPath.row];
     
     cell.textLabel.textColor = [UIColor colorWithRed:0.55 green:0.55 blue:0.55 alpha:1.f];
+    cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16.f];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if(indexPath.section == 0 && indexPath.row == 0)

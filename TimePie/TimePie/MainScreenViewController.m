@@ -189,10 +189,10 @@
 {
     if (itemTable)
     {
-        if (itemTable.contentOffset.y < -500.f && modalCanBeTriggered == true)
+        if (itemTable.contentOffset.y < -520.f && modalCanBeTriggered == true)
         {
-            //[self resignFirstResponder];
-            //[self animateModalView];
+            [self resignFirstResponder];
+            [self animateModalView];
         }
     }
 }
