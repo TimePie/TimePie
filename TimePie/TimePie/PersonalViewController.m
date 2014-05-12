@@ -45,6 +45,18 @@
     [self initMainView];
     [self initExitButton];
     [self initDarkUILayer];
+    //main Loop
+    NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
+}
+
+#pragma mark - main Loop
+- (void)mainLoop:(id)sender
+{
+    if (_mainView)
+    {
+        if (_mainView.contentOffset.y > 220) [self exitButtonPressed];
+    }
 }
 
 #pragma mark - init UI
@@ -113,7 +125,7 @@
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromTop;
     [self.view.window.layer addAnimation:transition forKey:nil];
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self dismissViewControllerAnimated:NO completion:NULL];
 }
 
 - (void)settingsButtonPressed
