@@ -47,6 +47,9 @@ static NSInteger routineItemFlag = 0;
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [routineButton setSelected:NO];
+    routineItemFlag = 0;
+    [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
     [self performSelector:@selector(respondInput:) withObject:self afterDelay:0.033f];
 }
 

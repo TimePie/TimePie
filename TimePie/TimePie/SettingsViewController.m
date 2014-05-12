@@ -9,6 +9,8 @@
 #import "SettingsViewController.h"
 #import "BasicUIColor+UIPosition.h"
 #import "SettingsThemeViewController.h"
+#import "RoutineItemViewController.h"
+#import "TrackItemViewController.h"
 #import "themeView.h"
 
 @interface SettingsViewController ()
@@ -120,6 +122,16 @@
     {
         SettingsThemeViewController *stVC = [[SettingsThemeViewController alloc] init];
         [[self navigationController] pushViewController:stVC animated:YES];
+    }
+    else if(indexPath.section == 0 && indexPath.row == 1)
+    {
+        RoutineItemViewController *riVC = [[RoutineItemViewController alloc] init];
+        [[self navigationController] pushViewController:riVC animated:YES];
+    }
+    else if(indexPath.section == 0 && indexPath.row == 2)
+    {
+        TrackItemViewController *tiVC = [[TrackItemViewController alloc] init];
+        [[self navigationController] pushViewController:tiVC animated:YES];
     }
 }
 

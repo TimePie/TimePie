@@ -39,7 +39,9 @@
     colorList = [NSMutableArray arrayWithObjects:REDNO1,BLUENO2,GREENNO3,PINKNO04,BROWNN05,YELLOWN06, PURPLEN07, P01N08, P01N09, P01N10, nil];
     lightColorList = [NSMutableArray arrayWithObjects:RedNO1_light, BLUENO2_light, GREENNO3_light, PINKNO04_light, BROWNN05_light, YELLOWN06_light, PURPLEN07_light, P01N08_light, P01N09_light, P01N10_light, nil];
     totalTime = [[TimingItemStore timingItemStore] getTotalDays];
-    timeOfEachTag = [[NSMutableArray alloc] init];
+    
+    NSArray *tempToETArray = @[@70.f,@18.f,@6.f,@2.f,@2.f];
+    timeOfEachTag = [NSMutableArray arrayWithArray:tempToETArray];
 }
 
 - (void)initScrollVessel
@@ -55,22 +57,16 @@
 {
     if (tagList.count > 0)
     {
-//        for (int i = 0; i < tagList.count; i++)
-//        {
+        CGFloat startPos = 10;
+        for (int i = 0; i < tagList.count; i++)
+        {
 //            [timeOfEachTag addObject:[[TimingItemStore timingItemStore] getDailyTimeByTagName:[tagList objectAtIndex:i] date:[NSDate date]]];
-//            tDCPieChart *tempChart =[[tDCPieChart alloc] initWithFrame:CGRectMake(10 + 100 * i, 10, 100, 130)];
-//            [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:0.7f PercentString:@"70"];
-//            [_vessel addSubview:tempChart];
-//        }
-        tDCPieChart *testChart1 = [[tDCPieChart alloc] initWithFrame:CGRectMake(10, 10, 100, 130)];
-        tDCPieChart *testChart2 = [[tDCPieChart alloc] initWithFrame:CGRectMake(110, 10, 100, 130)];
-        tDCPieChart *testChart3 = [[tDCPieChart alloc] initWithFrame:CGRectMake(210, 10, 100, 130)];
-        [testChart1 initInfosWithColor:REDNO1 lightColor:RedNO1_light Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:0] tag_name]] Percent:0.7f PercentString:@"70"];
-        [testChart2 initInfosWithColor:BLUENO2 lightColor:BLUENO2_light Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:1] tag_name]] Percent:0.18f PercentString:@"18"];
-        [testChart3 initInfosWithColor:GREENNO3 lightColor:GREENNO3_light Name:@"运动" Percent:0.06 PercentString:@"6"];
-        [_vessel addSubview:testChart1];
-        [_vessel addSubview:testChart2];
-        [_vessel addSubview:testChart3];
+            if (i > 2) startPos = 30;
+            else startPos = 10;
+            tDCPieChart *tempChart =[[tDCPieChart alloc] initWithFrame:CGRectMake(startPos + 100 * i, 10, 100, 130)];
+            [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:[[timeOfEachTag objectAtIndex:i] floatValue]/100 PercentString:[NSString stringWithFormat:@"%d",[[timeOfEachTag objectAtIndex:i] integerValue]]];
+            [_vessel addSubview:tempChart];
+        }
     }
     else NSLog(@"Create new items to view history stats");
 }
