@@ -11,6 +11,10 @@
 @interface timeDistributeCell : UITableViewCell<UIScrollViewDelegate>
 {
     NSArray *tagList;
+    NSArray *colorList;
+    NSArray *lightColorList;
+    NSNumber *totalTime;
+    NSMutableArray *timeOfEachTag;
 }
 @property (strong, nonatomic) UIScrollView *vessel;
 

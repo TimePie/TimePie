@@ -36,6 +36,10 @@
 - (void)initNeededData
 {
     tagList = [[TimingItemStore timingItemStore] getAllTags];
+    colorList = [NSMutableArray arrayWithObjects:REDNO1,BLUENO2,GREENNO3,PINKNO04,BROWNN05,YELLOWN06, PURPLEN07, P01N08, P01N09, P01N10, nil];
+    lightColorList = [NSMutableArray arrayWithObjects:RedNO1_light, BLUENO2_light, GREENNO3_light, PINKNO04_light, BROWNN05_light, YELLOWN06_light, PURPLEN07_light, P01N08_light, P01N09_light, P01N10_light, nil];
+    totalTime = [[TimingItemStore timingItemStore] getTotalDays];
+    timeOfEachTag = [[NSMutableArray alloc] init];
 }
 
 - (void)initScrollVessel
@@ -53,8 +57,9 @@
     {
 //        for (int i = 0; i < tagList.count; i++)
 //        {
+//            [timeOfEachTag addObject:[[TimingItemStore timingItemStore] getDailyTimeByTagName:[tagList objectAtIndex:i] date:[NSDate date]]];
 //            tDCPieChart *tempChart =[[tDCPieChart alloc] initWithFrame:CGRectMake(10 + 100 * i, 10, 100, 130)];
-//            [tempChart initInfosWithColor:REDNO1 lightColor:RedNO1_light Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:0.7f PercentString:@"70"];
+//            [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:0.7f PercentString:@"70"];
 //            [_vessel addSubview:tempChart];
 //        }
         tDCPieChart *testChart1 = [[tDCPieChart alloc] initWithFrame:CGRectMake(10, 10, 100, 130)];

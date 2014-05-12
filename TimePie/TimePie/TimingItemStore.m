@@ -654,8 +654,8 @@
     return [tag.item allObjects];
 }
 
-
-
+/**** PersonalCenter Usage
+ **/
 - (NSNumber *)getDailyTimeByTagName:(NSString*)tagName
                                date:(NSDate*)date
 {
@@ -736,7 +736,8 @@
 }
 
 
-
+/**** PersonalCenter Usage
+ **/
 - (NSNumber *)getTotalDays
 {
     NSManagedObjectContext *context = [self managedObjectContext];

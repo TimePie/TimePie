@@ -50,19 +50,19 @@
 
 
 
-- (void)initEventTrackColumnGraph
+- (void)initEventTrackColumnGraphWithColumnCount:(NSInteger)cCount HeightArray:(NSMutableArray *)cHeightArray
 {
     NSArray *tempCHeightArray = @[@15.f,@20.f,@15.f,@20.f,@15.f,@20.f];
     eventTrackColumnHeightArray = [NSMutableArray arrayWithArray:tempCHeightArray];
     eventTrackColumnGraph *columnGraph = [[eventTrackColumnGraph alloc] initWithFrame:CGRectMake(0, 10, 250, 40)];
-    [columnGraph initColumnGraphWithColumnCount:[eventTrackColumnHeightArray count] heightArray:eventTrackColumnHeightArray columnColor:_cellColor];
+    [columnGraph initColumnGraphWithColumnCount:cCount heightArray:cHeightArray columnColor:_cellColor];
     [self addSubview:columnGraph];
 }
 
-- (void)initCellColorWith:(UIColor *)cColor
+- (void)initCellWithColor:(UIColor *)cColor ColumnCount:(NSInteger)cCount HeightArray:(NSMutableArray *)cHeightArray
 {
     _cellColor = cColor;
-    [self initEventTrackColumnGraph];
+    [self initEventTrackColumnGraphWithColumnCount:cCount HeightArray:cHeightArray];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -17,6 +17,6 @@
 @property (strong, nonatomic) UILabel *PVETCHourIndicatorLabel;
 @property (strong, nonatomic) UIColor *cellColor;
 
-- (void)initCellColorWith:(UIColor*)cColor;
+- (void)initCellWithColor:(UIColor*)cColor ColumnCount:(NSInteger)cCount HeightArray:(NSMutableArray*)cHeightArray;
 
 @end

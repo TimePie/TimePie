@@ -95,6 +95,11 @@
 - (void)initNeededInfo
 {
     tagList = [[TimingItemStore timingItemStore] getAllTags];
+    colorList = [NSMutableArray arrayWithObjects:REDNO1,BLUENO2,GREENNO3,PINKNO04,BROWNN05,YELLOWN06, PURPLEN07, P01N08, P01N09, P01N10, nil];
+    lightColorList = [NSMutableArray arrayWithObjects:RedNO1_light, BLUENO2_light, GREENNO3_light, PINKNO04_light, BROWNN05_light, YELLOWN06_light, PURPLEN07_light, P01N08_light, P01N09_light, P01N10_light, nil];
+    NSArray *tempColumnHeightArray = @[@15.f,@20.f,@15.f,@20.f,@15.f,@20.f];
+    columnHeightList = [NSMutableArray arrayWithArray:tempColumnHeightArray];
+    avgTimeOfTagList = [NSMutableArray arrayWithObjects:@"7.8",@"2.6",@"3.9", nil];
 }
 
 #pragma mark - target selector
@@ -199,21 +204,27 @@
         {
             itemTrackCell = [[PersonalViewEventTrackCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
         }
-        if(indexPath.row == 0) [itemTrackCell initCellColorWith:REDNO1];
+        if(indexPath.row == 0)
+        {
+            itemTrackCell.PVETCEventLabel.text = @"学习";
+            itemTrackCell.PVETCAvgTimeLabel.text = [avgTimeOfTagList objectAtIndex:indexPath.row];
+            itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
+            [itemTrackCell initCellWithColor:[colorList objectAtIndex:indexPath.row] ColumnCount:[columnHeightList count] HeightArray:columnHeightList];
+        }
         //todo: set with index path
         if (indexPath.row == 1)
         {
             itemTrackCell.PVETCEventLabel.text = @"酱油";
-            itemTrackCell.PVETCAvgTimeLabel.text = @"2.6";
-            itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = BLUENO2;
-            [itemTrackCell initCellColorWith:BLUENO2];
+            itemTrackCell.PVETCAvgTimeLabel.text = [avgTimeOfTagList objectAtIndex:indexPath.row];
+            itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
+            [itemTrackCell initCellWithColor:[colorList objectAtIndex:indexPath.row] ColumnCount:[columnHeightList count] HeightArray:columnHeightList];
         }
         else if(indexPath.row == 2)
         {
             itemTrackCell.PVETCEventLabel.text = @"健身";
-            itemTrackCell.PVETCAvgTimeLabel.text = @"3.9";
-            itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = GREENNO3;
-            [itemTrackCell initCellColorWith:GREENNO3];
+            itemTrackCell.PVETCAvgTimeLabel.text = [avgTimeOfTagList objectAtIndex:indexPath.row];
+            itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
+            [itemTrackCell initCellWithColor:[colorList objectAtIndex:indexPath.row] ColumnCount:[columnHeightList count] HeightArray:columnHeightList];
         }
         itemTrackCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return itemTrackCell;
@@ -306,6 +317,11 @@
     }];
 }
 
+- (NSMutableArray*)getColumnHeightListWithTag:(Tag*)tag
+{
+    NSMutableArray *tempCHArray = [[NSMutableArray alloc] init];
+    return  tempCHArray;
+}
 
 - (void)didReceiveMemoryWarning
 {
