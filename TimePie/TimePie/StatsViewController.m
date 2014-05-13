@@ -9,11 +9,16 @@
 #import "StatsViewController.h"
 #import "StatsItemTableViewCell.h"
 #import "GraphTypeEnum.h"
+#import "TimingItem1.h"
+#import "TimingItemEntity.h"
+#import "TimingItemStore.h"
+#import "Tag.h"
 
 @interface StatsViewController ()
 {
     //record the current graph type
     GraphType currentType;
+    NSArray *graphArray;
 }
 
 @end
@@ -47,6 +52,12 @@
     //
     [self initGraphs];
     
+    [self initMonthGraph];
+    
+    [self initDaysGraph];
+    
+    graphArray = [NSArray arrayWithObjects: self.daysGraph, self.lineGraph, self.monthGraph, nil];
+    [self setGraphViewActive:currentType];
 }
 
 - (void)initNavigationBar
@@ -68,22 +79,17 @@
 {
     self.segmentedControl.selectedSegmentIndex =1;//设置默认选择项索引
     [self.segmentedControl setTitle:@"过去三天" forSegmentAtIndex:2];
+    [self.segmentedControl addTarget:self action: @selector(segmentAction:) forControlEvents: UIControlEventValueChanged];
+    //self.segmentedControl.frame = CGRectMake(20.0, 20.0, 250.0, 90.0);
 }
 
 #pragma mark - graph view data
 - (void)initItemData
 {
+    //[[TimingItemStore timingItemStore] getItemAtIndex:0];
     self.itemDataArray=[[NSMutableArray alloc]init];
     int itemCount=3;
     NSMutableArray *nameArray=[[NSMutableArray alloc]init];
-    
-    //item name
-    for (int i=0; i<itemCount; i++)
-    {
-        NSString* temp=@"Study";
-        NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",i]];
-        [nameArray addObject:name];
-    }
     
     //item color
     self.colorArray=[[NSMutableArray alloc]init];
@@ -94,16 +100,34 @@
     tempColor=[UIColor colorWithRed:251/255.0 green:170/255.0 blue:121/255.0 alpha:1.0];
     [self.colorArray addObject:tempColor];
     
-    //item data
+    //item name
     for (int i=0; i<itemCount; i++)
     {
+        NSString* temp=@"Study";
+        NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",i]];
+        [nameArray addObject:name];
+    }
+    //item data
+    //0表示 今日 的数据
+    for (int i = 0; i<itemCount; i++)
+    {
+        //TimingItem *itemEntity = [[TimingItemStore timingItemStore] getItemAtIndex:i];
+        //itemEntity
+        
         NSMutableArray *tempValues;
         tempValues = [[NSMutableArray alloc] init];
         
         //NSString * nsDateString= [NSString stringWithFormat:@"%d.%d",month,day];
-        for(int count=0;count <30;count++)
+        for(int count = 0;count <30;count++)
         {
-            [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+            if (count == 0) {
+                NSNumber *temp = [NSNumber numberWithInt:0];
+                [tempValues addObject:temp];
+            }
+            else
+            {
+                [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+            }
         }
         
         ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[self.colorArray objectAtIndex:i] AndMouthData:tempValues];
@@ -127,10 +151,11 @@
     self.ArrayOfDates = [[NSMutableArray alloc] init];
     
     //一次性获取一个月内的日期string
+    // 0 表示 今日 的数据
     for (int i=0; i < 30; i++)
     {
         NSString *tempS=@"";
-        if(i==0)
+        if(i == 0)
         {
             tempS=@"今日";
         }
@@ -146,16 +171,14 @@
 
 }
 
-#pragma mark - graph view
+#pragma mark - graph view init
 - (void)initGraphs
 {
     //TODO: rewrite this part
     //使数据模型和视图分开
     
-    
-    
     //create view for graph
-    self.lineGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 120, 320, 250)];
+    self.lineGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 130, 320, 240)];
     
     //self.lineGraph.backgroundColor=[UIColor blackColor];
     
@@ -188,11 +211,98 @@
     
 }
 
+- (void)initMonthGraph
+{
+    //create view for graph
+    self.monthGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 130, 320, 240)];
+    //self.lineGraph.backgroundColor=[UIColor blackColor];
+    
+    
+    self.monthGraph.delegate = self;
+    
+    self.monthGraph.graphType = MonthType;
+    
+    self.monthGraph.itemCount = self.itemDataArray.count;
+    
+    //set attributes
+    //self.lineGraph.colorTop = [UIColor whiteColor];
+    
+    //    self.lineGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
+    //    self.lineGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
+    
+    self.monthGraph.alphaBottom = 0.3;
+    self.monthGraph.alphaLine = 0.8;
+    self.monthGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
+    self.monthGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:11];
+    self.monthGraph.widthLine = 1.5;
+    self.monthGraph.enableTouchReport = YES;
+    self.monthGraph.animationGraphEntranceSpeed=0;
+    
+    //set graph color
+    //maybe set it to delegate
+    self.monthGraph.colorsOfGraph=self.colorArray;
+    
+    [self.view addSubview:self.monthGraph];
+
+}
+
+- (void)initDaysGraph
+{
+    //create view for graph
+    self.daysGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 130, 320, 240)];
+    
+    //self.lineGraph.backgroundColor=[UIColor blackColor];
+    
+    
+    self.daysGraph.delegate = self;
+    
+    self.daysGraph.graphType = ThreeDayType;
+    
+    self.daysGraph.itemCount = self.itemDataArray.count;
+    
+    //set attributes
+    //self.lineGraph.colorTop = [UIColor whiteColor];
+    
+    //    self.lineGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
+    //    self.lineGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
+    
+    self.daysGraph.alphaBottom = 0.3;
+    self.daysGraph.alphaLine = 0.8;
+    self.daysGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
+    self.daysGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:11];
+    self.daysGraph.widthLine = 1.5;
+    self.daysGraph.enableTouchReport = YES;
+    self.daysGraph.animationGraphEntranceSpeed=0;
+    
+    //set graph color
+    //maybe set it to delegate
+    self.daysGraph.colorsOfGraph=self.colorArray;
+    
+    [self.view addSubview:self.daysGraph];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - graph view manage method
+
+- (void)setGraphViewActive:(GraphType)type
+{
+    for (int i = 0; i < graphArray.count; i++)
+    {
+        StatsLineGraphView *temp = [graphArray objectAtIndex:i];
+        [temp setHidden:YES];
+        if (temp.graphType == type)
+        {
+            [temp setHidden:NO];
+        }
+    }
+}
+
 
 #pragma mark - Data Source for graph view
 
@@ -213,7 +323,7 @@
 
 - (float)valueInArray:(int) arrayIndex ObjectAtIndex:(int)index
 {
-    ZBStatsItemData *item=[self.itemDataArray objectAtIndex:arrayIndex];
+    ZBStatsItemData *item = [self.itemDataArray objectAtIndex:arrayIndex];
     
     return [[item.dataOfMonth objectAtIndex:index] floatValue];
 }
@@ -254,14 +364,14 @@
 
 - (int)numberOfGapsBetweenLabels:(GraphType) type
 {
-    return type == MonthType ? 4 : 1;
+    return type == MonthType ? 6 : 1;
 }
 
 - (NSString *)labelOnXAxisForIndex:(NSInteger)index WithTimeRange:(int) range
 {
     int currentTypeOffset = range;
     
-    return [self.ArrayOfDates objectAtIndex: currentTypeOffset- (index+1)];
+    return [self.ArrayOfDates objectAtIndex: currentTypeOffset - (index + 1)];
 }
 
 
@@ -288,6 +398,29 @@
 //    
 //}
 
+#pragma mark - UISegmentedControl event
+-(void)segmentAction:(UISegmentedControl *)Seg
+{
+    NSInteger Index = Seg.selectedSegmentIndex;
+    //NSLog(@"Seg.selectedSegmentIndex:%d",Index);
+    GraphType temp = ThreeDayType;
+    switch (Index) {
+        case 0:
+            temp = MonthType;
+            break;
+        case 1:
+            temp = WeekType;
+            break;
+        case 2:
+            temp = ThreeDayType;
+            break;
+        default:
+            break;
+    }
+    currentType = temp;
+    [self setGraphViewActive:currentType];
+
+}
 
 #pragma mark - table view
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
