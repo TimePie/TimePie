@@ -16,7 +16,9 @@
 
 @property (strong,nonatomic) IBOutlet UITableView *itemTableView;
 
-@property (strong, nonatomic) IBOutlet StatsLineGraphView *lineGraph;
+@property (strong, nonatomic) StatsLineGraphView *monthGraph;
+@property (strong, nonatomic) StatsLineGraphView *lineGraph;
+@property (strong, nonatomic) StatsLineGraphView *daysGraph;
 
 @property(strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 

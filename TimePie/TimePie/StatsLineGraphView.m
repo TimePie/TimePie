@@ -122,10 +122,13 @@ int currentlyCloser;
     
     for (int i = 0; i < numberOfXaxisPoints; i++)
     {
-        float dotValue = [self.delegate valueInArray:index ObjectAtIndex:i];
+        // 反向获取数据
+        // 数据按照   日期 降序排列
+        // 取数据按照  日期 升序获取
+        float dotValue = [self.delegate valueInArray:index ObjectAtIndex:numberOfXaxisPoints - 1 - i];
         
-        positionOnXAxis = (self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints - 1))*i;
-        positionOnYAxis = (self.viewForBaselineLayout.frame.size.height - 80) - ((dotValue - minValue) / ((maxValue - minValue) / (self.viewForBaselineLayout.frame.size.height - 80))) + 10;
+        positionOnXAxis = (self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints - 1)) * i;
+        positionOnYAxis = (self.viewForBaselineLayout.frame.size.height) - ((dotValue - minValue) / ((maxValue - minValue) / (self.viewForBaselineLayout.frame.size.height))) - 4;
         
         StatsCircle *circleDot = [[StatsCircle alloc] initWithFrame:CGRectMake(positionOnXAxis, positionOnYAxis, circleSize, circleSize)];
         
@@ -308,11 +311,12 @@ int currentlyCloser;
             float offsetX = 20;
             
             float width = self.viewForBaselineLayout.frame.size.width-30;
-            [labelXAxis setCenter:CGPointMake((width/(numberOfXaxisPoints-1))*(i*numberOfGaps - 1)+offsetX, self.frame.size.height + labelXaxisOffset+2)];
+            [labelXAxis setCenter:CGPointMake((width/((numberOfXaxisPoints-1)/numberOfGaps))*(i-1)+offsetX, self.frame.size.height + labelXaxisOffset+2)];
+            //[labelXAxis setCenter:CGPointMake((width/(numberOfXaxisPoints-1))*(i*numberOfGaps - 1)+offsetX, self.frame.size.height + labelXaxisOffset+2)];
             
             labelXAxis.font = self.labelFont;
             
-            if(i==numberOfXaxisPoints/numberOfGaps)
+            if(i == numberOfXaxisPoints / numberOfGaps)
             {
                 labelXAxis.font = [UIFont fontWithName:@"Roboto-Medium" size:13];
             }
