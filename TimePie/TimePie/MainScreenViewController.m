@@ -123,22 +123,19 @@
         [[self view] insertSubview:itemTable atIndex:0];
         /////////////////////////////////
         
-        selectView = [[UIView alloc] initWithFrame:CGRectMake(-125, 475, 100, 100)];
+        selectView = [[SelectView alloc] initWithFrame:CGRectMake(-125, -75, 100, 100)];
         
-        viewHistory = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-80, 0, 250, 90)];
-        cancelSelect =  [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+80, 0, 250, 90)];
-
-        [viewHistory setImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
-        [cancelSelect setImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
-        [viewHistory addTarget:self action:@selector(viewHistoryButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [cancelSelect addTarget:self action:@selector(cancelSelectButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        [selectView addSubview:viewHistory];
-        [selectView addSubview:cancelSelect];
-        [[self view] addSubview:selectView];
-//        [self showSelectView];
+//        [[self view] addSubview:selectView];
+        [self showSelectView];
 //        [self removeSelectView];
+        UITapGestureRecognizer *singleFingerTap =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(handleSingleTap:)];
+        [itemTable addGestureRecognizer:singleFingerTap];
         
+        
+//        [singleFingerTap release];
         
         
         
@@ -160,8 +157,6 @@
 {
     [itemTable addSubview:selectView];
     [itemTable bringSubviewToFront:selectView];
-//    [[self view] addSubview:selectView];
-//    [[self view] bringSubviewToFront:selectView];
     itemTable.frame = CGRectOffset( itemTable.frame, 0, 75 );
     pieChart.frame = CGRectOffset(  pieChart.frame, 0, -75);
 }
@@ -371,6 +366,13 @@
     NSLog(@"cancel select!");
 }
 
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    
+    NSLog(@"Single tap!%@", recognizer);
+    //Do stuff here...
+}
 
 /////
 

@@ -10,7 +10,7 @@
 #import "XYPieChart.h"
 #import "TimingItemStore.h"
 #import "MainScreenTableView.h"
-
+#import "SelectView.h"
 
 @interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource>
 {
@@ -23,9 +23,8 @@
     
     
     
-    UIView * selectView;
-    UIButton * viewHistory;
-    UIButton * cancelSelect;
+    SelectView * selectView;
+    
     
 }
 

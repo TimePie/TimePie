@@ -41,6 +41,7 @@
 		68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */; };
 		CD3E53C6191C94D7005A1416 /* Cancel_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */; };
 		CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3E53C5191C94D7005A1416 /* History_btn@2x.png */; };
+		CD45DB44192239460050A39F /* SelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD45DB43192239460050A39F /* SelectView.m */; };
 		CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05618E464D000916A4B /* Foundation.framework */; };
 		CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05818E464D000916A4B /* CoreGraphics.framework */; };
 		CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4CE05A18E464D000916A4B /* UIKit.framework */; };
@@ -146,6 +147,8 @@
 		68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBStatsDataArray.m; sourceTree = "<group>"; };
 		CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel_btn@2x.png"; sourceTree = "<group>"; };
 		CD3E53C5191C94D7005A1416 /* History_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "History_btn@2x.png"; sourceTree = "<group>"; };
+		CD45DB42192239460050A39F /* SelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectView.h; sourceTree = "<group>"; };
+		CD45DB43192239460050A39F /* SelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectView.m; sourceTree = "<group>"; };
 		CD4CE05318E464D000916A4B /* TimePie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimePie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4CE05618E464D000916A4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD4CE05818E464D000916A4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -527,6 +530,8 @@
 				CDC8858E1910FE3400A67510 /* TCell.m */,
 				CD5239B51911E178005EB55A /* MainScreenTableView.h */,
 				CD5239B61911E178005EB55A /* MainScreenTableView.m */,
+				CD45DB42192239460050A39F /* SelectView.h */,
+				CD45DB43192239460050A39F /* SelectView.m */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -669,6 +674,7 @@
 				134189891904111900DF2F41 /* SettingsViewController.m in Sources */,
 				68BBE0A319091B9500F12101 /* StatsCircle.m in Sources */,
 				CD5239B71911E178005EB55A /* MainScreenTableView.m in Sources */,
+				CD45DB44192239460050A39F /* SelectView.m in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
 				1367C5B1191E3B67005BF8AA /* themeDetailView.m in Sources */,

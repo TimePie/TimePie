@@ -55,7 +55,6 @@
 - (BOOL)addTag:(TimingItem *)item
        TagName:(NSString *)name;
 - (NSArray*)getAllTags;
-
 - (NSArray *)getTimingItemsByTagName:(NSString *)tagName;
 - (BOOL)markTracking:(NSString *)tagName;
 
