@@ -40,7 +40,7 @@
     lightColorList = [NSMutableArray arrayWithObjects:RedNO1_light, BLUENO2_light, GREENNO3_light, PINKNO04_light, BROWNN05_light, YELLOWN06_light, PURPLEN07_light, P01N08_light, P01N09_light, P01N10_light, nil];
     totalTime = [[TimingItemStore timingItemStore] getTotalDays];
     
-    NSArray *tempToETArray = @[@70.f,@18.f,@6.f,@2.f,@2.f];
+    NSArray *tempToETArray = @[@60.f,@18.f,@6.f,@7.f,@7.f,@2.f];
     timeOfEachTag = [NSMutableArray arrayWithArray:tempToETArray];
 }
 

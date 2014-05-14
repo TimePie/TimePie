@@ -113,7 +113,7 @@
     /***to do**/
     columnHeightList = [[NSMutableArray alloc] init];
     [self getColumnHeightListWithTagList];
-    avgTimeOfTagList = [NSMutableArray arrayWithObjects:@"7.8",@"2.6",@"3.9",@"6.3",@"2.7", nil];
+    avgTimeOfTagList = [NSMutableArray arrayWithObjects:@"7.8",@"2.6",@"3.9",@"6.3",@"2.7",@"1.5", nil];
 }
 
 #pragma mark - target selector

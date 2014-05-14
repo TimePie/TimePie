@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TimingItemStore.h"
 #import "TimingItem1.h"
+#import "Tag.h"
 
 #define TAG_LIMIT_COUNT     200
 #define TAG_INPUT_FIELD_1   4001
@@ -92,9 +93,17 @@ static NSInteger routineItemFlag = 0;
     _CIVC_mainVessel.dataSource = self;
     _CIVC_mainVessel.delegate = self;
     _CIVC_mainVessel.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
-    tagTextArray = [[NSMutableArray alloc] initWithObjects:@"工作",@"学习", nil];
-    tagCellSelectedFlag = [[NSMutableArray alloc] initWithObjects:@"n",@"n", nil];
+    NSArray *tempTagArray = [[TimingItemStore timingItemStore] getAllTags];
+    tagTextArray = [NSMutableArray arrayWithArray:tempTagArray];
+    [self initTagCellSelectedFlag];
     [self.view addSubview:_CIVC_mainVessel];
+}
+
+- (void)initTagCellSelectedFlag
+{
+    tagCellSelectedFlag = [[NSMutableArray alloc] init];
+    for (int i = 0; i < tagTextArray.count; i++)
+        [tagCellSelectedFlag addObject:@"n"];
 }
 
 #pragma mark - UITableView DataSource
@@ -280,7 +289,7 @@ static NSInteger routineItemFlag = 0;
     if ([view viewWithTag:indexPath.row - 1])
         [[view viewWithTag:indexPath.row - 1] removeFromSuperview];
     UILabel *tempTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
-    tempTagLabel.text = [tagTextArray objectAtIndex:indexPath.row - 1];
+    tempTagLabel.text = [[tagTextArray objectAtIndex:indexPath.row - 1] tag_name];
     tempTagLabel.tag = indexPath.row - 1;
     [view addSubview:tempTagLabel];
     [tagInputField removeFromSuperview];
