@@ -71,7 +71,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *s1CellTitleArray = [NSArray arrayWithObjects:@"主题",@"我的例行事件表",@"我跟踪的事件", nil];
+    NSArray *s1CellTitleArray = [NSArray arrayWithObjects:@"主题",@"我的例行事件表",@"我跟踪的标签", nil];
     NSArray *s2CellTitleArray = [NSArray arrayWithObjects:@"关于TimePie",@"为我们评分",@"", nil];
     
     NSString *cellIdentifier = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
