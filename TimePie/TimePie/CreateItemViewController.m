@@ -174,7 +174,7 @@ static NSInteger routineItemFlag = 0;
             }
             [tagCellSelectedFlag replaceObjectAtIndex:indexPath.row - 1 withObject:@"y"];
             [self initTagCheckViewInView:cell WithImage:[UIImage imageNamed:@"TagCheck"] AtIndexPath:indexPath];
-            _currentTagOfItem = [tagTextArray objectAtIndex:indexPath.row - 1];
+            _currentTagOfItem = [[tagTextArray objectAtIndex:indexPath.row - 1] tag_name];
         }
     }
 }
@@ -193,7 +193,13 @@ static NSInteger routineItemFlag = 0;
     if (textField.tag == TAG_INPUT_FIELD_1) _itemName = textField.text;
     else if (textField.text.length > 0)
     {
-        [tagTextArray addObject:textField.text];
+//        [tagTextArray addObject:textField.text];
+        TimingItem* item = [[TimingItemStore timingItemStore] createItem];
+        item.itemName = _itemName;
+        [[TimingItemStore timingItemStore] addTag:item TagName:textField.text];
+        [[TimingItemStore timingItemStore] saveData];
+        
+        tagTextArray = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getAllTags]];
         [tagCellSelectedFlag addObject:@"n"];
         textField.text = @"";
         [_CIVC_mainVessel reloadData];
