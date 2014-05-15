@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "TimingItem1.h"
+#import "TimingItemEntity.h"
+
 @class Tag;
 @class Tracking;
 
