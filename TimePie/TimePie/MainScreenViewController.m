@@ -129,10 +129,8 @@
 //        [[self view] addSubview:selectView];
         [self showSelectView];
 //        [self removeSelectView];
-        UITapGestureRecognizer *singleFingerTap =
-        [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                action:@selector(handleSingleTap:)];
-        [itemTable addGestureRecognizer:singleFingerTap];
+//        UITapGestureRecognizer *singleFingerTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+//        [itemTable addGestureRecognizer:singleFingerTap];
         
         
 //        [singleFingerTap release];
@@ -366,6 +364,7 @@
     NSLog(@"cancel select!");
 }
 
+/*
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     CGPoint location = [recognizer locationInView:[recognizer.view superview]];
@@ -373,7 +372,7 @@
     NSLog(@"Single tap!%@", recognizer);
     //Do stuff here...
 }
-
+*/
 /////
 
 

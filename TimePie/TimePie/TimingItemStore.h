@@ -68,4 +68,8 @@
                                date:(NSDate*)date;
 - (NSArray*)getTimingItemsByDate:(NSDate *)date;
 
+
+- (NSNumber*)getDailyTimeByItemName:(NSString*)itemName date:(NSDate*)date;
+- (TimingItemEntity *)getDailyTimingItemByItemName:(NSString*)itemName date:(NSDate *)date;
+
 @end

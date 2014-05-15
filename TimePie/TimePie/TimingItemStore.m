@@ -698,6 +698,88 @@
 }
 
 
+
+- (NSNumber*)getDailyTimeByItemName:(NSString*)itemName date:(NSDate*)date
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",itemName]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"item_name"]);
+    }
+    
+    NSDate * startDate = [DateHelper beginningOfDay:date];
+    NSDate * endDate = [DateHelper endOfDay:date];
+    
+    double timesum=0;
+    for(TimingItemEntity * item in fetchedObjects){
+        BOOL flag = true;
+        if ([item.date_created compare:startDate] == NSOrderedAscending) {
+            flag = false;
+        }
+        if ([item.date_created compare:endDate] == NSOrderedDescending) {
+            flag = false;
+        }
+        if(flag){
+            timesum = timesum + [item.time doubleValue];
+        }
+        
+    }
+
+    
+    return [NSNumber numberWithDouble:timesum];
+}
+
+- (TimingItemEntity *)getDailyTimingItemByItemName:(NSString*)itemName date:(NSDate *)date
+{
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",itemName]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"item_name"]);
+    }
+    
+    NSDate * startDate = [DateHelper beginningOfDay:date];
+    NSDate * endDate = [DateHelper endOfDay:date];
+    
+    
+    for(TimingItemEntity * item in fetchedObjects){
+        BOOL flag = true;
+        if ([item.date_created compare:startDate] == NSOrderedAscending) {
+            flag = false;
+        }
+        if ([item.date_created compare:endDate] == NSOrderedDescending) {
+            flag = false;
+        }
+        if(flag){
+            return item;
+        }
+        
+    }
+
+    
+    return nil;
+}
+
+
+
 - (BOOL)markTracking:(NSString *)tagName
 {
     NSManagedObjectContext *context = [self managedObjectContext];
