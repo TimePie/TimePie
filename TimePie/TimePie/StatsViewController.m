@@ -88,7 +88,7 @@
 {
     //[[TimingItemStore timingItemStore] getItemAtIndex:0];
     self.itemDataArray=[[NSMutableArray alloc]init];
-    int itemCount=3;
+    int itemCount=2;
     NSMutableArray *nameArray=[[NSMutableArray alloc]init];
     
     //item color
@@ -103,10 +103,24 @@
     //item name
     for (int i=0; i<itemCount; i++)
     {
-        NSString* temp=@"Study";
-        NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",i]];
+        NSString* temp=@"Test";
+        NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",(i+1)]];
         [nameArray addObject:name];
+        
     }
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    
+    
+    
+    NSArray* temp = [[TimingItemStore timingItemStore] getTimingItemsByDate:currentDate];
+    
+    
+    
+    
+    
     //item data
     //0表示 今日 的数据
     for (int i = 0; i<itemCount; i++)
@@ -121,12 +135,20 @@
         for(int count = 0;count <30;count++)
         {
             if (count == 0) {
-                NSNumber *temp = [NSNumber numberWithInt:0];
-                [tempValues addObject:temp];
+                
+                NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
+                //NSNumber *temp = [NSNumber numberWithInt:0];
+                [tempValues addObject:test];
+                
+                
             }
             else
             {
-                [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+                [comps setDay:-count];
+                NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+                NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
+                [tempValues addObject:test];
+                //[tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
             }
         }
         
