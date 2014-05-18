@@ -25,6 +25,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.view.backgroundColor = [UIColor whiteColor];
+        [self navigationController].view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -53,9 +55,13 @@
 #pragma mark - main Loop
 - (void)mainLoop:(id)sender
 {
-    if (_mainView)
+    if (_mainView && tagList)
     {
-        if (_mainView.contentOffset.y > 220) [self exitButtonPressed];
+        if (_exitButton && _mainView.contentOffset.y > 0)
+        {
+            _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-130-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+        }
+        if (_mainView.contentOffset.y > 220 * tagList.count/3) [self exitButtonPressed];
     }
 }
 
@@ -74,12 +80,12 @@
 
 - (void)initExitButton
 {
-    _exitButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-62, 94, 57)];
+    _exitButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-130, 94, 57)];
     [_exitButton setImage:[UIImage imageNamed:@"TimePie_Personal_Exit_Button"] forState:UIControlStateNormal];
     [_exitButton addTarget:self action:@selector(exitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     _exitButton.tag = 3001;
-    [[self navigationController].view addSubview:_exitButton];
-    [[self navigationController].view bringSubviewToFront:_exitButton];
+    [self.view addSubview:_exitButton];
+    [self.view bringSubviewToFront:_exitButton];
 }
 
 - (void)initMainView

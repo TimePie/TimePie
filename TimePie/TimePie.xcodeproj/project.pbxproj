@@ -18,6 +18,7 @@
 		13ACEB4D192105AB00DEEBB1 /* TrackItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13ACEB4C192105AB00DEEBB1 /* TrackItemViewController.m */; };
 		13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */; };
 		13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */; };
+		13B930641928FF3E0035CACD /* BounceAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B930631928FF3E0035CACD /* BounceAnimation.m */; };
 		13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */; };
 		13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */; };
 		13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE57E18EC49E400462A83 /* PersonalView_Avg@2x.png */; };
@@ -111,6 +112,8 @@
 		13B5194D18F2687B00D52DF4 /* PersonalViewEventTrackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewEventTrackCell.h; sourceTree = "<group>"; };
 		13B5194E18F2687B00D52DF4 /* PersonalViewEventTrackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewEventTrackCell.m; sourceTree = "<group>"; };
 		13B5194F18F2687B00D52DF4 /* PersonalViewEventTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewEventTrackCell.xib; sourceTree = "<group>"; };
+		13B930621928FF3E0035CACD /* BounceAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BounceAnimation.h; sourceTree = "<group>"; };
+		13B930631928FF3E0035CACD /* BounceAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceAnimation.m; sourceTree = "<group>"; };
 		13CCE57618EC469500462A83 /* PersonalViewAvgTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewAvgTimeCell.h; sourceTree = "<group>"; };
 		13CCE57718EC469500462A83 /* PersonalViewAvgTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewAvgTimeCell.m; sourceTree = "<group>"; };
 		13CCE57818EC469500462A83 /* PersonalViewAvgTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalViewAvgTimeCell.xib; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 		CD4CE09118E46A1400916A4B /* models */ = {
 			isa = PBXGroup;
 			children = (
+				13B930621928FF3E0035CACD /* BounceAnimation.h */,
+				13B930631928FF3E0035CACD /* BounceAnimation.m */,
 				CD8EE0F1190D242200F58797 /* TimingItem1.h */,
 				CD8EE0F2190D242200F58797 /* TimingItem1.m */,
 				CD52392119111298005EB55A /* TimingItemStore.h */,
@@ -687,6 +692,7 @@
 				13ACEB4A1920F35200DEEBB1 /* RoutineItemViewController.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
 				CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */,
+				13B930641928FF3E0035CACD /* BounceAnimation.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */,
 				CD6F7E04191B6F6600C962B7 /* TimingItemEntity.m in Sources */,

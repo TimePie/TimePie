@@ -18,6 +18,8 @@
 #import "Output.h"
 #import "BasicUIColor+UIPosition.h"
 
+#import "BounceAnimation.h"
+
 
 @interface MainScreenViewController ()
 {
@@ -33,11 +35,18 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.view.backgroundColor = [UIColor whiteColor];
+        [self navigationController].view.backgroundColor = [UIColor whiteColor];
+        _mAnimation = [BounceAnimation new];
     }
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.view.hidden = NO;
+    [self navigationController].navigationBar.hidden = NO;
+}
 
 
 - (void)viewDidAppear:(BOOL)animated
@@ -78,7 +87,7 @@
         
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
-        [timingItemStore restoreData];
+        //[timingItemStore restoreData];
         
         // for test:
 //        TimingItem * item = [timingItemStore createItem];
@@ -182,6 +191,10 @@
 {
     if (itemTable)
     {
+        if(itemTable.contentOffset.y < -434.f)
+        {
+            [self navigationController].navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44 - (434 + itemTable.contentOffset.y) * .5f);
+        }
         if (itemTable.contentOffset.y < -580.f && modalCanBeTriggered == true)
         {
             [self resignFirstResponder];
@@ -314,15 +327,17 @@
 {
     PersonalViewController *viewController = [[PersonalViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.3;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromBottom;
-    [[self navigationController].view.window.layer addAnimation:transition forKey:nil];
+    navController.transitioningDelegate = self;
+    [self navigationController].navigationBar.hidden = YES;
+    self.view.hidden = YES;
+//    CATransition *transition = [CATransition animation];
+//    transition.duration = 0.3;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    transition.type = kCATransitionPush;
+//    transition.subtype = kCATransitionFromBottom;
+//    [[self navigationController].view.window.layer addAnimation:transition forKey:nil];
 
-    [self presentViewController: navController animated:NO completion:^{
+    [self presentViewController: navController animated:YES completion:^{
         modalCanBeTriggered = false;
     }];
 }
@@ -418,5 +433,10 @@
 }
 //////////////////////
 
+#pragma mark - UIViewControllerTransitioningDelegate
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return self.mAnimation;
+}
 
 @end

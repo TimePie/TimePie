@@ -12,7 +12,9 @@
 #import "MainScreenTableView.h"
 #import "SelectView.h"
 
-@interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource>
+@class BounceAnimation;
+
+@interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate>
 {
     IBOutlet UIButton *stats;
     
@@ -28,7 +30,7 @@
     
 }
 
-
+@property (nonatomic, strong) BounceAnimation *mAnimation;
 
 - (IBAction)stats_btn_clicked:(id)sender;
 
