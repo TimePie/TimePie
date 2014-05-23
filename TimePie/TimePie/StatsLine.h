@@ -25,5 +25,7 @@
 
 @property (nonatomic) float lineWidth;
 
-
+@property (nonatomic, strong) NSArray *allPointsInLines;
+@property (nonatomic) NSInteger currentIndex;
+@property (nonatomic) BOOL isCurveLine;
 @end

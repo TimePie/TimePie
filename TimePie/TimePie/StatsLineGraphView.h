@@ -119,6 +119,6 @@
 //add
 @property (nonatomic) NSInteger itemCount;
 
-
+@property (nonatomic, strong) NSMutableArray *allDotsPositionOfAllLines;
 
 @end

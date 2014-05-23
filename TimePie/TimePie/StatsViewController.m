@@ -86,14 +86,16 @@
 #pragma mark - graph view data
 - (void)initItemData
 {
-    //[[TimingItemStore timingItemStore] getItemAtIndex:0];
-    self.itemDataArray=[[NSMutableArray alloc]init];
-    int itemCount=2;
-    NSMutableArray *nameArray=[[NSMutableArray alloc]init];
+    //手动保存 数据库的数据
+    [[TimingItemStore timingItemStore] saveData];
+    
+    self.itemDataArray = [[NSMutableArray alloc]init];
+    int itemCount = 3;
+    NSMutableArray *nameArray = [[NSMutableArray alloc]init];
     
     //item color
-    self.colorArray=[[NSMutableArray alloc]init];
-    UIColor* tempColor=[UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
+    self.colorArray = [[NSMutableArray alloc]init];
+    UIColor* tempColor = [UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
     [self.colorArray addObject:tempColor];
     tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
     [self.colorArray addObject:tempColor];
@@ -103,8 +105,8 @@
     //item name
     for (int i=0; i<itemCount; i++)
     {
-        NSString* temp=@"Test";
-        NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",(i+1)]];
+        NSString* temp = @"Test";
+        NSString* name = [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",(i+1)]];
         [nameArray addObject:name];
         
     }
@@ -114,46 +116,41 @@
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     
     
-    
-    NSArray* temp = [[TimingItemStore timingItemStore] getTimingItemsByDate:currentDate];
-    
-    
-    
-    
-    
-    //item data
-    //0表示 今日 的数据
+    //item data，一次性获得30天数据。
     for (int i = 0; i<itemCount; i++)
     {
-        //TimingItem *itemEntity = [[TimingItemStore timingItemStore] getItemAtIndex:i];
-        //itemEntity
-        
-        NSMutableArray *tempValues;
-        tempValues = [[NSMutableArray alloc] init];
-        
-        //NSString * nsDateString= [NSString stringWithFormat:@"%d.%d",month,day];
+        NSMutableArray *tempValues = [[NSMutableArray alloc] init];
         for(int count = 0;count <30;count++)
         {
-            if (count == 0) {
-                
-                //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
-                NSNumber *temp = [NSNumber numberWithInt:0];
-                [tempValues addObject:temp];
-                
-                
-            }
-            else
-            {
+            NSNumber *tempData = [NSNumber numberWithInt:0];
+            
+            //若无该事项，则默认为0
+            @try {
                 [comps setDay:-count];
                 NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
-                NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
-                //[tempValues addObject:test];
-                [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+                
+                /**
+                 *  real data
+                 */
+                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
+                
+                /**
+                 *  fake data
+                 */
+                //tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
             }
+            @catch (NSException *exception) {
+                tempData = [NSNumber numberWithInt:0];
+                //tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
+            }
+            
+//            if (tempData == 0) {
+//                tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
+//            }
+            [tempValues addObject:tempData];
+            
         }
-        
         ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[self.colorArray objectAtIndex:i] AndMouthData:tempValues];
-        
         
         [self.itemDataArray addObject:itemTemp];
     }
