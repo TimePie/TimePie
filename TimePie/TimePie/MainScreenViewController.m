@@ -52,9 +52,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    [timingItemStore restoreData];
+    [timingItemStore restoreData];
     modalCanBeTriggered = true;
     NSLog(@"view did appear");
+    
+
 }
 
 - (void)viewDidLoad
@@ -87,7 +89,7 @@
         
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
-        //[timingItemStore restoreData];
+//        [timingItemStore restoreData];
         
         // for test:
 //        TimingItem * item = [timingItemStore createItem];
@@ -109,7 +111,9 @@
         
         
         
+        UILongPressGestureRecognizer *longRecognizer=  [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressPie:)];
         
+        [pieChart addGestureRecognizer:longRecognizer];
         
         
         
@@ -123,7 +127,7 @@
         //[[self view] addSubview:pieChart];
         
         [pieChart reloadData];
-        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 550)];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 650)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable reloadData];
@@ -132,11 +136,15 @@
         [[self view] insertSubview:itemTable atIndex:0];
         /////////////////////////////////
         
-        selectView = [[SelectView alloc] initWithFrame:CGRectMake(-125, -75, 100, 100)];
+//        selectView = [[SelectView alloc] initWithFrame:CGRectMake(-125, -75, 100, 100)];
+//        
+//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToTap:)];
+//        tapRecognizer.numberOfTapsRequired =1;
+//        [selectView addGestureRecognizer:tapRecognizer];
         
         
 //        [[self view] addSubview:selectView];
-        [self showSelectView];
+//        [self showSelectView];
 //        [self removeSelectView];
 //        UITapGestureRecognizer *singleFingerTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
 //        [itemTable addGestureRecognizer:singleFingerTap];
@@ -144,7 +152,14 @@
         
 //        [singleFingerTap release];
         
+
         
+        [historyBtn setBackgroundImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
+        [cancelBtn setBackgroundImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
+        [historyBtn setTitle:@"" forState:UIControlStateNormal];
+        [cancelBtn setTitle:@"" forState:UIControlStateNormal];
+        historyBtn.hidden = YES;
+        cancelBtn.hidden = YES;
         
         //setup timer
         if(timer == nil){
@@ -155,7 +170,11 @@
         //main Loop
         NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
+        
+        
+        selectMode = NO;
     }
+    
     
 }
 
@@ -240,10 +259,45 @@
 {
     TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
     if(item){
-        return [[ColorThemes colorThemes] getColorAt:item.color];
+        
+        if(selectMode){
+            if([selectedArray containsObject:[[timingItemStore allItems] objectAtIndex:index]]){
+                return [[ColorThemes colorThemes] getColorAt:item.color];
+            }
+            return [[ColorThemes colorThemes] getLightColorAt:item.color];
+            
+        }else{
+            return [[ColorThemes colorThemes] getColorAt:item.color];
+        }
     }
     return [UIColor blackColor];
 }
+
+
+
+
+- (void)pieChart:(XYPieChart *)pieChart didSelectSliceAtIndex:(NSUInteger)index
+{
+    if(selectMode){
+        NSLog(@"did select slice at index: %d", index);
+        TimingItem* item =[[timingItemStore allItems] objectAtIndex:index];
+        if(![selectedArray containsObject:item]){
+            [selectedArray addObject:item];
+        }else{
+            [selectedArray removeObject:item];
+            NSLog(@"Deselect");
+        }
+        [pieChart reloadData];
+    }
+}
+- (void)pieChart:(XYPieChart *)pieChart didDeselectSliceAtIndex:(NSUInteger)index
+{
+    if(selectMode){
+        NSLog(@"did deselect slice at index: %d", index);
+    }
+}
+
+
 //////////////////
 
 
@@ -280,6 +334,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    if(selectMode){
+        return ;
+    }
+        
+        
     //NSLog(@"Timer!");
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
         return ;
@@ -379,15 +440,70 @@
     NSLog(@"cancel select!");
 }
 
-/*
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+-(IBAction)hist_btn_clicked:(id)sender
+{
+    if(selectMode){
+        selectMode =NO;
+        historyBtn.hidden = YES;
+        cancelBtn.hidden = YES;
+        [pieChart reloadData];
+        selectedArray = nil;
+    }
+    
+    
+    // delivery data to the history screen;
+    
+    
+    NSLog(@"history button clicked");
+}
+
+
+-(IBAction)canc_btn_clicked:(id)sender
+{
+    if(selectMode){
+        selectMode =NO;
+        historyBtn.hidden = YES;
+        cancelBtn.hidden = YES;
+        [pieChart reloadData];
+        selectedArray = nil;
+    }
+    
+    NSLog(@"cancel button clicked");
+}
+
+
+
+
+
+- (void)respondsToTap:(UITapGestureRecognizer *)recognizer {
+//    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    
     
     NSLog(@"Single tap!%@", recognizer);
+    
     //Do stuff here...
 }
-*/
+
+
+- (void)longPressPie:(UITapGestureRecognizer *)recognizer {
+    //    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    if(selectMode){
+//        selectMode = NO;
+//        [pieChart reloadData];
+    }else{
+        NSLog(@"long press!");
+        selectMode = YES;
+        historyBtn.hidden = NO;
+        cancelBtn.hidden = NO;
+        [pieChart reloadData];
+        selectedArray = [[NSMutableArray alloc] init];
+    }
+    
+    
+}
+
+
 /////
 
 

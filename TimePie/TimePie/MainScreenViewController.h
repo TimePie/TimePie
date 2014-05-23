@@ -17,12 +17,17 @@
 @interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate>
 {
     IBOutlet UIButton *stats;
+    IBOutlet UIButton *historyBtn;
+    IBOutlet UIButton *cancelBtn;
     
+    
+    
+    NSMutableArray * selectedArray;
     XYPieChart *pieChart;
     TimingItemStore * timingItemStore;
     MainScreenTableView *itemTable;
     NSTimer * timer;
-    
+    BOOL selectMode;
     
     
     SelectView * selectView;
