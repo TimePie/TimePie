@@ -103,8 +103,8 @@
     //item name
     for (int i=0; i<itemCount; i++)
     {
-        NSString* temp=@"Test";
-        NSString* name= [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",(i+1)]];
+        NSString* temp = @"Test";
+        NSString* name = [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",(i+1)]];
         [nameArray addObject:name];
         
     }
@@ -134,22 +134,37 @@
         //NSString * nsDateString= [NSString stringWithFormat:@"%d.%d",month,day];
         for(int count = 0;count <30;count++)
         {
-            if (count == 0) {
-                
-                //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
-                NSNumber *temp = [NSNumber numberWithInt:0];
-                [tempValues addObject:temp];
-                
-                
-            }
-            else
-            {
+//            if (count == 0) {
+//                
+//                //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
+//                NSNumber *temp = [NSNumber numberWithInt:0];
+//                [tempValues addObject:temp];
+//                
+//                
+//            }
+//            else
+//            {
+//                [comps setDay:-count];
+//                NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+//                NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
+//                //[tempValues addObject:test];
+//                [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+//            }
+            NSNumber *tempData = [NSNumber numberWithInt:0];
+            @try {
                 [comps setDay:-count];
                 NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
-                NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
-                //[tempValues addObject:test];
-                [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
+                TimingItemEntity *tempEntity = [[TimingItemStore timingItemStore] getDailyTimingItemByItemName:[nameArray objectAtIndex:i] date:tempDate];
+                
+                //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
             }
+            @catch (NSException *exception) {
+                //tempData = [NSNumber numberWithInt:0];
+                tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
+            }
+            [tempValues addObject:tempData];
+            
         }
         
         ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[self.colorArray objectAtIndex:i] AndMouthData:tempValues];
