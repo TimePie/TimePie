@@ -86,14 +86,18 @@
 #pragma mark - graph view data
 - (void)initItemData
 {
+    
+    [[TimingItemStore timingItemStore] saveData];
+    
+    
     //[[TimingItemStore timingItemStore] getItemAtIndex:0];
-    self.itemDataArray=[[NSMutableArray alloc]init];
-    int itemCount=2;
-    NSMutableArray *nameArray=[[NSMutableArray alloc]init];
+    self.itemDataArray = [[NSMutableArray alloc]init];
+    int itemCount = 3;
+    NSMutableArray *nameArray = [[NSMutableArray alloc]init];
     
     //item color
-    self.colorArray=[[NSMutableArray alloc]init];
-    UIColor* tempColor=[UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
+    self.colorArray = [[NSMutableArray alloc]init];
+    UIColor* tempColor = [UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
     [self.colorArray addObject:tempColor];
     tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
     [self.colorArray addObject:tempColor];
@@ -115,7 +119,7 @@
     
     
     
-    NSArray* temp = [[TimingItemStore timingItemStore] getTimingItemsByDate:currentDate];
+    //NSArray* temp = [[TimingItemStore timingItemStore] getTimingItemsByDate:currentDate];
     
     
     
@@ -128,8 +132,7 @@
         //TimingItem *itemEntity = [[TimingItemStore timingItemStore] getItemAtIndex:i];
         //itemEntity
         
-        NSMutableArray *tempValues;
-        tempValues = [[NSMutableArray alloc] init];
+        NSMutableArray *tempValues = [[NSMutableArray alloc] init];
         
         //NSString * nsDateString= [NSString stringWithFormat:@"%d.%d",month,day];
         for(int count = 0;count <30;count++)
@@ -160,8 +163,8 @@
                 //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
             }
             @catch (NSException *exception) {
-                //tempData = [NSNumber numberWithInt:0];
-                tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
+                tempData = [NSNumber numberWithInt:0];
+                //tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
             }
             [tempValues addObject:tempData];
             
