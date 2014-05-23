@@ -123,7 +123,7 @@
         //[[self view] addSubview:pieChart];
         
         [pieChart reloadData];
-        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 660)];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 550)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable reloadData];
@@ -412,8 +412,8 @@
         [Output println:@"Across"];
         
         //tests:
-        [timingItemStore addTag:item TagName:@"Second Tag"];
-        [timingItemStore getTimingItemsByTagName:@"Second Tag"];
+//        [timingItemStore addTag:item TagName:@"Second Tag"];
+//        [timingItemStore getTimingItemsByTagName:@"Second Tag"];
         [timingItemStore getAllTags];
     }
     else{

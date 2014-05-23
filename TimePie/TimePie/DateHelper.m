@@ -18,11 +18,11 @@
 
     
     //final version
-    //NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:date];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:date];
     
     
     //test version
-    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
+    //NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:date];
     
     
     return [calendar dateFromComponents:components];
@@ -35,10 +35,10 @@
     NSDateComponents *components = [NSDateComponents new];
     
     //final version
-    //components.day = 1;
+    components.day = 1;
     
     //test version
-    components.minute = 1;
+    //components.minute = 1;
     
     NSDate *date1 = [calendar dateByAddingComponents:components toDate:[DateHelper beginningOfDay:date]  options:0];
     
