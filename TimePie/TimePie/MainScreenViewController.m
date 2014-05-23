@@ -395,7 +395,6 @@
 //////////////////
 -(void)pollTime
 {
-    //NSLog(@"Timer!");
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
         return ;
     }
@@ -407,14 +406,14 @@
     if([DateHelper checkAcrossDay])
     {
         //across a day
-        [timingItemStore viewAllItem];
+//        [timingItemStore viewAllItem];
         [timingItemStore restoreData];
         [Output println:@"Across"];
         
         //tests:
 //        [timingItemStore addTag:item TagName:@"Second Tag"];
 //        [timingItemStore getTimingItemsByTagName:@"Second Tag"];
-        [timingItemStore getAllTags];
+//        [timingItemStore getAllTags];
     }
     else{
         //not across a day

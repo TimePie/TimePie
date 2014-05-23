@@ -23,6 +23,9 @@
         [viewHistory setImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
         [cancelSelect setImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
         
+        
+        
+        
         [self addSubview:viewHistory];
         [self addSubview:cancelSelect];
     }
