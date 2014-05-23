@@ -136,9 +136,9 @@
         {
             if (count == 0) {
                 
-                NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
-                //NSNumber *temp = [NSNumber numberWithInt:0];
-                [tempValues addObject:test];
+                //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
+                NSNumber *temp = [NSNumber numberWithInt:0];
+                [tempValues addObject:temp];
                 
                 
             }
@@ -147,8 +147,8 @@
                 [comps setDay:-count];
                 NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
                 NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
-                [tempValues addObject:test];
-                //[tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
+                //[tempValues addObject:test];
+                [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
             }
         }
         
