@@ -86,11 +86,9 @@
 #pragma mark - graph view data
 - (void)initItemData
 {
-    
+    //手动保存 数据库的数据
     [[TimingItemStore timingItemStore] saveData];
     
-    
-    //[[TimingItemStore timingItemStore] getItemAtIndex:0];
     self.itemDataArray = [[NSMutableArray alloc]init];
     int itemCount = 3;
     NSMutableArray *nameArray = [[NSMutableArray alloc]init];
@@ -118,60 +116,41 @@
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     
     
-    
-    //NSArray* temp = [[TimingItemStore timingItemStore] getTimingItemsByDate:currentDate];
-    
-    
-    
-    
-    
-    //item data
-    //0表示 今日 的数据
+    //item data，一次性获得30天数据。
     for (int i = 0; i<itemCount; i++)
     {
-        //TimingItem *itemEntity = [[TimingItemStore timingItemStore] getItemAtIndex:i];
-        //itemEntity
-        
         NSMutableArray *tempValues = [[NSMutableArray alloc] init];
-        
-        //NSString * nsDateString= [NSString stringWithFormat:@"%d.%d",month,day];
         for(int count = 0;count <30;count++)
         {
-//            if (count == 0) {
-//                
-//                //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
-//                NSNumber *temp = [NSNumber numberWithInt:0];
-//                [tempValues addObject:temp];
-//                
-//                
-//            }
-//            else
-//            {
-//                [comps setDay:-count];
-//                NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
-//                NSNumber *test = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
-//                //[tempValues addObject:test];
-//                [tempValues addObject:[NSNumber numberWithInteger:(arc4random() % 7000)]]; // Random values for the graph
-//            }
             NSNumber *tempData = [NSNumber numberWithInt:0];
+            
+            //若无该事项，则默认为0
             @try {
                 [comps setDay:-count];
                 NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
-                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
-                TimingItemEntity *tempEntity = [[TimingItemStore timingItemStore] getDailyTimingItemByItemName:[nameArray objectAtIndex:i] date:tempDate];
                 
-                //NSNumber *temp = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:currentDate];
+                /**
+                 *  real data
+                 */
+                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
+                
+                /**
+                 *  fake data
+                 */
+                //tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
             }
             @catch (NSException *exception) {
                 tempData = [NSNumber numberWithInt:0];
                 //tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
             }
+            
+//            if (tempData == 0) {
+//                tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
+//            }
             [tempValues addObject:tempData];
             
         }
-        
         ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[self.colorArray objectAtIndex:i] AndMouthData:tempValues];
-        
         
         [self.itemDataArray addObject:itemTemp];
     }

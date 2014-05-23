@@ -70,6 +70,8 @@ int currentlyCloser;
     self.animationDelegate = [[StatsAnimations alloc] init];
     self.animationDelegate.delegate = self;
     
+    //
+    self.allDotsPositionOfAllLines = [[NSMutableArray alloc] init];
     //draw different item in one view
     for (int i=0; i<self.itemCount; i++) {
         [self drawGraph:i];
@@ -113,6 +115,9 @@ int currentlyCloser;
 
 - (void)drawDots:(int) index
 {
+    NSMutableArray *currentLinesDots = [[NSMutableArray alloc] init];
+    
+    
     // draw dots
     float maxValue = [self maxValue]; // Biggest Y-axis value from all the points.
     float minValue = [self minValue]; // Smallest Y-axis value from all the points.
@@ -142,8 +147,11 @@ int currentlyCloser;
         
         [self addSubview:circleDot];
         
+        CGPoint tempPoint = CGPointMake(circleDot.center.x, circleDot.center.y);
+        [currentLinesDots addObject:[NSValue valueWithCGPoint:tempPoint]];
         //[self.animationDelegate animationForDot:i circleDot:circleDot animationSpeed:self.animationGraphEntranceSpeed];
     }
+    [self.allDotsPositionOfAllLines addObject:currentLinesDots];
 }
 
 - (void)drawLines:(int) index
@@ -182,6 +190,22 @@ int currentlyCloser;
         
         line.firstPoint = CGPointMake(xDot1, yDot1);
         line.secondPoint = CGPointMake(xDot2, yDot2);
+        
+        /**
+         *  test for curve line drawing
+         */
+        line.allPointsInLines = [self.allDotsPositionOfAllLines objectAtIndex:index];
+        line.currentIndex = i;
+        if (self.graphType == MonthType)
+        {
+            line.isCurveLine = YES;
+        }
+        else
+        {
+            line.isCurveLine = NO;
+        }
+        
+        
         //line.topColor = self.colorTop;
         
         line.color = [self.colorsOfGraph objectAtIndex:index];
@@ -198,14 +222,17 @@ int currentlyCloser;
         
         //set the dot on the line
         [currentDot removeFromSuperview];
-        [self addSubview:currentDot];
         
-        //generate a inner white dot on the current dot
-        StatsCircle *innerCircleDot = [[StatsCircle alloc] initWithFrame:CGRectMake(currentDot.center.x-circleSize/4, currentDot.center.y-circleSize/4, circleSize/2, circleSize/2)];
-        innerCircleDot.alpha = 1;
-        innerCircleDot.color = [UIColor whiteColor];
-        [self addSubview:innerCircleDot];
+        if(self.graphType != MonthType)
+        {
+            [self addSubview:currentDot];
         
+            //generate a inner white dot on the current dot
+            StatsCircle *innerCircleDot = [[StatsCircle alloc] initWithFrame:CGRectMake(currentDot.center.x-circleSize/4, currentDot.center.y-circleSize/4, circleSize/2, circleSize/2)];
+            innerCircleDot.alpha = 1;
+            innerCircleDot.color = [UIColor whiteColor];
+            [self addSubview:innerCircleDot];
+        }
         [self.animationDelegate animationForLine:i line:line animationSpeed:self.animationGraphEntranceSpeed];
     }
 }
