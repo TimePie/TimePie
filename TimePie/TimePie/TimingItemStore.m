@@ -53,7 +53,11 @@
 //Later we can use ColorTheme to manage the colors to avoid the duplicated colors.
 - (TimingItem *)createItem{
     TimingItem *i = [TimingItem randomItem];
-    i.color = [allItems count];
+    
+    
+    i.color = [[ColorThemes colorThemes] getAColor];
+//    i.color = 0;
+    
     [allItems addObject:i];
     NSLog(@"create item!");
     return i;
@@ -70,6 +74,7 @@
     i.timing= item.timing;
     [allItems insertObject:i atIndex:[allItems count]];
     NSLog(@"create item!");
+    
     return i;
 }
 
@@ -96,6 +101,7 @@
 {
     [allItems removeObjectIdenticalTo:i];
     [self deleteItem:i];
+    [[ColorThemes colorThemes] initTaken:allItems];
 }
 
 
@@ -393,6 +399,9 @@
         }
     }
     
+    
+    [[ColorThemes colorThemes] initTaken:allItems];
+    
     return YES;
 }
 
@@ -450,7 +459,7 @@
 // restore a single item from NSManagedObject
 - (TimingItem* )restoreItem:(NSManagedObject *)i
 {
-    TimingItem * item = [self createItem];
+    TimingItem * item = [TimingItem randomItem];
     item.itemName =[i valueForKey:@"item_name"];
     item.time = [[i valueForKey:@"time"] doubleValue];
     item.itemID =[[i valueForKey:@"item_id"] integerValue];
@@ -458,6 +467,7 @@
     item.lastCheck = [i valueForKey:@"last_check"];
     item.color = [[i valueForKey:@"color_number"] integerValue];
     item.timing = [[i valueForKey:@"timing"] boolValue];
+    [allItems addObject:item];
     return item;
 }
 

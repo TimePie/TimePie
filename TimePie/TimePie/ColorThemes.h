@@ -12,6 +12,8 @@
 {
     NSMutableArray * defaultColorTheme;
     NSMutableArray * defaultLightColorTheme;
+    int colorPointer;
+    NSMutableArray * taken;
 }
 
 
@@ -20,5 +22,7 @@
 - (NSArray *)defaultLightColorTheme;
 - (UIColor *)getColorAt:(int)index;
 - (UIColor *)getLightColorAt:(int)index;
+- (void)initTaken:(NSArray*)array;
+- (int)getAColor;
 
 @end

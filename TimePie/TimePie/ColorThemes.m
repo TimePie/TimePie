@@ -8,6 +8,9 @@
 
 #import "ColorThemes.h"
 #import "BasicUIColor+UIPosition.h"
+
+#import "TimingItem1.h"
+
 @implementation ColorThemes
 
 
@@ -16,9 +19,47 @@
     self =[super init];
     if(self){
         [self defaultColorTheme];
+        colorPointer = 0;
+        taken = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
+
+
+
+- (void)initTaken:(NSArray*)array
+{
+    taken = [[NSMutableArray alloc] init];
+    for(TimingItem * item in array){
+        [taken addObject:[NSNumber numberWithInt:item.color]];
+    }
+}
+
+- (int)getAColor
+{
+    int size=[[self defaultColorTheme] count];
+    
+    if(colorPointer>=size){
+        colorPointer%=size;
+    }
+    int flag = 0;
+    while([taken containsObject:[NSNumber numberWithInt:colorPointer]]){
+        colorPointer++;
+        if(colorPointer>=size){
+            colorPointer%=size;
+            if(flag==2) {
+                [taken addObject:[NSNumber numberWithInt:colorPointer]];
+                return colorPointer;
+
+            }
+            flag++;
+        }
+    }
+    [taken addObject:[NSNumber numberWithInt:colorPointer]];
+    return colorPointer;
+}
+
 
 
 
@@ -27,6 +68,7 @@
     static ColorThemes * colorThemes = nil;
     if(!colorThemes){
         colorThemes =[[super allocWithZone:nil] init];
+        
     }
     return colorThemes;
 }
