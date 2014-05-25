@@ -2,6 +2,9 @@
 #define MAIN_UI_COLOR [UIColor colorWithRed:0.38 green:0.72 blue:0.67 alpha:1.0]
 #define MAIN_DARK_BG_COLOR [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
 #define WHITE_COLOR [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]
+#define MAIN_UI_COLOR_TIME [UIColor colorWithRed:.83 green:.83 blue:.83 alpha:1.0]
+
+
 
     //color platte no.1 -- timepie default color set
 #define RedNO1_light [UIColor colorWithRed:1.0 green:0.65 blue:0.47 alpha:0.57]

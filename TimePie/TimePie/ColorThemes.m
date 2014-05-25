@@ -81,6 +81,13 @@
         [defaultColorTheme addObject:BLUENO2];
         [defaultColorTheme addObject:GREENNO3];
         [defaultColorTheme addObject:PINKNO04];
+        [defaultColorTheme addObject:BROWNN05];
+        [defaultColorTheme addObject:YELLOWN06];
+        [defaultColorTheme addObject:PURPLEN07];
+        [defaultColorTheme addObject:P01N08];
+        [defaultColorTheme addObject:P01N09];
+        [defaultColorTheme addObject:P01N10];
+        
     }
     return defaultColorTheme;
 }
@@ -92,6 +99,12 @@
         [defaultLightColorTheme addObject:BLUENO2_light];
         [defaultLightColorTheme addObject:GREENNO3_light];
         [defaultLightColorTheme addObject:PINKNO04_light];
+        [defaultLightColorTheme addObject:BROWNN05_light];
+        [defaultLightColorTheme addObject:YELLOWN06_light];
+        [defaultLightColorTheme addObject:PURPLEN07_light];
+        [defaultLightColorTheme addObject:P01N08_light];
+        [defaultLightColorTheme addObject:P01N09_light];
+        [defaultLightColorTheme addObject:P01N10_light];
     }
     return defaultLightColorTheme;
 }

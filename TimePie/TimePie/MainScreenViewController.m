@@ -21,6 +21,14 @@
 #import "BounceAnimation.h"
 
 
+#define ContentOffsetY -350
+#define ContentTriggerOffsetY -580
+#define HeightOfItemTable 570
+#define ItemTableInitOffsetY -0
+#define PieChartInitOffsetY -420
+
+
+
 @interface MainScreenViewController ()
 {
     BOOL modalCanBeTriggered;
@@ -69,6 +77,17 @@
         UINavigationItem *n = [self navigationItem];
         [n setTitle:@"TimePie"];
         
+        [[UINavigationBar appearance] setTitleTextAttributes:
+         [NSDictionary dictionaryWithObjectsAndKeys:
+          MAIN_UI_COLOR,
+          NSForegroundColorAttributeName,
+//          [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
+//          UITextAttributeTextShadowColor,
+//          [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+//          UITextAttributeTextShadowOffset,
+          [UIFont fontWithName:@"Arial-Bold" size:0.0],
+          NSFontAttributeName,
+          nil]];
         
         UIBarButtonItem *bbi= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
         
@@ -96,7 +115,7 @@
 //        [timingItemStore getTimingItemsByTagName:@"hahah"];
         
         //setup pieChart
-        pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, -390, 300, 300)];
+        pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0, PieChartInitOffsetY, 300, 300)];
         [pieChart setDataSource:self];
         [pieChart setDelegate:self];
         [pieChart setStartPieAngle:M_PI_2];
@@ -115,8 +134,12 @@
         [pieChart addGestureRecognizer:longRecognizer];
         
         
-        
-        
+        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG2"];
+        UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 85, 320, 311)];
+        [bgview setImage:bg];
+        [pieChart addSubview:bgview];
+        [pieChart sendSubviewToBack:bgview];
+//        [itemTable addSubview:bgview];
         
         
         
@@ -126,11 +149,11 @@
         //[[self view] addSubview:pieChart];
         
         [pieChart reloadData];
-        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 620)];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable reloadData];
-        [itemTable setContentInset:UIEdgeInsetsMake(370, 0, 0, 0)];
+        [itemTable setContentInset:UIEdgeInsetsMake(-ContentOffsetY, 0, 0, 0)];
         [itemTable addSubview:pieChart];
         [[self view] insertSubview:itemTable atIndex:0];
         /////////////////////////////////
@@ -165,6 +188,9 @@
             timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollTime) userInfo:nil repeats:YES];
         }
         //////////
+        
+        
+        
         
         //main Loop
         NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
@@ -209,11 +235,11 @@
 {
     if (itemTable)
     {
-        if(itemTable.contentOffset.y < -434.f)
+        if(itemTable.contentOffset.y < ContentOffsetY)
         {
-            [self navigationController].navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44 - (434 + itemTable.contentOffset.y) * .5f);
+            [self navigationController].navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44 - (-ContentOffsetY + itemTable.contentOffset.y) * .5f);
         }
-        if (itemTable.contentOffset.y < -580.f && modalCanBeTriggered == true)
+        if (itemTable.contentOffset.y < ContentTriggerOffsetY && modalCanBeTriggered == true)
         {
             [self resignFirstResponder];
             [self animateModalView];
@@ -327,6 +353,29 @@
     
     cell.itemColor.backgroundColor = [[ColorThemes colorThemes] getColorAt:item.color];
     cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.color];
+    cell.itemNotice.hidden = YES;
+    cell.itemName.font = [UIFont fontWithName:@"Roboto-Condensed" size:20];
+    cell.itemTime.font = [UIFont fontWithName:@"Roboto-Condensed" size:14];
+    if(indexPath.row ==0){
+        UIColor* bgColor = [[ColorThemes colorThemes] getLightColorAt:item.color];
+        CGFloat r;
+        CGFloat g;
+        CGFloat b;
+        CGFloat a;
+        [bgColor getRed:&r green:&g blue:&b  alpha:&a];
+        bgColor= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:.4];
+        
+        cell.backgroundColor =bgColor;
+        [cell.itemName setTextColor:[UIColor whiteColor]];
+        [cell.itemTime setTextColor:[UIColor whiteColor]];
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
+        TimingItem* i = [[timingItemStore allItems] objectAtIndex:0];
+        [cell.itemName setTextColor:[[ColorThemes colorThemes] getColorAt:i.color]];
+        [cell.itemTime setTextColor:MAIN_UI_COLOR_TIME];
+//        cell.itemTime.hidden = YES;
+    }
+    
     
     if(selectMode)
     {
@@ -345,6 +394,11 @@
 
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 48;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -459,6 +513,13 @@
 -(IBAction)hist_btn_clicked:(id)sender
 {
     if(selectMode){
+        
+        //Go back
+        
+
+        pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, 620);
+        itemTable.scrollEnabled = YES;
         selectMode =NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
@@ -477,6 +538,12 @@
 -(IBAction)canc_btn_clicked:(id)sender
 {
     if(selectMode){
+        
+        //Go back
+        
+        pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, 620);
+        itemTable.scrollEnabled =YES;
         selectMode =NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
@@ -508,18 +575,22 @@
 //        selectMode = NO;
 //        [pieChart reloadData];
     }else{
+        [itemTable setContentOffset:CGPointMake(itemTable.contentOffset.x, ContentOffsetY)];
+        itemTable.scrollEnabled = NO;
+        //Enter Select Mode
         NSLog(@"long press!");
         selectMode = YES;
         historyBtn.hidden = NO;
         cancelBtn.hidden = NO;
+        
+        pieChart.frame= CGRectMake(0, PieChartInitOffsetY-35, 300, 300);
+        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY+35, 320, 620);
         [pieChart reloadData];
         [itemTable reloadData];
+        
+        
         selectedArray = [[NSMutableArray alloc] init];
-        
-        
     }
-    
-    
 }
 
 
