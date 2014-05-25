@@ -30,4 +30,6 @@
 
 @property (nonatomic, assign) id<PersonalViewAvgTimeProtocal> delegate;
 
+- (void)reloadDayCount:(NSInteger)dCount;
+
 @end

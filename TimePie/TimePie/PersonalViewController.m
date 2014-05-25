@@ -16,7 +16,9 @@
 #import "Tag.h"
 
 @interface PersonalViewController ()
-
+{
+    NSInteger dayCount;
+}
 @end
 
 @implementation PersonalViewController
@@ -120,6 +122,7 @@
     columnHeightList = [[NSMutableArray alloc] init];
     [self getColumnHeightListWithTagList];
     avgTimeOfTagList = [NSMutableArray arrayWithObjects:@"7.8",@"2.6",@"3.9",@"6.3",@"2.7",@"1.5", nil];
+    dayCount = 7;
 }
 
 #pragma mark - target selector
@@ -145,6 +148,7 @@
 -(void)donePressed
 {
     timeRangeInfo = [_pVCPicker.pickerData objectAtIndex:[_pVCPicker.picker selectedRowInComponent:0]];
+    [self judgeDayCount];
     [_mainView reloadData];
     [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
     self.navigationController.navigationBar.userInteractionEnabled = YES;
@@ -201,6 +205,7 @@
         {
             avgTimeCell = [[PersonalViewAvgTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:avgTimeCellIdentifier];
         }
+        [avgTimeCell reloadDayCount:dayCount];
         avgTimeCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return avgTimeCell;
     }
@@ -317,6 +322,15 @@
     } completion:^(BOOL finished){
         [view setHidden:hidden];
     }];
+}
+
+- (void)judgeDayCount
+{
+    if ([timeRangeInfo isEqualToString:@"过去一周"]) dayCount = 7;
+    else if ([timeRangeInfo isEqualToString:@"过去一个月"]) dayCount = 31;
+    else if ([timeRangeInfo isEqualToString:@"过去三个月"]) dayCount = 93;
+    else if ([timeRangeInfo isEqualToString:@"过去六个月"]) dayCount = 180;
+    else dayCount = 365;
 }
 
 /** EventTrackCell Usage
