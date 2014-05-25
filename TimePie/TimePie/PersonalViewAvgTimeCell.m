@@ -60,7 +60,7 @@
     hourIndicator1.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
     hourIndicator1.textColor = MAIN_UI_COLOR;
     [self addSubview:hourIndicator1];
-    UILabel* hourIndicator2 = [[UILabel alloc] initWithFrame:CGRectMake(283, 20, 40, 20)];
+    UILabel* hourIndicator2 = [[UILabel alloc] initWithFrame:CGRectMake(293, 20, 40, 20)];
     hourIndicator2.text = @"h";
     hourIndicator2.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
     hourIndicator2.textColor = MAIN_UI_COLOR;
@@ -80,17 +80,27 @@
     // Configure the view for the selected state
 }
 
-- (void)loadText
+- (void)loadTotalText
 {
-    _labelTotal.text = [NSString stringWithFormat:@"%@",dayCount];
-    _labelAvg.text = [NSString stringWithFormat:@"%@",dayCount];
+    _labelTotal.text = [NSString stringWithFormat:@"%.0f",totalHours.floatValue];
 }
 
+- (void)loadAvgText
+{
+    _labelAvg.text = [NSString stringWithFormat:@"%.1f",totalHours.floatValue / dayCount.floatValue];
+}
+
+#pragma mark - public
 - (void)reloadDayCount:(NSInteger)dCount
 {
     dayCount = [NSNumber numberWithInt:dCount];
-    [self loadText];
+    [self loadAvgText];
 }
 
+- (void)reloadTotalHours:(NSNumber *)tHours
+{
+    totalHours = tHours;
+    [self loadTotalText];
+}
 
 @end

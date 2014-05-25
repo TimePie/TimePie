@@ -18,6 +18,7 @@
 @interface PersonalViewController ()
 {
     NSInteger dayCount;
+    NSNumber *totalHours;
 }
 @end
 
@@ -122,6 +123,7 @@
     columnHeightList = [[NSMutableArray alloc] init];
     [self getColumnHeightListWithTagList];
     avgTimeOfTagList = [NSMutableArray arrayWithObjects:@"7.8",@"2.6",@"3.9",@"6.3",@"2.7",@"1.5", nil];
+    totalHours = [[TimingItemStore timingItemStore] getTotalHoursByStartDate:[self calculateStartDateWithTimeInterval:7]];
     dayCount = 7;
 }
 
@@ -205,6 +207,7 @@
         {
             avgTimeCell = [[PersonalViewAvgTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:avgTimeCellIdentifier];
         }
+        [avgTimeCell reloadTotalHours:totalHours];
         [avgTimeCell reloadDayCount:dayCount];
         avgTimeCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return avgTimeCell;
@@ -326,11 +329,31 @@
 
 - (void)judgeDayCount
 {
-    if ([timeRangeInfo isEqualToString:@"过去一周"]) dayCount = 7;
-    else if ([timeRangeInfo isEqualToString:@"过去一个月"]) dayCount = 31;
-    else if ([timeRangeInfo isEqualToString:@"过去三个月"]) dayCount = 93;
-    else if ([timeRangeInfo isEqualToString:@"过去六个月"]) dayCount = 180;
-    else dayCount = 365;
+    if ([timeRangeInfo isEqualToString:@"过去一周"])
+    {
+        dayCount = 7;
+        totalHours = [[TimingItemStore timingItemStore] getTotalHoursByStartDate:[self calculateStartDateWithTimeInterval:7]];
+    }
+    else if ([timeRangeInfo isEqualToString:@"过去一个月"])
+    {
+        dayCount = 31;
+        totalHours = [[TimingItemStore timingItemStore] getTotalHoursByStartDate:[self calculateStartDateWithTimeInterval:31]];
+    }
+    else if ([timeRangeInfo isEqualToString:@"过去三个月"])
+    {
+        dayCount = 93;
+        totalHours = [[TimingItemStore timingItemStore] getTotalHoursByStartDate:[self calculateStartDateWithTimeInterval:93]];
+    }
+    else if ([timeRangeInfo isEqualToString:@"过去六个月"])
+    {
+        dayCount = 180;
+        totalHours = [[TimingItemStore timingItemStore] getTotalHoursByStartDate:[self calculateStartDateWithTimeInterval:180]];
+    }
+    else
+    {
+        dayCount = 365;
+        totalHours = [[TimingItemStore timingItemStore] getTotalHoursByStartDate:[self calculateStartDateWithTimeInterval:365]];
+    }
 }
 
 - (NSDate*)calculateStartDateWithTimeInterval:(NSInteger)interval;
