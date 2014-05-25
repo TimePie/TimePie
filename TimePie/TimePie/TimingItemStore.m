@@ -916,6 +916,47 @@
 }
 
 
+- (NSNumber *)getTotalHoursByStartDate:(NSDate*)date
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    
+    
+    NSDate *startOfToday = [DateHelper beginningOfDay:date];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"date_created >= %@", startOfToday]];
+    NSSortDescriptor *sortByDate = [[NSSortDescriptor alloc] initWithKey:@"date_created" ascending:YES];
+    
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+    [fetchRequest setFetchLimit:1];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    
+    
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"date_created....: %@", [info valueForKey:@"date_created"]);
+    }
+    if([fetchedObjects count]==0){
+        NSLog(@"Empty");
+        return 0;
+    }
+    
+    NSTimeInterval timeinterval =[(NSDate*)[[fetchedObjects objectAtIndex:0] valueForKey:@"date_created"] timeIntervalSinceNow];
+    
+    
+    NSNumber * result = [NSNumber numberWithDouble:-timeinterval/3600];
+    NSLog(@"%@",result);
+    return result;
+}
+
 - (NSNumber *)getTotalHours
 {
     NSManagedObjectContext *context = [self managedObjectContext];

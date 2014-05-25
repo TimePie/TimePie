@@ -65,7 +65,8 @@
 ///
 
 - (NSNumber *)getTotalHours;
-- (NSNumber *)getTotalDays;
+- (NSNumber *)getTotalHoursByStartDate:(NSDate*)date;
+//- (NSNumber *)getTotalDays;
 - (NSNumber *)getTotalHoursByTag:(NSString*)tagName;
 
 - (NSArray *)getDailyTimingsItemByTagName:(NSString*)tagName
