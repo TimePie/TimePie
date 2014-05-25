@@ -121,10 +121,11 @@
     lightColorList = [NSMutableArray arrayWithObjects:RedNO1_light, BLUENO2_light, GREENNO3_light, PINKNO04_light, BROWNN05_light, YELLOWN06_light, PURPLEN07_light, P01N08_light, P01N09_light, P01N10_light, nil];
     /***to do**/
     columnHeightList = [[NSMutableArray alloc] init];
-    [self getColumnHeightListWithTagList];
-    avgTimeOfTagList = [NSMutableArray arrayWithObjects:@"7.8",@"2.6",@"3.9",@"6.3",@"2.7",@"1.5", nil];
     totalHours = [[TimingItemStore timingItemStore] getTotalHoursByStartDate:[self calculateStartDateWithTimeInterval:7]];
     dayCount = 7;
+    avgTimeOfTagList = [[NSMutableArray alloc] init];
+    [self calculateAvgTimeOfTag];
+    [self getColumnHeightListWithTagList];
 }
 
 #pragma mark - target selector
@@ -233,7 +234,7 @@
             itemTrackCell = [[PersonalViewEventTrackCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
         }
         itemTrackCell.PVETCEventLabel.text = [[tagList objectAtIndex:indexPath.row] tag_name];
-        itemTrackCell.PVETCAvgTimeLabel.text = [avgTimeOfTagList objectAtIndex:indexPath.row];
+        itemTrackCell.PVETCAvgTimeLabel.text = [NSString stringWithFormat:@"%.1f",[[avgTimeOfTagList objectAtIndex:indexPath.row] floatValue]];
         itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
         [itemTrackCell initCellWithColor:[lightColorList objectAtIndex:indexPath.row] ColumnCount:[[columnHeightList objectAtIndex:indexPath.row] count] HeightArray:[columnHeightList objectAtIndex:indexPath.row]];
         itemTrackCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -363,6 +364,12 @@
     return resultDate;
 }
 
+- (void)calculateAvgTimeOfTag
+{
+    for (int i = 0; i < tagList.count; i++)
+        [avgTimeOfTagList addObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:i] tag_name]].floatValue / dayCount]];
+}
+
 /** EventTrackCell Usage
  **/
 - (void)getColumnHeightListWithTagList
@@ -378,9 +385,13 @@
 
 - (NSMutableArray*)getSpecificColumnHeightListWithTagName:(NSString*)tName
 {
-    NSArray *tArray = @[@15.f,@20.f,@15.f,@20.f,@15.f,@20.f];
-    NSMutableArray *rArray = [NSMutableArray arrayWithArray:tArray];
-    return rArray;
+    NSMutableArray *tArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < dayCount; i++)
+    {
+        NSNumber *tNum = [[TimingItemStore timingItemStore] getTotalHoursByDate:[self calculateStartDateWithTimeInterval:i] byTag:tName];
+        [tArray addObject: tNum];
+    }
+    return tArray;
 }
 
 - (void)didReceiveMemoryWarning
