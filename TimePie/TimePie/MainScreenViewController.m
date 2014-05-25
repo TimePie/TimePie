@@ -127,7 +127,7 @@
         //[[self view] addSubview:pieChart];
         
         [pieChart reloadData];
-        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 650)];
+        itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, -50, 320, 620)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable reloadData];
@@ -329,6 +329,22 @@
     cell.itemColor.backgroundColor = [[ColorThemes colorThemes] getColorAt:item.color];
     cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.color];
     
+    if(selectMode)
+    {
+        cell.alpha = .5;
+        cell.itemColor.alpha = .5;
+        cell.itemNotice.alpha = .5;
+        cell.itemTime.alpha =.5;
+        cell.itemName.alpha =.5;
+    }else{
+        cell.alpha =1;
+        cell.itemColor.alpha =1;
+        cell.itemNotice.alpha =1;
+        cell.itemTime.alpha = 1;
+        cell.itemName.alpha = 1;
+    }
+
+    
     return cell;
 }
 
@@ -467,6 +483,7 @@
         cancelBtn.hidden = YES;
         [pieChart reloadData];
         selectedArray = nil;
+        [itemTable reloadData];
     }
     
     NSLog(@"cancel button clicked");
@@ -497,7 +514,10 @@
         historyBtn.hidden = NO;
         cancelBtn.hidden = NO;
         [pieChart reloadData];
+        [itemTable reloadData];
         selectedArray = [[NSMutableArray alloc] init];
+        
+        
     }
     
     

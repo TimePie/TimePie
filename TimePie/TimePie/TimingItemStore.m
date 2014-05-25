@@ -512,6 +512,40 @@
 
 
 
+- (BOOL)addTag:(NSString *)name
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    Tag * tag ;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",name]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        //If not existed, create one
+        tag = (Tag*)[NSEntityDescription insertNewObjectForEntityForName:@"Tag"
+                                                  inManagedObjectContext:context];
+        [tag setValue:name forKey:@"tag_name"];
+    }else{
+        //If existed, return
+        return YES;
+    }
+    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return false;
+    }
+
+    
+    return NO;
+}
+
+
 
 
 - (BOOL)addTag:(TimingItem *)item
@@ -577,7 +611,7 @@
     
     
     
-    
+    /*
     ///check if it works
     
     fetchRequest = [[NSFetchRequest alloc] init];
@@ -591,6 +625,7 @@
         NSLog(@"item entity for tag:%@", i);
     }
 
+    */
     return true;
 }
 

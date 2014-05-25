@@ -27,7 +27,6 @@
 - (TimingItem *)createItem;
 - (TimingItem *)createItem:(TimingItem*)item;
 - (id)getItemAtIndex:(int)index;
-
 - (void)moveItemAtIndex:(int)from
                 toIndex:(int)to;
 
@@ -53,9 +52,10 @@
 
 
 
-
+//Tags
 - (BOOL)addTag:(TimingItem *)item
        TagName:(NSString *)name;
+- (BOOL)addTag:(NSString*)name;
 - (NSArray*)getAllTags;
 - (NSArray *)getTimingItemsByTagName:(NSString *)tagName;
 - (BOOL)markTracking:(NSString *)tagName;
