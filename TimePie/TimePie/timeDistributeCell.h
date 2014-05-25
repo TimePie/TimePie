@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class tDCPieChart;
 @interface timeDistributeCell : UITableViewCell<UIScrollViewDelegate>
 {
     NSArray *tagList;
@@ -15,7 +16,10 @@
     NSArray *lightColorList;
     NSNumber *totalTime;
     NSMutableArray *timeOfEachTag;
+    NSMutableArray *tDCPieChartList;
 }
 @property (strong, nonatomic) UIScrollView *vessel;
+
+- (void)reloadTotalHours:(NSNumber*)tHours;
 
 @end

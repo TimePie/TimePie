@@ -21,6 +21,7 @@
 {
     TimingItemStore *storeManager;
     NSNumber *dayCount;
+    NSNumber *totalHours;
 }
 @property (strong, nonatomic) UIImageView *titleImageTotal;
 @property (strong, nonatomic) UIImageView *titleImageAvg;
@@ -31,5 +32,6 @@
 @property (nonatomic, assign) id<PersonalViewAvgTimeProtocal> delegate;
 
 - (void)reloadDayCount:(NSInteger)dCount;
+- (void)reloadTotalHours:(NSNumber*)tHours;
 
 @end

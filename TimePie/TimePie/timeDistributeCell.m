@@ -14,6 +14,8 @@
 #import "TimingItemStore.h"
 #import "Tag.h"
 
+#define CHART_START_COUNT 900
+
 @implementation timeDistributeCell
 
 - (void)awakeFromNib
@@ -28,7 +30,7 @@
     {
         [self initNeededData];
         [self initScrollVessel];
-        [self initDistributeGraph];
+        //[self initDistributeGraph];
     }
     return self;
 }
@@ -38,10 +40,9 @@
     tagList = [[TimingItemStore timingItemStore] getAllTags];
     colorList = [NSMutableArray arrayWithObjects:REDNO1,BLUENO2,GREENNO3,PINKNO04,BROWNN05,YELLOWN06, PURPLEN07, P01N08, P01N09, P01N10, nil];
     lightColorList = [NSMutableArray arrayWithObjects:RedNO1_light, BLUENO2_light, GREENNO3_light, PINKNO04_light, BROWNN05_light, YELLOWN06_light, PURPLEN07_light, P01N08_light, P01N09_light, P01N10_light, nil];
-//    totalTime = [[TimingItemStore timingItemStore] getTotalDays];
     
-    NSArray *tempToETArray = @[@60.f,@18.f,@6.f,@7.f,@7.f,@2.f];
-    timeOfEachTag = [NSMutableArray arrayWithArray:tempToETArray];
+    timeOfEachTag = [[NSMutableArray alloc] init];
+    tDCPieChartList = [[NSMutableArray alloc] init];
 }
 
 - (void)initScrollVessel
@@ -53,22 +54,41 @@
     [self addSubview:_vessel];
 }
 
-- (void)initDistributeGraph
+- (void)initDistributeGraphInView:(UIView*)view
 {
     if (tagList.count > 0)
     {
         CGFloat startPos = 10;
         for (int i = 0; i < tagList.count; i++)
         {
-//            [timeOfEachTag addObject:[[TimingItemStore timingItemStore] getDailyTimeByTagName:[tagList objectAtIndex:i] date:[NSDate date]]];
+            if ([view viewWithTag:CHART_START_COUNT + i])
+                [[view viewWithTag:CHART_START_COUNT + i] removeFromSuperview];
             if (i > 2) startPos = 30;
             else startPos = 10;
             tDCPieChart *tempChart =[[tDCPieChart alloc] initWithFrame:CGRectMake(startPos + 100 * i, 10, 100, 130)];
-            [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:[[timeOfEachTag objectAtIndex:i] floatValue]/100 PercentString:[NSString stringWithFormat:@"%d",[[timeOfEachTag objectAtIndex:i] integerValue]]];
-            [_vessel addSubview:tempChart];
+            tempChart.tag = CHART_START_COUNT + i;
+            [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:[[timeOfEachTag objectAtIndex:i] floatValue] / 100 PercentString:[NSString stringWithFormat:@"%d",[[timeOfEachTag objectAtIndex:i] integerValue]]];
+            [tDCPieChartList addObject:tempChart];
+            [view addSubview:[tDCPieChartList objectAtIndex:i]];
         }
     }
     else NSLog(@"Create new items to view history stats");
+}
+
+- (void)generateTimeOfEachTag
+{
+    for (int i = 0; i < tagList.count; i++)
+    {
+        NSNumber *tempResult = [NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:i] tag_name]].floatValue * 100 / totalTime.floatValue];
+        [timeOfEachTag addObject:tempResult];
+    }
+    [self initDistributeGraphInView:_vessel];
+}
+
+- (void)reloadTotalHours:(NSNumber *)tHours
+{
+    totalTime = tHours;
+    [self generateTimeOfEachTag];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
