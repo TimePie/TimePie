@@ -219,8 +219,8 @@
         if (timeDrtbCell == nil)
         {
             timeDrtbCell = [[timeDistributeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:timeDistributeCellIdentifier];
-            
         }
+        [timeDrtbCell reloadTotalHours:totalHours];
         timeDrtbCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return timeDrtbCell;
     }
