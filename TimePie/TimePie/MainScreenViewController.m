@@ -53,10 +53,9 @@
 {
     [super viewDidAppear:animated];
     [timingItemStore restoreData];
+    [timingItemStore getTotalHours];
     modalCanBeTriggered = true;
     NSLog(@"view did appear");
-    
-
 }
 
 - (void)viewDidLoad
@@ -89,6 +88,7 @@
         
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
+
 //        [timingItemStore restoreData];
         
         // for test:
