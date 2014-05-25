@@ -48,8 +48,6 @@
     [self addSubview:_PVETCHourIndicatorLabel];
 }
 
-
-
 - (void)initEventTrackColumnGraphWithColumnCount:(NSInteger)cCount HeightArray:(NSMutableArray *)cHeightArray
 {
     NSArray *tempCHeightArray = @[@15.f,@20.f,@15.f,@20.f,@15.f,@20.f];
