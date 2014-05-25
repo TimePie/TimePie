@@ -872,6 +872,50 @@
 
 
 
+- (NSNumber *)getTotalHoursByTag:(NSString*)tagName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",tagName]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
+    }
+    
+    
+    NSNumber * sum = [NSNumber numberWithInt:0];
+    
+    if([fetchedObjects count]==0){
+        return [NSNumber numberWithInt:0];
+    }else{
+        Tag* tag = (Tag*)[fetchedObjects objectAtIndex:0];
+        NSSet* items = tag.item;
+        
+        for(TimingItemEntity * i in items){
+//            NSLog(@"%@time:%@",i.item_name, i.time);
+            sum = [NSNumber numberWithFloat:[sum floatValue]+[i.time floatValue]];
+        }
+        NSLog(@"sum: %@",sum);
+    }
+    
+    
+    
+    
+    
+    
+    
+    NSNumber * result = [NSNumber numberWithDouble:[sum floatValue]/3600];
+    return result;
+}
+
+
 - (NSNumber *)getTotalHours
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -898,7 +942,6 @@
         NSLog(@"Empty");
         return 0;
     }
-    
     
     NSTimeInterval timeinterval =[(NSDate*)[[fetchedObjects objectAtIndex:0] valueForKey:@"date_created"] timeIntervalSinceNow];
     
