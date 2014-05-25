@@ -518,7 +518,7 @@
         
 
         pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
-        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, 620);
+        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
         itemTable.scrollEnabled = YES;
         selectMode =NO;
         historyBtn.hidden = YES;
@@ -542,7 +542,7 @@
         //Go back
         
         pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
-        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, 620);
+        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
         itemTable.scrollEnabled =YES;
         selectMode =NO;
         historyBtn.hidden = YES;
