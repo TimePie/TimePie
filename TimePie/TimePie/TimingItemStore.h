@@ -66,6 +66,9 @@
 
 - (NSNumber *)getTotalHours;
 - (NSNumber *)getTotalHoursByStartDate:(NSDate*)date;
+- (NSNumber *)getTotalHoursByDate:(NSDate*)date
+                            byTag:(NSString*)tagName;
+
 //- (NSNumber *)getTotalDays;
 - (NSNumber *)getTotalHoursByTag:(NSString*)tagName;
 

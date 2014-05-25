@@ -373,7 +373,7 @@
             {
                 NSLog(@"timing item is today's item, do nothing");
             }else{    //timing item is not today's item; create new item and abandon this item;
-                NSLog(@"Timing item is no today's item; create a new one and reload.");
+                NSLog(@"Timing item is not today's item; create a new one and reload.");
                 TimingItem* newTimingItem = [self createItem:item];
                 item.timing = NO;
                 [self updateItem:item];
@@ -910,6 +910,48 @@
     
     
     
+    
+    NSNumber * result = [NSNumber numberWithDouble:[sum floatValue]/3600];
+    return result;
+}
+
+- (NSNumber *)getTotalHoursByDate:(NSDate*)date
+                            byTag:(NSString*)tagName
+{
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",tagName]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
+    }
+    
+    
+    NSDate* startOfDay = [DateHelper beginningOfDay:date];
+    NSDate* endOfDay = [DateHelper endOfDay:date];
+    
+    
+    NSNumber * sum = [NSNumber numberWithInt:0];
+    
+    if([fetchedObjects count]==0){
+        return [NSNumber numberWithInt:0];
+    }else{
+        Tag* tag = (Tag*)[fetchedObjects objectAtIndex:0];
+        NSSet* items = tag.item;
+        for(TimingItemEntity * i in items){
+            if([i.date_created compare:startOfDay] == NSOrderedDescending && [i.date_created compare:endOfDay] == NSOrderedAscending){
+                sum = [NSNumber numberWithFloat:[sum floatValue]+[i.time floatValue]];
+            }
+        }
+        NSLog(@"sum: %@",sum);
+    }
     
     NSNumber * result = [NSNumber numberWithDouble:[sum floatValue]/3600];
     return result;
