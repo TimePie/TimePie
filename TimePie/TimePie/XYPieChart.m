@@ -251,11 +251,14 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         if(M_PI*2*_labelRadius*layer.percentage < MAX(size.width,size.height)) ////I changed the value
         {
             [textLayer setString:@""];
+//            [textLayer setBounds:CGRectMake(0, 0, 0, 0)];
+//            textLayer.hidden = YES;
         }
         else
         {
             [textLayer setString:label];
             [textLayer setBounds:CGRectMake(0, 0, size.width, size.height)];
+//            textLayer.hidden =NO;
         }
     }
 }
@@ -491,7 +494,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
 - (NSInteger)getCurrentSelectedOnTouch:(CGPoint)point
 {
     __block NSUInteger selectedIndex = -1;
-    
+//    NSLog(@"touch!");
     CGAffineTransform transform = CGAffineTransformIdentity;
     
     CALayer *parentLayer = [_pieView layer];

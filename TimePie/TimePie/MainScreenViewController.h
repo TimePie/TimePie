@@ -30,6 +30,8 @@
     BOOL selectMode;
     
     
+    int count;
+    
     SelectView * selectView;
     
     

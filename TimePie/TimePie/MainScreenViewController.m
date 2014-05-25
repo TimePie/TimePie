@@ -21,11 +21,11 @@
 #import "BounceAnimation.h"
 
 
-#define ContentOffsetY -350
+#define ContentOffsetY -370
 #define ContentTriggerOffsetY -580
 #define HeightOfItemTable 570
-#define ItemTableInitOffsetY -0
-#define PieChartInitOffsetY -420
+#define ItemTableInitOffsetY 30
+#define PieChartInitOffsetY -380
 
 
 
@@ -123,7 +123,7 @@
         [pieChart setLabelRadius:100];
         [pieChart setShowPercentage:NO];
         [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
-        [pieChart setPieCenter:CGPointMake(160, 240)];
+        [pieChart setPieCenter:CGPointMake(160, 160)];
         [pieChart setUserInteractionEnabled:YES];
         [pieChart setLabelShadowColor:[UIColor blackColor]];
         
@@ -135,7 +135,7 @@
         
         
         UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG2"];
-        UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 85, 320, 311)];
+        UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 320, 311)];
         [bgview setImage:bg];
         [pieChart addSubview:bgview];
         [pieChart sendSubviewToBack:bgview];
@@ -351,7 +351,16 @@
     
     cell.itemTime.text = [NSString stringWithFormat:@"%@", [item getTimeString]];
     
-    cell.itemColor.backgroundColor = [[ColorThemes colorThemes] getColorAt:item.color];
+    
+    UIColor* color = [[ColorThemes colorThemes] getColorAt:item.color];
+    CGFloat r;
+    CGFloat g;
+    CGFloat b;
+    CGFloat a;
+    [color getRed:&r green:&g blue:&b  alpha:&a];
+    color= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:1-.1f*indexPath.row];
+    cell.itemColor.backgroundColor = color;
+    
     cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.color];
     cell.itemNotice.hidden = YES;
     cell.itemName.font = [UIFont fontWithName:@"Roboto-Condensed" size:20];
@@ -371,7 +380,17 @@
     }else{
         cell.backgroundColor = [UIColor whiteColor];
         TimingItem* i = [[timingItemStore allItems] objectAtIndex:0];
-        [cell.itemName setTextColor:[[ColorThemes colorThemes] getColorAt:i.color]];
+        
+        UIColor* nameColor = [[ColorThemes colorThemes] getColorAt:i.color];
+        CGFloat r;
+        CGFloat g;
+        CGFloat b;
+        CGFloat a;
+        [nameColor getRed:&r green:&g blue:&b  alpha:&a];
+        nameColor= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:.7-.06f*indexPath.row];
+        
+
+        [cell.itemName setTextColor:nameColor];
         [cell.itemTime setTextColor:MAIN_UI_COLOR_TIME];
 //        cell.itemTime.hidden = YES;
     }
@@ -405,6 +424,12 @@
 {
     
     
+    
+//    NSDate *start = [NSDate date];
+
+    
+    
+    
     if(selectMode){
         return ;
     }
@@ -432,6 +457,14 @@
     item.timing=YES;
     
     [timingItemStore moveItemAtIndex:[indexPath row] toIndex:0];
+    [itemTable reloadData];
+    [pieChart reloadData];
+    
+    
+    
+//    NSDate *methodFinish = [NSDate date];
+//    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:start];
+//    NSLog(@"execution time:%f",executionTime);
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -523,6 +556,11 @@
         selectMode =NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
+        
+        historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000  , historyBtn.frame.size.width,historyBtn.frame.size.height);
+        cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+        
+        
         [pieChart reloadData];
         selectedArray = nil;
     }
@@ -547,6 +585,10 @@
         selectMode =NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
+        
+        historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000, historyBtn.frame.size.width,historyBtn.frame.size.height);
+        cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+        
         [pieChart reloadData];
         selectedArray = nil;
         [itemTable reloadData];
@@ -582,6 +624,9 @@
         selectMode = YES;
         historyBtn.hidden = NO;
         cancelBtn.hidden = NO;
+        historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 100, historyBtn.frame.size.width,historyBtn.frame.size.height);
+        cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 100, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+        
         
         pieChart.frame= CGRectMake(0, PieChartInitOffsetY-35, 300, 300);
         itemTable.frame = CGRectMake(0, ItemTableInitOffsetY+35, 320, 620);
@@ -601,39 +646,48 @@
 //////////////////
 -(void)pollTime
 {
+    
+    NSDate *start = [NSDate date];
+    
+    
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
         return ;
     }
     
     TimingItem* item = [timingItemStore getItemAtIndex:0];
     
-    
-    
     if([DateHelper checkAcrossDay])
     {
         //across a day
-//        [timingItemStore viewAllItem];
         [timingItemStore restoreData];
-        [Output println:@"Across"];
-        
-        //tests:
-//        [timingItemStore addTag:item TagName:@"Second Tag"];
-//        [timingItemStore getTimingItemsByTagName:@"Second Tag"];
-//        [timingItemStore getAllTags];
+//        [Output println:@"Across"];
     }
     else{
         //not across a day
-        [Output println:@"Not across"];
+//        [Output println:@"Not across"];
     }
     
     
+    
+    
     [item check:YES];
-    [pieChart reloadData];
+    
+//    if(count++%10==0){
+        [pieChart reloadData];
+//    }
+    
+    
     if(![itemTable isEditing]){
         [itemTable reloadData];
     }
     
     
+    
+    
+    
+    NSDate *methodFinish = [NSDate date];
+    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:start];
+//    NSLog(@"Execution Time: %f", executionTime);
 
 }
 //////////////////////
