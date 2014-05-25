@@ -333,6 +333,12 @@
     else dayCount = 365;
 }
 
+- (NSDate*)calculateStartDateWithTimeInterval:(NSInteger)interval;
+{
+    NSDate *currentDate = [NSDate date];
+    NSDate *resultDate = [currentDate dateByAddingTimeInterval:-interval*24*60*60];
+    return resultDate;
+}
 
 /** EventTrackCell Usage
  **/
