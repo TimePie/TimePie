@@ -22,12 +22,12 @@
 
 
 #define ContentOffsetY -350
-#define ContentTriggerOffsetY -580
+#define ContentTriggerOffsetY -550
 #define HeightOfItemTable 570
 #define ItemTableInitOffsetY -0
 #define PieChartInitOffsetY -420
 
-
+#define ContentOffsetYForAnimation -414
 
 @interface MainScreenViewController ()
 {
@@ -235,9 +235,9 @@
 {
     if (itemTable)
     {
-        if(itemTable.contentOffset.y < ContentOffsetY)
+        if(itemTable.contentOffset.y < ContentOffsetYForAnimation)
         {
-            [self navigationController].navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44 - (-ContentOffsetY + itemTable.contentOffset.y) * .5f);
+            [self navigationController].navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44 - (-ContentOffsetYForAnimation + itemTable.contentOffset.y) * .5f);
         }
         if (itemTable.contentOffset.y < ContentTriggerOffsetY && modalCanBeTriggered == true)
         {
