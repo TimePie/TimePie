@@ -193,10 +193,7 @@ static NSInteger routineItemFlag = 0;
     if (textField.tag == TAG_INPUT_FIELD_1) _itemName = textField.text;
     else if (textField.text.length > 0)
     {
-//        [tagTextArray addObject:textField.text];
-        TimingItem* item = [[TimingItemStore timingItemStore] createItem];
-        item.itemName = _itemName;
-        [[TimingItemStore timingItemStore] addTag:item TagName:textField.text];
+        [[TimingItemStore timingItemStore] addTag:textField.text];
         [[TimingItemStore timingItemStore] saveData];
         
         tagTextArray = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getAllTags]];

@@ -412,7 +412,7 @@
 //    transition.type = kCATransitionPush;
 //    transition.subtype = kCATransitionFromBottom;
 //    [[self navigationController].view.window.layer addAnimation:transition forKey:nil];
-
+    [[TimingItemStore timingItemStore] saveData];
     [self presentViewController: navController animated:YES completion:^{
         modalCanBeTriggered = false;
     }];
