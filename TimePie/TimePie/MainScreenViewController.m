@@ -547,29 +547,40 @@
 {
     if(selectMode){
         
-        //Go back
-        
+        // delivery data to the history screen;
+        if(selectedArray.count != 0)
+        {
+            //selected items
+            StatsViewController *viewController = [[StatsViewController alloc] init];
+            viewController.timingItemArray = selectedArray;
+            [self presentViewController:viewController animated:YES completion:nil];
+            
+            //Go back
+            pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+            itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
+            itemTable.scrollEnabled = YES;
+            selectMode =NO;
+            historyBtn.hidden = YES;
+            cancelBtn.hidden = YES;
+            
+            historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000  , historyBtn.frame.size.width,historyBtn.frame.size.height);
+            cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+            
+            
+            [pieChart reloadData];
+            selectedArray = nil;
 
-        pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
-        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
-        itemTable.scrollEnabled = YES;
-        selectMode =NO;
-        historyBtn.hidden = YES;
-        cancelBtn.hidden = YES;
-        
-        historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000  , historyBtn.frame.size.width,historyBtn.frame.size.height);
-        cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
-        
-        
-        [pieChart reloadData];
-        selectedArray = nil;
-    }
+        }
+        else
+        {
+            //select nothing
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"请选择事项" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+            }
     
     
-    // delivery data to the history screen;
-    
-    
-    NSLog(@"history button clicked");
+        NSLog(@"history button clicked");
 }
 
 

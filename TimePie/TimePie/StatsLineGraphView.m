@@ -143,7 +143,8 @@ int currentlyCloser;
         //at most 99 dots per view
         circleDot.tag = i + index * DOTS_TAG_PER_VIEW;
         circleDot.alpha = 1;
-        circleDot.color = [self.colorsOfGraph objectAtIndex:index];
+        //circleDot.color = [self.colorsOfGraph objectAtIndex:index];
+        circleDot.color = [self.delegate colorForItemWithIndex:index];
         
         [self addSubview:circleDot];
         
@@ -207,9 +208,10 @@ int currentlyCloser;
         
         
         //line.topColor = self.colorTop;
-        
-        line.color = [self.colorsOfGraph objectAtIndex:index];
-        line.bottomColor = [self.colorsOfGraph objectAtIndex:index];
+        line.color = [self.delegate colorForItemWithIndex:index];
+        line.bottomColor = [self.delegate colorForItemWithIndex:index];
+        //line.color = [self.colorsOfGraph objectAtIndex:index];
+        //line.bottomColor = [self.colorsOfGraph objectAtIndex:index];
         //line.bottomColor =[line.bottomColor colorWithAlphaComponent:1];
         
         //line.topAlpha = self.alphaTop;

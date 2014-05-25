@@ -28,6 +28,8 @@
 
 @property (strong,nonatomic) NSMutableArray *itemDataArray;
 @property (strong,nonatomic) NSMutableArray  *colorArray;
+
+@property (strong,nonatomic) NSMutableArray *timingItemArray;
 //@property (strong,nonatomic) ZBStatsDataArray* statsItemData;
 
 @end

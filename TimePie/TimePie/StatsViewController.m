@@ -13,7 +13,7 @@
 #import "TimingItemEntity.h"
 #import "TimingItemStore.h"
 #import "Tag.h"
-
+#import "ColorThemes.h"
 @interface StatsViewController ()
 {
     //record the current graph type
@@ -90,26 +90,6 @@
     [[TimingItemStore timingItemStore] saveData];
     
     self.itemDataArray = [[NSMutableArray alloc]init];
-    int itemCount = 3;
-    NSMutableArray *nameArray = [[NSMutableArray alloc]init];
-    
-    //item color
-    self.colorArray = [[NSMutableArray alloc]init];
-    UIColor* tempColor = [UIColor colorWithRed:178/255.0 green:226/255.0 blue:140/255.0 alpha:1.0];
-    [self.colorArray addObject:tempColor];
-    tempColor=[UIColor colorWithRed:112/255.0 green:175/255.0 blue:215/255.0 alpha:1.0];
-    [self.colorArray addObject:tempColor];
-    tempColor=[UIColor colorWithRed:251/255.0 green:170/255.0 blue:121/255.0 alpha:1.0];
-    [self.colorArray addObject:tempColor];
-    
-    //item name
-    for (int i=0; i<itemCount; i++)
-    {
-        NSString* temp = @"Test";
-        NSString* name = [temp stringByAppendingString:[[NSString alloc] initWithFormat:@"%d",(i+1)]];
-        [nameArray addObject:name];
-        
-    }
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate *currentDate = [NSDate date];
@@ -117,8 +97,10 @@
     
     
     //item data，一次性获得30天数据。
-    for (int i = 0; i<itemCount; i++)
+    for (int i = 0; i < self.timingItemArray.count; i++)
     {
+        TimingItem *tempTimingItem = [self.timingItemArray objectAtIndex:i];
+        
         NSMutableArray *tempValues = [[NSMutableArray alloc] init];
         for(int count = 0;count <30;count++)
         {
@@ -132,7 +114,7 @@
                 /**
                  *  real data
                  */
-                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:[nameArray objectAtIndex:i] date:tempDate];
+                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:tempTimingItem.itemName date:tempDate];
                 
                 /**
                  *  fake data
@@ -148,9 +130,11 @@
 //                tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
 //            }
             [tempValues addObject:tempData];
-            
         }
-        ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:[nameArray objectAtIndex:i] Color:[self.colorArray objectAtIndex:i] AndMouthData:tempValues];
+        ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:tempTimingItem.itemName
+                                                                  Color:[[ColorThemes colorThemes] getColorAt:tempTimingItem.color]
+                                                           MonthData:tempValues
+                                                          AndSecondTime:tempTimingItem.time];
         
         [self.itemDataArray addObject:itemTemp];
     }
@@ -347,6 +331,14 @@
     return [[item.dataOfMonth objectAtIndex:index] floatValue];
 }
 
+
+- (UIColor *)colorForItemWithIndex:(int)index
+{
+    ZBStatsItemData* tempItem = (ZBStatsItemData*)[self.itemDataArray objectAtIndex:index];
+    return tempItem.mainColor;
+}
+
+
 - (float)minValueOfGraphType:(GraphType) type
 {
     //graphtype
@@ -486,21 +478,26 @@
     }
     //
     int index=indexPath.row;
-    ZBStatsItemData* tempItem=(ZBStatsItemData*)[self.itemDataArray objectAtIndex:index];
-    cell.timeLabel.text=@"2.5";
-    cell.itemName.text=tempItem.itemName;
+    ZBStatsItemData* tempItem = (ZBStatsItemData*)[self.itemDataArray objectAtIndex:index];
+    cell.itemName.text = tempItem.itemName;
     [cell setColorForItem: tempItem.mainColor];
     
-    if (index==0) {
-        //create left color block view
+    cell.timeLabel.text = [NSString stringWithFormat:@"%.4f",[self calculateTimeForItem:tempItem.currentSecondTime]];
+    if (index == 0) {
+        //set separator line for the first cell
         UIView *separatorline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.5 )];
         separatorline.backgroundColor = [UIColor colorWithRed:200/255.0 green:199/255.0 blue:204/255.0 alpha:1.0];
         [cell addSubview:separatorline];
 
     }
-    
-    
     return cell;
+}
+
+- (double)calculateTimeForItem:(double)secondTime
+{
+    double result = secondTime / 3600;
+    return result;
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

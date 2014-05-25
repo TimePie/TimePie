@@ -10,13 +10,14 @@
 
 @implementation ZBStatsItemData
 
-- (id)initWithName:(NSString *)name Color:(UIColor *)color AndMouthData:(NSMutableArray*) array
+- (id)initWithName:(NSString*) name Color:(UIColor *)color MonthData:(NSMutableArray*) array AndSecondTime:(double)currentTime
 {
     if ((self = [super init]))
     {
-        self.itemName=name;
-        self.mainColor=color;
-        self.dataOfMonth=array;
+        self.itemName = name;
+        self.mainColor = color;
+        self.dataOfMonth = array;
+        self.currentSecondTime = currentTime;
     }
     return self;
 }

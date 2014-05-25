@@ -13,8 +13,10 @@
 @property (strong,nonatomic) UIColor *mainColor;
 @property (strong,nonatomic) NSString *itemName;
 @property (strong,nonatomic) NSMutableArray* dataOfMonth;
+@property (nonatomic) double currentSecondTime;
 
-- (id)initWithName:(NSString*) name Color:(UIColor *)color AndMouthData:(NSMutableArray*) array;
+- (id)initWithName:(NSString*) name Color:(UIColor *)color MonthData:(NSMutableArray*) array AndSecondTime:(double)currentTime;
+
 
 - (float)maxValueStartAt:(int)startIndex EndAt:(int)endIndex;
 - (float)minValueStartAt:(int)startIndex EndAt:(int)endIndex;

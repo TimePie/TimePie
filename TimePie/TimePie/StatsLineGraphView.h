@@ -36,6 +36,7 @@
 - (float)maxValueOfGraphType:(GraphType) type;
 - (float)minValueOfGraphType:(GraphType) type;
 
+- (UIColor *)colorForItemWithIndex:(int)index;
 @optional
 
 //FOR GRAPH TO RESPOND TO TOUCH EVENTS//
