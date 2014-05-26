@@ -119,7 +119,8 @@
                 /**
                  *  fake data
                  */
-                //tempData = [NSNumber numberWithInteger:(arc4random() % 7000)];
+                //tempData = [NSNumber numberWithInteger:(arc4random() % 7)];
+                
             }
             @catch (NSException *exception) {
                 tempData = [NSNumber numberWithInt:0];
@@ -482,7 +483,7 @@
     cell.itemName.text = tempItem.itemName;
     [cell setColorForItem: tempItem.mainColor];
     
-    cell.timeLabel.text = [NSString stringWithFormat:@"%.4f",[self calculateTimeForItem:tempItem.currentSecondTime]];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%.2f",[self calculateTimeForItem:tempItem.currentSecondTime]];
     if (index == 0) {
         //set separator line for the first cell
         UIView *separatorline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.5 )];

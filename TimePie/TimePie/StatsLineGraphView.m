@@ -125,6 +125,8 @@ int currentlyCloser;
     float positionOnXAxis; // The position on the X-axis of the point currently being created.
     float positionOnYAxis; // The position on the Y-axis of the point currently being created.
     
+    float rate = (maxValue - minValue) / self.viewForBaselineLayout.frame.size.height;
+    
     for (int i = 0; i < numberOfXaxisPoints; i++)
     {
         // 反向获取数据
@@ -133,7 +135,7 @@ int currentlyCloser;
         float dotValue = [self.delegate valueInArray:index ObjectAtIndex:numberOfXaxisPoints - 1 - i];
         
         positionOnXAxis = (self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints - 1)) * i;
-        positionOnYAxis = (self.viewForBaselineLayout.frame.size.height) - ((dotValue - minValue) / ((maxValue - minValue) / (self.viewForBaselineLayout.frame.size.height))) - 4;
+        positionOnYAxis = (self.viewForBaselineLayout.frame.size.height) - ((dotValue - minValue) / rate) - 4;
         
         StatsCircle *circleDot = [[StatsCircle alloc] initWithFrame:CGRectMake(positionOnXAxis, positionOnYAxis, circleSize, circleSize)];
         
@@ -225,7 +227,7 @@ int currentlyCloser;
         //set the dot on the line
         [currentDot removeFromSuperview];
         
-        if(self.graphType != MonthType)
+        if(YES)//self.graphType != MonthType)
         {
             [self addSubview:currentDot];
         
@@ -240,22 +242,18 @@ int currentlyCloser;
 }
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     CGPoint translation = [recognizer locationInView:self.viewForBaselineLayout];
-    
+    //NSLog(@"%f", translation.y);
     //self.verticalLine.frame = CGRectMake(translation.x, 0, 1, self.viewForBaselineLayout.frame.size.height);
     
-    //
-    //
-    //TODO: horizontal line positon limitation
-    //
-    //
-    CGFloat yPostion=translation.y;
-    if(yPostion<=self.frame.origin.y/2)
+    //horizontal line positon limitation
+    CGFloat yPostion = translation.y;
+    if(yPostion <= -4)
     {
-        yPostion=self.frame.origin.y/2;
+        yPostion = -4;
     }
-    else if(yPostion>(self.frame.origin.y+self.frame.size.height)/2)
+    if(yPostion > self.frame.size.height)
     {
-        yPostion=(self.frame.origin.y+self.frame.size.height)/2;
+        yPostion = self.frame.size.height;
     }
     
     self.horizontalLine.frame=CGRectMake(0,yPostion, self.viewForBaselineLayout.frame.size.width+circleSize/2, 5);
