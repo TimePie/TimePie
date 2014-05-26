@@ -24,10 +24,10 @@
 #define ContentOffsetY -370
 #define ContentTriggerOffsetY -580
 #define HeightOfItemTable 570
-#define ItemTableInitOffsetY 30
-#define PieChartInitOffsetY -380
+#define ItemTableInitOffsetY -10
+#define PieChartInitOffsetY -350
 
-
+#define ContentOffsetYForAnimation -434
 
 @interface MainScreenViewController ()
 {
@@ -153,7 +153,7 @@
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable setSeparatorInset:UIEdgeInsetsZero];
-        
+        itemTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         [itemTable reloadData];
         [itemTable setContentInset:UIEdgeInsetsMake(-ContentOffsetY, 0, 0, 0)];
         [itemTable addSubview:pieChart];
@@ -237,9 +237,9 @@
 {
     if (itemTable)
     {
-        if(itemTable.contentOffset.y < ContentOffsetY)
+        if(itemTable.contentOffset.y < ContentOffsetYForAnimation)
         {
-            [self navigationController].navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44 - (-ContentOffsetY + itemTable.contentOffset.y) * .5f);
+            [self navigationController].navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44 - (-ContentOffsetYForAnimation + itemTable.contentOffset.y) * .5f);
         }
         if (itemTable.contentOffset.y < ContentTriggerOffsetY && modalCanBeTriggered == true)
         {
@@ -638,8 +638,8 @@
         selectMode = YES;
         historyBtn.hidden = NO;
         cancelBtn.hidden = NO;
-        historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 100, historyBtn.frame.size.width,historyBtn.frame.size.height);
-        cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 100, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+        historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 150, historyBtn.frame.size.width,historyBtn.frame.size.height);
+        cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 150, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
         
         
         pieChart.frame= CGRectMake(0, PieChartInitOffsetY-35, 300, 300);
