@@ -152,6 +152,8 @@
         itemTable = [[MainScreenTableView alloc] initWithFrame:CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable)];
         itemTable.delegate = self;
         itemTable.dataSource = self;
+        [itemTable setSeparatorInset:UIEdgeInsetsZero];
+        
         [itemTable reloadData];
         [itemTable setContentInset:UIEdgeInsetsMake(-ContentOffsetY, 0, 0, 0)];
         [itemTable addSubview:pieChart];
@@ -410,7 +412,8 @@
         cell.itemTime.alpha = 1;
         cell.itemName.alpha = 1;
     }
-
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
