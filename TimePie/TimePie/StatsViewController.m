@@ -114,12 +114,12 @@
                 /**
                  *  real data
                  */
-                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:tempTimingItem.itemName date:tempDate];
+                //tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:tempTimingItem.itemName date:tempDate];
                 
                 /**
                  *  fake data
                  */
-                //tempData = [NSNumber numberWithInteger:(arc4random() % 7)];
+                tempData = [NSNumber numberWithInteger:(arc4random() % 7)];
                 
             }
             @catch (NSException *exception) {
@@ -431,6 +431,8 @@
     }
     currentType = temp;
     [self setGraphViewActive:currentType];
+    
+    [self.itemTableView reloadData];
 
 }
 
@@ -483,7 +485,7 @@
     cell.itemName.text = tempItem.itemName;
     [cell setColorForItem: tempItem.mainColor];
     
-    cell.timeLabel.text = [NSString stringWithFormat:@"%.2f",[self calculateTimeForItem:tempItem.currentSecondTime]];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%.3f",[self calculateTimeForItem:tempItem.currentSecondTime]/currentType];
     if (index == 0) {
         //set separator line for the first cell
         UIView *separatorline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.5 )];

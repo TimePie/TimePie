@@ -32,6 +32,8 @@
 		6831559E1909263C00C9A27C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6831559D1909263C00C9A27C /* BEMLine.m */; };
 		688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688586EC190931AE0050D15D /* StatsBackButton@2x.png */; };
 		688586F11909368A0050D15D /* StatsNavShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688586F01909368A0050D15D /* StatsNavShadow@2x.png */; };
+		68BBB2101934EE2600FDC1A4 /* HorizontalScaleLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBB20F1934EE2600FDC1A4 /* HorizontalScaleLineView.m */; };
+		68BBB2121934F1E300FDC1A4 /* scaleLineBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BBB2111934F1E300FDC1A4 /* scaleLineBG@2x.png */; };
 		68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0971909193F00F12101 /* StatsLineGraphView.m */; };
 		68BBE09C19091A4600F12101 /* StatsItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE09A19091A4600F12101 /* StatsItemTableViewCell.m */; };
 		68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BBE09B19091A4600F12101 /* StatsItemTableViewCell.xib */; };
@@ -136,6 +138,9 @@
 		688586EC190931AE0050D15D /* StatsBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsBackButton@2x.png"; sourceTree = "<group>"; };
 		688586F01909368A0050D15D /* StatsNavShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsNavShadow@2x.png"; sourceTree = "<group>"; };
 		68AF964B19166E4B00CDF8D7 /* GraphTypeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphTypeEnum.h; sourceTree = "<group>"; };
+		68BBB20E1934EE2600FDC1A4 /* HorizontalScaleLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalScaleLineView.h; sourceTree = "<group>"; };
+		68BBB20F1934EE2600FDC1A4 /* HorizontalScaleLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorizontalScaleLineView.m; sourceTree = "<group>"; };
+		68BBB2111934F1E300FDC1A4 /* scaleLineBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scaleLineBG@2x.png"; sourceTree = "<group>"; };
 		68BBE0961909193F00F12101 /* StatsLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsLineGraphView.h; sourceTree = "<group>"; };
 		68BBE0971909193F00F12101 /* StatsLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsLineGraphView.m; sourceTree = "<group>"; };
 		68BBE09919091A4600F12101 /* StatsItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsItemTableViewCell.h; sourceTree = "<group>"; };
@@ -311,6 +316,7 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				68BBB2111934F1E300FDC1A4 /* scaleLineBG@2x.png */,
 				CDB36F1C1931F06900E7BBCE /* TimePie_RingBG2@2x.png */,
 				CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */,
 				CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */,
@@ -412,6 +418,8 @@
 				68BBE0A719091D5C00F12101 /* StatsAnimations.h */,
 				68BBE0A819091D5C00F12101 /* StatsAnimations.m */,
 				68AF964B19166E4B00CDF8D7 /* GraphTypeEnum.h */,
+				68BBB20E1934EE2600FDC1A4 /* HorizontalScaleLineView.h */,
+				68BBB20F1934EE2600FDC1A4 /* HorizontalScaleLineView.m */,
 			);
 			name = StatsView;
 			sourceTree = "<group>";
@@ -643,6 +651,7 @@
 				6831559B1909201400C9A27C /* StatsView_itemCellBG@2x.png in Resources */,
 				13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */,
 				CDB36F191931E87D00E7BBCE /* Roboto-Condensed.ttf in Resources */,
+				68BBB2121934F1E300FDC1A4 /* scaleLineBG@2x.png in Resources */,
 				13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */,
 				13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */,
 				CD52392019110D83005EB55A /* personalbtn@2x.png in Resources */,
@@ -714,6 +723,7 @@
 				CD5239C31913691E005EB55A /* ColorThemes.m in Sources */,
 				CD52392319111298005EB55A /* TimingItemStore.m in Sources */,
 				1316DB07191BE13500E74E3C /* SettingsThemeViewController.m in Sources */,
+				68BBB2101934EE2600FDC1A4 /* HorizontalScaleLineView.m in Sources */,
 				CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,

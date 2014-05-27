@@ -91,8 +91,8 @@ int currentlyCloser;
         //        self.verticalLine.alpha = 0;
         //        [self addSubview:self.verticalLine];
         
-        self.horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0,  self.viewForBaselineLayout.frame.size.width+circleSize/2,5)];
-        self.horizontalLine.backgroundColor = [UIColor grayColor];
+        self.horizontalLine = [[HorizontalScaleLineView alloc] initWithFrame:CGRectMake(0, 0,  self.viewForBaselineLayout.frame.size.width+circleSize/2,24)];
+        
         self.horizontalLine.alpha = 0;
         [self addSubview:self.horizontalLine];
         
@@ -256,9 +256,9 @@ int currentlyCloser;
         yPostion = self.frame.size.height;
     }
     
-    self.horizontalLine.frame=CGRectMake(0,yPostion, self.viewForBaselineLayout.frame.size.width+circleSize/2, 5);
+    self.horizontalLine.frame=CGRectMake(0,yPostion, self.viewForBaselineLayout.frame.size.width+circleSize/2, 24);
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.horizontalLine.alpha = 0.2;
+        self.horizontalLine.alpha = 1;
     } completion:nil];
     
     
