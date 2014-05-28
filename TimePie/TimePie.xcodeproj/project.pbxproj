@@ -69,9 +69,9 @@
 		CD52392319111298005EB55A /* TimingItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CD52392219111298005EB55A /* TimingItemStore.m */; };
 		CD5239B71911E178005EB55A /* MainScreenTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5239B61911E178005EB55A /* MainScreenTableView.m */; };
 		CD5239C31913691E005EB55A /* ColorThemes.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5239C21913691E005EB55A /* ColorThemes.m */; };
+		CD601A5F1935F918008946E9 /* TimingItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CD601A5E1935F918008946E9 /* TimingItemEntity.m */; };
 		CD6F7DFE191A508800C962B7 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7DFD191A508800C962B7 /* Tag.m */; };
 		CD6F7E01191A50F400C962B7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7E00191A50F400C962B7 /* User.m */; };
-		CD6F7E04191B6F6600C962B7 /* TimingItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7E03191B6F6600C962B7 /* TimingItemEntity.m */; };
 		CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F2190D242200F58797 /* TimingItem1.m */; };
 		CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F6190D246300F58797 /* XYPieChart.m */; };
 		CD9CE6A71919D23E003C4CA6 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE6A61919D23E003C4CA6 /* DateHelper.m */; };
@@ -192,12 +192,12 @@
 		CD5239C11913691E005EB55A /* ColorThemes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorThemes.h; sourceTree = "<group>"; };
 		CD5239C21913691E005EB55A /* ColorThemes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorThemes.m; sourceTree = "<group>"; };
 		CD52CC161931E82200BB7FB9 /* Roboto-Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Condensed.ttf"; sourceTree = "<group>"; };
+		CD601A5D1935F918008946E9 /* TimingItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItemEntity.h; sourceTree = "<group>"; };
+		CD601A5E1935F918008946E9 /* TimingItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItemEntity.m; sourceTree = "<group>"; };
 		CD6F7DFC191A508800C962B7 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		CD6F7DFD191A508800C962B7 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		CD6F7DFF191A50F400C962B7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD6F7E00191A50F400C962B7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		CD6F7E02191B6F6600C962B7 /* TimingItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimingItemEntity.h; path = ../TimingItemEntity.h; sourceTree = "<group>"; };
-		CD6F7E03191B6F6600C962B7 /* TimingItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimingItemEntity.m; path = ../TimingItemEntity.m; sourceTree = "<group>"; };
 		CD8EE0F1190D242200F58797 /* TimingItem1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem1.h; sourceTree = "<group>"; };
 		CD8EE0F2190D242200F58797 /* TimingItem1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem1.m; sourceTree = "<group>"; };
 		CD8EE0F5190D246300F58797 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
@@ -524,12 +524,12 @@
 			isa = PBXGroup;
 			children = (
 				CD4CE06A18E464D000916A4B /* TimePie.xcdatamodeld */,
-				CD6F7E02191B6F6600C962B7 /* TimingItemEntity.h */,
-				CD6F7E03191B6F6600C962B7 /* TimingItemEntity.m */,
 				CD6F7DFC191A508800C962B7 /* Tag.h */,
 				CD6F7DFD191A508800C962B7 /* Tag.m */,
 				CD6F7DFF191A50F400C962B7 /* User.h */,
 				CD6F7E00191A50F400C962B7 /* User.m */,
+				CD601A5D1935F918008946E9 /* TimingItemEntity.h */,
+				CD601A5E1935F918008946E9 /* TimingItemEntity.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -700,6 +700,7 @@
 				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
 				6831559E1909263C00C9A27C /* BEMLine.m in Sources */,
 				68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */,
+				CD601A5F1935F918008946E9 /* TimingItemEntity.m in Sources */,
 				13ACEB4D192105AB00DEEBB1 /* TrackItemViewController.m in Sources */,
 				13ACEB4A1920F35200DEEBB1 /* RoutineItemViewController.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
@@ -707,7 +708,6 @@
 				13B930641928FF3E0035CACD /* BounceAnimation.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */,
-				CD6F7E04191B6F6600C962B7 /* TimingItemEntity.m in Sources */,
 				68BBE0A619091C6700F12101 /* StatsLine.m in Sources */,
 				CD9CE6AD191A06D5003C4CA6 /* Output.m in Sources */,
 				CD6F7DFE191A508800C962B7 /* Tag.m in Sources */,

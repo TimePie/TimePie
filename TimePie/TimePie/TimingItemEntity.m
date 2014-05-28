@@ -2,7 +2,7 @@
 //  TimingItemEntity.m
 //  TimePie
 //
-//  Created by Max Lu on 5/8/14.
+//  Created by Max Lu on 5/28/14.
 //  Copyright (c) 2014 TimePieOrg. All rights reserved.
 //
 
@@ -20,6 +20,7 @@
 @dynamic last_check;
 @dynamic time;
 @dynamic timing;
+@dynamic tracking;
 @dynamic tag;
 @dynamic user;
 

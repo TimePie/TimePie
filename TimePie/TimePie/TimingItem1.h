@@ -23,6 +23,6 @@
 @property (nonatomic) int color;
 @property (nonatomic, strong) NSDate* lastCheck;
 @property (nonatomic) BOOL timing;
-
+@property (nonatomic) BOOL tracking;
 
 @end

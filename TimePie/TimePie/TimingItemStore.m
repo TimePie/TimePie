@@ -72,6 +72,7 @@
     item.time +=1;
     i.time = item.time;
     i.timing= item.timing;
+    i.tracking = item.tracking;
     [allItems insertObject:i atIndex:[allItems count]];
     NSLog(@"create item!");
     
@@ -152,6 +153,7 @@
         [i setValue:item.lastCheck forKey:@"last_check"];
         [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
         [i setValue:[NSNumber numberWithBool:item.timing] forKeyPath:@"timing"];
+        [i setValue:[NSNumber numberWithBool:item.tracking] forKey:@"tracking"];
         [context updatedObjects];
         if (![context save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -467,6 +469,7 @@
     item.lastCheck = [i valueForKey:@"last_check"];
     item.color = [[i valueForKey:@"color_number"] integerValue];
     item.timing = [[i valueForKey:@"timing"] boolValue];
+    item.tracking = [[i valueForKey:@"tracking"] boolValue];
     [allItems addObject:item];
     return item;
 }
@@ -482,7 +485,7 @@
     [i setValue:item.lastCheck forKey:@"last_check"];
     [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
     [i setValue:[NSNumber numberWithBool:item.timing] forKey:@"timing"];
-    
+    [i setValue:[NSNumber numberWithBool:item.tracking] forKey:@"tracking"];
     return i;
 }
 
@@ -505,9 +508,9 @@
     [i setValue:item.lastCheck forKey:@"last_check"];
     [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
     [i setValue:[NSNumber numberWithBool:item.timing] forKey:@"timing"];
+    [i setValue:[NSNumber numberWithBool:item.tracking] forKey:@"tracking"];
     
     return i;
-    
 }
 
 

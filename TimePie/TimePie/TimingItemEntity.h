@@ -2,7 +2,7 @@
 //  TimingItemEntity.h
 //  TimePie
 //
-//  Created by Max Lu on 5/8/14.
+//  Created by Max Lu on 5/28/14.
 //  Copyright (c) 2014 TimePieOrg. All rights reserved.
 //
 
@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSDate * last_check;
 @property (nonatomic, retain) NSNumber * time;
 @property (nonatomic, retain) NSNumber * timing;
+@property (nonatomic, retain) NSNumber * tracking;
 @property (nonatomic, retain) Tag *tag;
 @property (nonatomic, retain) User *user;
 

@@ -17,6 +17,8 @@
 @synthesize lastCheck;
 @synthesize color;
 @synthesize timing;
+@synthesize tracking;
+
 
 
 + (id)randomItem{
@@ -34,6 +36,7 @@
         NSDate *adate = [NSDate date];
         lastCheck =adate;
         timing = NO;
+        tracking = NO;
         [self setColor:0];
     }
     return self;
