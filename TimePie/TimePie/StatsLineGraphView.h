@@ -12,7 +12,7 @@
 #import "StatsLine.h"
 #import "StatsAnimations.h"
 #import "GraphTypeEnum.h"
-
+#import "HorizontalScaleLineView.h"
 @protocol StatsLineGraphDelegate <NSObject>
 
 @required
@@ -74,7 +74,7 @@
 @property (strong, nonatomic) StatsAnimations *animationDelegate;
 
 //@property (strong, nonatomic) UIView *verticalLine;
-@property (strong, nonatomic) UIView *horizontalLine;
+@property (strong, nonatomic) HorizontalScaleLineView *horizontalLine;
 
 @property (strong, nonatomic) UIFont *labelFont;
 

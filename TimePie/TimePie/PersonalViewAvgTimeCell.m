@@ -55,12 +55,12 @@
     [self addSubview:_labelTotal];
     [self.delegate showTotalTime];
     
-    UILabel* hourIndicator1 = [[UILabel alloc] initWithFrame:CGRectMake(108, 20, 40, 20)];
+    UILabel* hourIndicator1 = [[UILabel alloc] initWithFrame:CGRectMake(112, 19, 40, 20)];
     hourIndicator1.text = @"h";
     hourIndicator1.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
     hourIndicator1.textColor = MAIN_UI_COLOR;
     [self addSubview:hourIndicator1];
-    UILabel* hourIndicator2 = [[UILabel alloc] initWithFrame:CGRectMake(293, 20, 40, 20)];
+    UILabel* hourIndicator2 = [[UILabel alloc] initWithFrame:CGRectMake(293, 19, 40, 20)];
     hourIndicator2.text = @"h";
     hourIndicator2.font = [UIFont fontWithName:@"Roboto-Medium" size:14.f];
     hourIndicator2.textColor = MAIN_UI_COLOR;
@@ -83,11 +83,13 @@
 - (void)loadTotalText
 {
     _labelTotal.text = [NSString stringWithFormat:@"%.0f",totalHours.floatValue];
+    if (_labelTotal.text.integerValue > 99) _labelTotal.font = [UIFont fontWithName:@"Roboto-Medium" size:24.f];
 }
 
 - (void)loadAvgText
 {
     _labelAvg.text = [NSString stringWithFormat:@"%.1f",totalHours.floatValue / dayCount.floatValue];
+        if (_labelAvg.text.integerValue > 9) _labelAvg.font = [UIFont fontWithName:@"Roboto-Medium" size:24.f];
 }
 
 #pragma mark - public

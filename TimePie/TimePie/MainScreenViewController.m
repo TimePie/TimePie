@@ -22,7 +22,7 @@
 
 
 #define ContentOffsetY -370
-#define ContentTriggerOffsetY -580
+#define ContentTriggerOffsetY -555
 #define HeightOfItemTable 570
 #define ItemTableInitOffsetY -10
 #define PieChartInitOffsetY -350
@@ -63,6 +63,8 @@
     [timingItemStore restoreData];
     modalCanBeTriggered = true;
     NSLog(@"view did appear");
+    [[TimingItemStore timingItemStore] addTag:@"学习"];
+    [[TimingItemStore timingItemStore] addTag:@"工作"];
 }
 
 - (void)viewDidLoad

@@ -32,7 +32,6 @@ static NSInteger routineItemFlag = 0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        
     }
     return self;
 }
