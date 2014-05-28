@@ -72,6 +72,8 @@
 		CD5239B71911E178005EB55A /* MainScreenTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5239B61911E178005EB55A /* MainScreenTableView.m */; };
 		CD5239C31913691E005EB55A /* ColorThemes.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5239C21913691E005EB55A /* ColorThemes.m */; };
 		CD601A5F1935F918008946E9 /* TimingItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CD601A5E1935F918008946E9 /* TimingItemEntity.m */; };
+		CD601A651936131F008946E9 /* TimePie_Nav_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD601A641936131F008946E9 /* TimePie_Nav_Logo@2x.png */; };
+		CD601A67193613BE008946E9 /* Ubuntu-R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD601A66193613AE008946E9 /* Ubuntu-R.ttf */; };
 		CD6F7DFE191A508800C962B7 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7DFD191A508800C962B7 /* Tag.m */; };
 		CD6F7E01191A50F400C962B7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7E00191A50F400C962B7 /* User.m */; };
 		CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F2190D242200F58797 /* TimingItem1.m */; };
@@ -199,6 +201,8 @@
 		CD52CC161931E82200BB7FB9 /* Roboto-Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Condensed.ttf"; sourceTree = "<group>"; };
 		CD601A5D1935F918008946E9 /* TimingItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItemEntity.h; sourceTree = "<group>"; };
 		CD601A5E1935F918008946E9 /* TimingItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItemEntity.m; sourceTree = "<group>"; };
+		CD601A641936131F008946E9 /* TimePie_Nav_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Nav_Logo@2x.png"; sourceTree = "<group>"; };
+		CD601A66193613AE008946E9 /* Ubuntu-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-R.ttf"; sourceTree = "<group>"; };
 		CD6F7DFC191A508800C962B7 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		CD6F7DFD191A508800C962B7 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		CD6F7DFF191A50F400C962B7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CD601A641936131F008946E9 /* TimePie_Nav_Logo@2x.png */,
 				68BBB2111934F1E300FDC1A4 /* scaleLineBG@2x.png */,
 				CDB36F1C1931F06900E7BBCE /* TimePie_RingBG2@2x.png */,
 				CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */,
@@ -337,6 +342,7 @@
 			children = (
 				CD52CC161931E82200BB7FB9 /* Roboto-Condensed.ttf */,
 				13CCE58418EC501200462A83 /* Roboto-Medium.ttf */,
+				CD601A66193613AE008946E9 /* Ubuntu-R.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -648,6 +654,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD601A67193613BE008946E9 /* Ubuntu-R.ttf in Resources */,
 				6831559B1909201400C9A27C /* StatsView_itemCellBG@2x.png in Resources */,
 				13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */,
 				CDB36F191931E87D00E7BBCE /* Roboto-Condensed.ttf in Resources */,
@@ -657,6 +664,7 @@
 				CD52392019110D83005EB55A /* personalbtn@2x.png in Resources */,
 				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
+				CD601A651936131F008946E9 /* TimePie_Nav_Logo@2x.png in Resources */,
 				688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */,
 				CDB36F1D1931F06900E7BBCE /* TimePie_RingBG2@2x.png in Resources */,
 				CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */,

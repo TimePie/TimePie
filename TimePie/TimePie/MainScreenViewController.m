@@ -24,7 +24,7 @@
 #define ContentOffsetY -370
 #define ContentTriggerOffsetY -555
 #define HeightOfItemTable 570
-#define ItemTableInitOffsetY -10
+#define ItemTableInitOffsetY -0
 #define PieChartInitOffsetY -350
 
 #define ContentOffsetYForAnimation -434
@@ -75,8 +75,27 @@
     
     
     if(self){
+        
+        
+        
+        
+        for (NSString* family in [UIFont familyNames])
+        {
+            NSLog(@"%@", family);
+            
+            for (NSString* name in [UIFont fontNamesForFamilyName: family])
+            {
+                NSLog(@"  %@", name);
+            }
+        }
+        
+        
         //setup navigation items
         UINavigationItem *n = [self navigationItem];
+        
+//        UIImage *image = [UIImage imageNamed:@"TimePie_Nav_Logo.png"];
+//        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
+        
         [n setTitle:@"TimePie"];
         
         [[UINavigationBar appearance] setTitleTextAttributes:
@@ -87,7 +106,7 @@
 //          UITextAttributeTextShadowColor,
 //          [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
 //          UITextAttributeTextShadowOffset,
-          [UIFont fontWithName:@"Arial-Bold" size:0.0],
+          [UIFont fontWithName:@"Ubuntu" size:18.0],
           NSFontAttributeName,
           nil]];
         
@@ -155,7 +174,7 @@
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable setSeparatorInset:UIEdgeInsetsZero];
-        itemTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+//        itemTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         [itemTable reloadData];
         [itemTable setContentInset:UIEdgeInsetsMake(-ContentOffsetY, 0, 0, 0)];
         [itemTable addSubview:pieChart];
@@ -341,6 +360,11 @@
     return [[timingItemStore allItems] count];
 }
 
+
+
+
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"newFriendCell";
@@ -367,8 +391,32 @@
     
     cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.color];
     cell.itemNotice.hidden = YES;
-    cell.itemName.font = [UIFont fontWithName:@"Roboto-Condensed" size:20];
+    
+    
+
+    /*
+    NSString *str = cell.itemName.text;
+    NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
+    BOOL valid = [[str stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""];
+    if(valid){
+        NSLog(@"alphaset");
+        cell.itemName.font = [UIFont fontWithName:@"Roboto-Medium" size:16];
+    }else{
+        NSLog(@"not alphaset");
+        cell.itemName.font = [UIFont fontWithName:@"Arial-BoldMT" size:16];
+    }*/
+    cell.itemName.font = [UIFont fontWithName:@"Roboto-Medium" size:16];
     cell.itemTime.font = [UIFont fontWithName:@"Roboto-Condensed" size:14];
+    
+    cell.itemName.shadowColor = nil;
+    cell.itemName.shadowOffset =CGSizeMake(0.0, 1.0);
+    cell.itemName.layer.shadowOpacity = 0.0f;
+    cell.itemName.layer.shadowRadius = 2.0;
+    
+    cell.itemTime.shadowColor = nil;
+    cell.itemTime.layer.shadowOffset =CGSizeMake(0.0, 1.0);
+    cell.itemTime.layer.shadowOpacity = 0.0f;
+    cell.itemTime.layer.shadowRadius = 2.0;
     if(indexPath.row ==0){
         UIColor* bgColor = [[ColorThemes colorThemes] getLightColorAt:item.color];
         CGFloat r;
@@ -381,6 +429,16 @@
         cell.backgroundColor =bgColor;
         [cell.itemName setTextColor:[UIColor whiteColor]];
         [cell.itemTime setTextColor:[UIColor whiteColor]];
+        
+//        cell.itemName.shadowColor = [UIColor grayColor];
+        cell.itemName.layer.shadowOffset =CGSizeMake(0.0, 1.0);
+        cell.itemName.layer.shadowOpacity = .2f;
+        cell.itemName.layer.shadowRadius = 2.0f;
+        
+//        cell.itemTime.shadowColor = [UIColor grayColor];
+        cell.itemTime.layer.shadowOffset =CGSizeMake(0.0, 1.0);
+        cell.itemTime.layer.shadowOpacity = .2f;
+        cell.itemTime.layer.shadowRadius = 2.0f;
     }else{
         cell.backgroundColor = [UIColor whiteColor];
         TimingItem* i = [[timingItemStore allItems] objectAtIndex:0];
@@ -633,7 +691,8 @@
 //        selectMode = NO;
 //        [pieChart reloadData];
     }else{
-        [itemTable setContentOffset:CGPointMake(itemTable.contentOffset.x, ContentOffsetY)];
+        [itemTable setContentOffset:CGPointMake(itemTable.contentOffset.x, ContentOffsetYForAnimation)];
+//        NSLog(@"%f",itemTable.contentOffset.y);
         itemTable.scrollEnabled = NO;
         //Enter Select Mode
         NSLog(@"long press!");

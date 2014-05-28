@@ -16,7 +16,7 @@
 
 @interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate>
 {
-    IBOutlet UIButton *stats;
+//    IBOutlet UIButton *stats;
     IBOutlet UIButton *historyBtn;
     IBOutlet UIButton *cancelBtn;
     
