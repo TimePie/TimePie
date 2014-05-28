@@ -21,7 +21,7 @@
         self.scaleLabel =  [[UILabel alloc]initWithFrame:CGRectMake(17, 0, 35, self.frame.size.height)];
         self.scaleLabel.text = @"2.3h";
         self.scaleLabel.textColor = MAIN_UI_COLOR;//[UIColor blackColor];
-        self.scaleLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:13];
+        self.scaleLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:11];
         self.scaleLabel.textAlignment = UITextAlignmentCenter;
         [self addSubview:self.scaleLabel];
         //self.backgroundColor = [UIColor lightGrayColor];
