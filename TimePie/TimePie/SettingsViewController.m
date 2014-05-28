@@ -10,7 +10,6 @@
 #import "BasicUIColor+UIPosition.h"
 #import "SettingsThemeViewController.h"
 #import "RoutineItemViewController.h"
-#import "TrackItemViewController.h"
 #import "themeView.h"
 
 @interface SettingsViewController ()
@@ -131,7 +130,19 @@
     else if(indexPath.section == 0 && indexPath.row == 2)
     {
         TrackItemViewController *tiVC = [[TrackItemViewController alloc] init];
+        tiVC.delegate = self;
         [[self navigationController] pushViewController:tiVC animated:YES];
+    }
+}
+
+#pragma mark - TrackItemViewDelegate
+
+- (void)reloadPass
+{
+    if ([self.delegate respondsToSelector:@selector(reloadSecondPass)])
+    {
+        NSLog(@"First Pass");
+        [self.delegate reloadSecondPass];
     }
 }
 

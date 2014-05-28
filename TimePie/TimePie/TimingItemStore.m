@@ -827,7 +827,7 @@
 
 
 
-- (BOOL)markTracking:(NSString *)tagName
+- (BOOL)markTracking:(NSString *)tagName Tracked:(NSNumber*)isTracking
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
@@ -851,7 +851,7 @@
         tag = (Tag*)[fetchedObjects objectAtIndex:0];
     }
     
-    tag.tracking = [NSNumber numberWithBool:true];
+    tag.tracking = isTracking;
     [context updatedObjects];
     
     

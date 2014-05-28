@@ -8,7 +8,8 @@
 #define circleSize 8
 #define labelXaxisOffset 8
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define DOTS_TAG_PER_VIEW 100;
+#define DOTS_TAG_PER_VIEW 100
+#define SCALE_LINE_HEIGHT 24
 
 #import "StatsLineGraphView.h"
 
@@ -17,8 +18,8 @@
 
 int numberOfXaxisPoints; // The number of Points in the Graph.
 //int numberOfAllPointsInAGraph;
-StatsCircle *closestDot;
-int currentlyCloser;
+//StatsCircle *closestDot;
+//int currentlyCloser;
 
 - (void)reloadGraph {
     [self setNeedsLayout];
@@ -72,6 +73,8 @@ int currentlyCloser;
     
     //
     self.allDotsPositionOfAllLines = [[NSMutableArray alloc] init];
+    //
+    self.dotsArray = [[NSMutableArray alloc] init];
     //draw different item in one view
     for (int i=0; i<self.itemCount; i++) {
         [self drawGraph:i];
@@ -80,18 +83,11 @@ int currentlyCloser;
     //绘制坐标轴
     [self drawXAxis];
     
-    //
-    //TODO: change vertical to horizontal
-    //
+    //draw horizontal line
     if (self.enableTouchReport == YES)
     {
-        // Initialize the vertical gray line that appears where the user touches the graph.
-        //        self.verticalLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, self.viewForBaselineLayout.frame.size.height)];
-        //        self.verticalLine.backgroundColor = [UIColor grayColor];
-        //        self.verticalLine.alpha = 0;
-        //        [self addSubview:self.verticalLine];
-        
-        self.horizontalLine = [[HorizontalScaleLineView alloc] initWithFrame:CGRectMake(0, 0,  self.viewForBaselineLayout.frame.size.width+circleSize/2,24)];
+        // Initialize the horizontal line that appears where the user touches the graph.
+        self.horizontalLine = [[HorizontalScaleLineView alloc] initWithFrame:CGRectMake(0, 0,  self.viewForBaselineLayout.frame.size.width+circleSize/2,SCALE_LINE_HEIGHT)];
         
         self.horizontalLine.alpha = 0;
         [self addSubview:self.horizontalLine];
@@ -134,7 +130,7 @@ int currentlyCloser;
         // 取数据按照  日期 升序获取
         float dotValue = [self.delegate valueInArray:index ObjectAtIndex:numberOfXaxisPoints - 1 - i];
         
-        positionOnXAxis = (self.viewForBaselineLayout.frame.size.width/(numberOfXaxisPoints - 1)) * i;
+        positionOnXAxis = (self.viewForBaselineLayout.frame.size.width / (numberOfXaxisPoints - 1)) * i;
         positionOnYAxis = (self.viewForBaselineLayout.frame.size.height) - ((dotValue - minValue) / rate) - 4;
         
         StatsCircle *circleDot = [[StatsCircle alloc] initWithFrame:CGRectMake(positionOnXAxis, positionOnYAxis, circleSize, circleSize)];
@@ -149,6 +145,8 @@ int currentlyCloser;
         circleDot.color = [self.delegate colorForItemWithIndex:index];
         
         [self addSubview:circleDot];
+        
+        [self.dotsArray addObject:circleDot];
         
         CGPoint tempPoint = CGPointMake(circleDot.center.x, circleDot.center.y);
         [currentLinesDots addObject:[NSValue valueWithCGPoint:tempPoint]];
@@ -170,7 +168,7 @@ int currentlyCloser;
         UIView *currentDot;
         for (UIView *dot in [self.viewForBaselineLayout subviews])
         {
-            int indexTag=i + index * DOTS_TAG_PER_VIEW;
+            int indexTag = i + index * DOTS_TAG_PER_VIEW;
             if (dot.tag == indexTag)
             {
                 xDot1 = dot.center.x;
@@ -235,6 +233,7 @@ int currentlyCloser;
             StatsCircle *innerCircleDot = [[StatsCircle alloc] initWithFrame:CGRectMake(currentDot.center.x-circleSize/4, currentDot.center.y-circleSize/4, circleSize/2, circleSize/2)];
             innerCircleDot.alpha = 1;
             innerCircleDot.color = [UIColor whiteColor];
+            innerCircleDot.tag = -1;
             [self addSubview:innerCircleDot];
         }
         [self.animationDelegate animationForLine:i line:line animationSpeed:self.animationGraphEntranceSpeed];
@@ -242,9 +241,6 @@ int currentlyCloser;
 }
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     CGPoint translation = [recognizer locationInView:self.viewForBaselineLayout];
-    //NSLog(@"%f", translation.y);
-    //self.verticalLine.frame = CGRectMake(translation.x, 0, 1, self.viewForBaselineLayout.frame.size.height);
-    
     //horizontal line positon limitation
     CGFloat yPostion = translation.y;
     if(yPostion <= -4)
@@ -256,18 +252,17 @@ int currentlyCloser;
         yPostion = self.frame.size.height;
     }
     
-    self.horizontalLine.frame=CGRectMake(0,yPostion, self.viewForBaselineLayout.frame.size.width+circleSize/2, 24);
+    yPostion = yPostion - SCALE_LINE_HEIGHT / 2;
+    
+    self.horizontalLine.frame=CGRectMake(0,yPostion, self.viewForBaselineLayout.frame.size.width + circleSize / 2, SCALE_LINE_HEIGHT);
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.horizontalLine.alpha = 1;
     } completion:nil];
     
     
-    //    closestDot = [self closestDotFromVerticalLine:self.verticalLine];
-    //    closestDot.alpha = 0.8;
-    //
-    //    if (closestDot.tag > 99 && closestDot.tag < 1000) {
-    //        if ([self.delegate respondsToSelector:@selector(didTouchGraphWithClosestIndex:)])  [self.delegate didTouchGraphWithClosestIndex:((int)closestDot.tag - 100)];
-    //    }
+    StatsCircle *closestDot = [self closestDotFromHorizontalLine:self.horizontalLine];
+    
+    self.horizontalLine.scaleLabel.text = [self calculScaleLabelText:closestDot];//
     
     // ON RELEASE
     if (recognizer.state == UIGestureRecognizerStateEnded)
@@ -281,26 +276,53 @@ int currentlyCloser;
     }
 }
 
-// Find which dot is currently the closest to the vertical line
-- (StatsCircle *)closestDotFromVerticalLine:(UIView *)verticalLine {
-    currentlyCloser = 1000;
+- (NSString *)calculScaleLabelText:(StatsCircle *) dot
+{
+    float maxValue = [self maxValue]; // Biggest Y-axis value from all the points.
+    float minValue = [self minValue]; // Smallest Y-axis value from all the points.
+    float rate = (maxValue - minValue) / self.viewForBaselineLayout.frame.size.height;
+    float realValue = (self.viewForBaselineLayout.frame.size.height - (dot.center.y + 4)) * rate - minValue;
+    int intValue = (int)realValue;
     
-    for (StatsCircle *dot in self.subviews) {
-        
-        if (dot.tag > 99 && dot.tag < 1000) {
+    if (intValue <= 60) {
+        intValue = intValue >= 0 ? intValue : 0;
+        return [NSString stringWithFormat:@"%ds",intValue];
+    }
+    else if(intValue > 60 && intValue < 3600)
+    {
+        float tempValue = intValue / 60;
+        return [NSString stringWithFormat:@"%.1fm",tempValue];
+    }
+    else
+    {
+        float tempValue = intValue / 3600;
+        return [NSString stringWithFormat:@"%.1fh",tempValue];
+    }
+}
+
+
+// Find which dot is currently the closest to the line
+- (StatsCircle *)closestDotFromHorizontalLine:(UIView *)horizontalLine {
+    int currentlyCloser = 10000;
+    StatsCircle *resultDot;
+    for (StatsCircle *dot in self.dotsArray)
+    {
+        if (YES)//dot.tag != -1)
+        {
             
-            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                dot.alpha = 0;
-            } completion:nil];
-            
-            if (pow(((dot.center.x) - verticalLine.frame.origin.x), 2) < currentlyCloser) {
-                currentlyCloser = pow(((dot.center.x) - verticalLine.frame.origin.x), 2);
-                closestDot = dot;
+            if (pow(((dot.center.y) - (horizontalLine.frame.origin.y + SCALE_LINE_HEIGHT / 2)), 2) < currentlyCloser) {
+                currentlyCloser = pow(((dot.center.y) - (horizontalLine.frame.origin.y + SCALE_LINE_HEIGHT / 2)), 2);
+                resultDot = dot;
+                
+//                [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//                    dot.alpha = 0;
+//                } completion:nil];
+                
             }
         }
     }
     
-    return closestDot;
+    return resultDot;
 }
 
 // Determines the biggest Y-axis value from all the points.

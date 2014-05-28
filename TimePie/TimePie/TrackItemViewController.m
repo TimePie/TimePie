@@ -39,6 +39,14 @@
     [self initMainVessel];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if ([self.delegate respondsToSelector:@selector(reloadPass)])
+    {
+        [self.delegate reloadPass];
+    }
+}
+
 - (void)initMainVessel
 {
     _TIVC_Vessel = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
@@ -76,9 +84,11 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@",[[tagListArray objectAtIndex:indexPath.row] tag_name]];
     cell.textLabel.textColor = [UIColor colorWithRed:0.55 green:0.55 blue:0.55 alpha:1.f];
     cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16.f];
-    if ([[trackedTagList objectAtIndex:indexPath.row] isEqualToString:@"y"])
-        [self initTrackSelectedViewInCell:cell withIndexPath:indexPath withImage:[UIImage imageNamed:@"TimePie_Settings_Tracked"]];
-    else [self initTrackSelectedViewInCell:cell withIndexPath:indexPath withImage:[UIImage imageNamed:@"TimePie_Settings_unTracked"]];
+    if ([[(Tag*)[tagListArray objectAtIndex:indexPath.row] tracking] intValue] == 0)
+    {
+        [self initTrackSelectedViewInCell:cell withIndexPath:indexPath withImage:[UIImage imageNamed:@"TimePie_Settings_unTracked"]];
+    }
+    else [self initTrackSelectedViewInCell:cell withIndexPath:indexPath withImage:[UIImage imageNamed:@"TimePie_Settings_Tracked"]];
     return cell;
 }
 
@@ -86,8 +96,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[trackedTagList objectAtIndex:indexPath.row] isEqualToString:@"y"]) [trackedTagList replaceObjectAtIndex:indexPath.row withObject:@"n"];
-    else [trackedTagList replaceObjectAtIndex:indexPath.row withObject:@"y"];
+    if ([[(Tag*)[tagListArray objectAtIndex:indexPath.row] tracking] intValue] == 0)
+    {
+        //[trackedTagList replaceObjectAtIndex:indexPath.row withObject:@"n"];
+        [[TimingItemStore timingItemStore] markTracking:[[tagListArray objectAtIndex:indexPath.row] tag_name] Tracked:[NSNumber numberWithInt:1]];
+    }
+    else
+    {
+        //[trackedTagList replaceObjectAtIndex:indexPath.row withObject:@"y"];
+        [[TimingItemStore timingItemStore] markTracking:[[tagListArray objectAtIndex:indexPath.row] tag_name] Tracked:[NSNumber numberWithInt:0]];
+    }
     [_TIVC_Vessel reloadData];
 }
 

@@ -40,6 +40,7 @@
     if([self respondsToSelector:@selector(edgesForExtendedLayout)])
         [self setEdgesForExtendedLayout:UIRectEdgeBottom];
     if(_exitButton) _exitButton.hidden = NO;
+    if (_mainView) [_mainView reloadData];
 }
 
 - (void)viewDidLoad
@@ -64,7 +65,7 @@
         {
             _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-130-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
         }
-        if (_exitButton.frame.origin.y < 320.f) [self exitButtonPressed];
+        if (_exitButton.frame.origin.y < 330.f) [self exitButtonPressed];
     }
 }
 
@@ -116,6 +117,12 @@
 - (void)initNeededInfo
 {
     tagList = [[TimingItemStore timingItemStore] getAllTags];
+    trackedTagList = [[NSMutableArray alloc] init];
+    for (Tag *tag in tagList)
+    {
+        if (tag.tracking == [NSNumber numberWithInt:1])
+            [trackedTagList addObject:tag];
+    }
     //tagList = [NSArray arrayWithObjects:@"学习",@"工作",@"酱油",@"运动",@"电影", nil];
     colorList = [NSMutableArray arrayWithObjects:REDNO1,BLUENO2,GREENNO3,PINKNO04,BROWNN05,YELLOWN06, PURPLEN07, P01N08, P01N09, P01N10, nil];
     lightColorList = [NSMutableArray arrayWithObjects:RedNO1_light, BLUENO2_light, GREENNO3_light, PINKNO04_light, BROWNN05_light, YELLOWN06_light, PURPLEN07_light, P01N08_light, P01N09_light, P01N10_light, nil];
@@ -175,7 +182,7 @@
 {
     if (section == 2)
     {
-        return tagList.count;
+        return trackedTagList.count;
     }
     else if(section == 0) return 2;
     else return 1;
@@ -233,7 +240,7 @@
         {
             itemTrackCell = [[PersonalViewEventTrackCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
         }
-        itemTrackCell.PVETCEventLabel.text = [[tagList objectAtIndex:indexPath.row] tag_name];
+        itemTrackCell.PVETCEventLabel.text = [[trackedTagList objectAtIndex:indexPath.row] tag_name];
         itemTrackCell.PVETCAvgTimeLabel.text = [NSString stringWithFormat:@"%.1f",[[avgTimeOfTagList objectAtIndex:indexPath.row] floatValue]];
         itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
         [itemTrackCell initCellWithColor:[lightColorList objectAtIndex:indexPath.row] ColumnCount:[[columnHeightList objectAtIndex:indexPath.row] count] HeightArray:[columnHeightList objectAtIndex:indexPath.row]];
@@ -308,6 +315,22 @@
     self.exitButton.hidden = NO;
 }
 
+- (void)reloadSecondPass
+{
+    [trackedTagList removeAllObjects];
+    [avgTimeOfTagList removeAllObjects];
+    [columnHeightList removeAllObjects];
+    for (Tag *tag in tagList)
+    {
+        if (tag.tracking == [NSNumber numberWithInt:1])
+            [trackedTagList addObject:tag];
+    }
+    [self calculateAvgTimeOfTag];
+    [self getColumnHeightListWithTagList];
+    if (_mainView)
+        [_mainView reloadData];
+}
+
 #pragma mark - utility functions
 - (void)pushViewAnimationWithView:(UIView*)view willHidden:(BOOL)hidden
 {
@@ -366,8 +389,8 @@
 
 - (void)calculateAvgTimeOfTag
 {
-    for (int i = 0; i < tagList.count; i++)
-        [avgTimeOfTagList addObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:i] tag_name]].floatValue / dayCount]];
+    for (int i = 0; i < trackedTagList.count; i++)
+        [avgTimeOfTagList addObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[trackedTagList objectAtIndex:i] tag_name]].floatValue / dayCount]];
 }
 
 /** EventTrackCell Usage
@@ -375,9 +398,9 @@
 - (void)getColumnHeightListWithTagList
 {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < tagList.count; i++)
+    for (int i = 0; i < trackedTagList.count; i++)
     {
-        NSString *tempTagName = [[tagList objectAtIndex:i] tag_name];
+        NSString *tempTagName = [[trackedTagList objectAtIndex:i] tag_name];
         tempArray = [self getSpecificColumnHeightListWithTagName:tempTagName];
         [columnHeightList addObject:tempArray];
     }

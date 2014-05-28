@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TrackItemViewDelegate <NSObject>
+
+- (void)reloadPass;
+
+@end
+
 @interface TrackItemViewController : UIViewController
+
+@property (nonatomic, assign) id<TrackItemViewDelegate> delegate;
 
 @end
