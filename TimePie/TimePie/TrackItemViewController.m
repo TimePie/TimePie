@@ -84,9 +84,8 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@",[[tagListArray objectAtIndex:indexPath.row] tag_name]];
     cell.textLabel.textColor = [UIColor colorWithRed:0.55 green:0.55 blue:0.55 alpha:1.f];
     cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16.f];
-    if ([[[tagListArray objectAtIndex:indexPath.row] tracking] intValue] == 0)
+    if ([[(Tag*)[tagListArray objectAtIndex:indexPath.row] tracking] intValue] == 0)
     {
-        NSLog(@"%@",[[tagListArray objectAtIndex:indexPath.row] tracking]);
         [self initTrackSelectedViewInCell:cell withIndexPath:indexPath withImage:[UIImage imageNamed:@"TimePie_Settings_unTracked"]];
     }
     else [self initTrackSelectedViewInCell:cell withIndexPath:indexPath withImage:[UIImage imageNamed:@"TimePie_Settings_Tracked"]];
@@ -97,7 +96,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[[tagListArray objectAtIndex:indexPath.row] tracking] intValue] == 0)
+    if ([[(Tag*)[tagListArray objectAtIndex:indexPath.row] tracking] intValue] == 0)
     {
         //[trackedTagList replaceObjectAtIndex:indexPath.row withObject:@"n"];
         [[TimingItemStore timingItemStore] markTracking:[[tagListArray objectAtIndex:indexPath.row] tag_name] Tracked:[NSNumber numberWithInt:1]];
