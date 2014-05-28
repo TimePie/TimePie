@@ -16,6 +16,7 @@
     NSString *timeRangeInfo;
     
     NSArray *tagList;
+    NSMutableArray *trackedTagList;
     NSArray *colorList;
     NSArray *lightColorList;
     

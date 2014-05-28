@@ -22,12 +22,12 @@
 
 
 #define ContentOffsetY -370
-#define ContentTriggerOffsetY -555
+#define ContentTriggerOffsetY -560
 #define HeightOfItemTable 570
 #define ItemTableInitOffsetY -10
 #define PieChartInitOffsetY -350
 
-#define ContentOffsetYForAnimation -434
+#define ContentOffsetYForAnimation -504
 
 @interface MainScreenViewController ()
 {

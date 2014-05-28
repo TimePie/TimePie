@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TrackItemViewController.h"
 
 @protocol SettingsViewControllerDelegate <NSObject>
 
 @required
 - (void)reverseCloseButton;
+- (void)reloadSecondPass;
 
 @end
 
-@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,TrackItemViewDelegate>
 
 @property (strong, nonatomic) UINavigationBar *navBar;
 @property (strong, nonatomic) UITableView *SVCVessel;
