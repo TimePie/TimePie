@@ -15,12 +15,13 @@
 
 
 @implementation StatsLineGraphView
-
-int numberOfXaxisPoints; // The number of Points in the Graph.
+{
+    int numberOfXaxisPoints; // The number of Points in the Graph.
+    float scaleRateForMonthType;
 //int numberOfAllPointsInAGraph;
 //StatsCircle *closestDot;
 //int currentlyCloser;
-
+}
 - (void)reloadGraph {
     [self setNeedsLayout];
 }
@@ -72,6 +73,12 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
     self.animationDelegate.delegate = self;
     
     //
+    scaleRateForMonthType = 1;
+    if(self.graphType == MonthType)
+    {
+        scaleRateForMonthType = 0.91;
+    }
+    //
     self.allDotsPositionOfAllLines = [[NSMutableArray alloc] init];
     //
     self.dotsArray = [[NSMutableArray alloc] init];
@@ -116,12 +123,12 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
     
     // draw dots
     float maxValue = [self maxValue]; // Biggest Y-axis value from all the points.
-    float minValue = [self minValue]; // Smallest Y-axis value from all the points.
+    //float minValue = [self minValue]; // Smallest Y-axis value from all the points.
     
     float positionOnXAxis; // The position on the X-axis of the point currently being created.
     float positionOnYAxis; // The position on the Y-axis of the point currently being created.
     
-    float rate = (maxValue - minValue) / (self.viewForBaselineLayout.frame.size.height);
+    float rate = (maxValue) / (self.viewForBaselineLayout.frame.size.height);
     
     for (int i = 0; i < numberOfXaxisPoints; i++)
     {
@@ -131,7 +138,8 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
         float dotValue = [self.delegate valueInArray:index ObjectAtIndex:numberOfXaxisPoints - 1 - i];
         
         positionOnXAxis = (self.viewForBaselineLayout.frame.size.width / (numberOfXaxisPoints - 1)) * i;
-        positionOnYAxis = (self.viewForBaselineLayout.frame.size.height) - ((dotValue - minValue) / rate) - 4;
+        
+        positionOnYAxis = ((self.viewForBaselineLayout.frame.size.height) - ((dotValue * scaleRateForMonthType) / rate) - 4);
         
         StatsCircle *circleDot = [[StatsCircle alloc] initWithFrame:CGRectMake(positionOnXAxis, positionOnYAxis, circleSize, circleSize)];
         
@@ -268,7 +276,7 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
         //        if ([self.delegate respondsToSelector:@selector(didReleaseGraphWithClosestIndex:)]) [self.delegate didReleaseGraphWithClosestIndex:(closestDot.tag - 100)];
         
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            closestDot.alpha = 0;
+            //closestDot.alpha = 0;
             self.horizontalLine.alpha = 0;
         } completion:nil];
     }
@@ -277,14 +285,15 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
 - (NSString *)calculScaleLabelText:(StatsCircle *) dot
 {
     float maxValue = [self maxValue]; // Biggest Y-axis value from all the points.
-    float minValue = [self minValue]; // Smallest Y-axis value from all the points.
-    float rate = (maxValue - minValue) / self.viewForBaselineLayout.frame.size.height;
-    float realValue = (self.viewForBaselineLayout.frame.size.height - (dot.center.y + 4)) * rate - minValue;
-    int intValue = (int)realValue;
+    //float minValue = [self minValue]; // Smallest Y-axis value from all the points.
+    float rate = (maxValue) / self.viewForBaselineLayout.frame.size.height;
+    float realValue = (self.viewForBaselineLayout.frame.size.height - (dot.center.y + 4)) * rate / scaleRateForMonthType;
+    float intValue = realValue;
     
+    //区别秒分时
     if (intValue <= 60) {
         intValue = intValue >= 0 ? intValue : 0;
-        return [NSString stringWithFormat:@"%ds",intValue];
+        return [NSString stringWithFormat:@"%.0fs",intValue];
     }
     else if(intValue > 60 && intValue < 3600)
     {
@@ -313,9 +322,8 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
                 resultDot = dot;
                 
 //                [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//                    dot.alpha = 0;
+//                    dot.s = 0;
 //                } completion:nil];
-                
             }
         }
     }
