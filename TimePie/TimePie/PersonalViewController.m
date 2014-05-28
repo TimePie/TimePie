@@ -64,7 +64,7 @@
         {
             _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-130-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
         }
-        if (_mainView.contentOffset.y > 220 * tagList.count/3) [self exitButtonPressed];
+        if (_exitButton.frame.origin.y < 320.f) [self exitButtonPressed];
     }
 }
 

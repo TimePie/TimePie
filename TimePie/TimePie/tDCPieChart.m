@@ -95,9 +95,14 @@
     [self addSubview:percentageLabel];
     [self bringSubviewToFront:percentageLabel];
     
-    UILabel *eventName = [[UILabel alloc] initWithFrame:CGRectMake(30, 95, 60, 30)];
+    UILabel *eventName = [[UILabel alloc] initWithFrame:CGRectMake(30, 95, 80, 30)];
     eventName.text = _tDCEventName;
-    eventName.font = [UIFont fontWithName:@"Arial-BoldMT" size:20.f];
+    if (eventName.text.length > 2)
+    {
+        eventName.font = [UIFont fontWithName:@"Arial-BoldMT" size:15.f];
+        eventName.frame = CGRectMake(eventName.frame.origin.x - 8 * eventName.text.length / 4, eventName.frame.origin.y, eventName.frame.size.width, eventName.frame.size.height);
+    }
+    else eventName.font = [UIFont fontWithName:@"Arial-BoldMT" size:20.f];
     eventName.textColor = color;
     [self addSubview:eventName];
     [self bringSubviewToFront:eventName];
