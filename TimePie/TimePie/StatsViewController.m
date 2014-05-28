@@ -114,12 +114,12 @@
                 /**
                  *  real data
                  */
-                tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:tempTimingItem.itemName date:tempDate];
+                //tempData = [[TimingItemStore timingItemStore] getDailyTimeByItemName:tempTimingItem.itemName date:tempDate];
                 
                 /**
                  *  fake data
                  */
-                //tempData = [NSNumber numberWithInteger:(arc4random() % 7)];
+                tempData = [NSNumber numberWithInteger:(arc4random() % 7)];
                 
             }
             @catch (NSException *exception) {

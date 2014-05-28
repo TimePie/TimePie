@@ -121,7 +121,7 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
     float positionOnXAxis; // The position on the X-axis of the point currently being created.
     float positionOnYAxis; // The position on the Y-axis of the point currently being created.
     
-    float rate = (maxValue - minValue) / self.viewForBaselineLayout.frame.size.height;
+    float rate = (maxValue - minValue) / (self.viewForBaselineLayout.frame.size.height);
     
     for (int i = 0; i < numberOfXaxisPoints; i++)
     {
@@ -205,8 +205,6 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
         {
             line.isCurveLine = NO;
         }
-        
-        
         //line.topColor = self.colorTop;
         line.color = [self.delegate colorForItemWithIndex:index];
         line.bottomColor = [self.delegate colorForItemWithIndex:index];
@@ -225,7 +223,7 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
         //set the dot on the line
         [currentDot removeFromSuperview];
         
-        if(YES)//self.graphType != MonthType)
+        if(self.graphType != MonthType)
         {
             [self addSubview:currentDot];
         
@@ -357,16 +355,23 @@ int numberOfXaxisPoints; // The number of Points in the Graph.
             labelXAxis.text = [self.delegate labelOnXAxisForIndex:(i * numberOfGaps - 1) WithTimeRange:numberOfXaxisPoints];
             [labelXAxis sizeToFit];
             
-            float offsetX = 20;
+            float offsetX = 4;
             
-            float width = self.viewForBaselineLayout.frame.size.width-30;
+            float width = self.viewForBaselineLayout.frame.size.width;//-30;
             [labelXAxis setCenter:CGPointMake((width/((numberOfXaxisPoints-1)/numberOfGaps))*(i-1)+offsetX, self.frame.size.height + labelXaxisOffset+2)];
             //[labelXAxis setCenter:CGPointMake((width/(numberOfXaxisPoints-1))*(i*numberOfGaps - 1)+offsetX, self.frame.size.height + labelXaxisOffset+2)];
             
             labelXAxis.font = self.labelFont;
             
+            if (i == 1)
+            {
+                [labelXAxis setCenter:CGPointMake((width/((numberOfXaxisPoints-1)/numberOfGaps))*(i-1)+16, self.frame.size.height + labelXaxisOffset+2)];
+            }
+            
+            
             if(i == numberOfXaxisPoints / numberOfGaps)
             {
+                [labelXAxis setCenter:CGPointMake((width/((numberOfXaxisPoints-1)/numberOfGaps))*(i-1)-10, self.frame.size.height + labelXaxisOffset+2)];
                 labelXAxis.font = [UIFont fontWithName:@"Roboto-Medium" size:13];
             }
             

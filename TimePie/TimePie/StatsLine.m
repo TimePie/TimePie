@@ -52,7 +52,7 @@
         //[path1 addLineToPoint:self.secondPoint];
         
         
-        NSInteger granularity = 100;
+        NSInteger granularity =200;
         
         NSMutableArray *addCurvePoints = [[NSMutableArray alloc] init];
         NSMutableArray *points = [self.allPointsInLines mutableCopy];
