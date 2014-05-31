@@ -56,6 +56,11 @@
     [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 #pragma mark - main Loop
 - (void)mainLoop:(id)sender
 {

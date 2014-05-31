@@ -26,6 +26,7 @@
 		13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58418EC501200462A83 /* Roboto-Medium.ttf */; };
 		13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */; };
 		13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */; };
+		13EA460E1939936000AF229E /* TimePie_RingBG2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EA460D1939936000AF229E /* TimePie_RingBG2@2x.png */; };
 		13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB518F1BD4700D716AE /* tDCPieChart.m */; };
 		13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F4CBB918F1C12100D716AE /* UIView+Frame.m */; };
 		6831559B1909201400C9A27C /* StatsView_itemCellBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6831559A1909201400C9A27C /* StatsView_itemCellBG@2x.png */; };
@@ -82,7 +83,6 @@
 		CD9CE6AD191A06D5003C4CA6 /* Output.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE6AC191A06D5003C4CA6 /* Output.m */; };
 		CDB36F191931E87D00E7BBCE /* Roboto-Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD52CC161931E82200BB7FB9 /* Roboto-Condensed.ttf */; };
 		CDB36F1B1931EB9400E7BBCE /* TimePie_RingBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */; };
-		CDB36F1D1931F06900E7BBCE /* TimePie_RingBG2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB36F1C1931F06900E7BBCE /* TimePie_RingBG2@2x.png */; };
 		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
 		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
 /* End PBXBuildFile section */
@@ -130,6 +130,7 @@
 		13CCE58618EC5ABC00462A83 /* timeDistributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timeDistributeCell.h; sourceTree = "<group>"; };
 		13CCE58718EC5ABC00462A83 /* timeDistributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timeDistributeCell.m; sourceTree = "<group>"; };
 		13CCE58818EC5ABC00462A83 /* timeDistributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = timeDistributeCell.xib; sourceTree = "<group>"; };
+		13EA460D1939936000AF229E /* TimePie_RingBG2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_RingBG2@2x.png"; sourceTree = "<group>"; };
 		13F4CBB418F1BD4700D716AE /* tDCPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tDCPieChart.h; sourceTree = "<group>"; };
 		13F4CBB518F1BD4700D716AE /* tDCPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tDCPieChart.m; sourceTree = "<group>"; };
 		13F4CBB818F1C12100D716AE /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -217,7 +218,6 @@
 		CD9CE6AC191A06D5003C4CA6 /* Output.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Output.m; sourceTree = "<group>"; };
 		CD9CE6AE191A0729003C4CA6 /* GlobleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobleConstants.h; sourceTree = "<group>"; };
 		CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_RingBG@2x.png"; sourceTree = "<group>"; };
-		CDB36F1C1931F06900E7BBCE /* TimePie_RingBG2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_RingBG2@2x.png"; sourceTree = "<group>"; };
 		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
 		CDC8858D1910FE3400A67510 /* TCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCell.h; sourceTree = "<group>"; };
 		CDC8858E1910FE3400A67510 /* TCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCell.m; sourceTree = "<group>"; };
@@ -320,9 +320,9 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				13EA460D1939936000AF229E /* TimePie_RingBG2@2x.png */,
 				CD601A641936131F008946E9 /* TimePie_Nav_Logo@2x.png */,
 				68BBB2111934F1E300FDC1A4 /* scaleLineBG@2x.png */,
-				CDB36F1C1931F06900E7BBCE /* TimePie_RingBG2@2x.png */,
 				CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */,
 				CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */,
 				CD3E53C5191C94D7005A1416 /* History_btn@2x.png */,
@@ -666,11 +666,11 @@
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
 				CD601A651936131F008946E9 /* TimePie_Nav_Logo@2x.png in Resources */,
 				688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */,
-				CDB36F1D1931F06900E7BBCE /* TimePie_RingBG2@2x.png in Resources */,
 				CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
 				CDC8858C1910FE1500A67510 /* TCell.xib in Resources */,
 				68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */,
+				13EA460E1939936000AF229E /* TimePie_RingBG2@2x.png in Resources */,
 				CD4CE06E18E464D000916A4B /* Images.xcassets in Resources */,
 				CD4CE09B18E46EC800916A4B /* StatsViewController.xib in Resources */,
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,

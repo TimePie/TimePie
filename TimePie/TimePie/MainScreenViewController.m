@@ -164,7 +164,7 @@
         itemTable.delegate = self;
         itemTable.dataSource = self;
         [itemTable setSeparatorInset:UIEdgeInsetsZero];
-//        itemTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+        itemTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
         [itemTable reloadData];
         [itemTable setContentInset:UIEdgeInsetsMake(-ContentOffsetY, 0, 0, 0)];
         [itemTable addSubview:pieChart];
