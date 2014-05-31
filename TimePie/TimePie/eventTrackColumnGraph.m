@@ -9,6 +9,8 @@
 #import "eventTrackColumnGraph.h"
 #import "BasicUIColor+UIPosition.h"
 
+#define columnHeightFactor 1.8f
+
 @implementation eventTrackColumnGraph
 
 - (id)initWithFrame:(CGRect)frame
@@ -25,7 +27,7 @@
 {
     for (int i = 0; i < columnCount; i++)
     {
-        CGRect rectangle = CGRectMake(230 - 7*i, 40-[columnHeightArray[i] floatValue], 5, [columnHeightArray[i] floatValue]);
+        CGRect rectangle = CGRectMake(230 - 7*i, 40-[columnHeightArray[i] floatValue] * columnHeightFactor, 5, [columnHeightArray[i] floatValue] * columnHeightFactor);
         CGContextRef context = UIGraphicsGetCurrentContext();
         CGContextSetRGBFillColor(context, CGColorGetComponents([columnColor CGColor])[0], CGColorGetComponents([columnColor CGColor])[1], CGColorGetComponents([columnColor CGColor])[2], 0.3);
         CGContextFillRect(context, rectangle);

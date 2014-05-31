@@ -119,7 +119,7 @@
                 /**
                  *  fake data
                  */
-                //tempData = [NSNumber numberWithInteger:(arc4random() % 7)];
+                //tempData = [NSNumber numberWithInteger:(arc4random() % 10)];
                 
             }
             @catch (NSException *exception) {
@@ -182,7 +182,7 @@
     //使数据模型和视图分开
     
     //create view for graph
-    self.lineGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 130, 320, 240)];
+    self.lineGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 140, 320, 230)];
     
     //self.lineGraph.backgroundColor=[UIColor blackColor];
     
@@ -218,7 +218,7 @@
 - (void)initMonthGraph
 {
     //create view for graph
-    self.monthGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 130, 320, 240)];
+    self.monthGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 140, 320, 230)];
     //self.lineGraph.backgroundColor=[UIColor blackColor];
     
     
@@ -253,7 +253,7 @@
 - (void)initDaysGraph
 {
     //create view for graph
-    self.daysGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 130, 320, 240)];
+    self.daysGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 140, 320, 230)];
     
     //self.lineGraph.backgroundColor=[UIColor blackColor];
     

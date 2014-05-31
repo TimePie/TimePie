@@ -15,11 +15,13 @@
     NSArray *colorList;
     NSArray *lightColorList;
     NSNumber *totalTime;
+    NSNumber *totalTimeOfTags;
     NSMutableArray *timeOfEachTag;
     NSMutableArray *tDCPieChartList;
 }
 @property (strong, nonatomic) UIScrollView *vessel;
 
 - (void)reloadTotalHours:(NSNumber*)tHours;
+- (void)reloadTotalHoursForDistributeGraph;
 
 @end

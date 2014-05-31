@@ -52,7 +52,7 @@
         //[path1 addLineToPoint:self.secondPoint];
         
         
-        NSInteger granularity = 100;
+        NSInteger granularity =200;
         
         NSMutableArray *addCurvePoints = [[NSMutableArray alloc] init];
         NSMutableArray *points = [self.allPointsInLines mutableCopy];
@@ -74,7 +74,12 @@
             CGPoint p1 = [(NSValue *)points[index] CGPointValue];
             CGPoint p2 = [(NSValue *)points[index + 1] CGPointValue];
             CGPoint p3 = [(NSValue *)points[index + 2] CGPointValue];
-
+            
+            p0.y = p0.y >= 0 ? p0.y : 0;
+            p1.y = p1.y >= 0 ? p1.y : 0;
+            p2.y = p2.y >= 0 ? p2.y : 0;
+            p3.y = p3.y >= 0 ? p3.y : 0;
+            
             // now add n points starting at p1 + dx/dy up until p2 using Catmull-Rom splines
             for (int i = 1; i < granularity; i++)
             {
@@ -85,6 +90,8 @@
                 CGPoint pi; // intermediate point
                 pi.x = 0.5 * (2*p1.x+(p2.x-p0.x)*t + (2*p0.x-5*p1.x+4*p2.x-p3.x)*tt + (3*p1.x-p0.x-3*p2.x+p3.x)*ttt);
                 pi.y = 0.5 * (2*p1.y+(p2.y-p0.y)*t + (2*p0.y-5*p1.y+4*p2.y-p3.y)*tt + (3*p1.y-p0.y-3*p2.y+p3.y)*ttt);
+                
+                pi.y = pi.y >= self.firstPoint.y ? self.firstPoint.y : pi.y;
                 
                 [path1 addLineToPoint:pi];
                 
@@ -97,7 +104,7 @@
         }
         
         CGContextSetFillColorWithColor(ctx, [self.bottomColor CGColor]);
-        CGContextSetAlpha(ctx, self.bottomAlpha+0.3);
+        CGContextSetAlpha(ctx, self.bottomAlpha + 0.1);
         CGContextBeginPath(ctx);
         
         CGContextMoveToPoint(ctx, round(self.firstPoint.x), self.firstPoint.y);

@@ -79,7 +79,7 @@
 {
     for (int i = 0; i < tagList.count; i++)
     {
-        NSNumber *tempResult = [NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:i] tag_name]].floatValue * 100 / totalTime.floatValue];
+        NSNumber *tempResult = [NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:i] tag_name]].floatValue * 100 / totalTimeOfTags.floatValue];
         [timeOfEachTag addObject:tempResult];
     }
     [self initDistributeGraphInView:_vessel];
@@ -88,6 +88,17 @@
 - (void)reloadTotalHours:(NSNumber *)tHours
 {
     totalTime = tHours;
+    [self generateTimeOfEachTag];
+}
+
+- (void)reloadTotalHoursForDistributeGraph
+{
+    for (int i = 0; i < tagList.count; i++)
+    {
+        NSNumber *tempResult = [NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:i] tag_name]].floatValue];
+        CGFloat tempFloatValue = totalTimeOfTags.floatValue;
+        totalTimeOfTags = [NSNumber numberWithFloat:tempResult.floatValue + tempFloatValue];
+    }
     [self generateTimeOfEachTag];
 }
 
