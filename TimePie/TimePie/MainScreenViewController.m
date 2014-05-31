@@ -62,8 +62,37 @@
 {
     self.view.hidden = NO;
     [self navigationController].navigationBar.hidden = NO;
+    
+    
 }
 
+- (void)pieChartAppear:(NSTimer *)chkTimer {
+    NSLog(@"pieChartAppear");
+    [UIView animateWithDuration:.15
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         itemTable.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"view will disappear");
+    [UIView animateWithDuration:.15
+                          delay: 0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         itemTable.alpha = 0;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -75,6 +104,15 @@
     [[TimingItemStore timingItemStore] addTag:@"工作"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO
                                             withAnimation:UIStatusBarAnimationFade];
+    
+    NSTimer * ncTimer = [NSTimer scheduledTimerWithTimeInterval:.3
+                                                         target:self
+                                                       selector:@selector(pieChartAppear:)
+                                                       userInfo:nil
+                                                        repeats:NO];
+//    [ncTimer fire];
+    
+    
 //    NSLog(@"%@",[[ColorThemes colorThemes] getAvailableColors]);
 //    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
 }
