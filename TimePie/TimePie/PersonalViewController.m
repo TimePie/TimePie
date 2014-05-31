@@ -228,7 +228,7 @@
         {
             timeDrtbCell = [[timeDistributeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:timeDistributeCellIdentifier];
         }
-        [timeDrtbCell reloadTotalHours:totalHours];
+        [timeDrtbCell reloadTotalHoursForDistributeGraph];
         timeDrtbCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return timeDrtbCell;
     }
