@@ -266,9 +266,9 @@
     } completion:nil];
     
     
-    StatsCircle *closestDot = [self closestDotFromHorizontalLine:self.horizontalLine];
+    //StatsCircle *closestDot = [self closestDotFromHorizontalLine:self.horizontalLine];
     
-    self.horizontalLine.scaleLabel.text = [self calculScaleLabelText:closestDot];//
+    self.horizontalLine.scaleLabel.text = [self calculScaleLabelText:self.horizontalLine.center.y];//
     
     // ON RELEASE
     if (recognizer.state == UIGestureRecognizerStateEnded)
@@ -282,12 +282,12 @@
     }
 }
 
-- (NSString *)calculScaleLabelText:(StatsCircle *) dot
+- (NSString *)calculScaleLabelText:(float) yPosition  //(StatsCircle *) dot
 {
     float maxValue = [self maxValue]; // Biggest Y-axis value from all the points.
     //float minValue = [self minValue]; // Smallest Y-axis value from all the points.
     float rate = (maxValue) / self.viewForBaselineLayout.frame.size.height;
-    float realValue = (self.viewForBaselineLayout.frame.size.height - (dot.center.y + 4)) * rate / scaleRateForMonthType;
+    float realValue = (self.viewForBaselineLayout.frame.size.height - (yPosition + 4)) * rate / scaleRateForMonthType;
     float intValue = realValue;
     
     //区别秒分时
