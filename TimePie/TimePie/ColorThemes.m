@@ -36,6 +36,31 @@
     }
 }
 
+
+
+- (NSArray *)getAvailableColors
+{
+    int size=[[self defaultColorTheme] count];
+    int currentP = colorPointer;
+    int iterP = currentP;
+    NSMutableArray * availColors = [[NSMutableArray alloc] init];
+    if(![taken containsObject:[NSNumber numberWithInt:iterP]]){
+        [availColors addObject:[NSNumber numberWithInt:iterP]];
+    }
+    iterP++;
+    iterP%=size;
+    while(iterP!=currentP){
+        if(![taken containsObject:[NSNumber numberWithInt:iterP]]){
+            [availColors addObject:[NSNumber numberWithInt:iterP]];
+        }
+        iterP++;
+        iterP%=size;
+    }
+    
+    return availColors;
+}
+
+
 - (int)getAColor
 {
     int size=[[self defaultColorTheme] count];
@@ -121,6 +146,8 @@
     int size = [[self defaultLightColorTheme] count];
     return [[self defaultLightColorTheme] objectAtIndex:index%size];
 }
+
+
 
 
 

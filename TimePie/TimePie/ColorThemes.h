@@ -24,5 +24,6 @@
 - (UIColor *)getLightColorAt:(int)index;
 - (void)initTaken:(NSArray*)array;
 - (int)getAColor;
+- (NSArray *)getAvailableColors;
 
 @end

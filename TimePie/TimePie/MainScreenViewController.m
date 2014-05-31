@@ -65,7 +65,7 @@
     NSLog(@"view did appear");
     [[TimingItemStore timingItemStore] addTag:@"学习"];
     [[TimingItemStore timingItemStore] addTag:@"工作"];
-    
+    NSLog(@"%@",[[ColorThemes colorThemes] getAvailableColors]);
 //    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
 }
 
@@ -694,7 +694,7 @@
     }else{
         [itemTable setContentOffset:CGPointMake(itemTable.contentOffset.x, ContentOffsetYForAnimation)];
 //        NSLog(@"%f",itemTable.contentOffset.y);
-        itemTable.scrollEnabled = NO;
+//        itemTable.scrollEnabled = NO;
         //Enter Select Mode
         NSLog(@"long press!");
         selectMode = YES;
