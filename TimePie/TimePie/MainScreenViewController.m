@@ -41,6 +41,12 @@
 
 
 
+
+
+
+
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -67,6 +73,8 @@
     NSLog(@"view did appear");
     [[TimingItemStore timingItemStore] addTag:@"学习"];
     [[TimingItemStore timingItemStore] addTag:@"工作"];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO
+                                            withAnimation:UIStatusBarAnimationFade];
 //    NSLog(@"%@",[[ColorThemes colorThemes] getAvailableColors]);
 //    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
 }

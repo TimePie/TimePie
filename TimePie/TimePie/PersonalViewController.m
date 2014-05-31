@@ -43,6 +43,12 @@
     if (_mainView) [_mainView reloadData];
 }
 
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,12 +60,12 @@
     //main Loop
     NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                            withAnimation:UIStatusBarAnimationFade];
+    
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
+
 
 #pragma mark - main Loop
 - (void)mainLoop:(id)sender
