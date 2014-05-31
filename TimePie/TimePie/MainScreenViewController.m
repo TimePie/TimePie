@@ -17,6 +17,7 @@
 #import "DateHelper.h"
 #import "Output.h"
 #import "BasicUIColor+UIPosition.h"
+#import "SocialShareViewController.h"
 
 #import "BounceAnimation.h"
 
@@ -214,7 +215,7 @@
         selectMode = NO;
     }
     
-    
+    [self saveUIImageAsPNG:[self takeScreenshotOfPieChartWithFrame:CGRectMake(0, 0, 320, 300)]];
 }
 
 
@@ -619,6 +620,9 @@
     CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:navController animated:YES completion:nil];
+    
+//    SocialShareViewController *ssvc = [[SocialShareViewController alloc] init];
+//    [self presentViewController:ssvc animated:YES completion:nil];
 }
 
 
@@ -860,6 +864,36 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
     return self.mAnimation;
+}
+
+#pragma mark - Utilities Screenshot
+- (UIImageView*)takeScreenshotOfPieChartWithFrame:(CGRect)frame
+{
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *sourceImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIGraphicsBeginImageContext(frame.size);
+    [sourceImage drawAtPoint:frame.origin];
+    UIImage *croppedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    UIImageView *tempIM = [[UIImageView alloc] initWithImage:croppedImage];
+    tempIM.frame = CGRectMake(0, 0, 320, 300);
+    
+    return tempIM;
+}
+
+- (void)saveUIImageAsPNG:(UIImageView*)sourceImageView
+{
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    
+    UIImage * imageToSave = sourceImageView.image;
+    NSData * binaryImageData = UIImagePNGRepresentation(imageToSave);
+    
+    [binaryImageData writeToFile:[basePath stringByAppendingPathComponent:@"sharePieChartPhoto.png"] atomically:YES];
 }
 
 @end
