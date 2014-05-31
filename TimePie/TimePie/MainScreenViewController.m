@@ -326,14 +326,15 @@
             NSLog(@"Deselect");
         }
         [pieChart reloadData];
+        [itemTable reloadData];
     }
 }
-- (void)pieChart:(XYPieChart *)pieChart didDeselectSliceAtIndex:(NSUInteger)index
+/*- (void)pieChart:(XYPieChart *)pieChart didDeselectSliceAtIndex:(NSUInteger)index
 {
     if(selectMode){
         NSLog(@"did deselect slice at index: %d", index);
     }
-}
+}*/
 
 
 //////////////////
@@ -448,8 +449,9 @@
     }
     
     
-    if(selectMode)
+    if(selectMode&&![selectedArray containsObject:[[timingItemStore allItems] objectAtIndex:indexPath.row]])
     {
+        
         cell.alpha = .5;
         cell.itemColor.alpha = .5;
         cell.itemNotice.alpha = .5;
@@ -484,6 +486,15 @@
     
     
     if(selectMode){
+        TimingItem *item = [timingItemStore getItemAtIndex:indexPath.row];
+        if(![selectedArray containsObject:item]){
+            [selectedArray addObject:item];
+        }else{
+            [selectedArray removeObject:item];
+            NSLog(@"Deselect");
+        }
+        [pieChart reloadData];
+        [itemTable reloadData];
         return ;
     }
         
