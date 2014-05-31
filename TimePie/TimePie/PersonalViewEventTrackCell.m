@@ -10,6 +10,8 @@
 #import "BasicUIColor+UIPosition.h"
 #import "eventTrackColumnGraph.h"
 
+#define COLUMN_GRAPH_START_COUNT 700
+
 @implementation PersonalViewEventTrackCell
 
 - (void)awakeFromNib
@@ -50,9 +52,12 @@
 
 - (void)initEventTrackColumnGraphWithColumnCount:(NSInteger)cCount HeightArray:(NSMutableArray *)cHeightArray
 {
+    if ([self viewWithTag:COLUMN_GRAPH_START_COUNT])
+        [[self viewWithTag:COLUMN_GRAPH_START_COUNT] removeFromSuperview];
     NSArray *tempCHeightArray = @[@15.f,@20.f,@15.f,@20.f,@15.f,@20.f];
     eventTrackColumnHeightArray = [NSMutableArray arrayWithArray:tempCHeightArray];
     eventTrackColumnGraph *columnGraph = [[eventTrackColumnGraph alloc] initWithFrame:CGRectMake(0, 10, 250, 40)];
+    columnGraph.tag = COLUMN_GRAPH_START_COUNT;
     [columnGraph initColumnGraphWithColumnCount:cCount heightArray:cHeightArray columnColor:_cellColor];
     [self addSubview:columnGraph];
 }
