@@ -988,6 +988,7 @@
     
     for (NSManagedObject *info in fetchedObjects) {
         NSLog(@"date_created....: %@", [info valueForKey:@"date_created"]);
+        
     }
     if([fetchedObjects count]==0){
         NSLog(@"Empty");
@@ -995,7 +996,6 @@
     }
     
     NSTimeInterval timeinterval =[(NSDate*)[[fetchedObjects objectAtIndex:0] valueForKey:@"date_created"] timeIntervalSinceNow];
-    
     
     NSNumber * result = [NSNumber numberWithDouble:-timeinterval/3600];
     NSLog(@"%@",result);

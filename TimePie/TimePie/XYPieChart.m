@@ -674,7 +674,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
     
     CGSize size = [label sizeWithFont:self.labelFont];
     size.height = size.height*2;
-    size.width = size.width*.7;
+    size.width = size.width;
     
     [CATransaction setDisableActions:YES];
     if(M_PI*2*_labelRadius*pieLayer.percentage < MAX(size.width,size.height) || value <= 0) //I CHANGED THE VALUE

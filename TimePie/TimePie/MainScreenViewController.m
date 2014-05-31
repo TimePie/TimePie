@@ -65,6 +65,8 @@
     NSLog(@"view did appear");
     [[TimingItemStore timingItemStore] addTag:@"学习"];
     [[TimingItemStore timingItemStore] addTag:@"工作"];
+    
+//    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
 }
 
 - (void)viewDidLoad
@@ -77,17 +79,6 @@
     if(self){
         
         
-        
-        
-        for (NSString* family in [UIFont familyNames])
-        {
-            NSLog(@"%@", family);
-            
-            for (NSString* name in [UIFont fontNamesForFamilyName: family])
-            {
-                NSLog(@"  %@", name);
-            }
-        }
         
         
         //setup navigation items
@@ -127,7 +118,6 @@
         
         //setup timingItemStore
         timingItemStore = [TimingItemStore timingItemStore];
-
 //        [timingItemStore restoreData];
         
         // for test:
