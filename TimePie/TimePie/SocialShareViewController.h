@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SocialShareViewController : UIViewController
-
+{
+    NSMutableArray *itemList;
+}
 @property (nonatomic, strong) UIImageView *pieChartImage;
 
 @end

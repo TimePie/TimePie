@@ -74,9 +74,9 @@
     {
         if (_exitButton && _mainView.contentOffset.y > 0)
         {
-            _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-130-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+            _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
         }
-        if (_exitButton.frame.origin.y < 330.f) [self exitButtonPressed];
+        if (_exitButton.frame.origin.y < 390.f) [self exitButtonPressed];
     }
 }
 
@@ -95,7 +95,7 @@
 
 - (void)initExitButton
 {
-    _exitButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-130, 94, 57)];
+    _exitButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110, 94, 57)];
     [_exitButton setImage:[UIImage imageNamed:@"TimePie_Personal_Exit_Button"] forState:UIControlStateNormal];
     [_exitButton addTarget:self action:@selector(exitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     _exitButton.tag = 3001;

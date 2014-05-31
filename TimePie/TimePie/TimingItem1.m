@@ -15,7 +15,7 @@
 @synthesize dateCreated;
 @synthesize time;
 @synthesize lastCheck;
-@synthesize color;
+@synthesize itemColor;
 @synthesize timing;
 @synthesize tracking;
 
@@ -37,7 +37,7 @@
         lastCheck =adate;
         timing = NO;
         tracking = NO;
-        [self setColor:0];
+        [self setItemColor:0];
     }
     return self;
 }

@@ -260,8 +260,6 @@
         
         selectMode = NO;
     }
-    
-    [self saveUIImageAsPNG:[self takeScreenshotOfPieChartWithFrame:CGRectMake(0, 0, 320, 300)]];
 }
 
 
@@ -348,12 +346,12 @@
         
         if(selectMode){
             if([selectedArray containsObject:[[timingItemStore allItems] objectAtIndex:index]]){
-                return [[ColorThemes colorThemes] getColorAt:item.color];
+                return [[ColorThemes colorThemes] getColorAt:item.itemColor];
             }
-            return [[ColorThemes colorThemes] getLightColorAt:item.color];
+            return [[ColorThemes colorThemes] getLightColorAt:item.itemColor];
             
         }else{
-            return [[ColorThemes colorThemes] getColorAt:item.color];
+            return [[ColorThemes colorThemes] getColorAt:item.itemColor];
         }
     }
     return [UIColor blackColor];
@@ -419,7 +417,7 @@
     cell.itemTime.text = [NSString stringWithFormat:@"%@", [item getTimeString]];
     
     
-    UIColor* color = [[ColorThemes colorThemes] getColorAt:item.color];
+    UIColor* color = [[ColorThemes colorThemes] getColorAt:item.itemColor];
     CGFloat r;
     CGFloat g;
     CGFloat b;
@@ -428,7 +426,7 @@
     color= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:1-.1f*indexPath.row];
     cell.itemColor.backgroundColor = color;
     
-    cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.color];
+    cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.itemColor];
     cell.itemNotice.hidden = YES;
     
     
@@ -457,7 +455,7 @@
     cell.itemTime.layer.shadowOpacity = 0.0f;
     cell.itemTime.layer.shadowRadius = 2.0;
     if(indexPath.row ==0){
-        UIColor* bgColor = [[ColorThemes colorThemes] getLightColorAt:item.color];
+        UIColor* bgColor = [[ColorThemes colorThemes] getLightColorAt:item.itemColor];
         CGFloat r;
         CGFloat g;
         CGFloat b;
@@ -482,7 +480,7 @@
         cell.backgroundColor = [UIColor whiteColor];
         TimingItem* i = [[timingItemStore allItems] objectAtIndex:0];
         
-        UIColor* nameColor = [[ColorThemes colorThemes] getColorAt:i.color];
+        UIColor* nameColor = [[ColorThemes colorThemes] getColorAt:i.itemColor];
         CGFloat r;
         CGFloat g;
         CGFloat b;
@@ -654,11 +652,10 @@
 
 -(IBAction)stats_btn_clicked:(id)sender
 {
-//    [WeiXinHelper sendContent:@"HELLO" image:[self screenshot]];
     [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
-//    StatsViewController *viewController = [[StatsViewController alloc] init];
-//    [self presentViewController:viewController animated:YES completion:nil];
-//    NSLog(@"Go to statistics view");
+    SocialShareViewController *ssVC = [[SocialShareViewController alloc] init];
+    ssVC.pieChartImage.image = [self imageWithView:pieChart];
+    [self presentViewController:ssVC animated:YES completion:nil];
 }
 
 -(void)addNewItem:(id)sender{
@@ -926,7 +923,7 @@
     UIGraphicsEndImageContext();
     
     UIImageView *tempIM = [[UIImageView alloc] initWithImage:croppedImage];
-    tempIM.frame = CGRectMake(0, 0, 320, 300);
+    tempIM.frame = CGRectMake(0, 0, 320, 500);
     
     return tempIM;
 }
@@ -940,6 +937,29 @@
     NSData * binaryImageData = UIImagePNGRepresentation(imageToSave);
     
     [binaryImageData writeToFile:[basePath stringByAppendingPathComponent:@"sharePieChartPhoto.png"] atomically:YES];
+}
+
+- (UIImage *) imageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, [[UIScreen mainScreen] scale]);
+    
+    //fill with white back ground
+    
+    CGRect rect = CGRectMake(0.0f, 0.0f, 320, 320);
+    
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+    
+    CGContextFillRect(context, rect);
+    
+    
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
 }
 
 @end

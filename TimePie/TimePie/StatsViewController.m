@@ -133,7 +133,7 @@
             [tempValues addObject:tempData];
         }
         ZBStatsItemData *itemTemp=[[ZBStatsItemData alloc] initWithName:tempTimingItem.itemName
-                                                                  Color:[[ColorThemes colorThemes] getColorAt:tempTimingItem.color]
+                                                                  Color:[[ColorThemes colorThemes] getColorAt:tempTimingItem.itemColor]
                                                            MonthData:tempValues
                                                           AndSecondTime:tempTimingItem.time];
         

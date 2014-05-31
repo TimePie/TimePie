@@ -32,7 +32,7 @@
 {
     taken = [[NSMutableArray alloc] init];
     for(TimingItem * item in array){
-        [taken addObject:[NSNumber numberWithInt:item.color]];
+        [taken addObject:[NSNumber numberWithInt:item.itemColor]];
     }
 }
 

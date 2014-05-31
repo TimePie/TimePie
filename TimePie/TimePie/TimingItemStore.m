@@ -55,7 +55,7 @@
     TimingItem *i = [TimingItem randomItem];
     
     
-    i.color = [[ColorThemes colorThemes] getAColor];
+    i.itemColor = [[ColorThemes colorThemes] getAColor];
 //    i.color = 0;
     
     [allItems addObject:i];
@@ -66,7 +66,7 @@
 - (TimingItem *)createItem:(TimingItem*)item
 {
     TimingItem *i = [TimingItem randomItem];
-    i.color = item.color;
+    i.itemColor = item.itemColor;
     i.lastCheck = item.lastCheck;
     i.itemName = item.itemName;
     item.time +=1;
@@ -151,7 +151,7 @@
         [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
         [i setValue:item.dateCreated forKey:@"date_created"];
         [i setValue:item.lastCheck forKey:@"last_check"];
-        [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+        [i setValue:[NSNumber numberWithInt:item.itemColor] forKey:@"color_number"];
         [i setValue:[NSNumber numberWithBool:item.timing] forKeyPath:@"timing"];
         [i setValue:[NSNumber numberWithBool:item.tracking] forKey:@"tracking"];
         [context updatedObjects];
@@ -467,7 +467,7 @@
     item.itemID =[[i valueForKey:@"item_id"] integerValue];
     item.dateCreated = [i valueForKey:@"date_created"];
     item.lastCheck = [i valueForKey:@"last_check"];
-    item.color = [[i valueForKey:@"color_number"] integerValue];
+    item.itemColor = [[i valueForKey:@"color_number"] integerValue];
     item.timing = [[i valueForKey:@"timing"] boolValue];
     item.tracking = [[i valueForKey:@"tracking"] boolValue];
     [allItems addObject:item];
@@ -483,7 +483,7 @@
     [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
     [i setValue:item.dateCreated forKey:@"date_created"];
     [i setValue:item.lastCheck forKey:@"last_check"];
-    [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+    [i setValue:[NSNumber numberWithInt:item.itemColor] forKey:@"color_number"];
     [i setValue:[NSNumber numberWithBool:item.timing] forKey:@"timing"];
     [i setValue:[NSNumber numberWithBool:item.tracking] forKey:@"tracking"];
     return i;
@@ -506,7 +506,7 @@
     [i setValue:[NSNumber numberWithDouble:item.time] forKey:@"time"];
     [i setValue:item.dateCreated forKey:@"date_created"];
     [i setValue:item.lastCheck forKey:@"last_check"];
-    [i setValue:[NSNumber numberWithInt:item.color] forKey:@"color_number"];
+    [i setValue:[NSNumber numberWithInt:item.itemColor] forKey:@"color_number"];
     [i setValue:[NSNumber numberWithBool:item.timing] forKey:@"timing"];
     [i setValue:[NSNumber numberWithBool:item.tracking] forKey:@"tracking"];
     
