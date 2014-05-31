@@ -20,6 +20,7 @@
 
 #import "BounceAnimation.h"
 
+#import "WeiXinHelper.h"
 
 #define ContentOffsetY -370
 #define ContentTriggerOffsetY -560
@@ -65,7 +66,7 @@
     NSLog(@"view did appear");
     [[TimingItemStore timingItemStore] addTag:@"学习"];
     [[TimingItemStore timingItemStore] addTag:@"工作"];
-    NSLog(@"%@",[[ColorThemes colorThemes] getAvailableColors]);
+//    NSLog(@"%@",[[ColorThemes colorThemes] getAvailableColors]);
 //    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
 }
 
@@ -497,7 +498,7 @@
         [itemTable reloadData];
         return ;
     }
-        
+    
         
     //NSLog(@"Timer!");
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
@@ -570,6 +571,29 @@
 }
 
 
+
+
+
+-(UIImage *) screenshot
+{
+    
+    CGRect rect;
+    rect=CGRectMake(0, 0, 320, 480);
+    UIGraphicsBeginImageContext(rect.size);
+    
+    CGContextRef context=UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:context];
+    
+    UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
+
+
+
 //event handlers
 /////////////////////////
 -(void)personal_btn_clicked:(id)sender
@@ -583,9 +607,11 @@
 
 -(IBAction)stats_btn_clicked:(id)sender
 {
-    StatsViewController *viewController = [[StatsViewController alloc] init];
-    [self presentViewController:viewController animated:YES completion:nil];
-    NSLog(@"Go to statistics view");
+//    [WeiXinHelper sendContent:@"HELLO" image:[self screenshot]];
+    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
+//    StatsViewController *viewController = [[StatsViewController alloc] init];
+//    [self presentViewController:viewController animated:YES completion:nil];
+//    NSLog(@"Go to statistics view");
 }
 
 -(void)addNewItem:(id)sender{
@@ -743,6 +769,12 @@
 //        [Output println:@"Not across"];
     }
     
+    if([DateHelper checkIf5760]){
+        [pieChart setShowPercentage:YES];
+    }else{
+        [pieChart setShowPercentage:NO];
+    }
+    
     
     
     
@@ -767,6 +799,62 @@
 
 }
 //////////////////////
+
+
+
+
+- (void) sendContent:(NSString *)text image:(UIImage *)img
+{
+    enum WXScene _scene = WXSceneTimeline;
+    if(text!=nil){
+        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+        req.text = @"Test Text";
+        req.bText = YES;
+        req.scene = _scene;
+        [WXApi sendReq:req];
+    }
+    if(img!=nil){
+        
+        WXMediaMessage *message = [WXMediaMessage message];
+        [message setThumbImage:img];
+        
+        WXImageObject *ext = [WXImageObject object];
+        // NSString *filePath = [[NSBundle mainBundle] pathForResource:@"res5thumb" ofType:@"png"];
+        NSLog(@"here");
+        
+        
+        
+        ext.imageData = UIImagePNGRepresentation(img);
+        
+        //UIImage* image = [UIImage imageWithContentsOfFile:filePath];
+        //UIImage* image = [UIImage imageWithData:ext.imageData];
+        //ext.imageData = UIImagePNGRepresentation(image);
+        
+        //    UIImage* image = [UIImage imageNamed:@"res5thumb.png"];
+        //    ext.imageData = UIImagePNGRepresentation(image);
+        
+        message.mediaObject = ext;
+        
+        SendMessageToWXReq* req1 = [[SendMessageToWXReq alloc] init];
+        req1.bText = NO;
+        req1.message = message;
+        req1.scene = _scene;
+        
+        [WXApi sendReq:req1];
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - UIViewControllerTransitioningDelegate
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source

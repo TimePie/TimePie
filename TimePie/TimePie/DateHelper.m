@@ -62,4 +62,21 @@
 }
 
 
++(BOOL)checkIf5760
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate * now = [NSDate date];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:now];
+    NSInteger temp  = components.second;
+    temp%=15;
+    NSLog(@"%d",temp);
+    if(temp>=0&&temp<=4)
+    {
+        return true;
+    }
+    
+    
+    return false;
+}
+
 @end

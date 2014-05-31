@@ -13,5 +13,7 @@
 +(NSDate *)beginningOfDay:(NSDate *)date;
 +(NSDate *)endOfDay:(NSDate *)date;
 +(BOOL)checkAcrossDay;
++(BOOL)checkIf5760;
+
 
 @end
