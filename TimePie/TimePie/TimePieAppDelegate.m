@@ -5,7 +5,8 @@
 //  Created by Storm Max on 3/27/14.
 //  Copyright (c) 2014 TimePieOrg. All rights reserved.
 //
-
+#define kAppKey         @"1524504959"
+#define kRedirectURI    @"https://api.weibo.com/oauth2/default.html"
 #import "TimePieAppDelegate.h"
 #import "MainScreenViewController.h"
 #import "BasicUIColor+UIPosition.h"
@@ -19,8 +20,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //weibo
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:kAppKey];
     
-    
+    //weixin
+    [WXApi registerApp:@"wx7682160a12ce4e22" withDescription:@"TimePie"];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -159,6 +164,54 @@
     
     return _persistentStoreCoordinator;
 }
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL isSuc = [WXApi handleOpenURL:url delegate:self];
+    NSLog(@"url %@ isSuc %d",url,isSuc == YES ? 1 : 0);
+    return  isSuc;
+    
+    return [WeiboSDK handleOpenURL:url delegate:self];
+}
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    NSLog(@"here");
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    {
+        NSString *title = @"发送结果";
+        NSString *message = [NSString stringWithFormat:@"响应状态: %d\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",(int)response.statusCode, response.userInfo, response.requestUserInfo];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+        NSString *title = @"认证结果";
+        NSString *message = [NSString stringWithFormat:@"响应状态: %d\nresponse.userId: %@\nresponse.accessToken: %@\n响应UserInfo数据: %@\n原请求UserInfo数据: %@",(int)response.statusCode,[(WBAuthorizeResponse *)response userID], [(WBAuthorizeResponse *)response accessToken], response.userInfo, response.requestUserInfo];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"确定"
+                                              otherButtonTitles:nil];
+        
+        self.wbtoken = [(WBAuthorizeResponse *)response accessToken];
+        
+        [alert show];
+    }
+}
+
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+
 
 #pragma mark - Application's Documents directory
 

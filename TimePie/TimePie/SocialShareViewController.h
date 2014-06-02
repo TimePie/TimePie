@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WeiboSDK.h"
+#import "WeiboViewController.h"
+#import "WXApiObject.h"
+#import "WXApi.h"
 
-@interface SocialShareViewController : UIViewController
+@interface SocialShareViewController : UIViewController<WBHttpRequestDelegate>
 {
     NSMutableArray *itemList;
 }
 @property (nonatomic, strong) UIImageView *pieChartImage;
+@property (retain, nonatomic) WeiboViewController* WeiboviewController;
 
 @end

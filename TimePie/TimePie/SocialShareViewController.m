@@ -13,6 +13,9 @@
 #import "TimingItem1.h"
 #import "ColorThemes.h"
 
+#define weixin_scene_pengyouquan 1
+#define weixin_scene_liaotian 0
+
 @interface SocialShareViewController ()
 
 @end
@@ -38,6 +41,7 @@
     }
     [[UIApplication sharedApplication] setStatusBarHidden:YES
                                             withAnimation:UIStatusBarAnimationFade];
+     _WeiboviewController = [[WeiboViewController alloc] init];
     [self initButtons];
     [self getAllItems];
 }
@@ -93,11 +97,100 @@
 
 - (void)weiboButtonPressed:(id)sender
 {
+    BOOL is_installed=[WeiboSDK isWeiboAppInstalled];
+    if(is_installed){
+        NSLog(@"installed");
+        [self ShareWBMessage_installed];
+    }
+    else{
+        NSLog(@"uninstalled");
+        NSURL *url = [NSURL URLWithString:@"https://open.weibo.cn/oauth2/authorize?client_id=1524504959&redirect_uri=https://api.weibo.com/oauth2/default.html&display=mobile"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [self presentViewController:_WeiboviewController animated:YES completion:nil];
+        [_WeiboviewController authorize:request image:_pieChartImage.image text:@"分享内容"];
+    }
+    NSLog(@"Go to weibo view");
+    
+    
 }
+
+- (void)ShareWBMessage_installed
+{
+    
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:[self messageToShare:@"分享内容" image:_pieChartImage.image]];
+    request.userInfo = @{@"ShareMessageFrom": @"SocialShareViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    
+    [WeiboSDK sendRequest:request];
+     
+}
+
+- (WBMessageObject *)messageToShare:(NSString *)txt image:(UIImage *)img
+{
+    WBMessageObject *message = [WBMessageObject message];
+    if(txt!=nil){
+        message.text = txt;
+    }
+    if(img!=nil){
+        WBImageObject *image = [WBImageObject object];
+        image.imageData =UIImagePNGRepresentation(img);
+        message.imageObject = image;
+    }
+    return message;
+}
+
+
 
 - (void)wechatButtonPressed:(id)sender
 {
+    [self sendContent:@"Time Pie Shared" image:_pieChartImage.image];
 }
+
+
+- (void) sendContent:(NSString *)text image:(UIImage *)img
+{
+    if(text!=nil){
+        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+        req.text = @"Test Text";
+        req.bText = YES;
+        req.scene = weixin_scene_pengyouquan;
+        [WXApi sendReq:req];
+    }
+    if(img!=nil){
+        
+        WXMediaMessage *message = [WXMediaMessage message];
+        [message setThumbImage:img];
+        
+        WXImageObject *ext = [WXImageObject object];
+        // NSString *filePath = [[NSBundle mainBundle] pathForResource:@"res5thumb" ofType:@"png"];
+        NSLog(@"here");
+        
+        
+        
+        ext.imageData = UIImagePNGRepresentation(img);
+        
+        //UIImage* image = [UIImage imageWithContentsOfFile:filePath];
+        //UIImage* image = [UIImage imageWithData:ext.imageData];
+        //ext.imageData = UIImagePNGRepresentation(image);
+        
+        //    UIImage* image = [UIImage imageNamed:@"res5thumb.png"];
+        //    ext.imageData = UIImagePNGRepresentation(image);
+        
+        message.mediaObject = ext;
+        
+        SendMessageToWXReq* req1 = [[SendMessageToWXReq alloc] init];
+        req1.bText = NO;
+        req1.message = message;
+        req1.scene = weixin_scene_pengyouquan;
+        
+        [WXApi sendReq:req1];
+    }
+    
+}
+
+
 
 - (void)cancelButtonPressed:(id)sender
 {

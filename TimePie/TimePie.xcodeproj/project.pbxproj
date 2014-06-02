@@ -44,6 +44,10 @@
 		68BBE0A619091C6700F12101 /* StatsLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0A519091C6700F12101 /* StatsLine.m */; };
 		68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0A819091D5C00F12101 /* StatsAnimations.m */; };
 		68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */; };
+		863B00E5193C6BD3000F9514 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 863B00E2193C6BD3000F9514 /* WeiboSDK.bundle */; };
+		863B00E6193C6BD3000F9514 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 863B00E4193C6BD3000F9514 /* libWeiboSDK.a */; };
+		863B00E9193C6E39000F9514 /* WeiboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 863B00E8193C6E39000F9514 /* WeiboViewController.m */; };
+		863B00EB193C708E000F9514 /* WeiboViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 863B00EA193C708E000F9514 /* WeiboViewController.xib */; };
 		CD3E53C6191C94D7005A1416 /* Cancel_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */; };
 		CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3E53C5191C94D7005A1416 /* History_btn@2x.png */; };
 		CD45DB44192239460050A39F /* SelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD45DB43192239460050A39F /* SelectView.m */; };
@@ -164,6 +168,12 @@
 		68BBE0A819091D5C00F12101 /* StatsAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsAnimations.m; sourceTree = "<group>"; };
 		68BBE0AA19091EB300F12101 /* ZBStatsDataArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBStatsDataArray.h; sourceTree = "<group>"; };
 		68BBE0AB19091EB300F12101 /* ZBStatsDataArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBStatsDataArray.m; sourceTree = "<group>"; };
+		863B00E2193C6BD3000F9514 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		863B00E3193C6BD3000F9514 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		863B00E4193C6BD3000F9514 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		863B00E7193C6E39000F9514 /* WeiboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboViewController.h; sourceTree = "<group>"; };
+		863B00E8193C6E39000F9514 /* WeiboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboViewController.m; sourceTree = "<group>"; };
+		863B00EA193C708E000F9514 /* WeiboViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeiboViewController.xib; sourceTree = "<group>"; };
 		CD3E53C4191C94D7005A1416 /* Cancel_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel_btn@2x.png"; sourceTree = "<group>"; };
 		CD3E53C5191C94D7005A1416 /* History_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "History_btn@2x.png"; sourceTree = "<group>"; };
 		CD45DB42192239460050A39F /* SelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectView.h; sourceTree = "<group>"; };
@@ -239,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */,
+				863B00E6193C6BD3000F9514 /* libWeiboSDK.a in Frameworks */,
 				CD4CE05D18E464D000916A4B /* CoreData.framework in Frameworks */,
 				CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */,
 				CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */,
@@ -298,6 +309,9 @@
 		1395A02F1939E88F00C98747 /* Social */ = {
 			isa = PBXGroup;
 			children = (
+				863B00EA193C708E000F9514 /* WeiboViewController.xib */,
+				863B00E7193C6E39000F9514 /* WeiboViewController.h */,
+				863B00E8193C6E39000F9514 /* WeiboViewController.m */,
 				1395A0301939F43300C98747 /* SocialShareViewController.h */,
 				1395A0311939F43300C98747 /* SocialShareViewController.m */,
 			);
@@ -573,6 +587,9 @@
 		CD601A681939A10B008946E9 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				863B00E2193C6BD3000F9514 /* WeiboSDK.bundle */,
+				863B00E3193C6BD3000F9514 /* WeiboSDK.h */,
+				863B00E4193C6BD3000F9514 /* libWeiboSDK.a */,
 				CD601A691939A118008946E9 /* libWeChatSDK.a */,
 				CD601A6A1939A118008946E9 /* WXApi.h */,
 				CD601A6B1939A118008946E9 /* WXApiObject.h */,
@@ -660,6 +677,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = TimePieOrg;
 				TargetAttributes = {
+					CD4CE05218E464D000916A4B = {
+						DevelopmentTeam = HG357Q8Q6A;
+					};
 					CD4CE07218E464D000916A4B = {
 						TestTargetID = CD4CE05218E464D000916A4B;
 					};
@@ -693,6 +713,8 @@
 				13CCE58518EC557700462A83 /* Roboto-Medium.ttf in Resources */,
 				CDB36F191931E87D00E7BBCE /* Roboto-Condensed.ttf in Resources */,
 				68BBB2121934F1E300FDC1A4 /* scaleLineBG@2x.png in Resources */,
+				863B00EB193C708E000F9514 /* WeiboViewController.xib in Resources */,
+				863B00E5193C6BD3000F9514 /* WeiboSDK.bundle in Resources */,
 				13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */,
 				13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */,
 				CD52392019110D83005EB55A /* personalbtn@2x.png in Resources */,
@@ -768,6 +790,7 @@
 				CD52392319111298005EB55A /* TimingItemStore.m in Sources */,
 				1316DB07191BE13500E74E3C /* SettingsThemeViewController.m in Sources */,
 				68BBB2101934EE2600FDC1A4 /* HorizontalScaleLineView.m in Sources */,
+				863B00E9193C6E39000F9514 /* WeiboViewController.m in Sources */,
 				CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */,
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
@@ -892,6 +915,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimePie/TimePie-Prefix.pch";
 				INFOPLIST_FILE = "TimePie/TimePie-Info.plist";
@@ -909,6 +933,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TimePie/TimePie-Prefix.pch";
 				INFOPLIST_FILE = "TimePie/TimePie-Info.plist";

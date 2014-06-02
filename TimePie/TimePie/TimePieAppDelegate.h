@@ -7,14 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WeiboSDK.h"
+#import "WXApi.h"
+#import "SocialShareViewController.h"
 
-@interface TimePieAppDelegate : UIResponder <UIApplicationDelegate>
+@interface TimePieAppDelegate : UIResponder <UIApplicationDelegate,WeiboSDKDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) SocialShareViewController *viewController;
+@property (strong, nonatomic) NSString *wbtoken;
+
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
