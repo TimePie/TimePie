@@ -677,9 +677,6 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = TimePieOrg;
 				TargetAttributes = {
-					CD4CE05218E464D000916A4B = {
-						DevelopmentTeam = HG357Q8Q6A;
-					};
 					CD4CE07218E464D000916A4B = {
 						TestTargetID = CD4CE05218E464D000916A4B;
 					};
