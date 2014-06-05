@@ -237,10 +237,13 @@
         
 
         
-        [historyBtn setBackgroundImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
-        [cancelBtn setBackgroundImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
+        [historyBtn setBackgroundImage:[UIImage imageNamed:@"historyButton"] forState:UIControlStateNormal];
+        [shareBtn setBackgroundImage:[UIImage imageNamed:@"shareButton"] forState:UIControlStateNormal];
+        [cancelBtn setBackgroundImage:[UIImage imageNamed:@"cancelButton"] forState:UIControlStateNormal];
         [historyBtn setTitle:@"" forState:UIControlStateNormal];
+        [shareBtn setTitle:@"" forState:UIControlStateNormal];
         [cancelBtn setTitle:@"" forState:UIControlStateNormal];
+        shareBtn.hidden = YES;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
         
@@ -650,12 +653,43 @@
 {
 }
 
--(IBAction)stats_btn_clicked:(id)sender
+-(IBAction)share_btn_clicked:(id)sender
 {
-//    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
-    SocialShareViewController *ssVC = [[SocialShareViewController alloc] init];
-    ssVC.pieChartImage.image = [self imageWithView:pieChart];
-    [self presentViewController:ssVC animated:YES completion:nil];
+    //    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
+    if(selectMode)
+    {
+        
+        // delivery data to the history screen;
+        if(selectedArray.count != 0)
+        {
+            //Go back
+            
+            pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+            itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
+            itemTable.scrollEnabled =YES;
+            selectMode =NO;
+            
+            shareBtn.hidden = YES;
+            historyBtn.hidden = YES;
+            cancelBtn.hidden = YES;
+            
+            historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000, historyBtn.frame.size.width,historyBtn.frame.size.height);
+            shareBtn.frame = CGRectMake(shareBtn.frame.origin.x, 1000, shareBtn.frame.size.width,shareBtn.frame.size.height);
+            cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+            
+            SocialShareViewController *ssVC = [[SocialShareViewController alloc] init];
+            ssVC.pieChartImage.image = [self imageWithView:pieChart];
+            [self presentViewController:ssVC animated:YES completion:nil];
+            
+            [pieChart reloadData];
+        }
+        else
+        {
+            //select nothing
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"请选择事项" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
 }
 
 -(void)addNewItem:(id)sender{
@@ -664,8 +698,8 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:navController animated:YES completion:nil];
     
-//    SocialShareViewController *ssvc = [[SocialShareViewController alloc] init];
-//    [self presentViewController:ssvc animated:YES completion:nil];
+    //    SocialShareViewController *ssvc = [[SocialShareViewController alloc] init];
+    //    [self presentViewController:ssvc animated:YES completion:nil];
 }
 
 
@@ -682,7 +716,8 @@
 
 -(IBAction)hist_btn_clicked:(id)sender
 {
-    if(selectMode){
+    if(selectMode)
+    {
         
         // delivery data to the history screen;
         if(selectedArray.count != 0)
@@ -697,16 +732,19 @@
             itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
             itemTable.scrollEnabled = YES;
             selectMode =NO;
+            
+            shareBtn.hidden = YES;
             historyBtn.hidden = YES;
             cancelBtn.hidden = YES;
             
-            historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000  , historyBtn.frame.size.width,historyBtn.frame.size.height);
+            historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000, historyBtn.frame.size.width,historyBtn.frame.size.height);
+            shareBtn.frame = CGRectMake(shareBtn.frame.origin.x, 1000, shareBtn.frame.size.width,shareBtn.frame.size.height);
             cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
             
             
             [pieChart reloadData];
             selectedArray = nil;
-
+            
         }
         else
         {
@@ -714,10 +752,10 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"请选择事项" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alert show];
         }
-            }
+    }
     
     
-        NSLog(@"history button clicked");
+    NSLog(@"history button clicked");
 }
 
 
@@ -731,6 +769,8 @@
         itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
         itemTable.scrollEnabled =YES;
         selectMode =NO;
+        
+        shareBtn.hidden = YES;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
         
@@ -771,9 +811,11 @@
         //Enter Select Mode
         NSLog(@"long press!");
         selectMode = YES;
+        shareBtn.hidden = NO;
         historyBtn.hidden = NO;
         cancelBtn.hidden = NO;
         historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 150, historyBtn.frame.size.width,historyBtn.frame.size.height);
+        shareBtn.frame = CGRectMake(shareBtn.frame.origin.x, 150, shareBtn.frame.size.width,shareBtn.frame.size.height);
         cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 150, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
         
         

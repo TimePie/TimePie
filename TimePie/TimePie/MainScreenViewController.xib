@@ -6,8 +6,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainScreenViewController">
             <connections>
-                <outlet property="cancelBtn" destination="xv7-r9-OPn" id="eg3-Yg-uKi"/>
+                <outlet property="cancelBtn" destination="R6W-V6-0QO" id="wEt-4Y-w74"/>
                 <outlet property="historyBtn" destination="HUw-uf-ZGr" id="gmr-fC-U1J"/>
+                <outlet property="shareBtn" destination="xv7-r9-OPn" id="Cfo-Gl-bta"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUw-uf-ZGr" userLabel="historyButton">
-                    <rect key="frame" x="20" y="402" width="125" height="45"/>
+                    <rect key="frame" x="15" y="396" width="92" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -26,24 +27,24 @@
                         <action selector="hist_btn_clicked:" destination="-1" eventType="touchUpInside" id="rs4-6L-lRu"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xv7-r9-OPn" userLabel="cancelButton">
-                    <rect key="frame" x="175" y="402" width="125" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xv7-r9-OPn" userLabel="shareButton">
+                    <rect key="frame" x="114" y="396" width="92" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="canc_btn_clicked:" destination="-1" eventType="touchUpInside" id="Hyf-Vq-6TI"/>
+                        <action selector="share_btn_clicked:" destination="-1" eventType="touchUpInside" id="U7v-nJ-ZiN"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOL-6A-Ee6">
-                    <rect key="frame" x="140" y="492" width="40" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6W-V6-0QO" userLabel="cancelButton">
+                    <rect key="frame" x="213" y="396" width="92" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Share">
+                    <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="stats_btn_clicked:" destination="-1" eventType="touchUpInside" id="yzW-6c-s4U"/>
+                        <action selector="canc_btn_clicked:" destination="-1" eventType="touchUpInside" id="vpa-wd-zRR"/>
                     </connections>
                 </button>
             </subviews>
