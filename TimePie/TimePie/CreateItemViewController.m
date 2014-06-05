@@ -224,7 +224,7 @@ static NSInteger routineItemFlag = 0;
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"名称不能为空凸^-^凸" delegate:self cancelButtonTitle:@"我知道错了" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"事项名称不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
     }
 }
