@@ -52,7 +52,7 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate * now = [NSDate date];
     NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:now];
-    if (components.hour==0)
+    if (components.hour==0&&components.minute==0&&components.second==0)
     {
         return true;
     }
@@ -76,6 +76,18 @@
     
     
     return false;
+}
+
+
+
++(NSString*)getDateString
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate * now = [NSDate date];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:now];
+    
+    
+    return [NSString stringWithFormat:@"%ld.%ld.%ld",(long)components.year, (long)components.month, (long)components.day];
 }
 
 @end

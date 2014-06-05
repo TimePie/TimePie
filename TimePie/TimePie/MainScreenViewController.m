@@ -110,6 +110,8 @@
                                                        selector:@selector(pieChartAppear:)
                                                        userInfo:nil
                                                         repeats:NO];
+    [pieChart reloadData];
+    [itemTable reloadData];
 //    [ncTimer fire];
     
     
@@ -619,26 +621,6 @@
 
 
 
--(UIImage *) screenshot
-{
-    
-    CGRect rect;
-    rect=CGRectMake(0, 0, 320, 480);
-    UIGraphicsBeginImageContext(rect.size);
-    
-    CGContextRef context=UIGraphicsGetCurrentContext();
-    [self.view.layer renderInContext:context];
-    
-    UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
-
-
-
-
-
 //event handlers
 /////////////////////////
 -(void)personal_btn_clicked:(id)sender
@@ -653,6 +635,7 @@
 -(IBAction)stats_btn_clicked:(id)sender
 {
 //    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
+    [timingItemStore saveData];
     SocialShareViewController *ssVC = [[SocialShareViewController alloc] init];
     ssVC.pieChartImage.image = [self imageWithView:pieChart];
     [self presentViewController:ssVC animated:YES completion:nil];
@@ -808,6 +791,7 @@
     if([DateHelper checkAcrossDay])
     {
         //across a day
+        NSLog(@"Across");
         [timingItemStore restoreData];
 //        [Output println:@"Across"];
     }
@@ -846,56 +830,6 @@
 
 }
 //////////////////////
-
-
-
-
-- (void) sendContent:(NSString *)text image:(UIImage *)img
-{
-    enum WXScene _scene = WXSceneTimeline;
-    if(text!=nil){
-        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-        req.text = @"Test Text";
-        req.bText = YES;
-        req.scene = _scene;
-        [WXApi sendReq:req];
-    }
-    if(img!=nil){
-        
-        WXMediaMessage *message = [WXMediaMessage message];
-        [message setThumbImage:img];
-        
-        WXImageObject *ext = [WXImageObject object];
-        // NSString *filePath = [[NSBundle mainBundle] pathForResource:@"res5thumb" ofType:@"png"];
-        NSLog(@"here");
-        
-        
-        
-        ext.imageData = UIImagePNGRepresentation(img);
-        
-        //UIImage* image = [UIImage imageWithContentsOfFile:filePath];
-        //UIImage* image = [UIImage imageWithData:ext.imageData];
-        //ext.imageData = UIImagePNGRepresentation(image);
-        
-        //    UIImage* image = [UIImage imageNamed:@"res5thumb.png"];
-        //    ext.imageData = UIImagePNGRepresentation(image);
-        
-        message.mediaObject = ext;
-        
-        SendMessageToWXReq* req1 = [[SendMessageToWXReq alloc] init];
-        req1.bText = NO;
-        req1.message = message;
-        req1.scene = _scene;
-        
-        [WXApi sendReq:req1];
-    }
-    
-}
-
-
-
-
-
 
 
 

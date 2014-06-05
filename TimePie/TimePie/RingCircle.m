@@ -21,18 +21,18 @@
 
 
 - (id)initWithFrame:(CGRect)frame
-     withPercentage:(float)percentage
+     withPercentage:(double)percentage
           withColor:(UIColor*)color
 {
     self = [super initWithFrame:frame];
     if (self) {
         radius= frame.size.width/2;
-        innerRadius= frame.size.width/4;
+        innerRadius= frame.size.width/6;
         
         NSLog(@"init ring circle!");
-        circleView = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x-innerRadius, frame.origin.y-innerRadius, innerRadius*2, innerRadius*2)];
+        circleView = [[UIView alloc] initWithFrame:CGRectMake(-innerRadius, -innerRadius, innerRadius*2, innerRadius*2)];
         circleView.layer.cornerRadius = innerRadius;
-        circleView.layer.shadowColor = (__bridge CGColorRef)(color);
+        circleView.layer.shadowColor = [color CGColor];//(__bridge CGColorRef)(color);
         circleView.layer.shadowOffset = CGSizeMake(0, 0);
         circleView.layer.shadowRadius = 3;
         circleView.layer.shadowOpacity = 1;
@@ -44,11 +44,11 @@
         
         float ringRadius = innerRadius + (radius-innerRadius)*percentage/100;
         
-        ringView  = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x-ringRadius, frame.origin.y-ringRadius, ringRadius*2, ringRadius*2)];
+        ringView  = [[UIView alloc] initWithFrame:CGRectMake(-ringRadius, -ringRadius, ringRadius*2, ringRadius*2)];
         ringView.layer.cornerRadius = ringRadius;
         ringView.alpha = .2;
         
-        ringView.layer.shadowColor = (__bridge CGColorRef)(color);
+        ringView.layer.shadowColor = [color CGColor];//(__bridge CGColorRef)(color);
         ringView.layer.shadowOffset = CGSizeMake(0, 0);
         ringView.layer.shadowRadius = 3;
         ringView.layer.shadowOpacity = 1;

@@ -29,6 +29,7 @@
 - (id)getItemAtIndex:(int)index;
 - (void)moveItemAtIndex:(int)from
                 toIndex:(int)to;
+- (NSNumber*)getItemPercentage:(TimingItem*)item;
 
 
 

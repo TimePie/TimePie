@@ -1083,6 +1083,26 @@
     return [NSNumber numberWithInteger:minutes];
 }
 
+- (NSNumber*)getItemPercentage:(TimingItem*)item
+{
+    double sum = [self getTotalTime];
+    double time = item.time;
+    NSNumber* result= [NSNumber numberWithDouble:time/sum*100];
+    NSLog(@"%@",result);
+    return result;
+}
+
+
+
+- (double)getTotalTime
+{
+    double sum = 0.0;
+    for(TimingItem * item in allItems){
+        sum += item.time;
+    }
+    
+    return sum;
+}
 
 
 

@@ -70,8 +70,6 @@
 
 - (NSString *)getTimeString
 {
-    
-    
     NSTimeInterval intervalValue = time;
     NSDateFormatter *hmsFormatter = [[NSDateFormatter alloc] init];
     [hmsFormatter setDateFormat:@"HH:mm:ss"];
@@ -79,7 +77,6 @@
 //    NSLog(@"formatted date: %@", [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:intervalValue]]);
     
     return [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:intervalValue]];
-
 }
 
 

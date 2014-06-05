@@ -19,6 +19,7 @@
 
 
 - (id)initWithFrame:(CGRect)frame
-     withPercentage:(float)percentage
+     withPercentage:(double)percentage
           withColor:(UIColor*)color;
+
 @end

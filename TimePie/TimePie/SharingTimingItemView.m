@@ -10,6 +10,8 @@
 #import "SharingTimingItemView.h"
 #import "ColorThemes.h"
 #import "BasicUIColor+UIPosition.h"
+#import "TimingItemStore.h"
+
 
 @implementation SharingTimingItemView
 
@@ -38,16 +40,49 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        ringCircle= [[RingCircle alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 100, 100) withPercentage:50 withColor:[[ColorThemes colorThemes] getColorAt:item.itemColor]];
+        
+        
+        
+//        ringCircle= [[RingCircle alloc] initWithFrame:CGRectMake(0, 0, 100, 100) withPercentage:[[[TimingItemStore timingItemStore] getItemPercentage:item] doubleValue] withColor:[[ColorThemes colorThemes] getColorAt:item.itemColor]];
+        double percentage=[[[TimingItemStore timingItemStore] getItemPercentage:item] doubleValue];
+        ringCircle= [[RingCircle alloc] initWithFrame:CGRectMake(0, 0, 100, 100) withPercentage:percentage withColor:[[ColorThemes colorThemes] getColorAt:item.itemColor]];
         [self addSubview:ringCircle];
         
+        UILabel *percentageLabel = [[UILabel alloc] initWithFrame:CGRectMake(-15, -15, 30, 30)];
+        percentageLabel.text = [NSString stringWithFormat:@"%.1f%%", [[[TimingItemStore timingItemStore] getItemPercentage:item] doubleValue]];
+        
+        percentageLabel.font = [UIFont fontWithName:@"Ubuntu" size:10.f];
+        percentageLabel.textColor = [UIColor whiteColor];
+        [self addSubview:percentageLabel];
+
         
         
-         UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 100, 20)];
-         itemLabel.text = [item itemName];
-         itemLabel.font = [UIFont fontWithName:@"Ubuntu" size:15.f];
-         itemLabel.textColor = SHARING_TEXT_COLOR;
-         [self addSubview:itemLabel];
+        UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, -10, 100, 20)];
+        itemLabel.text = [item itemName];
+        itemLabel.font = [UIFont fontWithName:@"Ubuntu" size:15.f];
+        itemLabel.textColor = SHARING_TEXT_COLOR;
+        itemLabel.layer.shadowColor = [SHARING_TEXT_COLOR CGColor];
+        itemLabel.layer.shadowRadius = 3;
+        itemLabel.layer.shadowOpacity =.5;
+        itemLabel.layer.shadowOffset = CGSizeMake(0, 0);
+        
+        
+        
+        [self addSubview:itemLabel];
+        
+        
+        UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, -10, 100, 20)];
+        timeLabel.text = [item getTimeString];
+        timeLabel.font = [UIFont fontWithName:@"Ubuntu" size:15.f];
+        timeLabel.textColor = SHARING_TEXT_COLOR;
+        
+        timeLabel.layer.shadowColor = [SHARING_TEXT_COLOR CGColor];
+        timeLabel.layer.shadowRadius = 3;
+        timeLabel.layer.shadowOpacity =.5;
+        timeLabel.layer.shadowOffset = CGSizeMake(0, 0);
+        [self addSubview:timeLabel];
+        
+        
         
         
     }

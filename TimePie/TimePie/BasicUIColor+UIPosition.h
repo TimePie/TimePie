@@ -4,8 +4,8 @@
 #define WHITE_COLOR [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]
 #define MAIN_UI_COLOR_TIME [UIColor colorWithRed:.83 green:.83 blue:.83 alpha:1.0]
 
-#define SHARING_TEXT_COLOR [UIColor colorWithRed:.82 green:.82 blue:.82 alpha:1.0]
-
+#define SHARING_TEXT_COLOR [UIColor colorWithRed:.78 green:.78 blue:.78 alpha:1.0]
+#define SHARING_TITLE_COLOR [UIColor colorWithRed:.46 green:.46 blue:.46 alpha:1]
 
     //color platte no.1 -- timepie default color set
 #define RedNO1_light [UIColor colorWithRed:1.0 green:0.65 blue:0.47 alpha:0.57]

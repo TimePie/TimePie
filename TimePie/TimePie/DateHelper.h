@@ -14,6 +14,6 @@
 +(NSDate *)endOfDay:(NSDate *)date;
 +(BOOL)checkAcrossDay;
 +(BOOL)checkIf5760;
-
++(NSString*)getDateString;
 
 @end

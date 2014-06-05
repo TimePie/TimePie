@@ -11,10 +11,17 @@
 #import "WeiboViewController.h"
 #import "WXApiObject.h"
 #import "WXApi.h"
+#import "XYPieChart.h"
+#import "TimingItemStore.h"
 
-@interface SocialShareViewController : UIViewController<WBHttpRequestDelegate>
+@interface SocialShareViewController : UIViewController<WBHttpRequestDelegate,XYPieChartDataSource,XYPieChartDelegate,UIViewControllerTransitioningDelegate>
 {
     NSMutableArray *itemList;
+    XYPieChart * pieChart;
+    TimingItemStore * timingItemStore;
+    NSTimer * timer;
+    UIScrollView * scroll;
+    UIView * contentView;
 }
 @property (nonatomic, strong) UIImageView *pieChartImage;
 @property (retain, nonatomic) WeiboViewController* WeiboviewController;

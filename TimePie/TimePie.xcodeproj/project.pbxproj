@@ -83,6 +83,7 @@
 		CD601A6F1939A1D2008946E9 /* WeiXinHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD601A6E1939A1D2008946E9 /* WeiXinHelper.m */; };
 		CD6F7DFE191A508800C962B7 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7DFD191A508800C962B7 /* Tag.m */; };
 		CD6F7E01191A50F400C962B7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7E00191A50F400C962B7 /* User.m */; };
+		CD88F4821940C7CE002A91A4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD88F4811940C7CE002A91A4 /* QuartzCore.framework */; };
 		CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F2190D242200F58797 /* TimingItem1.m */; };
 		CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F6190D246300F58797 /* XYPieChart.m */; };
 		CD9CE6A71919D23E003C4CA6 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE6A61919D23E003C4CA6 /* DateHelper.m */; };
@@ -227,6 +228,7 @@
 		CD6F7DFD191A508800C962B7 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		CD6F7DFF191A50F400C962B7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD6F7E00191A50F400C962B7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CD88F4811940C7CE002A91A4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CD8EE0F1190D242200F58797 /* TimingItem1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem1.h; sourceTree = "<group>"; };
 		CD8EE0F2190D242200F58797 /* TimingItem1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem1.m; sourceTree = "<group>"; };
 		CD8EE0F5190D246300F58797 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD88F4821940C7CE002A91A4 /* QuartzCore.framework in Frameworks */,
 				CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */,
 				863B00E6193C6BD3000F9514 /* libWeiboSDK.a in Frameworks */,
 				CDFAD4B3193FFE65009A15D7 /* libWeChatSDK.a in Frameworks */,
@@ -493,6 +496,7 @@
 		CD4CE05518E464D000916A4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD88F4811940C7CE002A91A4 /* QuartzCore.framework */,
 				CD4CE05618E464D000916A4B /* Foundation.framework */,
 				CD4CE05818E464D000916A4B /* CoreGraphics.framework */,
 				CD4CE05A18E464D000916A4B /* UIKit.framework */,
