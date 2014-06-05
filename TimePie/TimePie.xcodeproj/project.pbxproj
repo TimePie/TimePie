@@ -91,6 +91,9 @@
 		CDB36F1B1931EB9400E7BBCE /* TimePie_RingBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */; };
 		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
 		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
+		CDFAD4B3193FFE65009A15D7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFAD4B0193FFE65009A15D7 /* libWeChatSDK.a */; };
+		CDFAD4B7194001D8009A15D7 /* RingCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFAD4B6194001D8009A15D7 /* RingCircle.m */; };
+		CDFAD4BA194007A4009A15D7 /* SharingTimingItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFAD4B9194007A4009A15D7 /* SharingTimingItemView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +240,13 @@
 		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
 		CDC8858D1910FE3400A67510 /* TCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCell.h; sourceTree = "<group>"; };
 		CDC8858E1910FE3400A67510 /* TCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCell.m; sourceTree = "<group>"; };
+		CDFAD4B0193FFE65009A15D7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		CDFAD4B1193FFE65009A15D7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		CDFAD4B2193FFE65009A15D7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		CDFAD4B5194001D8009A15D7 /* RingCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingCircle.h; sourceTree = "<group>"; };
+		CDFAD4B6194001D8009A15D7 /* RingCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RingCircle.m; sourceTree = "<group>"; };
+		CDFAD4B8194007A4009A15D7 /* SharingTimingItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharingTimingItemView.h; sourceTree = "<group>"; };
+		CDFAD4B9194007A4009A15D7 /* SharingTimingItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharingTimingItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +256,7 @@
 			files = (
 				CD4CE05918E464D000916A4B /* CoreGraphics.framework in Frameworks */,
 				863B00E6193C6BD3000F9514 /* libWeiboSDK.a in Frameworks */,
+				CDFAD4B3193FFE65009A15D7 /* libWeChatSDK.a in Frameworks */,
 				CD4CE05D18E464D000916A4B /* CoreData.framework in Frameworks */,
 				CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */,
 				CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */,
@@ -316,6 +327,7 @@
 		13CCE57318EC2F8800462A83 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				CDFAD4B4194001B1009A15D7 /* Sharing View */,
 				134BDD80191A8DA30095DB10 /* SettingsView */,
 				CD8EE0F4190D245800F58797 /* MainView */,
 				68BBE095190918F100F12101 /* StatsView */,
@@ -582,6 +594,9 @@
 		CD601A681939A10B008946E9 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				CDFAD4B0193FFE65009A15D7 /* libWeChatSDK.a */,
+				CDFAD4B1193FFE65009A15D7 /* WXApi.h */,
+				CDFAD4B2193FFE65009A15D7 /* WXApiObject.h */,
 				863B00E2193C6BD3000F9514 /* WeiboSDK.bundle */,
 				863B00E3193C6BD3000F9514 /* WeiboSDK.h */,
 				863B00E4193C6BD3000F9514 /* libWeiboSDK.a */,
@@ -619,6 +634,17 @@
 				CD601A6E1939A1D2008946E9 /* WeiXinHelper.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		CDFAD4B4194001B1009A15D7 /* Sharing View */ = {
+			isa = PBXGroup;
+			children = (
+				CDFAD4B5194001D8009A15D7 /* RingCircle.h */,
+				CDFAD4B6194001D8009A15D7 /* RingCircle.m */,
+				CDFAD4B8194007A4009A15D7 /* SharingTimingItemView.h */,
+				CDFAD4B9194007A4009A15D7 /* SharingTimingItemView.m */,
+			);
+			name = "Sharing View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -756,6 +782,7 @@
 				CD5239B71911E178005EB55A /* MainScreenTableView.m in Sources */,
 				CD45DB44192239460050A39F /* SelectView.m in Sources */,
 				CD4CE08E18E4678400916A4B /* MainScreenViewController.m in Sources */,
+				CDFAD4B7194001D8009A15D7 /* RingCircle.m in Sources */,
 				CD4CE09A18E46EC800916A4B /* StatsViewController.m in Sources */,
 				1367C5B1191E3B67005BF8AA /* themeDetailView.m in Sources */,
 				CD9CE6A71919D23E003C4CA6 /* DateHelper.m in Sources */,
@@ -772,6 +799,7 @@
 				13B930641928FF3E0035CACD /* BounceAnimation.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */,
+				CDFAD4BA194007A4009A15D7 /* SharingTimingItemView.m in Sources */,
 				68BBE0A619091C6700F12101 /* StatsLine.m in Sources */,
 				CD9CE6AD191A06D5003C4CA6 /* Output.m in Sources */,
 				CD6F7DFE191A508800C962B7 /* Tag.m in Sources */,

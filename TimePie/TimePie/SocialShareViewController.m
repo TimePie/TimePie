@@ -12,6 +12,8 @@
 #import "TimingItemEntity.h"
 #import "TimingItem1.h"
 #import "ColorThemes.h"
+#import "RingCircle.h"
+#import "SharingTimingItemView.h"
 
 #define weixin_scene_pengyouquan 1
 #define weixin_scene_liaotian 0
@@ -38,6 +40,7 @@
     {
         _pieChartImage.frame = CGRectMake(35, 35, 250, 250);
         [self.view addSubview:_pieChartImage];
+        
     }
     [[UIApplication sharedApplication] setStatusBarHidden:YES
                                             withAnimation:UIStatusBarAnimationFade];
@@ -91,6 +94,13 @@
         itemLabel.textColor = [[ColorThemes colorThemes] getColorAt:[[itemList objectAtIndex:i] itemColor]];
         [self.view addSubview:itemLabel];
     }
+    
+    SharingTimingItemView * stiv = [[SharingTimingItemView alloc] initWithFrame:CGRectMake(20, 150, 100, 100) withItem:[itemList objectAtIndex:0]];
+    
+    [self.view addSubview:stiv];
+    
+    
+    
 }
 
 #pragma mark - target selectors

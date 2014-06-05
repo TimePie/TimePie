@@ -652,7 +652,7 @@
 
 -(IBAction)stats_btn_clicked:(id)sender
 {
-    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
+//    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
     SocialShareViewController *ssVC = [[SocialShareViewController alloc] init];
     ssVC.pieChartImage.image = [self imageWithView:pieChart];
     [self presentViewController:ssVC animated:YES completion:nil];
