@@ -34,7 +34,7 @@
 		6831559E1909263C00C9A27C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6831559D1909263C00C9A27C /* BEMLine.m */; };
 		6851BA741940A01A00A8F4A2 /* historyButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851BA711940A01A00A8F4A2 /* historyButton@2x.png */; };
 		6851BA751940A01A00A8F4A2 /* shareButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851BA721940A01A00A8F4A2 /* shareButton@2x.png */; };
-		6851BA761940A01A00A8F4A2 /* cancelButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851BA731940A01A00A8F4A2 /* cancelButton@2x.png */; };
+		6851BA781940A5DD00A8F4A2 /* cancelButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6851BA771940A5DD00A8F4A2 /* cancelButton@2x.png */; };
 		688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688586EC190931AE0050D15D /* StatsBackButton@2x.png */; };
 		688586F11909368A0050D15D /* StatsNavShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688586F01909368A0050D15D /* StatsNavShadow@2x.png */; };
 		68BBB2101934EE2600FDC1A4 /* HorizontalScaleLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BBB20F1934EE2600FDC1A4 /* HorizontalScaleLineView.m */; };
@@ -154,7 +154,7 @@
 		6831559D1909263C00C9A27C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
 		6851BA711940A01A00A8F4A2 /* historyButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "historyButton@2x.png"; sourceTree = "<group>"; };
 		6851BA721940A01A00A8F4A2 /* shareButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareButton@2x.png"; sourceTree = "<group>"; };
-		6851BA731940A01A00A8F4A2 /* cancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelButton@2x.png"; sourceTree = "<group>"; };
+		6851BA771940A5DD00A8F4A2 /* cancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelButton@2x.png"; sourceTree = "<group>"; };
 		688586EC190931AE0050D15D /* StatsBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsBackButton@2x.png"; sourceTree = "<group>"; };
 		688586F01909368A0050D15D /* StatsNavShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StatsNavShadow@2x.png"; sourceTree = "<group>"; };
 		68AF964B19166E4B00CDF8D7 /* GraphTypeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphTypeEnum.h; sourceTree = "<group>"; };
@@ -369,8 +369,8 @@
 			children = (
 				6851BA711940A01A00A8F4A2 /* historyButton@2x.png */,
 				6851BA721940A01A00A8F4A2 /* shareButton@2x.png */,
-				6851BA731940A01A00A8F4A2 /* cancelButton@2x.png */,
 				13EA460D1939936000AF229E /* TimePie_RingBG2@2x.png */,
+				6851BA771940A5DD00A8F4A2 /* cancelButton@2x.png */,
 				CD601A641936131F008946E9 /* TimePie_Nav_Logo@2x.png */,
 				68BBB2111934F1E300FDC1A4 /* scaleLineBG@2x.png */,
 				CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */,
@@ -757,7 +757,7 @@
 				CD4CE0A518E4700F00916A4B /* CreateItemViewController.xib in Resources */,
 				688586F11909368A0050D15D /* StatsNavShadow@2x.png in Resources */,
 				13B5195118F2687B00D52DF4 /* PersonalViewEventTrackCell.xib in Resources */,
-				6851BA761940A01A00A8F4A2 /* cancelButton@2x.png in Resources */,
+				6851BA781940A5DD00A8F4A2 /* cancelButton@2x.png in Resources */,
 				6851BA741940A01A00A8F4A2 /* historyButton@2x.png in Resources */,
 				132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */,
 				CD4CE08F18E4678400916A4B /* MainScreenViewController.xib in Resources */,
