@@ -80,7 +80,6 @@
 		CD601A5F1935F918008946E9 /* TimingItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CD601A5E1935F918008946E9 /* TimingItemEntity.m */; };
 		CD601A651936131F008946E9 /* TimePie_Nav_Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD601A641936131F008946E9 /* TimePie_Nav_Logo@2x.png */; };
 		CD601A67193613BE008946E9 /* Ubuntu-R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD601A66193613AE008946E9 /* Ubuntu-R.ttf */; };
-		CD601A6C1939A118008946E9 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD601A691939A118008946E9 /* libWeChatSDK.a */; };
 		CD601A6F1939A1D2008946E9 /* WeiXinHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD601A6E1939A1D2008946E9 /* WeiXinHelper.m */; };
 		CD6F7DFE191A508800C962B7 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7DFD191A508800C962B7 /* Tag.m */; };
 		CD6F7E01191A50F400C962B7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7E00191A50F400C962B7 /* User.m */; };
@@ -219,9 +218,6 @@
 		CD601A5E1935F918008946E9 /* TimingItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItemEntity.m; sourceTree = "<group>"; };
 		CD601A641936131F008946E9 /* TimePie_Nav_Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Nav_Logo@2x.png"; sourceTree = "<group>"; };
 		CD601A66193613AE008946E9 /* Ubuntu-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-R.ttf"; sourceTree = "<group>"; };
-		CD601A691939A118008946E9 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		CD601A6A1939A118008946E9 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		CD601A6B1939A118008946E9 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		CD601A6D1939A1D2008946E9 /* WeiXinHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiXinHelper.h; sourceTree = "<group>"; };
 		CD601A6E1939A1D2008946E9 /* WeiXinHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiXinHelper.m; sourceTree = "<group>"; };
 		CD6F7DFC191A508800C962B7 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
@@ -253,7 +249,6 @@
 				CD4CE05D18E464D000916A4B /* CoreData.framework in Frameworks */,
 				CD4CE05B18E464D000916A4B /* UIKit.framework in Frameworks */,
 				CD4CE05718E464D000916A4B /* Foundation.framework in Frameworks */,
-				CD601A6C1939A118008946E9 /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,9 +585,6 @@
 				863B00E2193C6BD3000F9514 /* WeiboSDK.bundle */,
 				863B00E3193C6BD3000F9514 /* WeiboSDK.h */,
 				863B00E4193C6BD3000F9514 /* libWeiboSDK.a */,
-				CD601A691939A118008946E9 /* libWeChatSDK.a */,
-				CD601A6A1939A118008946E9 /* WXApi.h */,
-				CD601A6B1939A118008946E9 /* WXApiObject.h */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
