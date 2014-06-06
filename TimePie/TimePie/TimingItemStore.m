@@ -378,6 +378,8 @@
                 NSLog(@"Timing item is not today's item; create a new one and reload.");
                 TimingItem* newTimingItem = [self createItem:item];
                 item.timing = NO;
+                // update item time = 0 in new day ;
+                newTimingItem.time = 0;
                 [self updateItem:item];
                 [allItems removeObjectIdenticalTo:item];
                 [self saveData];
