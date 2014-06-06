@@ -48,7 +48,8 @@
 - (void)initScrollVessel
 {
     _vessel = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 142)];
-    _vessel.contentSize = CGSizeMake(SCREEN_WIDTH * 3, _vessel.frame.size.height);
+    int vesselContentPageCount = tagList.count % 3==0 ? tagList.count/3 : tagList.count / 3 + 1;
+    _vessel.contentSize = CGSizeMake(SCREEN_WIDTH * vesselContentPageCount, _vessel.frame.size.height);
     _vessel.pagingEnabled = YES;
     _vessel.showsHorizontalScrollIndicator = NO;
     [self addSubview:_vessel];

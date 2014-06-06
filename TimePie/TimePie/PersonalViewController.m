@@ -180,6 +180,7 @@
 {
     timeRangeInfo = [_pVCPicker.pickerData objectAtIndex:[_pVCPicker.picker selectedRowInComponent:0]];
     [self judgeDayCount];
+    [self reloadEventTrackColumn];
     [_mainView reloadData];
     [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
     self.navigationController.navigationBar.userInteractionEnabled = YES;
@@ -412,6 +413,14 @@
 {
     for (int i = 0; i < trackedTagList.count; i++)
         [avgTimeOfTagList addObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[trackedTagList objectAtIndex:i] tag_name]].floatValue / dayCount]];
+}
+
+- (void)reloadEventTrackColumn
+{
+    [avgTimeOfTagList removeAllObjects];
+    [columnHeightList removeAllObjects];
+    [self calculateAvgTimeOfTag];
+    [self getColumnHeightListWithTagList];
 }
 
 /** EventTrackCell Usage
