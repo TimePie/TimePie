@@ -84,7 +84,7 @@
     [pieChart setUserInteractionEnabled:YES];
     [pieChart setLabelShadowColor:[UIColor blackColor]];
     
-    UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG2"];
+    UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG3"];
     UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 125, 320, 311)];
     [bgview setImage:bg];
     [pieChart addSubview:bgview];

@@ -25,11 +25,14 @@
     
     
     NSMutableArray * selectedArray;
+    UIButton *personalButton;
+    UIBarButtonItem *addItemButton;
     XYPieChart *pieChart;
     TimingItemStore * timingItemStore;
     MainScreenTableView *itemTable;
     NSTimer * timer;
     BOOL selectMode;
+    UITapGestureRecognizer *tapRecognizer;
     
     
     int count;

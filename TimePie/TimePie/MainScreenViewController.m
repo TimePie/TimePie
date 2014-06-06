@@ -116,6 +116,22 @@
 //    NSLog(@"%@",[[ColorThemes colorThemes] getAvailableColors]);
 //    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
 //    [timingItemStore deleteAllData];
+    
+    
+    if([[timingItemStore allItems] count]==0){
+        [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:.4]];
+        personalButton.hidden = YES;
+        tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewItem:)];
+        tapRecognizer.numberOfTapsRequired =1;
+        [itemTable addGestureRecognizer:tapRecognizer];
+        self.navigationItem.rightBarButtonItem = nil;
+        
+    }else{
+        [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+        personalButton.hidden = NO;
+        [itemTable removeGestureRecognizer:tapRecognizer];
+        self.navigationItem.rightBarButtonItem = addItemButton;
+    }
 }
 
 - (void)viewDidLoad
@@ -152,17 +168,21 @@
           NSFontAttributeName,
           nil]];
         
-        UIBarButtonItem *bbi= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+        addItemButton= [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
         
         UIImage *personalImage = [UIImage imageNamed:@"personalbtn.png"];
-        UIButton *personalButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        personalButton = [UIButton buttonWithType:UIButtonTypeCustom];
         personalButton.bounds = CGRectMake( 0, 0, personalImage.size.width, personalImage.size.height );
         [personalButton setImage:personalImage forState:UIControlStateNormal];
         [personalButton addTarget:self action:@selector(personal_btn_clicked:) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *bbiLeft = [[UIBarButtonItem alloc] initWithCustomView:personalButton];
+        UIBarButtonItem* bbileft = [[UIBarButtonItem alloc] initWithCustomView:personalButton];
         
-        [n setRightBarButtonItem: bbi];
-        [n setLeftBarButtonItem:bbiLeft];
+        [n setRightBarButtonItem: addItemButton];
+        [n setLeftBarButtonItem: bbileft];
+        //[self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                 forBarMetrics:UIBarMetricsDefault];
+        //self.navigationController.navigationBar.shadowImage = [UIImage new];
+        //self.navigationController.navigationBar.translucent = YES;
         /////////////////////////////////
         
         
@@ -184,7 +204,14 @@
         [pieChart setLabelFont:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:16]];
         [pieChart setLabelRadius:100];
         [pieChart setShowPercentage:NO];
-        [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+        
+        if([[timingItemStore allItems] count]==0){
+            [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:.4]];
+            personalButton.hidden = YES;
+            self.navigationItem.rightBarButtonItem = nil;
+        }else{
+            [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+        }
         [pieChart setPieCenter:CGPointMake(160, 160)];
         [pieChart setUserInteractionEnabled:YES];
         [pieChart setLabelShadowColor:[UIColor blackColor]];
@@ -196,8 +223,11 @@
         [pieChart addGestureRecognizer:longRecognizer];
         
         
-        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG2"];
+        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG3.png"];
         UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 320, 311)];
+        
+//        [bgview addGestureRecognizer:tapRecognizer];
+        
         [bgview setImage:bg];
         [pieChart addSubview:bgview];
         [pieChart sendSubviewToBack:bgview];
@@ -220,6 +250,11 @@
         [itemTable setContentInset:UIEdgeInsetsMake(-ContentOffsetY, 0, 0, 0)];
         [itemTable addSubview:pieChart];
         [[self view] insertSubview:itemTable atIndex:0];
+        
+        
+        
+        
+
         /////////////////////////////////
         
 //        selectView = [[SelectView alloc] initWithFrame:CGRectMake(-125, -75, 100, 100)];
@@ -429,7 +464,6 @@
     
     cell.itemTime.text = [NSString stringWithFormat:@"%@", [item getTimeString]];
     
-    
     UIColor* color = [[ColorThemes colorThemes] getColorAt:item.itemColor];
     CGFloat r;
     CGFloat g;
@@ -603,6 +637,12 @@
         [itemTable reloadData];
         NSLog(p.itemName);
         
+        if([[timingItemStore allItems] count] == 0){
+            [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:.4]];
+            personalButton.hidden = YES;
+            self.navigationItem.rightBarButtonItem = nil;
+            [itemTable addGestureRecognizer:tapRecognizer];
+        }
     }
 }
 ////////////////////
@@ -664,10 +704,12 @@
 {
 }
 
--(void)navigationBarDoubleTap:(id)sender
+
+-(void)respondsToTap:(id)sender
 {
-    NSLog(@"navTap");
+    NSLog(@"%@",sender);
 }
+
 
 
 -(IBAction)share_btn_clicked:(id)sender
@@ -851,6 +893,7 @@
     
     
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
+
         [pieChart reloadData];
         return ;
     }
@@ -875,45 +918,9 @@
     }
     
     if([DateHelper checkIf123]){
-        [UIView animateWithDuration:1
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveEaseIn
-                         animations:^{
-                             [[self navigationItem] titleView].alpha = 0;
-                         }
-                         completion:^(BOOL finished){
-                             [UIView animateWithDuration:1
-                                                   delay: 0.0
-                                                 options: UIViewAnimationOptionCurveEaseIn
-                                              animations:^{
-                                                  [[self navigationItem] setTitle:[DateHelper getDateString]];
-                                                  [[self navigationItem] titleView].alpha = 1;
-                                              }
-                                              completion:^(BOOL finished){
-                                                  
-                                              }];
-                         }];
-        
+        [[self navigationItem] setTitle:[DateHelper getDateString]];
     }else{
-        [UIView animateWithDuration:1
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveEaseIn
-                         animations:^{
-                             [[self navigationItem] titleView].alpha = 0;
-                         }
-                         completion:^(BOOL finished){
-                             [UIView animateWithDuration:1
-                                                   delay: 0.0
-                                                 options: UIViewAnimationOptionCurveEaseIn
-                                              animations:^{
-                                                  [[self navigationItem] setTitle:@"TimePie"];
-                                                  [[self navigationItem] titleView].alpha = 1;
-                                              }
-                                              completion:^(BOOL finished){
-                                                  
-                                              }];
-                         }];
-        
+        [[self navigationItem] setTitle:@"TimePie"];
     }
     
     
