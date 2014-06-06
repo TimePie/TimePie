@@ -560,6 +560,8 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    
+    
     return cell;
 }
 
@@ -645,6 +647,13 @@
         }
     }
 }
+
+//自定义 delete
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    return @"删除";
+}
+
 ////////////////////
 
 
