@@ -117,8 +117,30 @@
     
 //    contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2, 2);
     
+    
+    
     scroll.contentSize = CGSizeMake(self.view.frame.size.width, (buttom+100));
+    
+    
     [self initButtons:self.view];
+    
+    
+    
+    NSTimer * ncTimer = [NSTimer scheduledTimerWithTimeInterval:.55
+                                                         target:self
+                                                       selector:@selector(switchViewWithImage:)
+                                                       userInfo:nil
+                                                        repeats:NO];
+    
+    
+}
+
+
+- (void)switchViewWithImage:(NSTimer *)chkTimer {
+    _pieChartImage.frame = CGRectMake(0, 0, scroll.contentSize.width, scroll.contentSize.height);
+    [self pieChartImage].image = [self imageWithView:contentView withWid:scroll.contentSize.width witHei:scroll.contentSize.height];
+    [contentView removeFromSuperview];
+    [scroll addSubview:[self pieChartImage]];
 }
 
 

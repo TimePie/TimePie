@@ -52,7 +52,7 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate * now = [NSDate date];
     NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:now];
-    NSLog(@"%d",components.second);
+//    NSLog(@"%d",components.second);
     
     
     /*
