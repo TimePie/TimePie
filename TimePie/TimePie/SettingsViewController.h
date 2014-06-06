@@ -17,7 +17,7 @@
 
 @end
 
-@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,TrackItemViewDelegate>
+@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate,TrackItemViewDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) UINavigationBar *navBar;
 @property (strong, nonatomic) UITableView *SVCVessel;

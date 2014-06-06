@@ -11,7 +11,7 @@
 #import "SettingsThemeViewController.h"
 #import "RoutineItemViewController.h"
 #import "themeView.h"
-
+#import "TimingItemStore.h"
 @interface SettingsViewController ()
 
 @end
@@ -133,6 +133,22 @@
         tiVC.delegate = self;
         [[self navigationController] pushViewController:tiVC animated:YES];
     }
+    else if(indexPath.section == 1 && indexPath.row == 0)
+    {
+        //about
+    }
+    else if(indexPath.section == 1 && indexPath.row == 1)
+    {
+        //评分
+    }
+    else if(indexPath.section == 1 && indexPath.row == 2)
+    {
+        //reset
+        UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"" message:@"是否清空数据" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        alert.tag = 1;
+        [alert show];
+        
+    }
 }
 
 #pragma mark - TrackItemViewDelegate
@@ -156,6 +172,29 @@
     tempLabel.textAlignment = UITextAlignmentCenter;
     tempLabel.font = [UIFont boldSystemFontOfSize:17.f];
     [view addSubview:tempLabel];
+}
+
+#pragma mark - ui alert delegate
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //NSLog(@"test");
+    if (alertView.tag==1) {
+        if (buttonIndex == 1)
+        {
+            if([[TimingItemStore timingItemStore] deleteAllData])
+            {
+                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"" message:@"成功清空数据" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+
+            }
+            else
+            {
+                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"" message:@"清空数据失败，请重试" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
