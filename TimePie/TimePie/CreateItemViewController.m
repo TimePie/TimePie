@@ -181,13 +181,11 @@ static NSInteger routineItemFlag = 0;
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    self.view.userInteractionEnabled = NO;
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    self.view.userInteractionEnabled = YES;
     [textField resignFirstResponder];
     if (textField.tag == TAG_INPUT_FIELD_1) _itemName = textField.text;
     else if (textField.text.length > 0)
