@@ -132,10 +132,12 @@
         //setup navigation items
         UINavigationItem *n = [self navigationItem];
         
+        
 //        UIImage *image = [UIImage imageNamed:@"TimePie_Nav_Logo.png"];
 //        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
         
         [n setTitle:@"TimePie"];
+        
         
         [[UINavigationBar appearance] setTitleTextAttributes:
          [NSDictionary dictionaryWithObjectsAndKeys:
@@ -661,6 +663,12 @@
 {
 }
 
+-(void)navigationBarDoubleTap:(id)sender
+{
+    NSLog(@"navTap");
+}
+
+
 -(IBAction)share_btn_clicked:(id)sender
 {
     //    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
@@ -797,16 +805,6 @@
 
 
 
-- (void)respondsToTap:(UITapGestureRecognizer *)recognizer {
-//    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
-    
-    
-    NSLog(@"Single tap!%@", recognizer);
-    
-    //Do stuff here...
-}
-
-
 - (void)longPressPie:(UITapGestureRecognizer *)recognizer {
     //    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
     if(selectMode){
@@ -848,7 +846,7 @@
 -(void)pollTime
 {
     
-    NSDate *start = [NSDate date];
+
     
     
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
@@ -875,6 +873,48 @@
         [pieChart setShowPercentage:NO];
     }
     
+    if([DateHelper checkIf123]){
+        [UIView animateWithDuration:1
+                              delay: 0.0
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             [[self navigationItem] titleView].alpha = 0;
+                         }
+                         completion:^(BOOL finished){
+                             [UIView animateWithDuration:1
+                                                   delay: 0.0
+                                                 options: UIViewAnimationOptionCurveEaseIn
+                                              animations:^{
+                                                  [[self navigationItem] setTitle:[DateHelper getDateString]];
+                                                  [[self navigationItem] titleView].alpha = 1;
+                                              }
+                                              completion:^(BOOL finished){
+                                                  
+                                              }];
+                         }];
+        
+    }else{
+        [UIView animateWithDuration:1
+                              delay: 0.0
+                            options: UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             [[self navigationItem] titleView].alpha = 0;
+                         }
+                         completion:^(BOOL finished){
+                             [UIView animateWithDuration:1
+                                                   delay: 0.0
+                                                 options: UIViewAnimationOptionCurveEaseIn
+                                              animations:^{
+                                                  [[self navigationItem] setTitle:@"TimePie"];
+                                                  [[self navigationItem] titleView].alpha = 1;
+                                              }
+                                              completion:^(BOOL finished){
+                                                  
+                                              }];
+                         }];
+        
+    }
+    
     
     [item check:YES];
     
@@ -888,12 +928,6 @@
     }
     
     
-    
-    
-    
-    NSDate *methodFinish = [NSDate date];
-    NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:start];
-//    NSLog(@"Execution Time: %f", executionTime);
 
 }
 //////////////////////

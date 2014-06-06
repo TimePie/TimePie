@@ -88,6 +88,22 @@
     return false;
 }
 
++(BOOL)checkIf123
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate * now = [NSDate date];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:now];
+    NSInteger temp  = components.second;
+    temp%=10;
+    if(temp>=6&&temp<=9)
+    {
+        return true;
+    }
+    
+    
+    return false;
+}
+
 
 
 +(NSString*)getDateString
