@@ -32,5 +32,8 @@
 //UIPosition
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+#define IS_IPHONE_HIGHERINCHE [[UIScreen mainScreen] bounds].size.height == 568
+#define IS_IPHONE_LOWERINCHE [[UIScreen mainScreen] bounds].size.height == 480
     //tDCPieChart
 #define CIRCLE_CENTER_POS 50

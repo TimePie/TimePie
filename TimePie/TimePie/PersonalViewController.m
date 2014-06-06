@@ -72,11 +72,21 @@
 {
     if (_mainView && tagList)
     {
-        if (_exitButton && _mainView.contentOffset.y > 0)
-        {
-            _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+        if (IS_IPHONE_HIGHERINCHE) {
+            if (_exitButton && _mainView.contentOffset.y > 0)
+            {
+                _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+            }
+            if (_exitButton.frame.origin.y < 390.f) [self exitButtonPressed];
         }
-        if (_exitButton.frame.origin.y < 390.f) [self exitButtonPressed];
+        else
+        {
+            if (_exitButton && _mainView.contentOffset.y > 0)
+            {
+                _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+            }
+            if (_exitButton.frame.origin.y < 330.f) [self exitButtonPressed];
+        }
     }
 }
 
