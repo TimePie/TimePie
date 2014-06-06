@@ -592,6 +592,7 @@
         [timingItemStore removeItem:p];
         [itemTable reloadData];
         NSLog(p.itemName);
+        
     }
 }
 ////////////////////
@@ -842,6 +843,7 @@
     
     
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
+        [pieChart reloadData];
         return ;
     }
     
@@ -863,8 +865,6 @@
     }else{
         [pieChart setShowPercentage:NO];
     }
-    
-    
     
     
     [item check:YES];
