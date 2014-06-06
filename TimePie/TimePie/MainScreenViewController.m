@@ -223,7 +223,7 @@
         [pieChart addGestureRecognizer:longRecognizer];
         
         
-        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG3.png"];
+        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG2.png"];
         UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 320, 311)];
         
 //        [bgview addGestureRecognizer:tapRecognizer];
