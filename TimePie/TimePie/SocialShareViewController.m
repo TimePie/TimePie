@@ -55,7 +55,7 @@
     timePieLabel.textColor = SHARING_TITLE_COLOR;
     timePieLabel.layer.shadowColor = [SHARING_TITLE_COLOR CGColor];
     timePieLabel.layer.shadowRadius = 3;
-    timePieLabel.layer.shadowOpacity =.6;
+    timePieLabel.layer.shadowOpacity =.4;
     timePieLabel.layer.shadowOffset = CGSizeMake(0, 0);
     [contentView addSubview:timePieLabel];
     

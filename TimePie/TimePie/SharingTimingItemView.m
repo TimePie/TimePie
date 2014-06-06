@@ -49,8 +49,11 @@
         [self addSubview:ringCircle];
         
         UILabel *percentageLabel = [[UILabel alloc] initWithFrame:CGRectMake(-15, -15, 30, 30)];
-        percentageLabel.text = [NSString stringWithFormat:@"%.1f%%", [[[TimingItemStore timingItemStore] getItemPercentage:item] doubleValue]];
         
+        NSString *percentageStr =[NSString stringWithFormat:@"%.1f%%", [[[TimingItemStore timingItemStore] getItemPercentage:item] doubleValue]];
+        CGSize size = [percentageStr sizeWithFont:[UIFont fontWithName:@"Ubuntu" size:10.f]];
+        percentageLabel.text = percentageStr;
+        percentageLabel.frame = CGRectMake(-size.width*.5, -size.height*.5, size.width, size.height);
         percentageLabel.font = [UIFont fontWithName:@"Ubuntu" size:10.f];
         percentageLabel.textColor = [UIColor whiteColor];
         [self addSubview:percentageLabel];
