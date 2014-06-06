@@ -278,6 +278,65 @@
 }
 
 
+
+
+- (BOOL)deleteAllData
+{
+    allItems = [[NSMutableArray alloc] init];
+    
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    BOOL result =YES;
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        [context deleteObject:info];
+    }
+    
+    
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        [context deleteObject:info];
+    }
+    
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        [context deleteObject:info];
+    }
+    
+    
+    
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    
+    
+    return NO;
+}
+
+
+
+
 // delete all items from coredata
 - (BOOL)deletaAllItem
 {

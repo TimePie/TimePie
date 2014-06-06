@@ -42,6 +42,8 @@
 - (BOOL)deletaAllItem;
 - (BOOL)viewAllItem;
 
+- (BOOL)deleteAllData;
+
 
 ////
 

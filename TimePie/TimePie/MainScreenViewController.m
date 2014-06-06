@@ -115,6 +115,7 @@
     
 //    NSLog(@"%@",[[ColorThemes colorThemes] getAvailableColors]);
 //    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
+//    [timingItemStore deleteAllData];
 }
 
 - (void)viewDidLoad
