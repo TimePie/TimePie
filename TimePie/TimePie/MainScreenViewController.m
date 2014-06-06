@@ -270,13 +270,17 @@
 {
     [itemTable addSubview:selectView];
     [itemTable bringSubviewToFront:selectView];
+    itemTable.frame = CGRectMake(itemTable.frame.origin.x  , itemTable.frame.origin.y, itemTable.frame.size.width, HeightOfItemTable-150);
     itemTable.frame = CGRectOffset( itemTable.frame, 0, 75 );
     pieChart.frame = CGRectOffset(  pieChart.frame, 0, -75);
+    
+    
 }
 
 - (void)removeSelectView
 {
     [selectView removeFromSuperview];
+    itemTable.frame = CGRectMake(itemTable.frame.origin.x  , itemTable.frame.origin.y, itemTable.frame.size.width, HeightOfItemTable);
     itemTable.frame = CGRectOffset( itemTable.frame, 0, -75 );
     pieChart.frame = CGRectOffset(  pieChart.frame, 0, 75);
 }
@@ -820,8 +824,10 @@
         cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 150, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
         
         
+        
+        
         pieChart.frame= CGRectMake(0, PieChartInitOffsetY-35, 300, 300);
-        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY+35, 320, 620);
+        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY+35, 320, HeightOfItemTable-27);
         [pieChart reloadData];
         [itemTable reloadData];
         
