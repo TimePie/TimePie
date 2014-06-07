@@ -87,7 +87,6 @@
 		CD6F7DFE191A508800C962B7 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7DFD191A508800C962B7 /* Tag.m */; };
 		CD6F7E01191A50F400C962B7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F7E00191A50F400C962B7 /* User.m */; };
 		CD88F4821940C7CE002A91A4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD88F4811940C7CE002A91A4 /* QuartzCore.framework */; };
-		CD88F4841941FDB9002A91A4 /* TimePie_RingBG3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD88F4831941FDB9002A91A4 /* TimePie_RingBG3@2x.png */; };
 		CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F2190D242200F58797 /* TimingItem1.m */; };
 		CD8EE0F7190D246300F58797 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8EE0F6190D246300F58797 /* XYPieChart.m */; };
 		CD9CE6A71919D23E003C4CA6 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9CE6A61919D23E003C4CA6 /* DateHelper.m */; };
@@ -236,7 +235,6 @@
 		CD6F7DFF191A50F400C962B7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		CD6F7E00191A50F400C962B7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CD88F4811940C7CE002A91A4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CD88F4831941FDB9002A91A4 /* TimePie_RingBG3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TimePie_RingBG3@2x.png"; path = "../../../../../../../Desktop/TimePie_RingBG3@2x.png"; sourceTree = "<group>"; };
 		CD8EE0F1190D242200F58797 /* TimingItem1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimingItem1.h; sourceTree = "<group>"; };
 		CD8EE0F2190D242200F58797 /* TimingItem1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItem1.m; sourceTree = "<group>"; };
 		CD8EE0F5190D246300F58797 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
@@ -372,7 +370,6 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				CD88F4831941FDB9002A91A4 /* TimePie_RingBG3@2x.png */,
 				6851BA711940A01A00A8F4A2 /* historyButton@2x.png */,
 				6851BA721940A01A00A8F4A2 /* shareButton@2x.png */,
 				13EA460D1939936000AF229E /* TimePie_RingBG2@2x.png */,
@@ -750,7 +747,6 @@
 				13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */,
 				13CCE58118EC49E400462A83 /* PersonalView_Total@2x.png in Resources */,
 				CD52392019110D83005EB55A /* personalbtn@2x.png in Resources */,
-				CD88F4841941FDB9002A91A4 /* TimePie_RingBG3@2x.png in Resources */,
 				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
 				CD601A651936131F008946E9 /* TimePie_Nav_Logo@2x.png in Resources */,

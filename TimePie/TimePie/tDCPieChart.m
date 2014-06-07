@@ -83,7 +83,9 @@
 {
     UILabel *percentageValueLabel = [[UILabel alloc] initWithFrame:CGRectMake([self originXValue], 35, 60, 30)];
     percentageValueLabel.text = _tDCPercentageString;
-    percentageValueLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:26.f];
+    if ([_tDCPercentageString intValue] < 100)
+        percentageValueLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:26.f];
+    else percentageValueLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:18.f];
     percentageValueLabel.textColor = color;
     [self addSubview:percentageValueLabel];
     [self bringSubviewToFront:percentageValueLabel];

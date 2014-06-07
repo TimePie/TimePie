@@ -34,6 +34,8 @@
 @interface MainScreenViewController ()
 {
     BOOL modalCanBeTriggered;
+    BOOL dateTitleLock;
+    BOOL originalTitleLock;
 }
 @end
 
@@ -54,6 +56,8 @@
         self.view.backgroundColor = [UIColor whiteColor];
         [self navigationController].view.backgroundColor = [UIColor whiteColor];
         _mAnimation = [BounceAnimation new];
+        dateTitleLock = YES;
+        originalTitleLock = NO;
     }
     return self;
 }
@@ -223,7 +227,7 @@
         [pieChart addGestureRecognizer:longRecognizer];
         
         
-        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG3.png"];
+        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG2.png"];
         UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 320, 311)];
         
 //        [bgview addGestureRecognizer:tapRecognizer];
@@ -560,6 +564,8 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    
+    
     return cell;
 }
 
@@ -645,6 +651,13 @@
         }
     }
 }
+
+//自定义 delete
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    return @"删除";
+}
+
 ////////////////////
 
 
@@ -917,12 +930,26 @@
         [pieChart setShowPercentage:NO];
     }
     
-    if([DateHelper checkIf123]){
-        [[self navigationItem] setTitle:[DateHelper getDateString]];
-    }else{
-        [[self navigationItem] setTitle:@"TimePie"];
-    }
+    UILabel *titleDateView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+    UILabel *titleOriginalView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+    titleDateView.font = titleOriginalView.font = [UIFont fontWithName:@"Ubuntu" size:18.f];
+    titleDateView.textColor = titleOriginalView.textColor = MAIN_UI_COLOR;
+    titleDateView.text = [DateHelper getDateString];
+    titleOriginalView.text = @"TimePie";
     
+    if([DateHelper checkIf123]){
+        [[self navigationItem] setTitleView:titleDateView];
+        if (dateTitleLock) {
+            titleDateView.alpha = titleOriginalView.alpha = 0.0f;
+            [self showDateTitle:titleDateView];
+        }
+    }else{
+        [[self navigationItem] setTitleView:titleOriginalView];
+        if (originalTitleLock) {
+            titleDateView.alpha = titleOriginalView.alpha = 0.0f;
+            [self showOriginalTitle:titleOriginalView];
+        }
+    }
     
     [item check:YES];
     
@@ -1053,6 +1080,27 @@
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return img;
+}
+
+#pragma mark - Utilities Animation
+- (void)showOriginalTitle:(UILabel*)view
+{
+    [UIView animateWithDuration:.5f animations:^{
+        view.alpha = 1.0f;
+    } completion:^(BOOL finished){
+        originalTitleLock = NO;
+        dateTitleLock = YES;
+    }];
+}
+
+- (void)showDateTitle:(UILabel*)view
+{
+    [UIView animateWithDuration:.5f animations:^{
+        view.alpha = 1.0f;
+    } completion:^(BOOL finished){
+        dateTitleLock = NO;
+        originalTitleLock = YES;
+    }];
 }
 
 @end

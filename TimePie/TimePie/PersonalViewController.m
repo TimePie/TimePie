@@ -72,11 +72,21 @@
 {
     if (_mainView && tagList)
     {
-        if (_exitButton && _mainView.contentOffset.y > 0)
-        {
-            _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+        if (IS_IPHONE_HIGHERINCHE) {
+            if (_exitButton && _mainView.contentOffset.y > 0)
+            {
+                _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+            }
+            if (_exitButton.frame.origin.y < 390.f) [self exitButtonPressed];
         }
-        if (_exitButton.frame.origin.y < 390.f) [self exitButtonPressed];
+        else
+        {
+            if (_exitButton && _mainView.contentOffset.y > 0)
+            {
+                _exitButton.frame = CGRectMake(SCREEN_WIDTH/2-47, SCREEN_HEIGHT-110-_mainView.contentOffset.y * .5f, 94, 57 + _mainView.contentOffset.y * .5f);
+            }
+            if (_exitButton.frame.origin.y < 330.f) [self exitButtonPressed];
+        }
     }
 }
 
@@ -170,6 +180,7 @@
 {
     timeRangeInfo = [_pVCPicker.pickerData objectAtIndex:[_pVCPicker.picker selectedRowInComponent:0]];
     [self judgeDayCount];
+    [self reloadEventTrackColumn];
     [_mainView reloadData];
     [self pushViewAnimationWithView:_pVCPicker willHidden:YES];
     self.navigationController.navigationBar.userInteractionEnabled = YES;
@@ -402,6 +413,14 @@
 {
     for (int i = 0; i < trackedTagList.count; i++)
         [avgTimeOfTagList addObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[trackedTagList objectAtIndex:i] tag_name]].floatValue / dayCount]];
+}
+
+- (void)reloadEventTrackColumn
+{
+    [avgTimeOfTagList removeAllObjects];
+    [columnHeightList removeAllObjects];
+    [self calculateAvgTimeOfTag];
+    [self getColumnHeightListWithTagList];
 }
 
 /** EventTrackCell Usage
