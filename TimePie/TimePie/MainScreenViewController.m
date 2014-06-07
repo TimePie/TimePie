@@ -125,8 +125,6 @@
     if([[timingItemStore allItems] count]==0){
         [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:.4]];
         personalButton.hidden = YES;
-        tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewItem:)];
-        tapRecognizer.numberOfTapsRequired =1;
         [itemTable addGestureRecognizer:tapRecognizer];
         self.navigationItem.rightBarButtonItem = nil;
         
@@ -156,6 +154,9 @@
         
 //        UIImage *image = [UIImage imageNamed:@"TimePie_Nav_Logo.png"];
 //        self.navigationItem.titleView = [[UIImageView alloc] initWithImage:image];
+        
+        tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addNewItem:)];
+        tapRecognizer.numberOfTapsRequired =1;
         
         [n setTitle:@"TimePie"];
         
@@ -227,7 +228,7 @@
         [pieChart addGestureRecognizer:longRecognizer];
         
         
-        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG2.png"];
+        UIImage* bg = [UIImage imageNamed:@"TimePie_RingBG3.png"];
         UIImageView* bgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 320, 311)];
         
 //        [bgview addGestureRecognizer:tapRecognizer];
@@ -727,6 +728,7 @@
 
 -(IBAction)share_btn_clicked:(id)sender
 {
+    [timingItemStore saveData];
     //    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
     if(selectMode)
     {
@@ -735,6 +737,8 @@
         if(selectedArray.count != 0)
         {
             //Go back
+            
+            
             
             pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
             itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
