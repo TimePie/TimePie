@@ -640,8 +640,8 @@
         if([[timingItemStore allItems] count] == 0){
             [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:.4]];
             personalButton.hidden = YES;
-            self.navigationItem.rightBarButtonItem = nil;
-            [itemTable addGestureRecognizer:tapRecognizer];
+//            self.navigationItem.rightBarButtonItem = nil;
+//            [itemTable addGestureRecognizer:tapRecognizer];
         }
     }
 }
