@@ -122,7 +122,9 @@
 //    [timingItemStore deleteAllData];
     
     
+    
     if([[timingItemStore allItems] count]==0){
+        [itemTable reloadData];
         [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:.4]];
         personalButton.hidden = YES;
         [itemTable addGestureRecognizer:tapRecognizer];
@@ -464,6 +466,8 @@
         [tableView registerNib:[UINib nibWithNibName:@"TCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     }
+
+    
     TimingItem * item = [[timingItemStore allItems] objectAtIndex:indexPath.row];
     [cell.itemName setText:item.itemName];
     
