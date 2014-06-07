@@ -10,7 +10,7 @@
 
 @interface CreateItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate>
 {
-    UIView *colorTag;
+    UIButton *colorTag;
     UITextField *inputField;
     UILabel *initInputLabel;
     UILabel *tagLabel;

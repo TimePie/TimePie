@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1316DB07191BE13500E74E3C /* SettingsThemeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316DB06191BE13500E74E3C /* SettingsThemeViewController.m */; };
+		13222BB2194381750040D0DF /* ColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13222BB1194381750040D0DF /* ColorPickerView.m */; };
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
 		134189891904111900DF2F41 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134189881904111900DF2F41 /* SettingsViewController.m */; };
 		134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 134275D118FC403300533378 /* eventTrackColumnGraph.m */; };
@@ -114,6 +115,8 @@
 /* Begin PBXFileReference section */
 		1316DB05191BE13500E74E3C /* SettingsThemeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsThemeViewController.h; sourceTree = "<group>"; };
 		1316DB06191BE13500E74E3C /* SettingsThemeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsThemeViewController.m; sourceTree = "<group>"; };
+		13222BB0194381750040D0DF /* ColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerView.h; sourceTree = "<group>"; };
+		13222BB1194381750040D0DF /* ColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerView.m; sourceTree = "<group>"; };
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
 		134189871904111900DF2F41 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		134189881904111900DF2F41 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -288,6 +291,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13222BAF194381520040D0DF /* CreateItem */ = {
+			isa = PBXGroup;
+			children = (
+				13222BB0194381750040D0DF /* ColorPickerView.h */,
+				13222BB1194381750040D0DF /* ColorPickerView.m */,
+			);
+			name = CreateItem;
+			sourceTree = "<group>";
+		};
 		132A702318EB027600AA675F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +350,7 @@
 		13CCE57318EC2F8800462A83 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				13222BAF194381520040D0DF /* CreateItem */,
 				CDFAD4B4194001B1009A15D7 /* Sharing View */,
 				134BDD80191A8DA30095DB10 /* SettingsView */,
 				CD8EE0F4190D245800F58797 /* MainView */,
@@ -809,6 +822,7 @@
 				68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */,
 				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
 				1395A0321939F43300C98747 /* SocialShareViewController.m in Sources */,
+				13222BB2194381750040D0DF /* ColorPickerView.m in Sources */,
 				6831559E1909263C00C9A27C /* BEMLine.m in Sources */,
 				68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */,
 				CD601A5F1935F918008946E9 /* TimingItemEntity.m in Sources */,

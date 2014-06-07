@@ -12,6 +12,7 @@
 #import "TimingItemStore.h"
 #import "TimingItem1.h"
 #import "Tag.h"
+#import "ColorPickerView.h"
 
 #define TAG_LIMIT_COUNT     200
 #define TAG_INPUT_FIELD_1   4001
@@ -22,7 +23,9 @@
 static NSInteger routineItemFlag = 0;
 
 @interface CreateItemViewController ()
-
+{
+    ColorPickerView *colorPicker;
+}
 @end
 
 @implementation CreateItemViewController
@@ -181,11 +184,13 @@ static NSInteger routineItemFlag = 0;
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    colorTag.userInteractionEnabled = NO;
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    colorTag.userInteractionEnabled = YES;
     [textField resignFirstResponder];
     if (textField.tag == TAG_INPUT_FIELD_1) _itemName = textField.text;
     else if (textField.text.length > 0)
@@ -246,6 +251,14 @@ static NSInteger routineItemFlag = 0;
     }
 }
 
+- (void)tagColorPressed:(id)sender
+{
+    NSLog(@"colorPicker");
+    colorPicker = [[ColorPickerView alloc] initWithFrame:CGRectMake(0, 568, SCREEN_WIDTH, 68)];
+    [self.view addSubview:colorPicker];
+    [self pushAnimateView:colorPicker];
+}
+
 - (void)addTagButtonPressed:(id)sender
 {
     
@@ -254,15 +267,16 @@ static NSInteger routineItemFlag = 0;
 #pragma mark - utilities methods
 - (void)initTextFieldInView:(UIView*)view
 {
-    colorTag = [[UIView alloc] initWithFrame:CGRectMake(10, 14, 20, 20)];
-    colorTag.backgroundColor = PINKNO04;
+    colorTag = [[UIButton alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
+    colorTag.backgroundColor = REDNO1;
     colorTag.tag =  TAG_COLOR_TAG;
+    [colorTag addTarget:self action:@selector(tagColorPressed:) forControlEvents:UIControlEventTouchUpInside];
     if([view viewWithTag:TAG_COLOR_TAG]) [[view viewWithTag:TAG_COLOR_TAG] removeFromSuperview];
-    [self setRoundedView:colorTag toDiameter:16];
+    [self setRoundedView:colorTag toDiameter:18];
     [view addSubview:colorTag];
     
     if([view viewWithTag:TAG_INPUT_FIELD_1]) [[view viewWithTag:TAG_INPUT_FIELD_1] removeFromSuperview];
-    inputField = [[UITextField alloc] initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH, 48)];
+    inputField = [[UITextField alloc] initWithFrame:CGRectMake(38.5, 0, SCREEN_WIDTH, 48)];
     inputField.returnKeyType = UIReturnKeyDone;
     inputField.textColor = MAIN_UI_COLOR;
     inputField.tag = TAG_INPUT_FIELD_1;
@@ -270,7 +284,7 @@ static NSInteger routineItemFlag = 0;
     [view addSubview:inputField];
     
     if([view viewWithTag:TAG_INPUT_FIELD_2]) [[view viewWithTag:TAG_INPUT_FIELD_2] removeFromSuperview];
-    initInputLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 120, 48)];
+    initInputLabel = [[UILabel alloc] initWithFrame:CGRectMake(38.5, 0, 120, 48)];
     initInputLabel.text = @"名称";
     initInputLabel.textColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
     initInputLabel.tag = TAG_INPUT_FIELD_2;
@@ -338,6 +352,14 @@ static NSInteger routineItemFlag = 0;
     tagCheck.tag = indexPath.row * TAG_LIMIT_COUNT;
     tagCheck.image = image;
     [view addSubview:tagCheck];
+}
+
+- (void)pushAnimateView:(UIView*)view
+{
+    [UIView animateWithDuration:.5f animations:^{
+        view.frame = CGRectMake(0, 500, SCREEN_WIDTH, 68);
+    } completion:^(BOOL finished){
+    }];
 }
 
 - (void)didReceiveMemoryWarning
