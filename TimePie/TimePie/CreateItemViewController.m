@@ -209,9 +209,12 @@ static NSInteger routineItemFlag = 0;
 
 - (void)confirmButtonPressed
 {
+    if (inputField.text.length > 0)
+    {
+        _itemName = inputField.text;
+    }
     if (_itemName.length > 0)
     {
-        NSLog(_itemName);
         TimingItem* item = [[TimingItemStore timingItemStore] createItem];
         item.itemName = _itemName;
         [[TimingItemStore timingItemStore] addTag:item TagName:_currentTagOfItem];
