@@ -120,13 +120,13 @@
     
     
     scroll.contentSize = CGSizeMake(self.view.frame.size.width, (buttom+100));
-    
+    scroll.scrollEnabled = NO;
     
     [self initButtons:self.view];
     
     
     
-    NSTimer * ncTimer = [NSTimer scheduledTimerWithTimeInterval:.55
+    NSTimer * ncTimer = [NSTimer scheduledTimerWithTimeInterval:.6
                                                          target:self
                                                        selector:@selector(switchViewWithImage:)
                                                        userInfo:nil
@@ -141,6 +141,7 @@
     [self pieChartImage].image = [self imageWithView:contentView withWid:scroll.contentSize.width witHei:scroll.contentSize.height];
     [contentView removeFromSuperview];
     [scroll addSubview:[self pieChartImage]];
+    [scroll setScrollEnabled:YES];
 }
 
 
@@ -335,8 +336,7 @@
 
 - (void)wechatButtonPressed:(id)sender
 {
-    
-    [self pieChartImage].image = [self imageWithView2:contentView withWid:scroll.contentSize.width witHei:scroll.contentSize.height];
+    [self pieChartImage].image = [self imageWithView:contentView withWid:scroll.contentSize.width witHei:scroll.contentSize.height];
     [self sendContent:@"Time Pie Shared" image:_pieChartImage.image];
 }
 
@@ -353,19 +353,19 @@
     if(img!=nil){
         
         WXMediaMessage *message = [WXMediaMessage message];
-        [message setThumbImage:img];
+        //[message setThumbImage:img];
         
         WXImageObject *ext = [WXImageObject object];
-        // NSString *filePath = [[NSBundle mainBundle] pathForResource:@"res5thumb" ofType:@"png"];
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"res5thumb" ofType:@"png"];
         NSLog(@"here");
         
         
         
-        ext.imageData = UIImagePNGRepresentation(img);
-        
-        //UIImage* image = [UIImage imageWithContentsOfFile:filePath];
+//        ext.imageData = UIImageJPGRepresentation(img);
+//        ext.imageData = UIImageJPEGRepresentation(img, 1);
+//        UIImage* image = [UIImage imageWithContentsOfFile:filePath];
         //UIImage* image = [UIImage imageWithData:ext.imageData];
-        //ext.imageData = UIImagePNGRepresentation(image);
+        ext.imageData = UIImagePNGRepresentation(img);
         
         //    UIImage* image = [UIImage imageNamed:@"res5thumb.png"];
         //    ext.imageData = UIImagePNGRepresentation(image);
