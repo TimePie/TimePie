@@ -68,7 +68,13 @@
             else startPos = 10;
             tDCPieChart *tempChart =[[tDCPieChart alloc] initWithFrame:CGRectMake(startPos + 100 * i, 10, 100, 130)];
             tempChart.tag = CHART_START_COUNT + i;
-            [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]] Percent:[[timeOfEachTag objectAtIndex:i] floatValue] / 100 PercentString:[NSString stringWithFormat:@"%d",[[timeOfEachTag objectAtIndex:i] integerValue]]];
+            
+            NSString* tagName =[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]];
+            if([tagName isEqualToString:@"(null)"]){
+                tagName = @"Others";
+            }
+            
+            [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:tagName Percent:[[timeOfEachTag objectAtIndex:i] floatValue] / 100 PercentString:[NSString stringWithFormat:@"%d",[[timeOfEachTag objectAtIndex:i] integerValue]]];
             [tDCPieChartList addObject:tempChart];
             [view addSubview:[tDCPieChartList objectAtIndex:i]];
         }
