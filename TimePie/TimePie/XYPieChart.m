@@ -673,7 +673,7 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         label = (pieLayer.text)?pieLayer.text:[NSString stringWithFormat:@"%0.0f", value];
     
     CGSize size = [label sizeWithFont:self.labelFont];
-    size.height = size.height*2;
+    size.height = size.height*2+2;
     size.width = size.width;
     
     [CATransaction setDisableActions:YES];

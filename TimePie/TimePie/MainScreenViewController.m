@@ -128,7 +128,7 @@
 //    NSLog(@"gettotalhoursbystartdate:%@",[timingItemStore getTotalHoursByStartDate:[NSDate date]]);
 //    [timingItemStore deleteAllData];
     
-    
+    [itemTable reloadData];
     
     if([[timingItemStore allItems] count]==0){
         [itemTable reloadData];
@@ -299,8 +299,8 @@
         [historyBtn setBackgroundImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
         
         
-        [shareBtn setBackgroundImage:[UIImage imageNamed:@"TimePie_Index_Share_s"] forState:UIControlStateNormal];
-        
+        [shareBtn setBackgroundImage:[UIImage imageNamed:@"TimePie_Index_Share"] forState:UIControlStateNormal];
+        [shareBtn removeFromSuperview];
         [cancelBtn setBackgroundImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
         [historyBtn setTitle:@"" forState:UIControlStateNormal];
         [shareBtn setTitle:@"" forState:UIControlStateNormal];
@@ -466,7 +466,11 @@
 ////////////////////
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[timingItemStore allItems] count]+1;
+    if([[timingItemStore allItems] count]==0){
+        return 0;
+    }else{
+        return [[timingItemStore allItems] count]+1;
+    }
 }
 
 
@@ -492,7 +496,7 @@
         cell.itemName.hidden = YES;
         cell.itemTime.hidden = YES;
         [shareBtn removeFromSuperview];
-        shareBtn.frame = CGRectMake(SCREEN_WIDTH/2-41, 5, 82, 32);
+        shareBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 47);
         [cell addSubview:shareBtn];
         return cell;
     }else{
