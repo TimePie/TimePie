@@ -253,7 +253,6 @@ static NSInteger routineItemFlag = 1;
         [[TimingItemStore timingItemStore] addDaily:_itemName tag:_currentTagOfItem];
         
         
-        
         if([[TimingItemStore timingItemStore] allItems].count == 0){
             item.timing= YES;
         }

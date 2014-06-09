@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "TimingItem1.h"
 #import "TimingItemEntity.h"
+#import "Daily.h"
 
 @class Tag;
 @class Tracking;
@@ -94,6 +95,9 @@
 - (NSArray*)getAllDaily;
 - (BOOL)updateDaily:(NSString*)fromName
            toName:(NSString*)toName;
+
+- (BOOL)createDailyMark:(Daily*)daily
+                   date:(NSDate*)date;
 
 
 

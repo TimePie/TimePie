@@ -14,6 +14,7 @@
 #import "DateHelper.h"
 #import "TimingItemEntity.h"
 #import "Daily.h"
+#import "DailyMark.h"
 
 @implementation TimingItemStore
 
@@ -400,7 +401,6 @@
 
 - (BOOL)restoreData
 {
-    
     NSLog(@"restore data!");
     allItems = nil;
     allItems = [[NSMutableArray alloc] init];
@@ -474,6 +474,10 @@
     
     [[ColorThemes colorThemes] initTaken:allItems];
     
+    
+    
+    
+    // daily handler:
     NSArray* dailyArray =[self getAllDaily];
     for(Daily* d in dailyArray){
         NSString* item_name = d.item_name;
@@ -485,21 +489,64 @@
             }
         }
         
+        
 
         if(flag){
             //if daily item existed do nothing
         }else{
             //else create new item
-            TimingItem* item = [[TimingItemStore timingItemStore] createItem];
-            item.itemName = item_name;
-            if([[TimingItemStore timingItemStore] allItems].count == 0){
-                item.timing= YES;
-            }
-            [[TimingItemStore timingItemStore] saveData];
-            if(d.tag_name){
-                [self addTag:item TagName:d.tag_name];
+            if([self createDailyMark:d date:[DateHelper beginningOfDay:[NSDate date]]]){
+                TimingItem* item = [[TimingItemStore timingItemStore] createItem];
+                item.itemName = item_name;
+                if([[TimingItemStore timingItemStore] allItems].count == 0){
+                    item.timing= YES;
+                }
+                [[TimingItemStore timingItemStore] saveData];
+                if(d.tag_name){
+                    [self addTag:item TagName:d.tag_name];
+                }
+            }else{
+                NSLog(@"mark mode do nothing");
             }
         }
+    }
+    
+    return YES;
+}
+
+
+
+// if succeed return YES;
+// if existed return NO;
+- (BOOL)createDailyMark:(Daily*)daily
+                   date:(NSDate*)date
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    DailyMark * dailyMark ;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"DailyMark" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"daily == %@ AND date == %@",daily.item_name, date]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        //If not existed, create one
+        dailyMark = (DailyMark*)[NSEntityDescription insertNewObjectForEntityForName:@"DailyMark"
+                                                  inManagedObjectContext:context];
+        dailyMark.daily = daily.item_name;
+        dailyMark.date = date;
+    }else{
+        //If existed, return
+        return NO;
+    }
+    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return false;
     }
     
     return YES;
@@ -1229,6 +1276,8 @@
         return false;
     }
     
+    
+    [self createDailyMark:daily date:[DateHelper beginningOfDay:[NSDate date]]];
     return NO;
 }
 - (BOOL)removeDaily:(NSString*)name

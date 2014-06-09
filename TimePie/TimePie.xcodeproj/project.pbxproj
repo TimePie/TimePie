@@ -96,6 +96,7 @@
 		CDB36F1B1931EB9400E7BBCE /* TimePie_RingBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB36F1A1931EB9400E7BBCE /* TimePie_RingBG@2x.png */; };
 		CDC4784A19457EBB0041FA0E /* TimingItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4784919457EBB0041FA0E /* TimingItemEntity.m */; };
 		CDC4785019458B0C0041FA0E /* Daily.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4784F19458B0C0041FA0E /* Daily.m */; };
+		CDC478561945DDFF0041FA0E /* DailyMark.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC478551945DDFF0041FA0E /* DailyMark.m */; };
 		CDC499E019429FEC002F995F /* TimePie_RingBG3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */; };
 		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
 		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
@@ -255,6 +256,8 @@
 		CDC4784919457EBB0041FA0E /* TimingItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimingItemEntity.m; sourceTree = "<group>"; };
 		CDC4784E19458B0C0041FA0E /* Daily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Daily.h; sourceTree = "<group>"; };
 		CDC4784F19458B0C0041FA0E /* Daily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Daily.m; sourceTree = "<group>"; };
+		CDC478541945DDFF0041FA0E /* DailyMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyMark.h; sourceTree = "<group>"; };
+		CDC478551945DDFF0041FA0E /* DailyMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyMark.m; sourceTree = "<group>"; };
 		CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_RingBG3@2x.png"; sourceTree = "<group>"; };
 		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
 		CDC8858D1910FE3400A67510 /* TCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCell.h; sourceTree = "<group>"; };
@@ -626,6 +629,8 @@
 				CDC4784919457EBB0041FA0E /* TimingItemEntity.m */,
 				CDC4784E19458B0C0041FA0E /* Daily.h */,
 				CDC4784F19458B0C0041FA0E /* Daily.m */,
+				CDC478541945DDFF0041FA0E /* DailyMark.h */,
+				CDC478551945DDFF0041FA0E /* DailyMark.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -817,6 +822,7 @@
 				CDC8858F1910FE3400A67510 /* TCell.m in Sources */,
 				CD6F7E01191A50F400C962B7 /* User.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
+				CDC478561945DDFF0041FA0E /* DailyMark.m in Sources */,
 				CD601A6F1939A1D2008946E9 /* WeiXinHelper.m in Sources */,
 				68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */,
 				68BBE0A019091A7600F12101 /* ZBStatsItemData.m in Sources */,
