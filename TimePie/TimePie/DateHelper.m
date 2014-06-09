@@ -58,7 +58,8 @@
     /*
     if(components.second==0){
         return true;
-    }*/
+    }
+     */
     
     
     
@@ -66,7 +67,7 @@
     {
         return true;
     }
-    
+
     
     return false;
 }

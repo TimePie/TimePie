@@ -912,16 +912,18 @@
     
     
     if([timingItemStore allItems]==nil||[[timingItemStore allItems] count]==0){
-
         [pieChart reloadData];
         return ;
     }
     
     TimingItem* item = [timingItemStore getItemAtIndex:0];
-    
+    if(item.timing==NO){
+        item.timing = YES;
+    }
     if([DateHelper checkAcrossDay])
     {
         //across a day
+        [timingItemStore saveData];
         [timingItemStore restoreData];
 //        [Output println:@"Across"];
     }

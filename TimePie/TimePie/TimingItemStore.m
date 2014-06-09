@@ -13,6 +13,7 @@
 #import "Tag.h"
 #import "DateHelper.h"
 #import "TimingItemEntity.h"
+#import "Daily.h"
 
 @implementation TimingItemStore
 
@@ -321,6 +322,16 @@
     }
     
     
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"Daily" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        [context deleteObject:info];
+    }
+    
+    
     
     if ([context save:&error]) {
         NSLog(@"Did it!");
@@ -409,17 +420,17 @@
     NSLog([NSString stringWithFormat:@"start: %@",startOfToday]);
     NSLog([NSString stringWithFormat:@"end: %@",endOfToday]);
     
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"((date_created >= %@) AND (date_created <= %@)) OR timing = %@", startOfToday, endOfToday, [NSNumber numberWithBool:true]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"((date_created >= %@) AND (date_created <= %@)) OR timing = %@", startOfToday, endOfToday, [NSNumber numberWithBool:YES], [NSNumber numberWithBool:YES]]];
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     
     
     NSLog(@"[restoredata]number of object returned: %d",[fetchedObjects count]);
     for (TimingItemEntity *i in fetchedObjects) {
-        
         TimingItem* item = [self restoreItem:i];
-        
+        //NSLog(@"item!!!");
         if(item.timing == YES){// if i is a timing item
-            
+            NSLog(@"timing item!");
+
             BOOL flag = true;
             if ([item.dateCreated compare:startOfToday] == NSOrderedAscending) {
                 flag = false;
@@ -427,8 +438,6 @@
             if ([item.dateCreated compare:endOfToday] == NSOrderedDescending) {
                 flag = false;
             }
-            
-            
             
             if(flag)   //timing item is today's item;  Do nothing;
             {
@@ -438,14 +447,14 @@
                 TimingItem* newTimingItem = [self createItem:item];
                 item.timing = NO;
                 // update item time = 0 in new day ;
-                newTimingItem.time = 0;
+//                newTimingItem.time = 0;
                 [self updateItem:item];
                 [allItems removeObjectIdenticalTo:item];
                 [self saveData];
                 //[self restoreData];
-                
             }
         }
+        
         
     }
     
@@ -465,8 +474,38 @@
     
     [[ColorThemes colorThemes] initTaken:allItems];
     
+    NSArray* dailyArray =[self getAllDaily];
+    for(Daily* d in dailyArray){
+        NSString* item_name = d.item_name;
+        BOOL flag = false;
+        for(TimingItem* item in allItems){
+            if([item.itemName isEqualToString:item_name]){
+                flag = true;
+                break;
+            }
+        }
+        
+
+        if(flag){
+            //if daily item existed do nothing
+        }else{
+            //else create new item
+            TimingItem* item = [[TimingItemStore timingItemStore] createItem];
+            item.itemName = item_name;
+            if([[TimingItemStore timingItemStore] allItems].count == 0){
+                item.timing= YES;
+            }
+            [[TimingItemStore timingItemStore] saveData];
+            if(d.tag_name){
+                [self addTag:item TagName:d.tag_name];
+            }
+        }
+    }
+    
     return YES;
 }
+
+
 
 
 
@@ -1152,6 +1191,132 @@
     NSLog(@"%@",result);
     return result;
 }
+
+
+// Dailys
+- (BOOL)addDaily:(NSString*)name
+             tag:(NSString*)tagName;
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    Daily * daily;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Daily" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",name]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        //If not existed, create one
+        
+        
+        daily = (Daily*)[NSEntityDescription insertNewObjectForEntityForName:@"Daily"
+                                                  inManagedObjectContext:context];
+        [daily setValue:name forKey:@"item_name"];
+        if(tagName){
+            [daily setValue:tagName forKey:@"tag_name"];
+        }
+    }else{
+        //If existed, return
+        return YES;
+    }
+    
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return false;
+    }
+    
+    return NO;
+}
+- (BOOL)removeDaily:(NSString*)name
+{
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    BOOL result =YES;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Daily" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",name]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    for (NSManagedObject *info in fetchedObjects) {
+        [context deleteObject:info];
+    }
+    
+    
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    return result;
+    
+}
+- (NSArray*)getAllDaily
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSMutableArray * results = [[NSMutableArray alloc] init];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Daily" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count]==0){
+        //If not existed, return an array with no item in it.
+        return results;
+    }else{
+        //If existed, return array;
+        for(Daily * daily in fetchedObjects){
+            [results addObject:daily];
+        }
+        return results;
+    }
+    
+    return results;
+}
+- (BOOL)updateDaily:(NSString*)fromName
+           toName:(NSString*)toName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    BOOL result = YES;
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Daily" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",fromName]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (Daily *i in fetchedObjects) {
+        i.item_name = toName;
+    }
+    
+    [context updatedObjects];
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    return result;
+}
+
+
 
 
 

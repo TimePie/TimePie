@@ -20,7 +20,6 @@
 @synthesize tracking;
 
 
-
 + (id)randomItem{
     return [[self alloc] initWithItemName:@"An item"];
 }

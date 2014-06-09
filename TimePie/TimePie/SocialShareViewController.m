@@ -346,7 +346,7 @@
     if(text!=nil){
         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
         req.text = @"Test Text";
-        req.bText = YES;
+//        req.bText = YES;
         req.scene = weixin_scene_pengyouquan;
         [WXApi sendReq:req];
     }
@@ -373,7 +373,7 @@
         message.mediaObject = ext;
         
         SendMessageToWXReq* req1 = [[SendMessageToWXReq alloc] init];
-        req1.bText = NO;
+//        req1.bText = NO;
         req1.message = message;
         req1.scene = weixin_scene_pengyouquan;
         

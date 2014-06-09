@@ -85,4 +85,16 @@
 - (NSNumber*)getDailyTimeByItemName:(NSString*)itemName date:(NSDate*)date;
 - (TimingItemEntity *)getDailyTimingItemByItemName:(NSString*)itemName date:(NSDate *)date;
 
+
+
+// Dailys
+- (BOOL)addDaily:(NSString*)name
+             tag:(NSString*)tagName;
+- (BOOL)removeDaily:(NSString*)name;
+- (NSArray*)getAllDaily;
+- (BOOL)updateDaily:(NSString*)fromName
+           toName:(NSString*)toName;
+
+
+
 @end
