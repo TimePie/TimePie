@@ -14,11 +14,16 @@
 #import "TimingItemStore.h"
 #import "Tag.h"
 #import "ColorThemes.h"
+
+#define IS_IPHONE_LOWERINCHE [[UIScreen mainScreen] bounds].size.height == 480
+
+
 @interface StatsViewController ()
 {
     //record the current graph type
     GraphType currentType;
     NSArray *graphArray;
+    CGRect graphRect;
 }
 
 @end
@@ -40,6 +45,8 @@
     
     [self initNavigationBar];
     
+    [self resizeUIView];
+    
     currentType = WeekType;
     //
     [self initSegmentedControl];
@@ -60,16 +67,43 @@
     [self setGraphViewActive:currentType];
 }
 
+
+/**
+ *  在 viewDidAppear 修改 tableview 适配 3.5，加载稍慢了点。
+ */
+-(void)viewDidAppear:(BOOL)animated
+{
+    //设置tableview的frame
+    [self resizeUIView];
+}
+- (void)resizeUIView
+{
+    if(IS_IPHONE_LOWERINCHE)
+    {
+        graphRect = CGRectMake(-4, 140, 320, 200);
+        CGRect tableViewRect = CGRectMake(0, 373, 320, 105);
+        self.itemTableView.viewForBaselineLayout.frame  = tableViewRect;
+        self.itemTableView.hidden = !self.itemTableView.isHidden;
+    }
+    else
+    {
+        graphRect = CGRectMake(-4, 140, 320, 230);
+        //CGRect tableViewRect = CGRectMake(0, 403, 320, 165);
+    }
+    
+}
+
+
 - (void)initNavigationBar
 {
     //[self.navigationItem setBackBarButtonItem:[[UINavigationItem alloc] se ]]
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]  initWithImage:[UIImage imageNamed:@"StatsBackButton"] style:nil target:self action:@selector(exitButtonPressed)];//initWithTitle:@"t" style:UIBarButtonItemStyleBordered:self action:@selector(exitButtonPressed)];
-    self.navigationItem.leftBarButtonItem=backButton;
+    self.navigationItem.leftBarButtonItem = backButton;
     
     [self.navigationBar pushNavigationItem:self.navigationItem animated:NO];  //.leftBarButtonItem= backButton;
     
-    self.navigationBar.topItem.title=@"历史回顾";
+    self.navigationBar.topItem.title = @"历史回顾";
     
     self.navigationBar.clipsToBounds = YES;
     //[[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
@@ -77,7 +111,7 @@
 
 - (void)initSegmentedControl
 {
-    self.segmentedControl.selectedSegmentIndex =1;//设置默认选择项索引
+    self.segmentedControl.selectedSegmentIndex = 1;//设置默认选择项索引
     [self.segmentedControl setTitle:@"过去三天" forSegmentAtIndex:2];
     [self.segmentedControl addTarget:self action: @selector(segmentAction:) forControlEvents: UIControlEventValueChanged];
     //self.segmentedControl.frame = CGRectMake(20.0, 20.0, 250.0, 90.0);
@@ -108,7 +142,7 @@
             
             //若无该事项，则默认为0
             @try {
-                [comps setDay:-count];
+                [comps setDay: -count];
                 NSDate *tempDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
                 
                 /**
@@ -182,7 +216,7 @@
     //使数据模型和视图分开
     
     //create view for graph
-    self.lineGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 140, 320, 230)];
+    self.lineGraph = [[StatsLineGraphView alloc] initWithFrame:graphRect];
     
     //self.lineGraph.backgroundColor=[UIColor blackColor];
     
@@ -218,7 +252,7 @@
 - (void)initMonthGraph
 {
     //create view for graph
-    self.monthGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 140, 320, 230)];
+    self.monthGraph = [[StatsLineGraphView alloc] initWithFrame:graphRect];
     //self.lineGraph.backgroundColor=[UIColor blackColor];
     
     
@@ -253,7 +287,7 @@
 - (void)initDaysGraph
 {
     //create view for graph
-    self.daysGraph = [[StatsLineGraphView alloc] initWithFrame:CGRectMake(-4, 140, 320, 230)];
+    self.daysGraph = [[StatsLineGraphView alloc] initWithFrame:graphRect];
     
     //self.lineGraph.backgroundColor=[UIColor blackColor];
     
@@ -457,6 +491,7 @@
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     return 48;
 }
 
