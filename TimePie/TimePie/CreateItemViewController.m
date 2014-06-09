@@ -26,6 +26,7 @@ static NSInteger routineItemFlag = 1;
 {
     ColorPickerView *colorPicker;
     BOOL colorPickerIsAble;
+    BOOL colorIsSelected;
     int currentColorTag;
 }
 @end
@@ -38,6 +39,7 @@ static NSInteger routineItemFlag = 1;
     if (self)
     {
         colorPickerIsAble = NO;
+        colorIsSelected = NO;
     }
     return self;
 }
@@ -47,6 +49,7 @@ static NSInteger routineItemFlag = 1;
     [super viewDidLoad];
     [self initNavBar];
     [self initMainVessel];
+    [self initNeededData];
     [NSTimer scheduledTimerWithTimeInterval:0.033f target:self
                                    selector:@selector(mainLoop:) userInfo:nil repeats:NO];
 }
@@ -57,6 +60,11 @@ static NSInteger routineItemFlag = 1;
     routineItemFlag = 1;
     [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonActive"] forState:UIControlStateNormal];
     [self performSelector:@selector(respondInput:) withObject:self afterDelay:0.033f];
+}
+
+- (void)initNeededData
+{
+//    currentColorTag = [[ColorThemes colorThemes] getAColor];
 }
 
 - (void) mainLoop: (id) sender
@@ -229,6 +237,7 @@ static NSInteger routineItemFlag = 1;
     }
     colorTagButton.backgroundColor = chosenItemColor;
     currentColorTag = chosenColorTag;
+    colorIsSelected = YES;
 }
 
 #pragma mark - target selector
@@ -309,7 +318,8 @@ static NSInteger routineItemFlag = 1;
 - (void)initTextFieldInView:(UIView*)view
 {
     colorTagButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
-    colorTagButton.backgroundColor = REDNO1;
+    currentColorTag = [[ColorThemes colorThemes] getAColor];
+    colorTagButton.backgroundColor = [[ColorThemes colorThemes] getColorAt:currentColorTag];
     colorTagButton.tag =  TAG_COLOR_TAG;
     [colorTagButton addTarget:self action:@selector(tagColorPressed:) forControlEvents:UIControlEventTouchUpInside];
     if([view viewWithTag:TAG_COLOR_TAG]) [[view viewWithTag:TAG_COLOR_TAG] removeFromSuperview];
