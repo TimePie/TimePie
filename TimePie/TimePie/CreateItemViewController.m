@@ -248,6 +248,15 @@ static NSInteger routineItemFlag = 1;
         TimingItem* item = [[TimingItemStore timingItemStore] createItem];
         item.itemName = _itemName;
         item.itemColor = currentColorTag;
+        //for BillHuang:
+        // By default daily of item is on:
+        [[TimingItemStore timingItemStore] addDaily:_itemName tag:_currentTagOfItem];
+        
+        
+        
+        if([[TimingItemStore timingItemStore] allItems].count == 0){
+            item.timing= YES;
+        }
         [[TimingItemStore timingItemStore] addTag:item TagName:_currentTagOfItem];
         [[TimingItemStore timingItemStore] saveData];
 //        [[TimingItemStore timingItemStore] viewAllItem];

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Daily" representedClassName="Daily" syncable="YES">
+        <attribute name="item_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tag_name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES">
         <attribute name="tag_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tracking" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -29,5 +33,6 @@
         <element name="Tag" positionX="18" positionY="99" width="128" height="103"/>
         <element name="TimingItemEntity" positionX="-36" positionY="9" width="128" height="193"/>
         <element name="User" positionX="-18" positionY="72" width="128" height="118"/>
+        <element name="Daily" positionX="-9" positionY="99" width="128" height="73"/>
     </elements>
 </model>
