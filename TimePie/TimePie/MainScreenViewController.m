@@ -22,10 +22,17 @@
 #import "BounceAnimation.h"
 
 #import "WeiXinHelper.h"
+#import "BasicUIColor+UIPosition.h"
+
+
+
 
 #define ContentOffsetY -370
 #define ContentTriggerOffsetY -560
+
+
 #define HeightOfItemTable 570
+
 #define ItemTableInitOffsetY -0
 #define PieChartInitOffsetY -350
 
@@ -718,6 +725,7 @@
 
 - (void)settingsButtonPressed
 {
+    
 }
 
 
@@ -740,10 +748,12 @@
         {
             //Go back
             
-            
-            
             pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+            if(isiPhone5){
             itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
+            }else{
+            itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable-75);
+            }
             itemTable.scrollEnabled =YES;
             selectMode =NO;
             
@@ -807,7 +817,11 @@
             
             //Go back
             pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+            if(isiPhone5){
             itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
+            }else{
+            itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable-75);
+            }
             itemTable.scrollEnabled = YES;
             selectMode =NO;
             
@@ -844,7 +858,11 @@
         //Go back
         
         pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+        if(isiPhone5){
         itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
+        }else{
+        itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable-75);
+        }
         itemTable.scrollEnabled =YES;
         selectMode =NO;
         

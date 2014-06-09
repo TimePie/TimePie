@@ -37,3 +37,6 @@
 #define IS_IPHONE_LOWERINCHE [[UIScreen mainScreen] bounds].size.height == 480
     //tDCPieChart
 #define CIRCLE_CENTER_POS 50
+
+
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
