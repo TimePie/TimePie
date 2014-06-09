@@ -84,10 +84,15 @@
 
 - (void)generateTimeOfEachTag
 {
+    int calibrateResult = 0;
     for (int i = 0; i < tagList.count; i++)
     {
         NSNumber *tempResult = [NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:i] tag_name]].floatValue * 100 / totalTimeOfTags.floatValue];
+        calibrateResult += tempResult.intValue;
         [timeOfEachTag addObject:tempResult];
+    }
+    if (calibrateResult < 100) {
+        [timeOfEachTag replaceObjectAtIndex:tagList.count - 1 withObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:tagList.count - 1] tag_name]].floatValue * 100 / totalTimeOfTags.floatValue + 1]];
     }
     [self initDistributeGraphInView:_vessel];
 }
