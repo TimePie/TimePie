@@ -23,6 +23,9 @@
 - (void)viewDidLoad
 {
     self.title = @"关于TimePie";
+    UIImageView *mainImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+    mainImage.image = [UIImage imageNamed:@"aboutTimePie"];
+    [self.view addSubview:mainImage];
 }
 
 @end
