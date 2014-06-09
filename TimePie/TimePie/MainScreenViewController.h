@@ -33,7 +33,8 @@
     NSTimer * timer;
     BOOL selectMode;
     UITapGestureRecognizer *tapRecognizer;
-    
+    UILabel *titleDateView;
+    UILabel *titleOriginalView;
     
     int count;
     

@@ -143,6 +143,13 @@
         [itemTable removeGestureRecognizer:tapRecognizer];
         self.navigationItem.rightBarButtonItem = addItemButton;
     }
+    
+    
+    [[self navigationItem] setTitleView:titleOriginalView];
+    if (originalTitleLock) {
+        titleDateView.alpha = titleOriginalView.alpha = 0.0f;
+        [self showOriginalTitle:titleOriginalView];
+    }
 }
 
 - (void)viewDidLoad
@@ -289,13 +296,16 @@
         
 
         
-        [historyBtn setBackgroundImage:[UIImage imageNamed:@"historyButton"] forState:UIControlStateNormal];
-        [shareBtn setBackgroundImage:[UIImage imageNamed:@"shareButton"] forState:UIControlStateNormal];
-        [cancelBtn setBackgroundImage:[UIImage imageNamed:@"cancelButton"] forState:UIControlStateNormal];
+        [historyBtn setBackgroundImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
+        
+        
+        [shareBtn setBackgroundImage:[UIImage imageNamed:@"TimePie_Index_Share_s"] forState:UIControlStateNormal];
+        
+        [cancelBtn setBackgroundImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
         [historyBtn setTitle:@"" forState:UIControlStateNormal];
         [shareBtn setTitle:@"" forState:UIControlStateNormal];
         [cancelBtn setTitle:@"" forState:UIControlStateNormal];
-        shareBtn.hidden = YES;
+        shareBtn.hidden = NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
         
@@ -456,7 +466,7 @@
 ////////////////////
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[timingItemStore allItems] count];
+    return [[timingItemStore allItems] count]+1;
 }
 
 
@@ -466,12 +476,28 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    
+    
     static NSString *CellIdentifier = @"newFriendCell";
     TCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(cell == nil){
         [tableView registerNib:[UINib nibWithNibName:@"TCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
+    
+    if(indexPath.row==[[timingItemStore allItems] count]){
+        cell.itemName.hidden = YES;
+        cell.itemTime.hidden = YES;
+        [shareBtn removeFromSuperview];
+        shareBtn.frame = CGRectMake(SCREEN_WIDTH/2-41, 5, 82, 32);
+        [cell addSubview:shareBtn];
+        return cell;
+    }else{
+        cell.itemTime.hidden = NO;
+        cell.itemName.hidden = NO;
     }
 
     
@@ -591,7 +617,10 @@
     
 //    NSDate *start = [NSDate date];
 
-    
+    if(indexPath.row == [[timingItemStore allItems] count]){
+        [self share_btn_clicked:nil];
+        return ;
+    }
     
     
     if(selectMode){
@@ -740,9 +769,16 @@
 {
     [timingItemStore saveData];
     //    [self sendContent:@"hello" image:[UIImage imageNamed:@"Cancel_btn.png"]];
+    
+    SocialShareViewController *ssVC = [[SocialShareViewController alloc] init];
+    ssVC.pieChartImage.image = [self imageWithView:pieChart];
+    [self presentViewController:ssVC animated:YES completion:nil];
+    return ;
+    
+    
     if(selectMode)
     {
-        
+    
         // delivery data to the history screen;
         if(selectedArray.count != 0)
         {
@@ -757,7 +793,7 @@
             itemTable.scrollEnabled =YES;
             selectMode =NO;
             
-            shareBtn.hidden = YES;
+            shareBtn.hidden = NO;
             historyBtn.hidden = YES;
             cancelBtn.hidden = YES;
             
@@ -825,7 +861,7 @@
             itemTable.scrollEnabled = YES;
             selectMode =NO;
             
-            shareBtn.hidden = YES;
+            shareBtn.hidden = NO;
             historyBtn.hidden = YES;
             cancelBtn.hidden = YES;
             
@@ -866,7 +902,7 @@
         itemTable.scrollEnabled =YES;
         selectMode =NO;
         
-        shareBtn.hidden = YES;
+        shareBtn.hidden = NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
         
@@ -886,8 +922,9 @@
 
 
 - (void)longPressPie:(UITapGestureRecognizer *)recognizer {
+    
     //    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
-    if(selectMode){
+    if(selectMode||[[timingItemStore allItems] count]==0){
 //        selectMode = NO;
 //        [pieChart reloadData];
     }else{
@@ -956,8 +993,8 @@
         [pieChart setShowPercentage:NO];
     }
     
-    UILabel *titleDateView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
-    UILabel *titleOriginalView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+    titleDateView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+    titleOriginalView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
     titleDateView.font = titleOriginalView.font = [UIFont fontWithName:@"Ubuntu" size:18.f];
     titleDateView.textColor = titleOriginalView.textColor = MAIN_UI_COLOR;
     titleDateView.text = [DateHelper getDateString];

@@ -97,6 +97,7 @@
 		CDC4784A19457EBB0041FA0E /* TimingItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4784919457EBB0041FA0E /* TimingItemEntity.m */; };
 		CDC4785019458B0C0041FA0E /* Daily.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4784F19458B0C0041FA0E /* Daily.m */; };
 		CDC478561945DDFF0041FA0E /* DailyMark.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC478551945DDFF0041FA0E /* DailyMark.m */; };
+		CDC4785A1945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC478591945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png */; };
 		CDC499E019429FEC002F995F /* TimePie_RingBG3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */; };
 		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
 		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
@@ -258,6 +259,7 @@
 		CDC4784F19458B0C0041FA0E /* Daily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Daily.m; sourceTree = "<group>"; };
 		CDC478541945DDFF0041FA0E /* DailyMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyMark.h; sourceTree = "<group>"; };
 		CDC478551945DDFF0041FA0E /* DailyMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyMark.m; sourceTree = "<group>"; };
+		CDC478591945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Index_Share_s@2x.png"; sourceTree = "<group>"; };
 		CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_RingBG3@2x.png"; sourceTree = "<group>"; };
 		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
 		CDC8858D1910FE3400A67510 /* TCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCell.h; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CDC478591945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png */,
 				CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */,
 				6851BA711940A01A00A8F4A2 /* historyButton@2x.png */,
 				6851BA721940A01A00A8F4A2 /* shareButton@2x.png */,
@@ -781,6 +784,7 @@
 				CDC499E019429FEC002F995F /* TimePie_RingBG3@2x.png in Resources */,
 				13CCE57A18EC469500462A83 /* PersonalViewAvgTimeCell.xib in Resources */,
 				13CCE58A18EC5ABC00462A83 /* timeDistributeCell.xib in Resources */,
+				CDC4785A1945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png in Resources */,
 				CD601A651936131F008946E9 /* TimePie_Nav_Logo@2x.png in Resources */,
 				688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */,
 				CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */,

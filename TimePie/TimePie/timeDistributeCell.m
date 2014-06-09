@@ -71,7 +71,7 @@
             
             NSString* tagName =[NSString stringWithFormat:@"%@",(Tag*)[[tagList objectAtIndex:i] tag_name]];
             if([tagName isEqualToString:@"(null)"]){
-                tagName = @"Others";
+                tagName = @"   Others";
             }
             
             [tempChart initInfosWithColor:[colorList objectAtIndex:i] lightColor:[lightColorList objectAtIndex:i] Name:tagName Percent:[[timeOfEachTag objectAtIndex:i] floatValue] / 100 PercentString:[NSString stringWithFormat:@"%d",[[timeOfEachTag objectAtIndex:i] integerValue]]];
