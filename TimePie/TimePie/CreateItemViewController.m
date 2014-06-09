@@ -20,7 +20,7 @@
 #define TAG_COLOR_TAG       4003
 #define TAG_INPUT_FIELD_2   4004
 
-static NSInteger routineItemFlag = 0;
+static NSInteger routineItemFlag = 1;
 
 @interface CreateItemViewController ()
 {
@@ -54,8 +54,8 @@ static NSInteger routineItemFlag = 0;
 - (void)viewDidAppear:(BOOL)animated
 {
     [routineButton setSelected:NO];
-    routineItemFlag = 0;
-    [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonNormal"] forState:UIControlStateNormal];
+    routineItemFlag = 1;
+    [routineButton setImage:[UIImage imageNamed:@"AddRoutineButtonActive"] forState:UIControlStateNormal];
     [self performSelector:@selector(respondInput:) withObject:self afterDelay:0.033f];
 }
 
