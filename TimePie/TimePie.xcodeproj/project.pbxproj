@@ -98,7 +98,7 @@
 		CDC4785019458B0C0041FA0E /* Daily.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC4784F19458B0C0041FA0E /* Daily.m */; };
 		CDC478561945DDFF0041FA0E /* DailyMark.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC478551945DDFF0041FA0E /* DailyMark.m */; };
 		CDC4785A1945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC478591945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png */; };
-		CDC4785C1945FE910041FA0E /* TimePie_Index_Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC4785B1945FE910041FA0E /* TimePie_Index_Share@2x.png */; };
+		CDC47862194608610041FA0E /* TimePie_Index_Share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC47861194608610041FA0E /* TimePie_Index_Share@2x.png */; };
 		CDC499E019429FEC002F995F /* TimePie_RingBG3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */; };
 		CDC8858C1910FE1500A67510 /* TCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC8858B1910FE1500A67510 /* TCell.xib */; };
 		CDC8858F1910FE3400A67510 /* TCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC8858E1910FE3400A67510 /* TCell.m */; };
@@ -261,7 +261,7 @@
 		CDC478541945DDFF0041FA0E /* DailyMark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyMark.h; sourceTree = "<group>"; };
 		CDC478551945DDFF0041FA0E /* DailyMark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyMark.m; sourceTree = "<group>"; };
 		CDC478591945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Index_Share_s@2x.png"; sourceTree = "<group>"; };
-		CDC4785B1945FE910041FA0E /* TimePie_Index_Share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Index_Share@2x.png"; sourceTree = "<group>"; };
+		CDC47861194608610041FA0E /* TimePie_Index_Share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Index_Share@2x.png"; sourceTree = "<group>"; };
 		CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_RingBG3@2x.png"; sourceTree = "<group>"; };
 		CDC8858B1910FE1500A67510 /* TCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCell.xib; sourceTree = "<group>"; };
 		CDC8858D1910FE3400A67510 /* TCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCell.h; sourceTree = "<group>"; };
@@ -400,7 +400,7 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				CDC4785B1945FE910041FA0E /* TimePie_Index_Share@2x.png */,
+				CDC47861194608610041FA0E /* TimePie_Index_Share@2x.png */,
 				CDC478591945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png */,
 				CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */,
 				6851BA711940A01A00A8F4A2 /* historyButton@2x.png */,
@@ -792,7 +792,7 @@
 				688586ED190931AE0050D15D /* StatsBackButton@2x.png in Resources */,
 				CD3E53C7191C94D7005A1416 /* History_btn@2x.png in Resources */,
 				CD4CE06318E464D000916A4B /* InfoPlist.strings in Resources */,
-				CDC4785C1945FE910041FA0E /* TimePie_Index_Share@2x.png in Resources */,
+				CDC47862194608610041FA0E /* TimePie_Index_Share@2x.png in Resources */,
 				CDC8858C1910FE1500A67510 /* TCell.xib in Resources */,
 				68BBE09D19091A4600F12101 /* StatsItemTableViewCell.xib in Resources */,
 				13EA460E1939936000AF229E /* TimePie_RingBG2@2x.png in Resources */,
