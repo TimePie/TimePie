@@ -106,8 +106,15 @@ static NSInteger routineItemFlag = 1;
     _CIVC_mainVessel.dataSource = self;
     _CIVC_mainVessel.delegate = self;
     _CIVC_mainVessel.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
-    NSArray *tempTagArray = [[TimingItemStore timingItemStore] getAllTags];
-    tagTextArray = [NSMutableArray arrayWithArray:tempTagArray];
+    NSMutableArray *tempTagArray = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getAllTags]];
+    for (int i = 0; i<tempTagArray.count; i++)
+    {
+        if ([[[tempTagArray objectAtIndex:i] tag_name] isEqualToString:@""])
+        {
+            [tempTagArray removeObjectAtIndex:i];
+        }
+    }
+    tagTextArray = tempTagArray;
     [self initTagCellSelectedFlag];
     [self.view addSubview:_CIVC_mainVessel];
 }
