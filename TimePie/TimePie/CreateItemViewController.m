@@ -12,7 +12,7 @@
 #import "TimingItemStore.h"
 #import "TimingItem1.h"
 #import "Tag.h"
-#import "ColorPickerView.h"
+#import "ColorThemes.h"
 
 #define TAG_LIMIT_COUNT     200
 #define TAG_INPUT_FIELD_1   4001
@@ -25,6 +25,8 @@ static NSInteger routineItemFlag = 0;
 @interface CreateItemViewController ()
 {
     ColorPickerView *colorPicker;
+    BOOL colorPickerIsAble;
+    int currentColorTag;
 }
 @end
 
@@ -35,6 +37,7 @@ static NSInteger routineItemFlag = 0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        colorPickerIsAble = NO;
     }
     return self;
 }
@@ -184,13 +187,13 @@ static NSInteger routineItemFlag = 0;
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    colorTag.userInteractionEnabled = NO;
+    colorTagButton.userInteractionEnabled = NO;
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    colorTag.userInteractionEnabled = YES;
+    colorTagButton.userInteractionEnabled = YES;
     [textField resignFirstResponder];
     if (textField.tag == TAG_INPUT_FIELD_1) _itemName = textField.text;
     else if (textField.text.length > 0)
@@ -204,6 +207,19 @@ static NSInteger routineItemFlag = 0;
         [_CIVC_mainVessel reloadData];
     }
     return YES;
+}
+
+#pragma mark - ColorPickerViewDelegate
+
+- (void)sendChosenColorWithColor:(UIColor *)chosenItemColor ColorTag:(int)chosenColorTag
+{
+    [UIView animateWithDuration:.5f animations:^{
+        colorPicker.frame = CGRectMake(0, 568, SCREEN_WIDTH, 68);
+    } completion:^(BOOL finished){
+        colorPickerIsAble = NO;
+    }];
+    colorTagButton.backgroundColor = chosenItemColor;
+    currentColorTag = chosenColorTag;
 }
 
 #pragma mark - target selector
@@ -222,6 +238,7 @@ static NSInteger routineItemFlag = 0;
     {
         TimingItem* item = [[TimingItemStore timingItemStore] createItem];
         item.itemName = _itemName;
+        item.itemColor = currentColorTag;
         [[TimingItemStore timingItemStore] addTag:item TagName:_currentTagOfItem];
         [[TimingItemStore timingItemStore] saveData];
 //        [[TimingItemStore timingItemStore] viewAllItem];
@@ -254,9 +271,13 @@ static NSInteger routineItemFlag = 0;
 - (void)tagColorPressed:(id)sender
 {
     NSLog(@"colorPicker");
-    colorPicker = [[ColorPickerView alloc] initWithFrame:CGRectMake(0, 568, SCREEN_WIDTH, 68)];
-    [self.view addSubview:colorPicker];
-    [self pushAnimateView:colorPicker];
+    if (!colorPickerIsAble)
+    {
+        colorPicker = [[ColorPickerView alloc] initWithFrame:CGRectMake(0, 568, SCREEN_WIDTH, 68)];
+        colorPicker.delegate = self;
+        [self.view addSubview:colorPicker];
+        [self pushAnimateView:colorPicker];
+    }
 }
 
 - (void)addTagButtonPressed:(id)sender
@@ -267,13 +288,13 @@ static NSInteger routineItemFlag = 0;
 #pragma mark - utilities methods
 - (void)initTextFieldInView:(UIView*)view
 {
-    colorTag = [[UIButton alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
-    colorTag.backgroundColor = REDNO1;
-    colorTag.tag =  TAG_COLOR_TAG;
-    [colorTag addTarget:self action:@selector(tagColorPressed:) forControlEvents:UIControlEventTouchUpInside];
+    colorTagButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
+    colorTagButton.backgroundColor = REDNO1;
+    colorTagButton.tag =  TAG_COLOR_TAG;
+    [colorTagButton addTarget:self action:@selector(tagColorPressed:) forControlEvents:UIControlEventTouchUpInside];
     if([view viewWithTag:TAG_COLOR_TAG]) [[view viewWithTag:TAG_COLOR_TAG] removeFromSuperview];
-    [self setRoundedView:colorTag toDiameter:18];
-    [view addSubview:colorTag];
+    [self setRoundedView:colorTagButton toDiameter:18];
+    [view addSubview:colorTagButton];
     
     if([view viewWithTag:TAG_INPUT_FIELD_1]) [[view viewWithTag:TAG_INPUT_FIELD_1] removeFromSuperview];
     inputField = [[UITextField alloc] initWithFrame:CGRectMake(38.5, 0, SCREEN_WIDTH, 48)];
@@ -359,6 +380,7 @@ static NSInteger routineItemFlag = 0;
     [UIView animateWithDuration:.5f animations:^{
         view.frame = CGRectMake(0, 500, SCREEN_WIDTH, 68);
     } completion:^(BOOL finished){
+        colorPickerIsAble = YES;
     }];
 }
 

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ColorPickerView.h"
 
-@interface CreateItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate>
+@interface CreateItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate,ColorPickerViewDelegate>
 {
-    UIButton *colorTag;
+    UIButton *colorTagButton;
     UITextField *inputField;
     UILabel *initInputLabel;
     UILabel *tagLabel;
