@@ -10,6 +10,7 @@
 #import "BasicUIColor+UIPosition.h"
 #import "SettingsThemeViewController.h"
 #import "RoutineItemViewController.h"
+#import "AboutTimePieViewController.h"
 #import "themeView.h"
 #import "TimingItemStore.h"
 @interface SettingsViewController ()
@@ -66,12 +67,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {return 2;}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {return 3;}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 3;
+    }
+    else return 2;
+}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *s1CellTitleArray = [NSArray arrayWithObjects:@"主题",@"我的例行事件表",@"我跟踪的标签", nil];
-    NSArray *s2CellTitleArray = [NSArray arrayWithObjects:@"关于TimePie",@"为我们评分",@"", nil];
+    NSArray *s2CellTitleArray = [NSArray arrayWithObjects:@"关于TimePie",@"", nil];
     
     NSString *cellIdentifier = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -86,10 +93,10 @@
     if(indexPath.section == 0 && indexPath.row == 0)
     {
         themeView *tV = [[themeView alloc] initWithFrame:CGRectMake(160, 0, 140, 48)];
-        [tV initThemeNameWithString:@"格里粉" ColorBoard:_themeColors];
+        [tV initThemeNameWithString:@"水果派" ColorBoard:_themeColors];
         [cell addSubview:tV];
     }
-    else if(indexPath.section == 1 && indexPath.row == 2)
+    else if(indexPath.section == 1 && indexPath.row == 1)
     {
         cell.backgroundColor = REDNO1;
         [self initLabelInView:cell];
@@ -135,13 +142,10 @@
     }
     else if(indexPath.section == 1 && indexPath.row == 0)
     {
-        //about
+        AboutTimePieViewController *abtpVC = [[AboutTimePieViewController alloc] init];
+        [[self navigationController] pushViewController:abtpVC animated:YES];
     }
     else if(indexPath.section == 1 && indexPath.row == 1)
-    {
-        //评分
-    }
-    else if(indexPath.section == 1 && indexPath.row == 2)
     {
         //reset
         UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"" message:@"是否清空数据" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];

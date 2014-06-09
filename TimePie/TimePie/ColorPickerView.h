@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ColorPickerViewDelegate <NSObject>
+
+@required
+- (void)sendChosenColorWithColor:(UIColor*)chosenItemColor ColorTag:(int)chosenColorTag;
+
+@end
+
 @interface ColorPickerView : UIView
 
 @property (nonatomic, strong) UIScrollView *CPV_mainVessel;
+@property (nonatomic, assign) id<ColorPickerViewDelegate> delegate;
 
 @end

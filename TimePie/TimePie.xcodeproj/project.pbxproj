@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1316DB07191BE13500E74E3C /* SettingsThemeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1316DB06191BE13500E74E3C /* SettingsThemeViewController.m */; };
 		13222BB2194381750040D0DF /* ColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13222BB1194381750040D0DF /* ColorPickerView.m */; };
+		13222BB51945A9E90040D0DF /* AboutTimePieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13222BB41945A9E90040D0DF /* AboutTimePieViewController.m */; };
 		132A702218EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */; };
 		134189891904111900DF2F41 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134189881904111900DF2F41 /* SettingsViewController.m */; };
 		134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 134275D118FC403300533378 /* eventTrackColumnGraph.m */; };
@@ -118,6 +119,8 @@
 		1316DB06191BE13500E74E3C /* SettingsThemeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsThemeViewController.m; sourceTree = "<group>"; };
 		13222BB0194381750040D0DF /* ColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerView.h; sourceTree = "<group>"; };
 		13222BB1194381750040D0DF /* ColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerView.m; sourceTree = "<group>"; };
+		13222BB31945A9E90040D0DF /* AboutTimePieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTimePieViewController.h; sourceTree = "<group>"; };
+		13222BB41945A9E90040D0DF /* AboutTimePieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTimePieViewController.m; sourceTree = "<group>"; };
 		132A702118EB026F00AA675F /* TimePie_Personal_Exit_Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TimePie_Personal_Exit_Button@2x.png"; sourceTree = "<group>"; };
 		134189871904111900DF2F41 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		134189881904111900DF2F41 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -323,6 +326,8 @@
 				13ACEB491920F35200DEEBB1 /* RoutineItemViewController.m */,
 				13ACEB4B192105AB00DEEBB1 /* TrackItemViewController.h */,
 				13ACEB4C192105AB00DEEBB1 /* TrackItemViewController.m */,
+				13222BB31945A9E90040D0DF /* AboutTimePieViewController.h */,
+				13222BB41945A9E90040D0DF /* AboutTimePieViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -835,6 +840,7 @@
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
 				CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */,
 				13B930641928FF3E0035CACD /* BounceAnimation.m in Sources */,
+				13222BB51945A9E90040D0DF /* AboutTimePieViewController.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
 				1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */,
 				CDC4785019458B0C0041FA0E /* Daily.m in Sources */,
