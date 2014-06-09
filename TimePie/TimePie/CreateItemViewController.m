@@ -213,11 +213,20 @@ static NSInteger routineItemFlag = 1;
 
 - (void)sendChosenColorWithColor:(UIColor *)chosenItemColor ColorTag:(int)chosenColorTag
 {
-    [UIView animateWithDuration:.5f animations:^{
-        colorPicker.frame = CGRectMake(0, 568, SCREEN_WIDTH, 68);
-    } completion:^(BOOL finished){
-        colorPickerIsAble = NO;
-    }];
+    if (IS_IPHONE_HIGHERINCHE) {
+        [UIView animateWithDuration:.5f animations:^{
+            colorPicker.frame = CGRectMake(0, 568, SCREEN_WIDTH, 68);
+        } completion:^(BOOL finished){
+            colorPickerIsAble = NO;
+        }];
+    }
+    else{
+        [UIView animateWithDuration:.5f animations:^{
+            colorPicker.frame = CGRectMake(0, 480, SCREEN_WIDTH, 68);
+        } completion:^(BOOL finished){
+            colorPickerIsAble = NO;
+        }];
+    }
     colorTagButton.backgroundColor = chosenItemColor;
     currentColorTag = chosenColorTag;
 }
@@ -377,11 +386,22 @@ static NSInteger routineItemFlag = 1;
 
 - (void)pushAnimateView:(UIView*)view
 {
-    [UIView animateWithDuration:.5f animations:^{
-        view.frame = CGRectMake(0, 500, SCREEN_WIDTH, 68);
-    } completion:^(BOOL finished){
-        colorPickerIsAble = YES;
-    }];
+    if (IS_IPHONE_HIGHERINCHE)
+    {
+        [UIView animateWithDuration:.5f animations:^{
+            view.frame = CGRectMake(0, 500, SCREEN_WIDTH, 68);
+        } completion:^(BOOL finished){
+            colorPickerIsAble = YES;
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:.5f animations:^{
+            view.frame = CGRectMake(0, 480 - 68, SCREEN_WIDTH, 68);
+        } completion:^(BOOL finished){
+            colorPickerIsAble = YES;
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
