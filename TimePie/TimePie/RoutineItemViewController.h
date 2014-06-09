@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RoutineItemViewController : UIViewController
+@interface RoutineItemViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) UITableView *routineTableView;
+@property (strong, nonatomic) NSArray *routineDataArray;
 
 @end

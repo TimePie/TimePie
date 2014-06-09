@@ -647,7 +647,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-
+        
         TimingItem *p = [[timingItemStore allItems] objectAtIndex:[indexPath row]];
         [timingItemStore removeItem:p];
         [itemTable reloadData];
