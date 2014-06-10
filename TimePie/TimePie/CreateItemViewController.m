@@ -202,6 +202,20 @@ static NSInteger routineItemFlag = 1;
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if (inputField.text.length > 0) {
+        _itemName = inputField.text;
+        initInputLabel.text = @"";
+    }
+    if (tagInputField.text.length > 0)
+    {
+        [[TimingItemStore timingItemStore] addTag:tagInputField.text];
+        [[TimingItemStore timingItemStore] saveData];
+        
+        tagTextArray = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getAllTags]];
+        [tagCellSelectedFlag addObject:@"n"];
+        tagInputField.text = @"";
+        [_CIVC_mainVessel reloadData];
+    }
     colorTagButton.userInteractionEnabled = NO;
     return YES;
 }
