@@ -140,7 +140,7 @@
 - (BOOL)saveData
 {
     BOOL result = NO;
-    
+    NSLog(@"savedata");
     
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
@@ -427,6 +427,7 @@
     NSLog(@"[restoredata]number of object returned: %d",[fetchedObjects count]);
     for (TimingItemEntity *i in fetchedObjects) {
         TimingItem* item = [self restoreItem:i];
+
         //NSLog(@"item!!!");
         if(item.timing == YES){// if i is a timing item
             NSLog(@"timing item!");
@@ -459,16 +460,18 @@
     }
     
     
-    if(allItems&&[allItems count]!=0){
-        [[[self allItems] objectAtIndex:0] check:YES];
-        NSLog([[[self allItems] objectAtIndex:0] itemName]);
-    }
+    
     
     
     for(int i=0;i<[allItems count];i++){
         if(((TimingItem*)[allItems objectAtIndex:i]).timing == YES){
             [self moveItemAtIndex:i toIndex:0];
         }
+    }
+    
+    if(allItems&&[allItems count]!=0){
+        [[[self allItems] objectAtIndex:0] check:YES];
+        NSLog([[[self allItems] objectAtIndex:0] itemName]);
     }
     
     
@@ -481,6 +484,7 @@
     NSArray* dailyArray =[self getAllDaily];
     for(Daily* d in dailyArray){
         NSString* item_name = d.item_name;
+        
         BOOL flag = false;
         for(TimingItem* item in allItems){
             if([item.itemName isEqualToString:item_name]){
