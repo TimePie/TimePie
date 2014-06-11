@@ -92,7 +92,7 @@
         [timeOfEachTag addObject:tempResult];
     }
     if (calibrateResult < 100) {
-        [timeOfEachTag replaceObjectAtIndex:tagList.count - 1 withObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:tagList.count - 1] tag_name]].floatValue * 100 / totalTimeOfTags.floatValue + 1]];
+        [timeOfEachTag replaceObjectAtIndex:0 withObject:[NSNumber numberWithFloat:[[TimingItemStore timingItemStore] getTotalHoursByTag:[[tagList objectAtIndex:0] tag_name]].floatValue * 100 / totalTimeOfTags.floatValue + 1]];
     }
     [self initDistributeGraphInView:_vessel];
 }
