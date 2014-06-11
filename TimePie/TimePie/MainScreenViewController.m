@@ -495,6 +495,7 @@
     if(indexPath.row==[[timingItemStore allItems] count]){
         cell.itemName.hidden = YES;
         cell.itemTime.hidden = YES;
+        cell.itemNotice.hidden = YES;
         [shareBtn removeFromSuperview];
         shareBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 47);
         [cell addSubview:shareBtn];
@@ -502,6 +503,7 @@
     }else{
         cell.itemTime.hidden = NO;
         cell.itemName.hidden = NO;
+        cell.itemNotice.hidden = NO;
     }
 
     
