@@ -41,7 +41,7 @@
 - (BOOL)restoreData;
 
 - (BOOL)deletaAllItem;
-- (BOOL)viewAllItem;
+- (NSUInteger)viewAllItem;
 
 - (BOOL)deleteAllData;
 
@@ -60,7 +60,7 @@
 - (BOOL)addTag:(TimingItem *)item
        TagName:(NSString *)name;
 - (BOOL)addTag:(NSString*)name;
-- (NSArray*)getAllTags;
+- (NSArray *)getAllTags;
 - (NSArray *)getTimingItemsByTagName:(NSString *)tagName;
 - (BOOL)markTracking:(NSString *)tagName Tracked:(NSNumber*)isTracking;
 

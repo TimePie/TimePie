@@ -55,10 +55,7 @@
 //Later we can use ColorTheme to manage the colors to avoid the duplicated colors.
 - (TimingItem *)createItem{
     TimingItem *i = [TimingItem randomItem];
-    
-    
     i.itemColor = [[ColorThemes colorThemes] getAColor];
-//    i.color = 0;
     
     [allItems addObject:i];
     NSLog(@"create item!");
@@ -376,7 +373,7 @@
 }
 
 // view all items in coredata
-- (BOOL)viewAllItem
+- (NSUInteger)viewAllItem
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
@@ -396,7 +393,7 @@
         
     }
     
-    return YES;
+    return [fetchedObjects count];
 }
 
 - (BOOL)restoreData
