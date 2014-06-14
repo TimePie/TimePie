@@ -751,11 +751,14 @@
         case 0:
         {
             NSLog(@"Edit Item");
+            NSIndexPath *cellIndexPath = [itemTable indexPathForCell:cell];
+            TimingItem *p = [[timingItemStore allItems] objectAtIndex:[cellIndexPath row]];
             CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
             viewController.isEditView = YES;
+            viewController.editItemName = p.itemName;
+            viewController.editItemColor = [[ColorThemes colorThemes] getColorAt:p.itemColor];
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             [self presentViewController:navController animated:YES completion:nil];
-            
             [cell hideUtilityButtonsAnimated:YES];
             break;
         }
@@ -764,8 +767,6 @@
             // Delete button was pressed
             NSIndexPath *cellIndexPath = [itemTable indexPathForCell:cell];
             
-            //[_testArray[cellIndexPath.section] removeObjectAtIndex:cellIndexPath.row];
-//            [itemTable deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
             TimingItem *p = [[timingItemStore allItems] objectAtIndex:[cellIndexPath row]];
             [timingItemStore removeItem:p];
             [itemTable reloadData];

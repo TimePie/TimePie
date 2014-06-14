@@ -27,6 +27,14 @@
 @property (strong, nonatomic) NSString *itemName;
 @property (strong, nonatomic) NSString *currentTagOfItem;
 
+/**
+ *  是否为编辑事项
+ */
 @property BOOL isEditView;
+
+@property (strong, nonatomic) NSString *editItemName;
+@property (strong, nonatomic) UIColor *editItemColor;
+@property (strong, nonatomic) NSString *editItemTag;
+@property BOOL isEditItemRoutine;
 
 @end

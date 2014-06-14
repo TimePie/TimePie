@@ -341,7 +341,7 @@ static NSInteger routineItemFlag = 1;
 {
     colorTagButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
     currentColorTag = [[ColorThemes colorThemes] getAColor];
-    colorTagButton.backgroundColor = [[ColorThemes colorThemes] getColorAt:currentColorTag];
+    colorTagButton.backgroundColor = _isEditView? _editItemColor : [[ColorThemes colorThemes] getColorAt:currentColorTag];
     colorTagButton.tag =  TAG_COLOR_TAG;
     [colorTagButton addTarget:self action:@selector(tagColorPressed:) forControlEvents:UIControlEventTouchUpInside];
     if([view viewWithTag:TAG_COLOR_TAG]) [[view viewWithTag:TAG_COLOR_TAG] removeFromSuperview];
@@ -353,6 +353,7 @@ static NSInteger routineItemFlag = 1;
     inputField.returnKeyType = UIReturnKeyDone;
     inputField.textColor = MAIN_UI_COLOR;
     inputField.tag = TAG_INPUT_FIELD_1;
+    inputField.text = _isEditView? _editItemName : @"";
     inputField.delegate = self;
     [view addSubview:inputField];
     
