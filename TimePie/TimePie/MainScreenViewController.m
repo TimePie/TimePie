@@ -12,7 +12,7 @@
 #import "CreateItemViewController.h"
 
 #import "TimingItem1.h"
-#import "TCell.h"
+
 #import "ColorThemes.h"
 #import "DateHelper.h"
 #import "Output.h"
@@ -608,6 +608,10 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    //utitlity buttons
+    cell.rightUtilityButtons = [self rightButtons];
+    cell.delegate = self;
+    
     return cell;
 }
 
@@ -677,7 +681,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -698,10 +702,110 @@
 }
 
 //自定义 delete
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    return @"删除";
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//    return @"删除";
+//}
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:0.76f green:0.73f blue:0.674f alpha:1.0]
+                                                title:@"编辑"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.f green:0.584f blue:0.37f alpha:1.0f]
+                                                title:@"删除"];
+    
+    return rightUtilityButtons;
 }
+
+#pragma mark - SWTableViewDelegate
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
+{
+    switch (state) {
+        case 0:
+            {
+                NSLog(@"utility buttons closed");
+                [itemTable setEditing:NO];
+            }
+            break;
+        case 1:
+            NSLog(@"left utility buttons open");
+            break;
+        case 2:
+            {
+                NSLog(@"right utility buttons open");
+                [itemTable setEditing:YES];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+        {
+            NSLog(@"More button was pressed");
+            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"你瞅啥" message:@"大哥金链子挺粗啊，哪儿买的？" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alertTest show];
+            
+            [cell hideUtilityButtonsAnimated:YES];
+            break;
+        }
+        case 1:
+        {
+            // Delete button was pressed
+            NSIndexPath *cellIndexPath = [itemTable indexPathForCell:cell];
+            
+            //[_testArray[cellIndexPath.section] removeObjectAtIndex:cellIndexPath.row];
+//            [itemTable deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            TimingItem *p = [[timingItemStore allItems] objectAtIndex:[cellIndexPath row]];
+            [timingItemStore removeItem:p];
+            [itemTable reloadData];
+            NSLog(p.itemName);
+            
+            if([[timingItemStore allItems] count] == 0){
+                [pieChart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:.4]];
+                personalButton.hidden = YES;
+                //            self.navigationItem.rightBarButtonItem = nil;
+                //            [itemTable addGestureRecognizer:tapRecognizer];
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+{
+    // allow just one cell's utility button to be open at once
+    return YES;
+}
+
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+{
+    switch (state) {
+        case 1:
+            // set to NO to disable all left utility buttons appearing
+            return YES;
+            break;
+        case 2:
+            // set to NO to disable all right utility buttons appearing
+            return YES;
+            break;
+        default:
+            break;
+    }
+    
+    return YES;
+}
+
 
 ////////////////////
 

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
-@interface TCell : UITableViewCell
+@interface TCell : SWTableViewCell
 
 
 @property(nonatomic, strong) IBOutlet UILabel * itemName;

@@ -11,12 +11,13 @@
 #import "TimingItemStore.h"
 #import "MainScreenTableView.h"
 #import "SelectView.h"
+#import "TCell.h"
 //#import "WXApi.h"
 //#import "WXApiObject.h"
 
 @class BounceAnimation;
 
-@interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate>
+@interface MainScreenViewController : UIViewController <XYPieChartDataSource,XYPieChartDelegate, UITableViewDelegate, UITableViewDataSource,UIViewControllerTransitioningDelegate,SWTableViewCellDelegate>
 {
 //    IBOutlet UIButton *stats;
     IBOutlet UIButton *historyBtn;

@@ -14,6 +14,12 @@
 		134189891904111900DF2F41 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134189881904111900DF2F41 /* SettingsViewController.m */; };
 		134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 134275D118FC403300533378 /* eventTrackColumnGraph.m */; };
 		134BDD83191A8DC30095DB10 /* themeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 134BDD82191A8DC30095DB10 /* themeView.m */; };
+		13601FD2194C19C600A9C5D9 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FC7194C19C600A9C5D9 /* NSMutableArray+SWUtilityButtons.m */; };
+		13601FD3194C19C600A9C5D9 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FC9194C19C600A9C5D9 /* SWCellScrollView.m */; };
+		13601FD4194C19C600A9C5D9 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FCB194C19C600A9C5D9 /* SWLongPressGestureRecognizer.m */; };
+		13601FD5194C19C600A9C5D9 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FCD194C19C600A9C5D9 /* SWTableViewCell.m */; };
+		13601FD6194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FCF194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m */; };
+		13601FD7194C19C600A9C5D9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FD1194C19C600A9C5D9 /* SWUtilityButtonView.m */; };
 		1367C5B1191E3B67005BF8AA /* themeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367C5B0191E3B67005BF8AA /* themeDetailView.m */; };
 		1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1378213D19055B3800083168 /* PersonalViewPicker.m */; };
 		1395A0321939F43300C98747 /* SocialShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1395A0311939F43300C98747 /* SocialShareViewController.m */; };
@@ -132,6 +138,18 @@
 		134BDD81191A8DC30095DB10 /* themeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = themeView.h; sourceTree = "<group>"; };
 		134BDD82191A8DC30095DB10 /* themeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = themeView.m; sourceTree = "<group>"; };
 		134D50BA18EAFE910066C117 /* BasicUIColor+UIPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasicUIColor+UIPosition.h"; sourceTree = "<group>"; };
+		13601FC6194C19C600A9C5D9 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		13601FC7194C19C600A9C5D9 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		13601FC8194C19C600A9C5D9 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		13601FC9194C19C600A9C5D9 /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		13601FCA194C19C600A9C5D9 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		13601FCB194C19C600A9C5D9 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		13601FCC194C19C600A9C5D9 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		13601FCD194C19C600A9C5D9 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		13601FCE194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		13601FCF194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		13601FD0194C19C600A9C5D9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		13601FD1194C19C600A9C5D9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		1367C5AF191E3B67005BF8AA /* themeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = themeDetailView.h; sourceTree = "<group>"; };
 		1367C5B0191E3B67005BF8AA /* themeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = themeDetailView.m; sourceTree = "<group>"; };
 		1378213C19055B3800083168 /* PersonalViewPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewPicker.h; sourceTree = "<group>"; };
@@ -348,6 +366,26 @@
 				1367C5B0191E3B67005BF8AA /* themeDetailView.m */,
 			);
 			name = SettingsView;
+			sourceTree = "<group>";
+		};
+		13601FC5194C19C600A9C5D9 /* SWTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				13601FC6194C19C600A9C5D9 /* NSMutableArray+SWUtilityButtons.h */,
+				13601FC7194C19C600A9C5D9 /* NSMutableArray+SWUtilityButtons.m */,
+				13601FC8194C19C600A9C5D9 /* SWCellScrollView.h */,
+				13601FC9194C19C600A9C5D9 /* SWCellScrollView.m */,
+				13601FCA194C19C600A9C5D9 /* SWLongPressGestureRecognizer.h */,
+				13601FCB194C19C600A9C5D9 /* SWLongPressGestureRecognizer.m */,
+				13601FCC194C19C600A9C5D9 /* SWTableViewCell.h */,
+				13601FCD194C19C600A9C5D9 /* SWTableViewCell.m */,
+				13601FCE194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.h */,
+				13601FCF194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m */,
+				13601FD0194C19C600A9C5D9 /* SWUtilityButtonView.h */,
+				13601FD1194C19C600A9C5D9 /* SWUtilityButtonView.m */,
+			);
+			name = SWTableViewCell;
+			path = PodFiles;
 			sourceTree = "<group>";
 		};
 		1395A02F1939E88F00C98747 /* Social */ = {
@@ -644,6 +682,7 @@
 		CD601A681939A10B008946E9 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				13601FC5194C19C600A9C5D9 /* SWTableViewCell */,
 				CDFAD4B0193FFE65009A15D7 /* libWeChatSDK.a */,
 				CDFAD4B1193FFE65009A15D7 /* WXApi.h */,
 				CDFAD4B2193FFE65009A15D7 /* WXApiObject.h */,
@@ -830,7 +869,9 @@
 				CDC8858F1910FE3400A67510 /* TCell.m in Sources */,
 				CD6F7E01191A50F400C962B7 /* User.m in Sources */,
 				CD4CE06C18E464D000916A4B /* TimePie.xcdatamodeld in Sources */,
+				13601FD4194C19C600A9C5D9 /* SWLongPressGestureRecognizer.m in Sources */,
 				CDC478561945DDFF0041FA0E /* DailyMark.m in Sources */,
+				13601FD2194C19C600A9C5D9 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				CD601A6F1939A1D2008946E9 /* WeiXinHelper.m in Sources */,
 				68BBE0981909193F00F12101 /* StatsLineGraphView.m in Sources */,
 				68BBE0A019091A7600F12101 /* ZBStatsItemData.m in Sources */,
@@ -845,14 +886,17 @@
 				CD9CE6A71919D23E003C4CA6 /* DateHelper.m in Sources */,
 				68BBE0AC19091EB300F12101 /* ZBStatsDataArray.m in Sources */,
 				13F4CBB618F1BD4700D716AE /* tDCPieChart.m in Sources */,
+				13601FD6194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				1395A0321939F43300C98747 /* SocialShareViewController.m in Sources */,
 				13222BB2194381750040D0DF /* ColorPickerView.m in Sources */,
 				6831559E1909263C00C9A27C /* BEMLine.m in Sources */,
+				13601FD3194C19C600A9C5D9 /* SWCellScrollView.m in Sources */,
 				68BBE0A919091D5C00F12101 /* StatsAnimations.m in Sources */,
 				13ACEB4D192105AB00DEEBB1 /* TrackItemViewController.m in Sources */,
 				13ACEB4A1920F35200DEEBB1 /* RoutineItemViewController.m in Sources */,
 				13CCE58918EC5ABC00462A83 /* timeDistributeCell.m in Sources */,
 				CD8EE0F3190D242200F58797 /* TimingItem1.m in Sources */,
+				13601FD5194C19C600A9C5D9 /* SWTableViewCell.m in Sources */,
 				13B930641928FF3E0035CACD /* BounceAnimation.m in Sources */,
 				13222BB51945A9E90040D0DF /* AboutTimePieViewController.m in Sources */,
 				CD4CE06918E464D000916A4B /* TimePieAppDelegate.m in Sources */,
@@ -872,6 +916,7 @@
 				CD4CE09518E46EBA00916A4B /* PersonalViewController.m in Sources */,
 				13B5195018F2687B00D52DF4 /* PersonalViewEventTrackCell.m in Sources */,
 				CD4CE06518E464D000916A4B /* main.m in Sources */,
+				13601FD7194C19C600A9C5D9 /* SWUtilityButtonView.m in Sources */,
 				68BBE09C19091A4600F12101 /* StatsItemTableViewCell.m in Sources */,
 				13F4CBBA18F1C12100D716AE /* UIView+Frame.m in Sources */,
 				134275D218FC403300533378 /* eventTrackColumnGraph.m in Sources */,
