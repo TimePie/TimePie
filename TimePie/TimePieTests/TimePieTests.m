@@ -12,6 +12,7 @@
 #import "ColorThemes.h"
 #import "Tag.h"
 #import "Daily.h"
+#import "BasicUIColor+UIPosition.h"
 
 @interface TimePieTests : XCTestCase
 
@@ -71,7 +72,6 @@
     XCTAssertTrue(YES==[[(TimingItem*)[allItems objectAtIndex:0] itemName] isEqualToString:@"new item"],@"testCreateItemFromItem");
 }
 
-
 //5
 - (void)testViewAllItem
 {
@@ -84,7 +84,41 @@
     XCTAssertTrue(10==(int)[[TimingItemStore timingItemStore] viewAllItem] ,@"testViewAllItem");
 }
 
-//6
+//6 failed
+- (void) testMoveItemAtIndexToIndex
+{
+    int number = 10;
+    int atIndex = 3;
+    int toIndex = 5;
+    int toIndexOutOfRange = 12;
+    
+    [[TimingItemStore timingItemStore] deletaAllItem];
+    for(int i = 0; i < number; i++){
+        TimingItem* temp = [[TimingItemStore timingItemStore] createItem];
+        temp.itemName = [NSString stringWithFormat:@"tempName_%d",i];
+    }
+    [[TimingItemStore timingItemStore] saveData];
+    
+    [[TimingItemStore timingItemStore] moveItemAtIndex:atIndex toIndex:toIndex];
+    TimingItem* getItem = [[TimingItemStore timingItemStore] getItemAtIndex:atIndex];
+    NSString* toIndexName = [NSString stringWithFormat:@"tempName_%d",toIndex - 1];
+     XCTAssertTrue([toIndexName isEqualToString: getItem.itemName] ,@"testMoveItemAtIndexToIndex");
+    
+    //out of array range, failed
+//    
+//    [[TimingItemStore timingItemStore] deletaAllItem];
+//    for(int i = 0; i < number; i++){
+//        TimingItem* temp = [[TimingItemStore timingItemStore] createItem];
+//        temp.itemName = [NSString stringWithFormat:@"tempName_%d",i];
+//    }
+//    [[TimingItemStore timingItemStore] saveData];
+//    [[TimingItemStore timingItemStore] moveItemAtIndex:atIndex toIndex:toIndexOutOfRange];
+//    getItem = [[TimingItemStore timingItemStore] getItemAtIndex:atIndex];
+//    toIndexName = [NSString stringWithFormat:@"tempName_%d",toIndexOutOfRange];
+//    XCTAssertTrue([toIndexName isEqualToString:getItem.itemName],@"testMoveItemAtIndexToIndex");
+}
+
+//7
 - (void)testAddTag
 {
     [[TimingItemStore timingItemStore] deleteAllData];
@@ -93,7 +127,7 @@
     XCTAssertTrue(YES==[((Tag*)[[[TimingItemStore timingItemStore] getAllTags] objectAtIndex:0]).tag_name isEqualToString:@"testTag"],@"testAddTag");
 }
 
-//7
+//8
 - (void)testAddTagWithItem
 {
     [[TimingItemStore timingItemStore] deleteAllData];
@@ -109,7 +143,37 @@
     XCTAssertTrue([item.itemName isEqualToString:item1.item_name],@"testAddTagWithItem");
 }
 
-//8
+//9
+- (void) testGetTimingItemsByTagName
+{
+    [[TimingItemStore timingItemStore] deleteAllData];
+    
+    int number = 20;
+    for (int i = 0; i < number; i++) {
+        TimingItem* item = [[TimingItemStore timingItemStore] createItem];
+        [[TimingItemStore timingItemStore] saveData];
+        [[TimingItemStore timingItemStore] addTag:item TagName:@"testTag"];
+    }
+    NSArray *allItem = [[TimingItemStore timingItemStore] getTimingItemsByTagName:@"testTag"];
+    XCTAssertTrue([allItem count] == number,@"testGetTimingItemsByTagName");
+}
+
+//10
+- (void) testGetAllTag
+{
+    [[TimingItemStore timingItemStore] deleteAllData];
+    
+    int number = 20;
+    for (int i = 0; i < number; i++) {
+        [[TimingItemStore timingItemStore] addTag:[NSString stringWithFormat:@"TestTag_%d",i]];
+        [[TimingItemStore timingItemStore] saveData];
+    }
+    NSArray *allTag = [[TimingItemStore timingItemStore] getAllTags];
+    XCTAssertTrue([allTag count] == number,@"testGetTimingItemsByTagName");
+}
+
+
+//11
 - (void)testAddDaily
 {
     [[TimingItemStore timingItemStore] deleteAllData];
@@ -120,8 +184,7 @@
     XCTAssertTrue([[(Daily*)[allDaily objectAtIndex:0] tag_name] isEqualToString:@"testTag"], @"testAddDaily");
 }
 
-
-//9
+//12
 - (void)testRemoveDaily
 {
     [[TimingItemStore timingItemStore] deleteAllData];
@@ -133,7 +196,7 @@
     
 }
 
-//10
+//13
 - (void)testUpdateDaily
 {
     [[TimingItemStore timingItemStore] deleteAllData];
@@ -144,6 +207,51 @@
     XCTAssertTrue([allDaily count]==1, @"testUpdateDaily");
     XCTAssertTrue([[(Daily*)[allDaily objectAtIndex:0] item_name] isEqualToString:@"testDaily1"], @"testUpdateDaily");
 }
+
+//14
+- (void)testGetAllDaily
+{
+    [[TimingItemStore timingItemStore] deleteAllData];
+    
+    //creat
+    int number = 100;
+    for (int i = 0; i < number; i++) {
+        NSString *tagName = [NSString stringWithFormat:@"testTag_%d",i];
+        NSString *dailyName = [NSString stringWithFormat:@"dailyName_%d",i];
+        [[TimingItemStore timingItemStore] addTag:tagName];
+        [[TimingItemStore timingItemStore] addDaily:dailyName tag:tagName];
+    }
+    NSArray * allDaily  = [[TimingItemStore timingItemStore] getAllDaily];
+    
+    XCTAssertTrue([allDaily count] == number, @"testgetAllDaily");
+}
+
+//15
+- (void) testGetColor
+{
+    NSMutableArray * testColorTheme = [[NSMutableArray alloc] init];
+    [testColorTheme addObject:REDNO1];
+    [testColorTheme addObject:BLUENO2];
+    [testColorTheme addObject:GREENNO3];
+    [testColorTheme addObject:PINKNO04];
+    [testColorTheme addObject:BROWNN05];
+    [testColorTheme addObject:YELLOWN06];
+    [testColorTheme addObject:PURPLEN07];
+    [testColorTheme addObject:P01N08];
+    [testColorTheme addObject:P01N09];
+    [testColorTheme addObject:P01N10];
+    
+    ColorThemes * colorThemes = [ColorThemes colorThemes];
+    UIColor *tempColor1 = (UIColor*)[colorThemes getColorAt:4];
+    UIColor *temoColor2 = (UIColor*)[testColorTheme objectAtIndex:4];
+    XCTAssertTrue( [temoColor2 isEqual:tempColor1] , @"testGetColor");
+}
+
+
+
+
+
+
 
 
 
