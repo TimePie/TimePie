@@ -33,9 +33,16 @@
 - (NSNumber*)getItemPercentage:(TimingItem*)item;
 
 
+- (BOOL)setNameByItem:(NSString*)fromName
+               toName:(NSString*)itemName;
+
+- (BOOL)setColorByItem:(TimingItem *)item
+               toColor:(int)color;
+
+- (BOOL)setTagByItem:(TimingItem*)item
+             withTag:(NSString*)tagName;
 
 
-/////////Core Data
 
 - (BOOL)saveData;
 - (BOOL)restoreData;
@@ -64,6 +71,8 @@
 - (NSArray *)getTimingItemsByTagName:(NSString *)tagName;
 - (BOOL)markTracking:(NSString *)tagName Tracked:(NSNumber*)isTracking;
 
+
+- (Tag* )getTagByItem:(NSString*)itemName;
 
 
 ///

@@ -163,6 +163,67 @@
 }
 
 
+- (BOOL)setNameByItem:(NSString*)fromName
+               toName:(NSString*)itemName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",fromName]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (TimingItemEntity *i in fetchedObjects){
+        i.item_name = itemName;
+    }
+    
+    BOOL result = YES;
+    [context updatedObjects];
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    [self restoreData];
+    return result;
+}
+
+
+- (BOOL)setColorByItem:(TimingItem *)item
+               toColor:(int)color
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",item.itemName]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (TimingItemEntity *i in fetchedObjects){
+        i.color_number = [NSNumber numberWithInt:color];
+    }
+    
+    BOOL result = YES;
+    [context updatedObjects];
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    [self restoreData];
+    return result;
+
+}
+
 
 
 //check if there is a same item existed
@@ -606,6 +667,29 @@
 }
 
 
+
+- (Tag* )getTagByItem:(NSString*)itemName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@", itemName]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count] == 0){
+        return nil;
+    }else{
+        return ((TimingItemEntity*)[fetchedObjects objectAtIndex:0]).tag;
+    }
+    return nil;
+}
+
+
+
 // restore a single item from NSManagedObject
 - (TimingItem* )restoreItem:(NSManagedObject *)i
 {
@@ -695,7 +779,66 @@
     return NO;
 }
 
-
+- (BOOL)setTagByItem:(TimingItem*)item
+             withTag:(NSString*)tagName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    Tag * tag ;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Tag" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tag_name == %@",tagName]];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Name: %@", [info valueForKey:@"tag_name"]);
+    }
+    if([fetchedObjects count]==0){
+        //if not existed, create one;
+        tag = (Tag*)[NSEntityDescription insertNewObjectForEntityForName:@"Tag"
+                                                  inManagedObjectContext:context];
+        [tag setValue:tagName forKey:@"tag_name"];
+    }else{
+        // if existed
+        tag = (Tag*)[fetchedObjects objectAtIndex:0];
+    }
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        return false;
+    }
+    
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@",item.itemName]];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if([fetchedObjects count]==0){
+        [self saveItemEntity:item];
+        [self addTag:item TagName:tagName];
+    }else{
+        for (TimingItemEntity *i in fetchedObjects) {
+            NSLog(@"Name: %@", [i valueForKey:@"item_name"]);
+            i.tag = tag;
+        }
+    }
+    
+    BOOL result = YES;
+    [context updatedObjects];
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    return result;
+}
 
 
 - (BOOL)addTag:(TimingItem *)item
