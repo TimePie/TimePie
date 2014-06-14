@@ -8,6 +8,7 @@
 
 #import "TimeAdjustView.h"
 #import "BasicUIColor+UIPosition.h"
+#import "TimingItem1.h"
 
 @implementation TimeAdjustView
 
@@ -35,6 +36,7 @@
     [self addSubview:cancelButton];
     
     UISlider *taSlider = [[UISlider alloc] initWithFrame:CGRectMake(50, 50, 220, 30)];
+    [taSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     taSlider.tintColor = [UIColor colorWithRed:0 green:0.478 blue:1.f alpha:1.f];
     [self addSubview:taSlider];
     
@@ -59,6 +61,9 @@
     _lhsItemTiming.font = _rhsItemTiming.font = [UIFont fontWithName:@"Roboto-Condensed" size:16.f];
     [self addSubview:_lhsItemTiming];
     [self addSubview:_rhsItemTiming];
+    //mark original time
+    lhsOriginalTime = _lhsItem.time;
+    rhsOriginalTime = _rhsItem.time;
 }
 
 - (void)confirmClicked:(id)sender
@@ -69,6 +74,15 @@
 - (void)cancelClicked:(id)sender
 {
     [_delegate cancelPressedPass];
+}
+
+- (void)sliderValueChanged:(UISlider*)sender
+{
+    NSLog(@"%f",sender.value);
+    _lhsItem.time -= lhsOriginalTime * sender.value;
+    _rhsItem.time += rhsOriginalTime * sender.value;
+    _lhsItemTiming.text = [_lhsItem getTimeString];
+    _rhsItemTiming.text = [_rhsItem getTimeString];
 }
 
 #pragma mark - utilities

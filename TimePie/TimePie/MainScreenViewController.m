@@ -1092,6 +1092,8 @@
         [taView.layer setShadowRadius:15.0];
         [taView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
         taView.delegate = self;
+        taView.lhsItem = (TimingItem*)[selectedArray objectAtIndex:0];
+        taView.rhsItem = (TimingItem*)[selectedArray objectAtIndex:1];
         taView.lhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
         taView.rhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:1] itemColor]];
         taView.lhsItemName.text = [(TimingItem*)[selectedArray objectAtIndex:0] itemName];

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class TimingItem;
 @protocol TimeAdjustViewDelegate <NSObject>
 
 - (void)cancelPressedPass;
@@ -16,6 +17,10 @@
 @end
 
 @interface TimeAdjustView : UIView
+{
+    double lhsOriginalTime;
+    double rhsOriginalTime;
+}
 /**
  *  left adjust item
  */
@@ -40,6 +45,9 @@
  *  right item Time
  */
 @property (nonatomic, strong) UILabel *rhsItemTiming;
+
+@property (nonatomic, strong) TimingItem *lhsItem;
+@property (nonatomic, strong) TimingItem *rhsItem;
 
 @property (nonatomic, assign) id<TimeAdjustViewDelegate> delegate;
 
