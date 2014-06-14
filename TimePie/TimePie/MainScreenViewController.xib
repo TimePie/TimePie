@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainScreenViewController">
             <connections>
+                <outlet property="adjustTimeButton" destination="jM2-Uz-fjh" id="HJm-Gn-akX"/>
                 <outlet property="cancelBtn" destination="R6W-V6-0QO" id="wEt-4Y-w74"/>
                 <outlet property="historyBtn" destination="HUw-uf-ZGr" id="gmr-fC-U1J"/>
                 <outlet property="shareBtn" destination="xv7-r9-OPn" id="Cfo-Gl-bta"/>
@@ -18,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUw-uf-ZGr" userLabel="historyButton">
-                    <rect key="frame" x="24" y="409" width="125" height="45"/>
+                    <rect key="frame" x="14" y="409" width="92" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,13 +39,23 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6W-V6-0QO" userLabel="cancelButton">
-                    <rect key="frame" x="172" y="409" width="125" height="45"/>
+                    <rect key="frame" x="214" y="409" width="92" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="canc_btn_clicked:" destination="-1" eventType="touchUpInside" id="vpa-wd-zRR"/>
+                    </connections>
+                </button>
+                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jM2-Uz-fjh">
+                    <rect key="frame" x="114" y="409" width="92" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="timeAdjust_btn_clicked:" destination="-1" eventType="touchUpInside" id="1Bl-Xl-m2W"/>
                     </connections>
                 </button>
             </subviews>

@@ -22,6 +22,7 @@
 //    IBOutlet UIButton *stats;
     IBOutlet UIButton *historyBtn;
     IBOutlet UIButton *cancelBtn;
+    IBOutlet UIButton *adjustTimeButton;
     IBOutlet UIButton *shareBtn;
     
     

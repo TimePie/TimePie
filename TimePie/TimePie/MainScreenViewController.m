@@ -23,7 +23,7 @@
 
 #import "WeiXinHelper.h"
 #import "BasicUIColor+UIPosition.h"
-
+#import "Tag.h"
 
 
 
@@ -296,18 +296,21 @@
         
 
         
-        [historyBtn setBackgroundImage:[UIImage imageNamed:@"History_btn"] forState:UIControlStateNormal];
+        [historyBtn setBackgroundImage:[UIImage imageNamed:@"historyButton"] forState:UIControlStateNormal];
         
         
         [shareBtn setBackgroundImage:[UIImage imageNamed:@"TimePie_Index_Share"] forState:UIControlStateNormal];
         [shareBtn removeFromSuperview];
-        [cancelBtn setBackgroundImage:[UIImage imageNamed:@"Cancel_btn"] forState:UIControlStateNormal];
+        [cancelBtn setBackgroundImage:[UIImage imageNamed:@"cancelButton"] forState:UIControlStateNormal];
+        [adjustTimeButton setBackgroundImage:[UIImage imageNamed:@"adjustTimeButton"] forState:UIControlStateNormal];
         [historyBtn setTitle:@"" forState:UIControlStateNormal];
         [shareBtn setTitle:@"" forState:UIControlStateNormal];
         [cancelBtn setTitle:@"" forState:UIControlStateNormal];
+        [adjustTimeButton setTitle:@"" forState:UIControlStateNormal];
         shareBtn.hidden = NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
+        adjustTimeButton.hidden = YES;
         
         //setup timer
         if(timer == nil){
@@ -759,8 +762,11 @@
             TimingItem *p = [[timingItemStore allItems] objectAtIndex:[cellIndexPath row]];
             CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
             viewController.isEditView = YES;
+            viewController.editItem = p;
             viewController.editItemName = p.itemName;
             viewController.editItemColor = [[ColorThemes colorThemes] getColorAt:p.itemColor];
+            viewController.editItemTag = [[[TimingItemStore timingItemStore] getTagByItem:p.itemName] tag_name];
+            viewController.currentTagOfItem = viewController.editItemTag;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             [self presentViewController:navController animated:YES completion:nil];
             [cell hideUtilityButtonsAnimated:YES];
@@ -981,10 +987,12 @@
             shareBtn.hidden = NO;
             historyBtn.hidden = YES;
             cancelBtn.hidden = YES;
+            adjustTimeButton.hidden = YES;
             
             historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000, historyBtn.frame.size.width,historyBtn.frame.size.height);
             shareBtn.frame = CGRectMake(shareBtn.frame.origin.x, 1000, shareBtn.frame.size.width,shareBtn.frame.size.height);
             cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+            adjustTimeButton.frame =CGRectMake(adjustTimeButton.frame.origin.x, 1000, adjustTimeButton.frame.size.width, adjustTimeButton.frame.size.height);
             
             
             [pieChart reloadData];
@@ -994,7 +1002,7 @@
         else
         {
             //select nothing
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"请选择事项" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"请选择要查看历史数据的事项" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
             [alert show];
         }
     }
@@ -1003,6 +1011,43 @@
     NSLog(@"history button clicked");
 }
 
+- (IBAction)timeAdjust_btn_clicked:(id)sender
+{
+    if(selectMode){
+        
+        //Go back
+        if(selectedArray.count != 0)
+        {
+            pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
+            if(isiPhone5){
+                itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
+            }else{
+                itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable-75);
+            }
+            itemTable.scrollEnabled =YES;
+            selectMode =NO;
+            
+            shareBtn.hidden = NO;
+            historyBtn.hidden = YES;
+            cancelBtn.hidden = YES;
+            adjustTimeButton.hidden = YES;
+            
+            historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000, historyBtn.frame.size.width,historyBtn.frame.size.height);
+            cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+            adjustTimeButton.frame =CGRectMake(adjustTimeButton.frame.origin.x, 1000, adjustTimeButton.frame.size.width, adjustTimeButton.frame.size.height);
+            
+            [pieChart reloadData];
+            selectedArray = nil;
+            [itemTable reloadData];
+        }
+        else
+        {
+            //select nothing
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"请选择要调整时间的两个事项" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+}
 
 -(IBAction)canc_btn_clicked:(id)sender
 {
@@ -1022,9 +1067,11 @@
         shareBtn.hidden = NO;
         historyBtn.hidden = YES;
         cancelBtn.hidden = YES;
+        adjustTimeButton.hidden = YES;
         
         historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 1000, historyBtn.frame.size.width,historyBtn.frame.size.height);
         cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 1000, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
+        adjustTimeButton.frame =CGRectMake(adjustTimeButton.frame.origin.x, 1000, adjustTimeButton.frame.size.width, adjustTimeButton.frame.size.height);
         
         [pieChart reloadData];
         selectedArray = nil;
@@ -1054,10 +1101,11 @@
         shareBtn.hidden = NO;
         historyBtn.hidden = NO;
         cancelBtn.hidden = NO;
+        adjustTimeButton.hidden = NO;
         historyBtn.frame = CGRectMake(historyBtn.frame.origin.x, 150, historyBtn.frame.size.width,historyBtn.frame.size.height);
         shareBtn.frame = CGRectMake(shareBtn.frame.origin.x, 150, shareBtn.frame.size.width,shareBtn.frame.size.height);
         cancelBtn.frame =CGRectMake(cancelBtn.frame.origin.x, 150, cancelBtn.frame.size.width, cancelBtn.frame.size.height);
-        
+        adjustTimeButton.frame =CGRectMake(adjustTimeButton.frame.origin.x, 150, adjustTimeButton.frame.size.width, adjustTimeButton.frame.size.height);
         
         
         

@@ -81,7 +81,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",[[tagListArray objectAtIndex:indexPath.row] tag_name]];
+    NSString *tempTagName =[NSString stringWithFormat:@"%@",(Tag*)[[tagListArray objectAtIndex:indexPath.row] tag_name]];
+    if ([tempTagName isEqualToString:@"(null)"]) tempTagName = @"其他";
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",tempTagName];
     cell.textLabel.textColor = [UIColor colorWithRed:0.55 green:0.55 blue:0.55 alpha:1.f];
     cell.textLabel.font = [UIFont fontWithName:@"Arial" size:16.f];
     if ([[(Tag*)[tagListArray objectAtIndex:indexPath.row] tracking] intValue] == 0)

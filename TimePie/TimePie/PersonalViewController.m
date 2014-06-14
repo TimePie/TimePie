@@ -137,12 +137,12 @@
 
 - (void)initNeededInfo
 {
-    tagList = [[TimingItemStore timingItemStore] getAllTags];
+    tagList = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getAllTags]];
     trackedTagList = [[NSMutableArray alloc] init];
-    for (Tag *tag in tagList)
+    for (int i=0; i<tagList.count; i++)
     {
-        if (tag.tracking == [NSNumber numberWithInt:1])
-            [trackedTagList addObject:tag];
+        if ([(Tag*)[tagList objectAtIndex:i] tracking] == [NSNumber numberWithInt:1])
+            [trackedTagList addObject:[tagList objectAtIndex:i]];
     }
     //tagList = [NSArray arrayWithObjects:@"学习",@"工作",@"酱油",@"运动",@"电影", nil];
     colorList = [NSMutableArray arrayWithObjects:REDNO1,BLUENO2,GREENNO3,PINKNO04,BROWNN05,YELLOWN06, PURPLEN07, P01N08, P01N09, P01N10, nil];
@@ -262,7 +262,9 @@
         {
             itemTrackCell = [[PersonalViewEventTrackCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:itemTrackCellIdentifier];
         }
-        itemTrackCell.PVETCEventLabel.text = [[trackedTagList objectAtIndex:indexPath.row] tag_name];
+        NSString *tempTagName =[NSString stringWithFormat:@"%@",(Tag*)[[trackedTagList objectAtIndex:indexPath.row] tag_name]];
+        if ([tempTagName isEqualToString:@"(null)"]) tempTagName = @"其他";
+        itemTrackCell.PVETCEventLabel.text = tempTagName;
         itemTrackCell.PVETCAvgTimeLabel.text = [NSString stringWithFormat:@"%.1f",[[avgTimeOfTagList objectAtIndex:indexPath.row] floatValue]];
         itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
         [itemTrackCell initCellWithColor:[lightColorList objectAtIndex:indexPath.row] ColumnCount:[[columnHeightList objectAtIndex:indexPath.row] count] HeightArray:[columnHeightList objectAtIndex:indexPath.row]];
