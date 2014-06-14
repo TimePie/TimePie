@@ -480,17 +480,20 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-    
-    static NSString *CellIdentifier = @"newFriendCell";
+
+    static NSString *CellIdentifier;
+    if(indexPath.row==[[timingItemStore allItems] count]){
+        CellIdentifier= @"newShareCell";
+    }else{
+        CellIdentifier = @"newFriendCell";
+    }
     TCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(cell == nil){
         [tableView registerNib:[UINib nibWithNibName:@"TCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     }
+    
     
     if(indexPath.row==[[timingItemStore allItems] count]){
         cell.itemName.hidden = YES;
@@ -513,12 +516,12 @@
     cell.itemTime.text = [NSString stringWithFormat:@"%@", [item getTimeString]];
     
     UIColor* color = [[ColorThemes colorThemes] getColorAt:item.itemColor];
-    CGFloat r;
-    CGFloat g;
-    CGFloat b;
-    CGFloat a;
-    [color getRed:&r green:&g blue:&b  alpha:&a];
-    color= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:1-.1f*indexPath.row];
+//    CGFloat r;
+//    CGFloat g;
+//    CGFloat b;
+//    CGFloat a;
+//    [color getRed:&r green:&g blue:&b  alpha:&a];
+//    color= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:1-.1f*indexPath.row];
     cell.itemColor.backgroundColor = color;
     
     cell.itemNotice.backgroundColor =[[ColorThemes colorThemes] getLightColorAt:item.itemColor];
@@ -551,14 +554,15 @@
     cell.itemTime.layer.shadowRadius = 2.0;
     if(indexPath.row ==0){
         UIColor* bgColor = [[ColorThemes colorThemes] getLightColorAt:item.itemColor];
-        CGFloat r;
-        CGFloat g;
-        CGFloat b;
-        CGFloat a;
-        [bgColor getRed:&r green:&g blue:&b  alpha:&a];
-        bgColor= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:.4];
+//        CGFloat r;
+//        CGFloat g;
+//        CGFloat b;
+//        CGFloat a;
+//        [bgColor getRed:&r green:&g blue:&b  alpha:&a];
+//        bgColor= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:.4];
         
         cell.backgroundColor =bgColor;
+        
         [cell.itemName setTextColor:[UIColor whiteColor]];
         [cell.itemTime setTextColor:[UIColor whiteColor]];
         
@@ -576,12 +580,12 @@
         TimingItem* i = [[timingItemStore allItems] objectAtIndex:0];
         
         UIColor* nameColor = [[ColorThemes colorThemes] getColorAt:i.itemColor];
-        CGFloat r;
-        CGFloat g;
-        CGFloat b;
-        CGFloat a;
-        [nameColor getRed:&r green:&g blue:&b  alpha:&a];
-        nameColor= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:.7-.06f*indexPath.row];
+//        CGFloat r;
+//        CGFloat g;
+//        CGFloat b;
+//        CGFloat a;
+//        [nameColor getRed:&r green:&g blue:&b  alpha:&a];
+//        nameColor= [[UIColor alloc] initWithRed:r green:g  blue:b  alpha:.7-.06f*indexPath.row];
         
 
         [cell.itemName setTextColor:nameColor];

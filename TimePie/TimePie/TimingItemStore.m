@@ -555,6 +555,7 @@
 
         if(flag){
             //if daily item existed do nothing
+            [self createDailyMark:d date:[DateHelper beginningOfDay:[NSDate date]]];
         }else{
             //else create new item
             if([self createDailyMark:d date:[DateHelper beginningOfDay:[NSDate date]]]){
