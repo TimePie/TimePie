@@ -233,7 +233,7 @@
 //    self.lineGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
 //    self.lineGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
     
-    self.lineGraph.alphaBottom = 0.3;
+    self.lineGraph.alphaBottom = 0.7;
     self.lineGraph.alphaLine = 0.8;
     self.lineGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
     self.lineGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:11];
@@ -268,7 +268,7 @@
     //    self.lineGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
     //    self.lineGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
     
-    self.monthGraph.alphaBottom = 0.3;
+    self.monthGraph.alphaBottom = 0.7;
     self.monthGraph.alphaLine = 0.8;
     self.monthGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
     self.monthGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:11];
@@ -304,7 +304,7 @@
     //    self.lineGraph.colorBottom = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:0.5]; // Leaving this not-set on iOS 7 will default to your window's tintColor
     //    self.lineGraph.colorLine = [UIColor colorWithRed:251.0/255.0 green:170.0/255.0 blue:121.0/255.0 alpha:1.0];
     
-    self.daysGraph.alphaBottom = 0.3;
+    self.daysGraph.alphaBottom = 0.7;
     self.daysGraph.alphaLine = 0.8;
     self.daysGraph.colorXaxisLabel = [UIColor colorWithRed:99.0/255.0 green:183.0/255.0 blue:170.0/255.0 alpha:1.0];
     self.daysGraph.labelFont=[UIFont fontWithName:@"Roboto-Medium" size:11];
