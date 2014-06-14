@@ -136,7 +136,7 @@
         TimingItem *tempTimingItem = [self.timingItemArray objectAtIndex:i];
         
         NSMutableArray *tempValues = [[NSMutableArray alloc] init];
-        for(int count = 0;count <30;count++)
+        for(int count = 0;count < 30;count++)
         {
             NSNumber *tempData = [NSNumber numberWithInt:0];
             
@@ -520,7 +520,14 @@
     cell.itemName.text = tempItem.itemName;
     [cell setColorForItem: tempItem.mainColor];
     
-    cell.timeLabel.text = [NSString stringWithFormat:@"%.3f",[self calculateTimeForItem:tempItem.currentSecondTime]/currentType];
+    NSMutableArray * dataOfMonth = tempItem.dataOfMonth;
+    double totalTime = 0;
+    for (int i = 0 ; i < currentType ; i++) {
+        NSNumber * numnber = [dataOfMonth objectAtIndex:i];
+        totalTime += [numnber doubleValue];
+    }
+    
+    cell.timeLabel.text = [NSString stringWithFormat:@"%.3f",[self calculateTimeForItem:totalTime] / currentType];
     if (index == 0) {
         //set separator line for the first cell
         UIView *separatorline = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0.5 )];
