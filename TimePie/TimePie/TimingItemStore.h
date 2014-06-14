@@ -41,7 +41,8 @@
 - (BOOL)setTagByItem:(TimingItem*)item
              withTag:(NSString*)tagName;
 
-
+- (BOOL)setItemTime:(TimingItem*)item
+           withTime:(double)time;
 
 - (BOOL)saveData;
 - (BOOL)restoreData;

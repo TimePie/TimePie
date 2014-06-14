@@ -163,6 +163,9 @@
 }
 
 
+
+
+
 - (BOOL)setNameByItem:(TimingItem*)item
                toName:(NSString*)itemName
 {
@@ -235,6 +238,39 @@
     [self restoreData];
     return result;
 }
+
+- (BOOL)setItemTime:(TimingItem*)item
+           withTime:(double)time
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@ && date_created == %@",item.itemName, item.dateCreated]];
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    if([fetchedObjects count] == 0){
+        return NO;
+    }
+    for (TimingItemEntity *i in fetchedObjects){
+        i.time = [NSNumber numberWithDouble:time];
+    }
+    
+    BOOL result = YES;
+    [context updatedObjects];
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    return result;
+}
+
 
 
 - (BOOL)setColorByItem:(TimingItem *)item
