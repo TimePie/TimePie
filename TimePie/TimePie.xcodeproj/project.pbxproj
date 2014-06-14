@@ -21,6 +21,7 @@
 		13601FD6194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FCF194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		13601FD7194C19C600A9C5D9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FD1194C19C600A9C5D9 /* SWUtilityButtonView.m */; };
 		13601FD9194C391800A9C5D9 /* adjustTimeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13601FD8194C391800A9C5D9 /* adjustTimeButton@2x.png */; };
+		13601FDC194C7C7600A9C5D9 /* TimeAdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FDB194C7C7600A9C5D9 /* TimeAdjustView.m */; };
 		1367C5B1191E3B67005BF8AA /* themeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367C5B0191E3B67005BF8AA /* themeDetailView.m */; };
 		1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1378213D19055B3800083168 /* PersonalViewPicker.m */; };
 		1395A0321939F43300C98747 /* SocialShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1395A0311939F43300C98747 /* SocialShareViewController.m */; };
@@ -152,6 +153,8 @@
 		13601FD0194C19C600A9C5D9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		13601FD1194C19C600A9C5D9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		13601FD8194C391800A9C5D9 /* adjustTimeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "adjustTimeButton@2x.png"; sourceTree = "<group>"; };
+		13601FDA194C7C7600A9C5D9 /* TimeAdjustView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeAdjustView.h; sourceTree = "<group>"; };
+		13601FDB194C7C7600A9C5D9 /* TimeAdjustView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeAdjustView.m; sourceTree = "<group>"; };
 		1367C5AF191E3B67005BF8AA /* themeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = themeDetailView.h; sourceTree = "<group>"; };
 		1367C5B0191E3B67005BF8AA /* themeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = themeDetailView.m; sourceTree = "<group>"; };
 		1378213C19055B3800083168 /* PersonalViewPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewPicker.h; sourceTree = "<group>"; };
@@ -708,6 +711,8 @@
 				CD5239B61911E178005EB55A /* MainScreenTableView.m */,
 				CD45DB42192239460050A39F /* SelectView.h */,
 				CD45DB43192239460050A39F /* SelectView.m */,
+				13601FDA194C7C7600A9C5D9 /* TimeAdjustView.h */,
+				13601FDB194C7C7600A9C5D9 /* TimeAdjustView.m */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -868,6 +873,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13601FDC194C7C7600A9C5D9 /* TimeAdjustView.m in Sources */,
 				13CCE57918EC469500462A83 /* PersonalViewAvgTimeCell.m in Sources */,
 				CD4CE0A418E4700F00916A4B /* CreateItemViewController.m in Sources */,
 				CDC8858F1910FE3400A67510 /* TCell.m in Sources */,

@@ -11,6 +11,7 @@
 #import "StatsViewController.h"
 #import "CreateItemViewController.h"
 
+
 #import "TimingItem1.h"
 
 #import "ColorThemes.h"
@@ -24,8 +25,6 @@
 #import "WeiXinHelper.h"
 #import "BasicUIColor+UIPosition.h"
 #import "Tag.h"
-
-
 
 #define ContentOffsetY -370
 #define ContentTriggerOffsetY -560
@@ -43,6 +42,7 @@
     BOOL modalCanBeTriggered;
     BOOL dateTitleLock;
     BOOL originalTitleLock;
+    TimeAdjustView *taView;
 }
 @end
 
@@ -1016,8 +1016,10 @@
     if(selectMode){
         
         //Go back
-        if(selectedArray.count != 0)
+        if(selectedArray.count == 2)
         {
+            [self animateTimeAdjustView];
+            
             pieChart.frame= CGRectMake(0, PieChartInitOffsetY, 300, 300);
             if(isiPhone5){
                 itemTable.frame = CGRectMake(0, ItemTableInitOffsetY, 320, HeightOfItemTable);
@@ -1081,9 +1083,96 @@
     NSLog(@"cancel button clicked");
 }
 
+- (void)animateTimeAdjustView
+{
+    if (!taView) {
+        taView = [[TimeAdjustView alloc] initWithFrame:CGRectMake(0, 568, SCREEN_WIDTH, 150)];
+        [taView.layer setShadowColor:[UIColor blackColor].CGColor];
+        [taView.layer setShadowOpacity:0.55];
+        [taView.layer setShadowRadius:15.0];
+        [taView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+        taView.delegate = self;
+        taView.lhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
+        taView.rhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:1] itemColor]];
+        taView.lhsItemName.text = [(TimingItem*)[selectedArray objectAtIndex:0] itemName];
+        taView.rhsItemName.text = [(TimingItem*)[selectedArray objectAtIndex:1] itemName];
+        taView.lhsItemTiming.text = [(TimingItem*)[selectedArray objectAtIndex:0] getTimeString];
+        taView.rhsItemTiming.text = [(TimingItem*)[selectedArray objectAtIndex:1] getTimeString];
+        taView.lhsItemTiming.textColor = [[ColorThemes colorThemes] getLightColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
+        taView.rhsItemTiming.textColor = [[ColorThemes colorThemes] getLightColorAt:[(TimingItem*)[selectedArray objectAtIndex:1] itemColor]];
+        [self.view addSubview:taView];
+    }
+    taView.hidden = NO;
+    [self pushAnimateView:taView];
+}
 
+- (void)pushAnimateView:(UIView*)view
+{
+    if (IS_IPHONE_HIGHERINCHE)
+    {
+        [UIView animateWithDuration:.25f animations:^{
+            view.frame = CGRectMake(0, 418, SCREEN_WIDTH, 150);
+        } completion:^(BOOL finished){
+            pieChart.userInteractionEnabled = NO;
+            itemTable.scrollEnabled = NO;
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:.25f animations:^{
+            view.frame = CGRectMake(0, 330, SCREEN_WIDTH, 150);
+        } completion:^(BOOL finished){
+            pieChart.userInteractionEnabled = NO;
+            itemTable.scrollEnabled = NO;
+        }];
+    }
+}
 
+#pragma mark - TimeAdjustViewDelegate
 
+- (void)confirmPressedPass
+{
+    if (IS_IPHONE_HIGHERINCHE) {
+        [UIView animateWithDuration:.25f animations:^{
+            taView.frame = CGRectMake(0, 568, SCREEN_WIDTH, 150);
+        } completion:^(BOOL finished){
+            pieChart.userInteractionEnabled = YES;
+            taView.hidden = YES;
+            itemTable.scrollEnabled = YES;
+        }];
+    }
+    else{
+        [UIView animateWithDuration:.25f animations:^{
+            taView.frame = CGRectMake(0, 480, SCREEN_WIDTH, 150);
+        } completion:^(BOOL finished){
+            pieChart.userInteractionEnabled = YES;
+            taView.hidden = YES;
+            itemTable.scrollEnabled = YES;
+        }];
+    }
+}
+
+- (void)cancelPressedPass
+{
+    if (IS_IPHONE_HIGHERINCHE) {
+        [UIView animateWithDuration:.5f animations:^{
+            taView.frame = CGRectMake(0, 568, SCREEN_WIDTH, 150);
+        } completion:^(BOOL finished){
+            pieChart.userInteractionEnabled = YES;
+            taView.hidden = YES;
+            itemTable.scrollEnabled = YES;
+        }];
+    }
+    else{
+        [UIView animateWithDuration:.5f animations:^{
+            taView.frame = CGRectMake(0, 480, SCREEN_WIDTH, 150);
+        } completion:^(BOOL finished){
+            pieChart.userInteractionEnabled = YES;
+            taView.hidden = YES;
+            itemTable.scrollEnabled = YES;
+        }];
+    }
+}
 
 - (void)longPressPie:(UITapGestureRecognizer *)recognizer {
     
