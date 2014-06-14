@@ -15,7 +15,7 @@
     UIView *darkUILayer;
     NSString *timeRangeInfo;
     
-    NSArray *tagList;
+    NSMutableArray *tagList;
     NSMutableArray *trackedTagList;
     NSArray *colorList;
     NSArray *lightColorList;
