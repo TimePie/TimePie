@@ -22,6 +22,10 @@
     NSTimer * timer;
     UIScrollView * scroll;
     UIView * contentView;
+    NSDate * shareDate;
+    UILabel *reviewLabel;
+    UILabel *iuseLabel;
+    UILabel *timePieLabel;
 }
 @property (nonatomic, strong) UIImageView *pieChartImage;
 @property (retain, nonatomic) WeiboViewController* WeiboviewController;

@@ -42,14 +42,12 @@
 
 - (void)pieChartAppear:(NSTimer *)chkTimer {
     
-    
-    
     scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     contentView = [[UIView alloc] init];
     [self.view addSubview:scroll];
     [scroll addSubview:contentView];
     //        [self.view addSubview:_pieChartImage];
-    UILabel *timePieLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 20, 300, 50)];
+    timePieLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 20, 300, 50)];
     timePieLabel.text = @"TimePie";
     timePieLabel.font = [UIFont fontWithName:@"Ubuntu" size:28.f];
     timePieLabel.textColor = SHARING_TITLE_COLOR;
@@ -61,8 +59,8 @@
     
     
     
-    UILabel *reviewLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 52, 300, 50)];
-    reviewLabel.text = [[DateHelper getDateString] stringByAppendingString: @" 今日回顾"];
+    reviewLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 52, 300, 50)];
+    reviewLabel.text = [[DateHelper getDateString:shareDate] stringByAppendingString: @" 今日回顾"];
     reviewLabel.font = [UIFont fontWithName:@"Ubuntu" size:25.f];
     reviewLabel.textColor = SHARING_TEXT_COLOR;
     reviewLabel.layer.shadowColor = [SHARING_TEXT_COLOR CGColor];
@@ -102,7 +100,7 @@
     
     int buttom = [self getAllItems:contentView];
     
-    UILabel *iuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, buttom, 300, 50)];
+    iuseLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, buttom, 300, 50)];
     iuseLabel.text = @"使用TimePie，了解自己的时间";
     iuseLabel.font = [UIFont fontWithName:@"Ubuntu" size:14.f];
     iuseLabel.textColor = SHARING_TEXT_COLOR;
@@ -112,25 +110,55 @@
     iuseLabel.layer.shadowOffset = CGSizeMake(0, 0);
     [contentView addSubview:iuseLabel];
     
-    
-    
-    
 //    contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2, 2);
-    
-    
     
     scroll.contentSize = CGSizeMake(self.view.frame.size.width, (buttom+100));
     scroll.scrollEnabled = NO;
     
     [self initButtons:self.view];
     
-    
-    
     NSTimer * ncTimer = [NSTimer scheduledTimerWithTimeInterval:.6
                                                          target:self
                                                        selector:@selector(switchViewWithImage:)
                                                        userInfo:nil
                                                         repeats:NO];
+    
+    
+}
+
+
+- (void)reloadInfo{
+
+    [_pieChartImage removeFromSuperview];
+    
+    [contentView removeFromSuperview];
+    contentView = nil;
+    contentView = [[UIView alloc] init];
+    [scroll addSubview:contentView];
+    [contentView addSubview:timePieLabel];
+    [contentView addSubview:reviewLabel];
+    [contentView addSubview:pieChart];
+    [contentView addSubview:iuseLabel];
+    //        [self.view addSubview:_pieChartImage];
+    reviewLabel.text = [[DateHelper getDateString:shareDate] stringByAppendingString: @" 今日回顾"];
+    [pieChart reloadData];
+    
+    
+    int buttom = [self getAllItems:contentView];
+    
+
+    iuseLabel.frame = CGRectMake(65, buttom, 300, 50);
+    [contentView addSubview:iuseLabel];
+    
+    //    contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 2, 2);
+    scroll.contentSize = CGSizeMake(self.view.frame.size.width, (buttom+100));
+    scroll.scrollEnabled = NO;
+    NSTimer * ncTimer = [NSTimer scheduledTimerWithTimeInterval:.6
+                                                         target:self
+                                                       selector:@selector(switchViewWithImage:)
+                                                       userInfo:nil
+                                                        repeats:NO];
+
     
     
 }
@@ -145,31 +173,62 @@
 }
 
 
-
-- (void)viewDidLoad
+- (void)initWithDate:(NSDate*)date
 {
-    [super viewDidLoad];
-    
+    shareDate = date;
+    if([date compare:[NSDate date]] == NSOrderedDescending){
+        date = [NSDate date];
+    }
+    NSMutableArray * itemEntityList = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getTimingItemsByDate:shareDate]];
+    itemList = [[NSMutableArray alloc] init];
+    for(TimingItemEntity * itemEntity in itemEntityList){
+        [itemList addObject: [[TimingItemStore timingItemStore] TimingItemFromTimingItemEntity:itemEntity]];
+    }
+
     
     if (_pieChartImage)
     {
-        
         timingItemStore = [TimingItemStore timingItemStore];
-        
         _pieChartImage.frame = CGRectMake(35, 35, 250, 250);
         
         
+        
+        
+        
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        
+        // Setting the swipe direction.
+        [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+        [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+        
+        // Adding the swipe gesture on view
+        [self.view setUserInteractionEnabled:YES];
+        [self.view addGestureRecognizer:swipeLeft];
+        [self.view addGestureRecognizer:swipeRight];
+        
+
+        
+
+        //        itemList = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] allItems]];
         NSTimer * ncTimer = [NSTimer scheduledTimerWithTimeInterval:.6
                                                              target:self
                                                            selector:@selector(pieChartAppear:)
                                                            userInfo:nil
                                                             repeats:NO];
         
-        
     }
     [[UIApplication sharedApplication] setStatusBarHidden:YES
                                             withAnimation:UIStatusBarAnimationFade];
-     _WeiboviewController = [[WeiboViewController alloc] init];
+    _WeiboviewController = [[WeiboViewController alloc] init];
+    
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self initWithDate:[DateHelper getYesterday:[NSDate date]]];
 
 }
 
@@ -197,6 +256,56 @@
     return img;
 }
 
+
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    
+    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft) {
+        shareDate = [DateHelper getTomorrow:shareDate];
+        if([shareDate compare:[NSDate date]] == NSOrderedDescending){
+            shareDate = [NSDate date];
+        }
+        NSMutableArray * itemEntityList = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getTimingItemsByDate:shareDate]];
+        itemList = [[NSMutableArray alloc] init];
+        for(TimingItemEntity * itemEntity in itemEntityList){
+            [itemList addObject: [[TimingItemStore timingItemStore] TimingItemFromTimingItemEntity:itemEntity]];
+        }
+        
+        [self reloadInfo];
+//        [self.view removeFromSuperview];
+//        [scroll removeFromSuperview];
+//        scroll = nil;
+//        [self initWithDate:[DateHelper getTomorrow:shareDate]];
+//        [scroll removeFromSuperview];
+//        scroll = nil;
+//        [self pieChartAppear:nil];
+    }
+    
+    if (swipe.direction == UISwipeGestureRecognizerDirectionRight) {
+        shareDate = [DateHelper getYesterday:shareDate];
+        if([shareDate compare:[[TimingItemStore timingItemStore] getStartDate]] == NSOrderedAscending){
+            shareDate = [DateHelper getTomorrow:shareDate];
+        }
+        
+        
+        NSMutableArray * itemEntityList = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getTimingItemsByDate:shareDate]];
+        itemList = [[NSMutableArray alloc] init];
+        for(TimingItemEntity * itemEntity in itemEntityList){
+            [itemList addObject: [[TimingItemStore timingItemStore] TimingItemFromTimingItemEntity:itemEntity]];
+        }
+        
+        [self reloadInfo];
+//        [self.view removeFromSuperview];
+//        [scroll removeFromSuperview];
+//        scroll = nil;
+//        [self initWithDate:[DateHelper getYesterday:shareDate]];
+//        shareDate = [DateHelper getYesterday:shareDate];
+//        [scroll removeFromSuperview];
+//        scroll = nil;
+//        [self pieChartAppear:nil];
+        
+    }
+    
+}
 
 
 
@@ -264,8 +373,6 @@
 
 - (int)getAllItems:(UIView*)intoView
 {
-    itemList = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] allItems]];
-    
     for (int i = 0; i < itemList.count; i++)
     {
         /*
@@ -341,7 +448,7 @@
 }
 
 
-- (void) sendContent:(NSString *)text image:(UIImage *)img
+- (void)sendContent:(NSString *)text image:(UIImage *)img
 {
     if(text!=nil){
         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
@@ -416,7 +523,7 @@
 //////////////////
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
-    return [[timingItemStore allItems] count];
+    return [itemList count];// [[timingItemStore allItems] count];
 }
 
 
@@ -424,7 +531,7 @@
 - (NSString *)pieChart:(XYPieChart *)pieChart textForSliceAtIndex:(NSUInteger)index
 {
     
-    TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
+    TimingItem * item = [itemList objectAtIndex:index]; // [[timingItemStore allItems] objectAtIndex:index];
     if(item){
         return [NSString stringWithFormat:@"%@\n%@",[item itemName], [item getTimeString]];
     }
@@ -436,7 +543,7 @@
 - (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index;
 {
     
-    TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
+    TimingItem * item = [itemList objectAtIndex:index]; // [[timingItemStore allItems] objectAtIndex:index];
     if(item){
         return [item time];
     }
@@ -446,11 +553,12 @@
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
-    TimingItem * item = [[timingItemStore allItems] objectAtIndex:index];
+    TimingItem * item = [itemList objectAtIndex:index]; // [[timingItemStore allItems] objectAtIndex:index];
     
     if(item){
         return [[ColorThemes colorThemes] getColorAt:item.itemColor];
     }
+    
     return [UIColor blackColor];
 }
 

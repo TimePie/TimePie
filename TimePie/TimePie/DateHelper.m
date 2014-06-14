@@ -117,4 +117,50 @@
     return [NSString stringWithFormat:@"%ld.%ld.%ld",(long)components.year, (long)components.month, (long)components.day];
 }
 
+
++(NSString*)getDateString:(NSDate*)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate * now = date;
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:now];
+    
+    
+    return [NSString stringWithFormat:@"%ld.%ld.%ld",(long)components.year, (long)components.month, (long)components.day];
+    
+}
+
++(NSDate *)getYesterday:(NSDate*)now
+{
+    int daysToAdd = -1;
+    
+    // set up date components
+    NSDateComponents *components = [[NSDateComponents alloc] init] ;
+    [components setDay:daysToAdd];
+    
+    // create a calendar
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] ;
+    
+    NSDate *yesterday = [gregorian dateByAddingComponents:components toDate:now options:0];
+//    NSLog(@"Yesterday: %@", yesterday);
+    
+    return yesterday;
+}
+
++(NSDate *)getTomorrow:(NSDate*)now
+{
+    int daysToAdd = 1;
+    
+    // set up date components
+    NSDateComponents *components = [[NSDateComponents alloc] init] ;
+    [components setDay:daysToAdd];
+    
+    // create a calendar
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] ;
+    
+    NSDate *tomorrow = [gregorian dateByAddingComponents:components toDate:now options:0];
+//    NSLog(@"tomorrow: %@", tomorrow);
+    
+    return tomorrow;
+}
+
 @end

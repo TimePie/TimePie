@@ -32,7 +32,6 @@
                 toIndex:(int)to;
 - (NSNumber*)getItemPercentage:(TimingItem*)item;
 
-
 - (BOOL)setNameByItem:(NSString*)fromName
                toName:(NSString*)itemName;
 
@@ -77,6 +76,7 @@
 
 ///
 
+- (NSDate*)getStartDate;
 - (NSNumber *)getTotalHours;
 - (NSNumber *)getTotalHoursByStartDate:(NSDate*)date;
 - (NSNumber *)getTotalHoursByDate:(NSDate*)date
@@ -108,6 +108,9 @@
 - (BOOL)createDailyMark:(Daily*)daily
                    date:(NSDate*)date;
 
+
+
+- (TimingItem*)TimingItemFromTimingItemEntity:(TimingItemEntity*)itemEntity;
 
 
 @end

@@ -188,6 +188,49 @@
         NSLog(@"Could not do it: %@", [error localizedDescription]);
         result = NO;
     }
+    
+    
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"Daily" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"item_name == %@", fromName]];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (Daily *i in fetchedObjects){
+        i.item_name = itemName;
+    }
+    
+    [context updatedObjects];
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    
+    
+    fetchRequest = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"DailyMark" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"daily == %@", fromName]];
+    
+    fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    for (DailyMark *i in fetchedObjects){
+        i.daily = itemName;
+    }
+    
+    [context updatedObjects];
+    if ([context save:&error]) {
+        NSLog(@"Did it!");
+    } else {
+        NSLog(@"Could not do it: %@", [error localizedDescription]);
+        result = NO;
+    }
+    
+    
+    
+    
     [self restoreData];
     return result;
 }
@@ -588,7 +631,7 @@
     NSError *error;
     
     
-    DailyMark * dailyMark ;
+    DailyMark * dailyMark;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"DailyMark" inManagedObjectContext:context];
@@ -614,6 +657,7 @@
     
     return YES;
 }
+
 
 
 
@@ -1294,6 +1338,31 @@
     return result;
 }
 
+- (NSDate*)getStartDate
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TimingItemEntity" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortByDate = [[NSSortDescriptor alloc] initWithKey:@"date_created" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortByDate]];
+    [fetchRequest setFetchLimit:1];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"date_created....: %@", [info valueForKey:@"date_created"]);
+    }
+    if([fetchedObjects count]==0){
+        NSLog(@"Empty");
+        return nil;
+    }
+    return ((TimingItemEntity*)[fetchedObjects objectAtIndex:0]).date_created;
+}
+
 - (NSNumber *)getTotalHours
 {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -1377,7 +1446,7 @@
 
 - (NSNumber*)getItemPercentage:(TimingItem*)item
 {
-    double sum = [self getTotalTime];
+    double sum = [self getTotalTime:item.dateCreated];
     double time = item.time;
     NSNumber* result= [NSNumber numberWithDouble:time/sum*100];
     NSLog(@"%@",result);
@@ -1481,7 +1550,7 @@
     return results;
 }
 - (BOOL)updateDaily:(NSString*)fromName
-           toName:(NSString*)toName
+             toName:(NSString*)toName
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
@@ -1512,13 +1581,28 @@
 
 
 
-
-
-- (double)getTotalTime
+- (TimingItem*)TimingItemFromTimingItemEntity:(TimingItemEntity*)itemEntity
 {
+    TimingItem *i = [TimingItem randomItem];
+    i.itemName = itemEntity.item_name;
+    i.itemColor = [itemEntity.color_number intValue];
+    i.dateCreated = itemEntity.date_created;
+    i.time = [itemEntity.time doubleValue];
+    i.lastCheck = itemEntity.last_check;
+    i.timing = [itemEntity.timing boolValue];
+
+    return i;
+}
+
+
+
+- (double)getTotalTime:(NSDate*)date
+{
+    NSArray* itemAry = [self getTimingItemsByDate:date];
+    
     double sum = 0.0;
-    for(TimingItem * item in allItems){
-        sum += item.time;
+    for(TimingItemEntity * item in itemAry){
+        sum += [item.time doubleValue];
     }
     
     return sum;

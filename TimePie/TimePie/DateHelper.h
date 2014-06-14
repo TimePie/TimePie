@@ -16,5 +16,7 @@
 +(BOOL)checkIf5760;
 +(BOOL)checkIf123;
 +(NSString*)getDateString;
-
++(NSString*)getDateString:(NSDate*)date;
++(NSDate *)getYesterday:(NSDate*)now;
++(NSDate *)getTomorrow:(NSDate*)now;
 @end

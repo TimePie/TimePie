@@ -61,7 +61,7 @@
         
         
         UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, -10, 100, 20)];
-        itemLabel.text = [item itemName];
+        itemLabel.text = item.itemName;
         itemLabel.font = [UIFont fontWithName:@"Ubuntu" size:15.f];
         itemLabel.textColor = SHARING_TEXT_COLOR;
         itemLabel.layer.shadowColor = [SHARING_TEXT_COLOR CGColor];
