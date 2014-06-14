@@ -20,6 +20,7 @@
 		13601FD5194C19C600A9C5D9 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FCD194C19C600A9C5D9 /* SWTableViewCell.m */; };
 		13601FD6194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FCF194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		13601FD7194C19C600A9C5D9 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13601FD1194C19C600A9C5D9 /* SWUtilityButtonView.m */; };
+		13601FD9194C391800A9C5D9 /* adjustTimeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13601FD8194C391800A9C5D9 /* adjustTimeButton@2x.png */; };
 		1367C5B1191E3B67005BF8AA /* themeDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1367C5B0191E3B67005BF8AA /* themeDetailView.m */; };
 		1378213E19055B3800083168 /* PersonalViewPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1378213D19055B3800083168 /* PersonalViewPicker.m */; };
 		1395A0321939F43300C98747 /* SocialShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1395A0311939F43300C98747 /* SocialShareViewController.m */; };
@@ -150,6 +151,7 @@
 		13601FCF194C19C600A9C5D9 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		13601FD0194C19C600A9C5D9 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		13601FD1194C19C600A9C5D9 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		13601FD8194C391800A9C5D9 /* adjustTimeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "adjustTimeButton@2x.png"; sourceTree = "<group>"; };
 		1367C5AF191E3B67005BF8AA /* themeDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = themeDetailView.h; sourceTree = "<group>"; };
 		1367C5B0191E3B67005BF8AA /* themeDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = themeDetailView.m; sourceTree = "<group>"; };
 		1378213C19055B3800083168 /* PersonalViewPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewPicker.h; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 		13CCE58218EC4FFC00462A83 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				13601FD8194C391800A9C5D9 /* adjustTimeButton@2x.png */,
 				CDC47861194608610041FA0E /* TimePie_Index_Share@2x.png */,
 				CDC478591945F8FB0041FA0E /* TimePie_Index_Share_s@2x.png */,
 				CDC499DF19429FEC002F995F /* TimePie_RingBG3@2x.png */,
@@ -821,6 +824,7 @@
 				CDB36F191931E87D00E7BBCE /* Roboto-Condensed.ttf in Resources */,
 				6851BA751940A01A00A8F4A2 /* shareButton@2x.png in Resources */,
 				68BBB2121934F1E300FDC1A4 /* scaleLineBG@2x.png in Resources */,
+				13601FD9194C391800A9C5D9 /* adjustTimeButton@2x.png in Resources */,
 				863B00EB193C708E000F9514 /* WeiboViewController.xib in Resources */,
 				863B00E5193C6BD3000F9514 /* WeiboSDK.bundle in Resources */,
 				13CCE58018EC49E400462A83 /* PersonalView_Avg@2x.png in Resources */,
