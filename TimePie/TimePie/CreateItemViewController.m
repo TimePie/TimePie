@@ -66,6 +66,9 @@ static NSInteger routineItemFlag = 1;
 - (void)initNeededData
 {
 //    currentColorTag = [[ColorThemes colorThemes] getAColor];
+    if (_isEditView) {
+        currentColorTag = _editItem.itemColor;
+    }
 }
 
 - (void) mainLoop: (id) sender
@@ -110,7 +113,7 @@ static NSInteger routineItemFlag = 1;
     NSMutableArray *tempTagArray = [NSMutableArray arrayWithArray:[[TimingItemStore timingItemStore] getAllTags]];
     for (int i = 0; i<tempTagArray.count; i++)
     {
-        if ([[[tempTagArray objectAtIndex:i] tag_name] isEqualToString:@""])
+        if ([[[tempTagArray objectAtIndex:i] tag_name] isEqualToString:@""] || [[tempTagArray objectAtIndex:i] tag_name] == nil)
         {
             [tempTagArray removeObjectAtIndex:i];
         }
@@ -123,8 +126,20 @@ static NSInteger routineItemFlag = 1;
 - (void)initTagCellSelectedFlag
 {
     tagCellSelectedFlag = [[NSMutableArray alloc] init];
-    for (int i = 0; i < tagTextArray.count; i++)
-        [tagCellSelectedFlag addObject:@"n"];
+    if (_isEditView) {
+        for (int i = 0; i < tagTextArray.count; i++)
+        {
+            if ([[[tagTextArray objectAtIndex:i] tag_name] isEqualToString:_editItemTag])
+            {
+                [tagCellSelectedFlag addObject:@"y"];
+            }
+            else [tagCellSelectedFlag addObject:@"n"];
+        }
+    }
+    else{
+        for (int i = 0; i < tagTextArray.count; i++)
+            [tagCellSelectedFlag addObject:@"n"];
+    }
 }
 
 #pragma mark - UITableView DataSource
@@ -154,6 +169,10 @@ static NSInteger routineItemFlag = 1;
     else if(row >= 1 && row <= tagTextArray.count)
     {
         [self initTagCellView:cell withIndexPath:indexPath];
+        if ([[tagCellSelectedFlag objectAtIndex:indexPath.row - 1] isEqualToString:@"y"])
+        {
+            [self initTagCheckViewInView:cell WithImage:[UIImage imageNamed:@"TagCheck"] AtIndexPath:indexPath];
+        }
     }
     else if(row == tagTextArray.count + 1)
     {
@@ -270,36 +289,58 @@ static NSInteger routineItemFlag = 1;
 
 - (void)confirmButtonPressed
 {
-    if (inputField.text.length > 0)
-    {
-        _itemName = inputField.text;
-    }
-    if (_itemName.length > 0)
-    {
-        TimingItem* item = [[TimingItemStore timingItemStore] createItem];
-        item.itemName = _itemName;
-        item.itemColor = currentColorTag;
-        
-        if(routineItemFlag == 1)
+    if (!_isEditView) {
+        if (inputField.text.length > 0)
         {
-            // By default daily of item is on:
-            [[TimingItemStore timingItemStore] addDaily:_itemName tag:_currentTagOfItem];
-        
+            _itemName = inputField.text;
         }
-        
-        if([[TimingItemStore timingItemStore] allItems].count == 0){
-            item.timing= YES;
+        if (_itemName.length > 0)
+        {
+            TimingItem* item = [[TimingItemStore timingItemStore] createItem];
+            item.itemName = _itemName;
+            item.itemColor = currentColorTag;
+            
+            if(routineItemFlag == 1)
+            {
+                // By default daily of item is on:
+                [[TimingItemStore timingItemStore] addDaily:_itemName tag:_currentTagOfItem];
+                
+            }
+            
+            if([[TimingItemStore timingItemStore] allItems].count == 0){
+                item.timing= YES;
+            }
+            [[TimingItemStore timingItemStore] addTag:item TagName:_currentTagOfItem];
+            [[TimingItemStore timingItemStore] saveData];
+            //        [[TimingItemStore timingItemStore] viewAllItem];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
         }
-        [[TimingItemStore timingItemStore] addTag:item TagName:_currentTagOfItem];
-        [[TimingItemStore timingItemStore] saveData];
-//        [[TimingItemStore timingItemStore] viewAllItem];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"事项名称不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"事项名称不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+        if (inputField.text.length > 0)
+        {
+            _itemName = inputField.text;
+        }
+        if (_itemName.length > 0)
+        {
+            [[TimingItemStore timingItemStore] setNameByItem:_editItemName toName:_itemName];
+            [[TimingItemStore timingItemStore] setColorByItem:_editItem toColor:currentColorTag];
+            [[TimingItemStore timingItemStore] setTagByItem:_editItem withTag:_currentTagOfItem];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"事项名称不能为空" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     }
 }
 
@@ -340,7 +381,9 @@ static NSInteger routineItemFlag = 1;
 - (void)initTextFieldInView:(UIView*)view
 {
     colorTagButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 14, 22, 22)];
-    currentColorTag = [[ColorThemes colorThemes] getAColor];
+    if (!_isEditView) {
+        currentColorTag = [[ColorThemes colorThemes] getAColor];
+    }
     colorTagButton.backgroundColor = _isEditView? _editItemColor : [[ColorThemes colorThemes] getColorAt:currentColorTag];
     colorTagButton.tag =  TAG_COLOR_TAG;
     [colorTagButton addTarget:self action:@selector(tagColorPressed:) forControlEvents:UIControlEventTouchUpInside];

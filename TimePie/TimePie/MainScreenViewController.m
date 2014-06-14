@@ -23,7 +23,7 @@
 
 #import "WeiXinHelper.h"
 #import "BasicUIColor+UIPosition.h"
-
+#import "Tag.h"
 
 
 
@@ -759,8 +759,11 @@
             TimingItem *p = [[timingItemStore allItems] objectAtIndex:[cellIndexPath row]];
             CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
             viewController.isEditView = YES;
+            viewController.editItem = p;
             viewController.editItemName = p.itemName;
             viewController.editItemColor = [[ColorThemes colorThemes] getColorAt:p.itemColor];
+            viewController.editItemTag = [[[TimingItemStore timingItemStore] getTagByItem:p.itemName] tag_name];
+            viewController.currentTagOfItem = viewController.editItemTag;
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
             [self presentViewController:navController animated:YES completion:nil];
             [cell hideUtilityButtonsAnimated:YES];

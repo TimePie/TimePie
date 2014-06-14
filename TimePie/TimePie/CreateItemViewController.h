@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ColorPickerView.h"
 
+@class TimingItem;
 @interface CreateItemViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate,ColorPickerViewDelegate>
 {
     UIButton *colorTagButton;
@@ -32,6 +33,7 @@
  */
 @property BOOL isEditView;
 
+@property (strong, nonatomic) TimingItem *editItem;
 @property (strong, nonatomic) NSString *editItemName;
 @property (strong, nonatomic) UIColor *editItemColor;
 @property (strong, nonatomic) NSString *editItemTag;
