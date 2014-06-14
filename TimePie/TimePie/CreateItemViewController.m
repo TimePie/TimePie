@@ -40,6 +40,7 @@ static NSInteger routineItemFlag = 1;
     {
         colorPickerIsAble = NO;
         colorIsSelected = NO;
+        _isEditView = NO;
     }
     return self;
 }
@@ -93,7 +94,7 @@ static NSInteger routineItemFlag = 1;
     [tempBtn_confirm addTarget:self action:@selector(confirmButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc] initWithCustomView:tempBtn_confirm];
     
-    self.title = @"新建事项";
+    self.title = _isEditView ? @"编辑事项" : @"新建事项";
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.rightBarButtonItem = confirmButton;
     [self navigationController].navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: MAIN_UI_COLOR};

@@ -750,9 +750,11 @@
     switch (index) {
         case 0:
         {
-            NSLog(@"More button was pressed");
-            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"你瞅啥" message:@"大哥金链子挺粗啊，哪儿买的？" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alertTest show];
+            NSLog(@"Edit Item");
+            CreateItemViewController *viewController = [[CreateItemViewController alloc] init];
+            viewController.isEditView = YES;
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+            [self presentViewController:navController animated:YES completion:nil];
             
             [cell hideUtilityButtonsAnimated:YES];
             break;

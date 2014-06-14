@@ -27,4 +27,6 @@
 @property (strong, nonatomic) NSString *itemName;
 @property (strong, nonatomic) NSString *currentTagOfItem;
 
+@property BOOL isEditView;
+
 @end
