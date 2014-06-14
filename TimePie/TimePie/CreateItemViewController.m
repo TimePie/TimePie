@@ -330,7 +330,7 @@ static NSInteger routineItemFlag = 1;
         }
         if (_itemName.length > 0)
         {
-            [[TimingItemStore timingItemStore] setNameByItem:_editItemName toName:_itemName];
+            [[TimingItemStore timingItemStore] setNameByItem:_editItem toName:_itemName];
             [[TimingItemStore timingItemStore] setColorByItem:_editItem toColor:currentColorTag];
             [[TimingItemStore timingItemStore] setTagByItem:_editItem withTag:_currentTagOfItem];
             [self dismissViewControllerAnimated:YES completion:nil];

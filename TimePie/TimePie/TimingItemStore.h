@@ -32,7 +32,7 @@
                 toIndex:(int)to;
 - (NSNumber*)getItemPercentage:(TimingItem*)item;
 
-- (BOOL)setNameByItem:(NSString*)fromName
+- (BOOL)setNameByItem:(TimingItem*)item
                toName:(NSString*)itemName;
 
 - (BOOL)setColorByItem:(TimingItem *)item

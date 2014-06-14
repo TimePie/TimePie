@@ -163,9 +163,12 @@
 }
 
 
-- (BOOL)setNameByItem:(NSString*)fromName
+- (BOOL)setNameByItem:(TimingItem*)item
                toName:(NSString*)itemName
 {
+    NSString* fromName = item.itemName;
+    item.itemName = itemName;
+//    NSLog(@"%d",[[self allItems] count]);
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
     
@@ -228,9 +231,7 @@
         result = NO;
     }
     
-    
-    
-    
+
     [self restoreData];
     return result;
 }
@@ -881,7 +882,6 @@
         NSLog(@"Could not do it: %@", [error localizedDescription]);
         result = NO;
     }
-    
     return result;
 }
 
