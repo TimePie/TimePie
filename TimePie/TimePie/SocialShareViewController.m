@@ -228,7 +228,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initWithDate:[DateHelper getYesterday:[NSDate date]]];
+    [self initWithDate:[NSDate date]];
 
 }
 

@@ -242,6 +242,7 @@
 - (BOOL)setItemTime:(TimingItem*)item
            withTime:(double)time
 {
+    item.time = time;
     NSManagedObjectContext *context = [self managedObjectContext];
     NSError *error;
     
