@@ -1039,7 +1039,6 @@
             adjustTimeButton.frame =CGRectMake(adjustTimeButton.frame.origin.x, 1000, adjustTimeButton.frame.size.width, adjustTimeButton.frame.size.height);
             
             [pieChart reloadData];
-            selectedArray = nil;
             [itemTable reloadData];
         }
         else
@@ -1092,20 +1091,30 @@
         [taView.layer setShadowRadius:15.0];
         [taView.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
         taView.delegate = self;
-        taView.lhsItem = (TimingItem*)[selectedArray objectAtIndex:0];
-        taView.rhsItem = (TimingItem*)[selectedArray objectAtIndex:1];
-        taView.lhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
-        taView.rhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:1] itemColor]];
-        taView.lhsItemName.text = [(TimingItem*)[selectedArray objectAtIndex:0] itemName];
-        taView.rhsItemName.text = [(TimingItem*)[selectedArray objectAtIndex:1] itemName];
-        taView.lhsItemTiming.text = [(TimingItem*)[selectedArray objectAtIndex:0] getTimeString];
-        taView.rhsItemTiming.text = [(TimingItem*)[selectedArray objectAtIndex:1] getTimeString];
-        taView.lhsItemTiming.textColor = [[ColorThemes colorThemes] getLightColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
-        taView.rhsItemTiming.textColor = [[ColorThemes colorThemes] getLightColorAt:[(TimingItem*)[selectedArray objectAtIndex:1] itemColor]];
         [self.view addSubview:taView];
     }
+    [self loadTAViewData];
     taView.hidden = NO;
     [self pushAnimateView:taView];
+}
+
+- (void)loadTAViewData
+{
+    taView.lhsItem = (TimingItem*)[selectedArray objectAtIndex:0];
+    taView.rhsItem = (TimingItem*)[selectedArray objectAtIndex:1];
+    taView.lhsOriginalTime = [(TimingItem*)[selectedArray objectAtIndex:0] time];
+    taView.rhsOriginalTime = [(TimingItem*)[selectedArray objectAtIndex:1] time];
+    taView.lhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
+    taView.rhsItemView.backgroundColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:1] itemColor]];
+    taView.lhsItemName.text = [(TimingItem*)[selectedArray objectAtIndex:0] itemName];
+    taView.rhsItemName.text = [(TimingItem*)[selectedArray objectAtIndex:1] itemName];
+    taView.lhsItemTiming.text = [(TimingItem*)[selectedArray objectAtIndex:0] getTimeString];
+    taView.rhsItemTiming.text = [(TimingItem*)[selectedArray objectAtIndex:1] getTimeString];
+    taView.lhsItemTiming.textColor = [[ColorThemes colorThemes] getLightColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
+    taView.rhsItemTiming.textColor = [[ColorThemes colorThemes] getLightColorAt:[(TimingItem*)[selectedArray objectAtIndex:1] itemColor]];
+    taView.taSlider.maximumValue = taView.lhsOriginalTime + taView.rhsOriginalTime;
+    taView.taSlider.value =  taView.taSlider.maximumValue * (taView.lhsOriginalTime / (taView.rhsOriginalTime + taView.lhsOriginalTime));
+    taView.taSlider.tintColor = [[ColorThemes colorThemes] getColorAt:[(TimingItem*)[selectedArray objectAtIndex:0] itemColor]];
 }
 
 - (void)pushAnimateView:(UIView*)view
@@ -1132,12 +1141,15 @@
 
 #pragma mark - TimeAdjustViewDelegate
 
-- (void)confirmPressedPass
+- (void)confirmPressedPassWithLhs:(double)lTime Rhs:(double)rTime
 {
     if (IS_IPHONE_HIGHERINCHE) {
         [UIView animateWithDuration:.25f animations:^{
             taView.frame = CGRectMake(0, 568, SCREEN_WIDTH, 150);
         } completion:^(BOOL finished){
+            [[TimingItemStore timingItemStore] setItemTime:[selectedArray objectAtIndex:0] withTime:lTime];
+            [[TimingItemStore timingItemStore] setItemTime:[selectedArray objectAtIndex:1] withTime:rTime];
+            selectedArray = nil;
             pieChart.userInteractionEnabled = YES;
             taView.hidden = YES;
             itemTable.scrollEnabled = YES;
@@ -1147,6 +1159,9 @@
         [UIView animateWithDuration:.25f animations:^{
             taView.frame = CGRectMake(0, 480, SCREEN_WIDTH, 150);
         } completion:^(BOOL finished){
+            [[TimingItemStore timingItemStore] setItemTime:[selectedArray objectAtIndex:0] withTime:lTime];
+            [[TimingItemStore timingItemStore] setItemTime:[selectedArray objectAtIndex:1] withTime:rTime];
+            selectedArray = nil;
             pieChart.userInteractionEnabled = YES;
             taView.hidden = YES;
             itemTable.scrollEnabled = YES;

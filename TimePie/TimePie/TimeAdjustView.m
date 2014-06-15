@@ -9,6 +9,7 @@
 #import "TimeAdjustView.h"
 #import "BasicUIColor+UIPosition.h"
 #import "TimingItem1.h"
+#import "ColorThemes.h"
 
 @implementation TimeAdjustView
 
@@ -35,10 +36,10 @@
     [cancelButton addTarget:self action:@selector(cancelClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:cancelButton];
     
-    UISlider *taSlider = [[UISlider alloc] initWithFrame:CGRectMake(50, 50, 220, 30)];
-    [taSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-    taSlider.tintColor = [UIColor colorWithRed:0 green:0.478 blue:1.f alpha:1.f];
-    [self addSubview:taSlider];
+    _taSlider = [[UISlider alloc] initWithFrame:CGRectMake(50, 50, 220, 30)];
+    [_taSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    _taSlider.tintColor = [UIColor colorWithRed:0 green:0.478 blue:1.f alpha:1.f];
+    [self addSubview:_taSlider];
     
     _lhsItemView = [[UIView alloc] initWithFrame:CGRectMake(6, 45, 40, 40)];
     [self setRoundedView:_lhsItemView toDiameter:38.f];
@@ -61,14 +62,14 @@
     _lhsItemTiming.font = _rhsItemTiming.font = [UIFont fontWithName:@"Roboto-Condensed" size:16.f];
     [self addSubview:_lhsItemTiming];
     [self addSubview:_rhsItemTiming];
-    //mark original time
-    lhsOriginalTime = _lhsItem.time;
-    rhsOriginalTime = _rhsItem.time;
+    
+    lhsTime = _taSlider.value;
+    rhsTime = _taSlider.maximumValue - _taSlider.value;
 }
 
 - (void)confirmClicked:(id)sender
 {
-    [_delegate confirmPressedPass];
+    [_delegate confirmPressedPassWithLhs:lhsTime Rhs:rhsTime];
 }
 
 - (void)cancelClicked:(id)sender
@@ -78,11 +79,12 @@
 
 - (void)sliderValueChanged:(UISlider*)sender
 {
-    NSLog(@"%f",sender.value);
-    _lhsItem.time -= lhsOriginalTime * sender.value;
-    _rhsItem.time += rhsOriginalTime * sender.value;
-    _lhsItemTiming.text = [_lhsItem getTimeString];
-    _rhsItemTiming.text = [_rhsItem getTimeString];
+
+    lhsTime = sender.value;
+    rhsTime = sender.maximumValue - sender.value;
+    _lhsItemTiming.text = [self getTimeStringBySeconds:lhsTime];
+    _rhsItemTiming.text = [self getTimeStringBySeconds:rhsTime];
+    NSLog(@"%f + %f",lhsTime,rhsTime);
 }
 
 #pragma mark - utilities
@@ -95,6 +97,16 @@
     roundedView.frame = newFrame;
     roundedView.layer.cornerRadius = newSize / 2.0;
     roundedView.center = saveCenter;
+}
+
+- (NSString *)getTimeStringBySeconds:(double)seconds
+{
+    NSTimeInterval intervalValue = seconds;
+    NSDateFormatter *hmsFormatter = [[NSDateFormatter alloc] init];
+    [hmsFormatter setDateFormat:@"HH:mm:ss"];
+    [hmsFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
+    return [hmsFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:intervalValue]];
 }
 
 

@@ -12,14 +12,14 @@
 @protocol TimeAdjustViewDelegate <NSObject>
 
 - (void)cancelPressedPass;
-- (void)confirmPressedPass;
+- (void)confirmPressedPassWithLhs:(double)lTime Rhs:(double)rTime;
 
 @end
 
 @interface TimeAdjustView : UIView
 {
-    double lhsOriginalTime;
-    double rhsOriginalTime;
+    double lhsTime;
+    double rhsTime;
 }
 /**
  *  left adjust item
@@ -48,6 +48,11 @@
 
 @property (nonatomic, strong) TimingItem *lhsItem;
 @property (nonatomic, strong) TimingItem *rhsItem;
+
+@property double lhsOriginalTime;
+@property double rhsOriginalTime;
+
+@property (nonatomic, strong) UISlider *taSlider;
 
 @property (nonatomic, assign) id<TimeAdjustViewDelegate> delegate;
 
