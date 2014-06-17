@@ -266,6 +266,10 @@
         if ([tempTagName isEqualToString:@"(null)"]) tempTagName = @"其他";
         itemTrackCell.PVETCEventLabel.text = tempTagName;
         itemTrackCell.PVETCAvgTimeLabel.text = [NSString stringWithFormat:@"%.1f",[[avgTimeOfTagList objectAtIndex:indexPath.row] floatValue]];
+        if ([[avgTimeOfTagList objectAtIndex:indexPath.row] floatValue] > 10.f) {
+            itemTrackCell.PVETCAvgTimeLabel.frame = CGRectMake(260, 18, 40, 20);
+            itemTrackCell.PVETCAvgTimeLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:18.f];
+        }
         itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
         [itemTrackCell initCellWithColor:[lightColorList objectAtIndex:indexPath.row] ColumnCount:[[columnHeightList objectAtIndex:indexPath.row] count] HeightArray:[columnHeightList objectAtIndex:indexPath.row]];
         itemTrackCell.selectionStyle = UITableViewCellSelectionStyleNone;
