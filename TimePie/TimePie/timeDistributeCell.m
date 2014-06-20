@@ -64,7 +64,8 @@
         {
             if ([view viewWithTag:CHART_START_COUNT + i])
                 [[view viewWithTag:CHART_START_COUNT + i] removeFromSuperview];
-            if (i > 2) startPos = 30;
+            if (i > 5) startPos = 50;
+            else if (i > 2) startPos = 30;
             else startPos = 10;
             tDCPieChart *tempChart =[[tDCPieChart alloc] initWithFrame:CGRectMake(startPos + 100 * i, 10, 100, 130)];
             tempChart.tag = CHART_START_COUNT + i;

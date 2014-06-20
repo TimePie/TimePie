@@ -58,8 +58,8 @@
     [self initExitButton];
     [self initDarkUILayer];
     //main Loop
-    NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
+//    NSTimer *runLoopTimer = [NSTimer timerWithTimeInterval:0.04f target:self selector:@selector(mainLoop:) userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:runLoopTimer forMode:NSRunLoopCommonModes];
     [[UIApplication sharedApplication] setStatusBarHidden:YES
                                             withAnimation:UIStatusBarAnimationFade];
     
@@ -269,6 +269,10 @@
         if ([[avgTimeOfTagList objectAtIndex:indexPath.row] floatValue] > 10.f) {
             itemTrackCell.PVETCAvgTimeLabel.frame = CGRectMake(260, 18, 40, 20);
             itemTrackCell.PVETCAvgTimeLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:18.f];
+        }
+        else{
+            itemTrackCell.PVETCAvgTimeLabel.frame = CGRectMake(260, 15, 40, 20);
+            itemTrackCell.PVETCAvgTimeLabel.font = [UIFont fontWithName:@"Roboto-Medium" size:25.f];
         }
         itemTrackCell.PVETCEventLabel.textColor = itemTrackCell.PVETCAvgTimeLabel.textColor = itemTrackCell.PVETCHourIndicatorLabel.textColor = [colorList objectAtIndex:indexPath.row];
         [itemTrackCell initCellWithColor:[lightColorList objectAtIndex:indexPath.row] ColumnCount:[[columnHeightList objectAtIndex:indexPath.row] count] HeightArray:[columnHeightList objectAtIndex:indexPath.row]];
