@@ -1,7 +1,7 @@
 TimePie
 =======
 
-An iOS Time Management App
+An iOS Time Management App (only running on iPhones with 3.5 or 4.0 inches screens)
 
 On Appstore              |  Main Screen
 :-------------------------:|:-------------------------:
